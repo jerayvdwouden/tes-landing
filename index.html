@@ -5160,6 +5160,14 @@ function submitAndNext() {
 // ─── init ──────────────────────────────────
 buildProgressBar(1);
 updateProgressBar('1a');
+
+// ─── Deep-link: open een pagina direct via #naam (bijv. #cursussen vanaf de hub) ──
+function openHashPage(){
+  var h = (location.hash || '').replace('#','');
+  if (h && document.getElementById('page-' + h)) showPage(h);
+}
+openHashPage();
+window.addEventListener('hashchange', openHashPage);
 </script>
 </body>
 </html>
