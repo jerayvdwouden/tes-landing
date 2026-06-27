@@ -645,6 +645,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 </style>
 </head>
 <body>
+<script>if((location.hash||"").replace("#","")==="cursussen"){location.replace("/cursus");}</script>
 <div class="page-wrap">
 <div class="glow-top"></div>
 <div class="noise"></div>
@@ -656,7 +657,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="nav-links">
       <button class="nav-link active" data-page="home" onclick="showPage('home')">Home</button>
       <button class="nav-link" data-page="tool" onclick="showPage('tool')">Jaardoel in 5 Minuten</button>
-      <button class="nav-link" data-page="cursussen" onclick="showPage('cursussen')">Cursussen</button>
+      <button class="nav-link" data-page="cursussen" onclick="window.location.href='/cursus'">Cursussen</button>
       <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek')">Gesprek</button>
     </div>
     <button class="nav-cta" onclick="showPage('tool')">Begin nu →</button>
@@ -727,11 +728,11 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="home-courses">
       <div class="home-courses-head">
         <h2>Gratis content</h2>
-        <button class="home-courses-link" onclick="showPage('cursussen')">Alles bekijken →</button>
+        <button class="home-courses-link" onclick="window.location.href='/cursus'">Alles bekijken →</button>
       </div>
       <div class="mc-row">
 
-        <div class="mc-mini" onclick="showPage('cursussen')">
+        <div class="mc-mini" onclick="window.location.href='/cursus'">
           <div class="mc-mini-thumb" style="background:linear-gradient(160deg,#160a00,#0d0500)">
             <div class="mc-mini-bg">🧠</div>
             <div class="mc-mini-fade"></div>
@@ -745,7 +746,7 @@ footer p{font-size:.68rem;color:var(--dim)}
           </div>
         </div>
 
-        <div class="mc-mini" onclick="showPage('cursussen')">
+        <div class="mc-mini" onclick="window.location.href='/cursus'">
           <div class="mc-mini-thumb" style="background:linear-gradient(160deg,#001608,#000d05)">
             <div class="mc-mini-bg">🎯</div>
             <div class="mc-mini-fade"></div>
@@ -759,7 +760,7 @@ footer p{font-size:.68rem;color:var(--dim)}
           </div>
         </div>
 
-        <div class="mc-mini" onclick="showPage('cursussen')">
+        <div class="mc-mini" onclick="window.location.href='/cursus'">
           <div class="mc-mini-thumb" style="background:linear-gradient(160deg,#080016,#05000d)">
             <div class="mc-mini-bg">📅</div>
             <div class="mc-mini-fade"></div>
@@ -773,7 +774,7 @@ footer p{font-size:.68rem;color:var(--dim)}
           </div>
         </div>
 
-        <div class="mc-mini" onclick="showPage('cursussen')">
+        <div class="mc-mini" onclick="window.location.href='/cursus'">
           <div class="mc-mini-thumb" style="background:linear-gradient(160deg,#1a0400,#0d0200)">
             <div class="mc-mini-bg">🔥</div>
             <div class="mc-mini-fade"></div>
@@ -787,7 +788,7 @@ footer p{font-size:.68rem;color:var(--dim)}
           </div>
         </div>
 
-        <div class="mc-mini" onclick="showPage('cursussen')">
+        <div class="mc-mini" onclick="window.location.href='/cursus'">
           <div class="mc-mini-thumb" style="background:linear-gradient(160deg,#001414,#000808)">
             <div class="mc-mini-bg">⚡</div>
             <div class="mc-mini-fade"></div>
@@ -801,7 +802,7 @@ footer p{font-size:.68rem;color:var(--dim)}
           </div>
         </div>
 
-        <div class="mc-mini" onclick="showPage('cursussen')">
+        <div class="mc-mini" onclick="window.location.href='/cursus'">
           <div class="mc-mini-thumb" style="background:linear-gradient(160deg,#100d00,#080500)">
             <div class="mc-mini-bg">🎖️</div>
             <div class="mc-mini-fade"></div>
