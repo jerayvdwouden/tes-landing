@@ -57,7 +57,7 @@ a{color:var(--gold);text-decoration:none;}
 /* trailer */
 .trailer{padding:54px 0 10px;}
 .trailer .eyebrow{text-align:center;}
-.tstage{position:relative;max-width:940px;margin:14px auto 0;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000 center/cover no-repeat;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;}
+.tstage{position:relative;max-width:760px;margin:14px auto 0;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000 center/cover no-repeat;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;}
 .tstage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.72));}
 .tstage .play{position:relative;z-index:2;width:92px;height:92px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(0,0,0,.55);transition:.18s;}
 .tstage:hover .play{transform:scale(1.06);background:var(--gold2);}
@@ -70,7 +70,7 @@ a{color:var(--gold);text-decoration:none;}
 .about{font-size:18px;color:var(--cream);max-width:760px;line-height:1.7;}
 /* module cards row */
 .cardwrap{position:relative;}
-.cardrow{display:grid;grid-auto-flow:column;grid-auto-columns:248px;gap:20px;overflow-x:auto;padding:6px 2px 8px;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;}
+.cardrow{display:grid;grid-auto-flow:column;grid-auto-columns:300px;gap:20px;overflow-x:auto;padding:6px 2px 8px;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;}
 .cardrow::-webkit-scrollbar{display:none;}
 .navarrow{position:absolute;top:calc(50% - 6px);transform:translateY(-50%);z-index:6;width:50px;height:50px;border-radius:50%;
   background:rgba(10,10,11,.82);backdrop-filter:blur(6px);border:1px solid var(--gold);color:var(--gold);
@@ -103,15 +103,15 @@ a{color:var(--gold);text-decoration:none;}
 .mvhead .mvt{font-family:var(--serif);font-size:32px;color:var(--white);line-height:1.1;}
 .mvhead .mvc{font-size:13px;color:var(--mut);margin-top:6px;}
 .lessons{margin-top:6px;}
-.lrow{display:flex;align-items:center;gap:16px;padding:14px 8px;cursor:pointer;border-bottom:1px solid #1f1f24;transition:.15s;border-radius:10px;}
+.lrow{display:flex;align-items:center;gap:18px;padding:18px 8px;cursor:pointer;border-bottom:1px solid #1f1f24;transition:.15s;border-radius:10px;}
 .lrow:hover{background:var(--card2);}
-.lthumb{position:relative;width:120px;flex:0 0 120px;aspect-ratio:16/10;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:#000;}
+.lthumb{position:relative;width:160px;flex:0 0 160px;aspect-ratio:16/10;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:#000;}
 .lthumb img{width:100%;height:100%;object-fit:cover;opacity:.9;}
 .lthumb .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
 .lthumb .pl span{width:30px;height:30px;border-radius:50%;background:rgba(201,168,76,.92);display:flex;align-items:center;justify-content:center;}
 .lrow .li{flex:1;min-width:0;}
 .lrow .ln{font-size:11.5px;color:var(--gold);letter-spacing:1.5px;font-weight:600;}
-.lrow .lt{font-size:16px;color:var(--cream);font-weight:600;margin-top:2px;}
+.lrow .lt{font-size:17px;color:var(--cream);font-weight:600;margin-top:2px;}
 .lrow .typ{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:3px 8px;}
 .lrow .arr{color:var(--mut2);font-size:18px;}
 .lrow:hover .arr{color:var(--gold);}
@@ -162,9 +162,41 @@ a{color:var(--gold);text-decoration:none;}
   .stitle{font-size:34px;}
   .lhead{font-size:30px;}
   .cardrow{grid-auto-columns:200px;}
-  .lthumb{width:88px;flex:0 0 88px;}
+  .lthumb{width:112px;flex:0 0 112px;}
   .lrow .typ{display:none;}
 }
+
+.hero{position:relative;overflow:hidden;}
+.hero .wrap{grid-template-columns:1fr;min-height:520px;align-content:center;}
+.hero .wrap>div:first-child{position:relative;z-index:2;max-width:600px;}
+.hero-img{position:absolute;top:0;right:0;bottom:0;width:62%;z-index:1;margin:0;}
+.hero-img .frame{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border:0;box-shadow:none;border-radius:0;overflow:visible;background:transparent;}
+.hero-img .frame img{width:100%;height:100%;object-fit:cover;object-position:62% center;border-radius:0;
+ -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 40%);mask-image:linear-gradient(to right,transparent 0%,#000 40%);}
+.hero-img .ring{display:none;}
+.hero-img .tag{left:auto;right:26px;bottom:26px;}
+.hero .kick{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 12px rgba(0,0,0,.6);}
+.hero .htitle{color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7),0 4px 26px rgba(0,0,0,.6);}
+.hero .htitle .gd{color:var(--gold);}
+.hero .lead{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.95),0 2px 12px rgba(0,0,0,.7);}
+.hero .meta span{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9);}
+.hero .meta span b{color:var(--gold);}
+@media(max-width:860px){
+ .hero .wrap{min-height:460px;align-content:end;padding-top:120px;}
+ .hero .wrap>div:first-child{max-width:none;}
+ .hero-img{position:absolute;inset:0;width:100%;height:100%;}
+ .hero-img .frame img{object-position:center 22%;-webkit-mask-image:none;mask-image:none;}
+ .hero-img .tag{display:none;}
+ .hero-img::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg, rgba(10,10,11,.5) 0%, rgba(10,10,11,.22) 36%, rgba(10,10,11,.62) 72%, var(--bg) 100%);}
+}
+.mcard .mphoto{position:absolute;inset:0;background-size:cover;background-position:center 28%;z-index:0;}
+.mcard .mshade{position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:linear-gradient(180deg, rgba(10,10,11,.55) 0%, rgba(10,10,11,.12) 32%, rgba(10,10,11,.42) 60%, rgba(10,10,11,.92) 100%);}
+.mcard .bgnum{z-index:2;}
+.mcard .inner{z-index:3;}
+.mcard .mk,.mcard .mtt,.mcard .mcount{text-shadow:0 1px 8px rgba(0,0,0,.85);}
+.mcard .mbody .mtt{font-family:'Abolition',var(--sans),sans-serif;text-transform:uppercase;letter-spacing:.6px;font-size:28px;line-height:1.04;}
 </style></head><body>
 <nav class="sitenav"><div class="nav-inner">
   <a class="logo" href="https://executionsystem.nl/">The Execution System</a>
@@ -187,23 +219,11 @@ a{color:var(--gold);text-decoration:none;}
         <h1 class="htitle">The <span class="gd">Execution</span><br>System</h1>
         <p class="lead">Stop met dromen, start met uitvoeren. Het complete 12-weken-systeem om eindelijk consistent richting je doelen te werken — in vijf heldere stappen.</p>
         <div class="meta"><span><b>5</b> modules</span><span><b>24</b> lessen</span></div>
-        <button class="btn gold" onclick="openLesson(0)">Begin de cursus &nbsp;&rarr;</button>
       </div>
-      <div class="hero-img"><div class="frame"><img src="/cursus/jeray-web.jpg" alt="Jeray" referrerpolicy="no-referrer"><div class="ring"></div>
+      <div class="hero-img"><div class="frame"><img src="/cursus/cursus-hero.jpg" alt="Jeray"><div class="ring"></div>
         <div class="tag"><div class="nm">Jeray</div><div class="rl">Jouw coach</div></div></div></div>
     </div>
   </header>
-
-  <section class="trailer"><div class="wrap">
-    <div class="eyebrow">Bekijk de trailer</div>
-    <div class="tstage" id="tstage"><iframe class="bunny" src="https://iframe.mediadelivery.net/embed/692336/71acad20-1925-46be-9459-15c8f5be9e47?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>
-  </div></section>
-
-  <section class="sec"><div class="wrap">
-    <div class="eyebrow">Over deze cursus</div>
-    <h2 class="stitle">Waarom dit werkt</h2>
-    <p class="about">Deze cursus en dit traject zijn bedoeld om mensen te helpen die moeite hebben met consistent actie ondernemen richting hun doelen. Met dit simpele systeem werk je dagelijks richting de doelen die het meest waardevol zijn — en bereik je eindelijk waar je toe in staat bent.</p>
-  </div></section>
 
   <section class="sec alt" id="curr"><div class="wrap">
     <div class="eyebrow">De cursus</div>
@@ -216,6 +236,15 @@ a{color:var(--gold);text-decoration:none;}
       <button class="navarrow right" id="arrR" onclick="scrollCards(1)" aria-label="Volgende">&rsaquo;</button>
     </div>
   </div></section>
+
+  <section class="trailer"><div class="wrap">
+    <div class="eyebrow">Bekijk de trailer</div>
+    <div class="tstage" id="tstage"><iframe class="bunny" src="https://iframe.mediadelivery.net/embed/692336/71acad20-1925-46be-9459-15c8f5be9e47?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>
+  </div></section>
+
+
+
+
   <section class="sec"><div class="wrap">
     <div class="notionband">
       <div><div class="eyebrow" style="margin-bottom:8px">Gratis cadeau</div>
@@ -259,12 +288,13 @@ const FLAT=[]; DATA.forEach((m,mi)=>m.lessons.forEach((l,li)=>FLAT.push({...l,mi
 let cur=0;
 const GRADS=['linear-gradient(160deg,#1d1a12,#0b0b0c)','linear-gradient(160deg,#15171b,#0b0b0c)','linear-gradient(160deg,#1b1410,#0b0b0c)','linear-gradient(160deg,#121619,#0b0b0c)','linear-gradient(160deg,#1a1612,#0b0b0c)'];
 function show(id){['view-home','view-module','view-lesson'].forEach(v=>document.getElementById(v).style.display=(v===id?'block':'none'));window.scrollTo(0,0);}
+const PHOTOS=['/cursus/module-1.jpg','/cursus/module-2.jpg','/cursus/module-3.jpg','/cursus/module-4.jpg','/cursus/module-5.jpg'];
 function buildHome(){
   const row=document.getElementById('cardrow'); row.innerHTML='';
   DATA.forEach((m,mi)=>{
     const num=String(mi+1).padStart(2,'0');
     const c=document.createElement('div'); c.className='mcard'; c.onclick=()=>openModule(mi);
-    c.innerHTML=`<div class="grad" style="background:${GRADS[mi%GRADS.length]}"></div><div class="glow2"></div><div class="bgnum">${num}</div>
+    c.innerHTML=`<div class="mphoto" style="background-image:url('${PHOTOS[mi%PHOTOS.length]}')"></div><div class="mshade"></div><div class="bgnum">${num}</div>
       <div class="inner"><div class="mk">Module ${num}</div>
       <div class="mbody"><div class="mtt">${m.title}</div><div class="mcount">${m.lessons.length} lessen</div>
       <span class="watch"><svg width="10" height="11" viewBox="0 0 10 11"><path d="M0 0 L10 5.5 L0 11 Z" fill="currentColor"/></svg> Bekijk module</span></div></div>`;
