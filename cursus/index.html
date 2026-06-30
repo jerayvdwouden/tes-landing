@@ -196,7 +196,7 @@ a{color:var(--gold);text-decoration:none;}
 
   <section class="trailer"><div class="wrap">
     <div class="eyebrow">Bekijk de trailer</div>
-    <div class="tstage" id="tstage"><iframe class="bunny" src="https://iframe.mediadelivery.net/embed/692336/71acad20-1925-46be-9459-15c8f5be9e47?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>
+    <div class="tstage" id="tstage"><iframe class="bunny" src="https://iframe.mediadelivery.net/embed/692336/71acad20-1925-46be-9459-15c8f5be9e47?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>
   </div></section>
 
   <section class="sec"><div class="wrap">
@@ -292,7 +292,7 @@ function openLesson(i){
   cur=i; const l=FLAT[i];
   const vs=document.getElementById('vstage');
   if(l.vid){ vs.style.display='flex'; vs.classList.add('hasvid'); vs.style.backgroundImage='none';
-    vs.innerHTML='<iframe class="bunny" src="https://iframe.mediadelivery.net/embed/'+LIB+'/'+l.vid+'?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>'; }
+    vs.innerHTML='<iframe class="bunny" src="https://iframe.mediadelivery.net/embed/'+LIB+'/'+l.vid+'?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>'; }
   else { vs.style.display='none'; vs.innerHTML=''; }
   document.getElementById('lcrumb').textContent=`${l.mtitle} · Les ${l.n} van ${FLAT.length}`;
   document.getElementById('lhead').textContent=l.title;
