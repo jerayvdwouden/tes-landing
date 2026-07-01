@@ -65,8 +65,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-fi
 .eyebrow{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:.9rem}
 .eyebrow::before,.eyebrow::after{content:'';display:block;width:32px;height:1px;background:var(--gold-d)}
 h1{font-family:'Abolition',sans-serif;font-size:clamp(2.8rem,8vw,5rem);line-height:1.05;letter-spacing:.04em;text-transform:uppercase;margin-bottom:1.2rem}
-/* hero-kop: vast in 3 regels houden op smalle schermen (niet verder afbreken) */
-@media(max-width:600px){.hero h1{font-size:clamp(1.5rem,8vw,3rem);white-space:nowrap;letter-spacing:.02em}}
+/* hero-kop: altijd exact 3 regels — elke regel blijft op één lijn (niet verder afbreken) */
+.hero h1{white-space:nowrap}
+@media(max-width:600px){.hero h1{font-size:clamp(1.5rem,8vw,3rem);letter-spacing:.02em}}
 h1 em{font-style:normal;color:var(--gold)}
 .hero-sub{font-size:.95rem;color:var(--muted);max-width:480px;margin:0 auto 2.25rem;line-height:1.8}
 .vsl-wrap{margin:0 auto 2.25rem;max-width:540px;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--bg2)}
