@@ -684,6 +684,25 @@ footer p{font-size:.68rem;color:var(--dim)}
 .vb-empty{padding:.65rem .85rem;font-size:.75rem;color:#444;font-style:italic}
 .vb-area-tag{font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;color:#555;margin-bottom:.2rem}
 .vb-zone.vb-top .vb-area-tag{color:#888}
+
+/* ─── LAPTOP/DESKTOP: meer breedte gebruiken, alles groter (telefoon/tablet <1024px blijft ongewijzigd) ─── */
+@media(min-width:1024px){
+  html{font-size:17px}
+  .wrap{max-width:920px}
+  .nav-inner{max-width:1100px}
+  .tool-wrap{max-width:660px}
+  .hero-sub{max-width:600px}
+  .section-head p{max-width:560px}
+}
+@media(min-width:1280px){
+  html{font-size:18.5px}
+  .wrap{max-width:1120px}
+  .nav-inner{max-width:1280px}
+  .tool-wrap{max-width:740px}
+  .hero-sub{max-width:680px}
+  .section-head p{max-width:620px}
+  .free-grid{gap:1.6rem}
+}
 </style>
 </head>
 <body>
