@@ -3001,7 +3001,7 @@ function toggleImpChip(el, area) {
     var lbl = el.querySelector('.imp-chip-label');
     if (lbl) lbl.style.color = '';
   }
-  const any = document.querySelectorAll('.imp-chip.selected').length > 0;
+  const any = document.querySelectorAll('#imp-grid .imp-chip.selected').length > 0;
   const btn = document.getElementById('s1a-next');
   if (btn) btn.classList.toggle('locked', !any);
 }
@@ -3011,8 +3011,8 @@ function hexToRgb(hex) {
 }
 
 function goToStep1b() {
-  importantAreas = [...document.querySelectorAll('.imp-chip.selected')]
-    .map(el => el.querySelector('.imp-chip-label').textContent);
+  importantAreas = [...new Set([...document.querySelectorAll('#imp-grid .imp-chip.selected')]
+    .map(el => el.querySelector('.imp-chip-label').textContent))];
   if (!importantAreas.length) return;
   renderGrowthCards();
   document.getElementById('step-1a').classList.remove('active');
@@ -5319,8 +5319,14 @@ function homeStepNext(){
     var name = lbl ? lbl.textContent : '';
     if(sel.indexOf(name) > -1 && !chip.classList.contains('selected')) toggleImpChip(chip, name);
   });
-  // clear the homepage chips so the tool's step logic doesn't double-count
-  chips.forEach(function(c){ toggleHomeChip(c); });
+  // homepage-chips visueel wissen zonder ze opnieuw te selecteren
+  chips.forEach(function(c){
+    c.classList.remove('selected');
+    c.style.borderColor=''; c.style.background=''; c.style.boxShadow='';
+    var ic=c.querySelector('.imp-chip-icon svg'); if(ic) ic.style.color='';
+    var lb=c.querySelector('.imp-chip-label'); if(lb) lb.style.color='';
+  });
+  var hb=document.getElementById('home-s1-next'); if(hb) hb.classList.add('locked');
   // advance the tool to step 2 using its own logic
   if(typeof goToStep1b==='function') goToStep1b();
 }
