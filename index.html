@@ -796,8 +796,8 @@ footer p{font-size:.68rem;color:var(--dim)}
         <div class="imp-chip" data-color="#60A5FA" onclick="toggleHomeChip(this,'Carri&egrave;re')"><div class="imp-chip-icon"><svg><use href="#i-trending"/></svg></div><div class="imp-chip-label">Carri&egrave;re</div></div>
         <div class="imp-chip" data-color="#4ADE80" onclick="toggleHomeChip(this,'Financi&euml;n')"><div class="imp-chip-icon"><svg><use href="#i-banknote"/></svg></div><div class="imp-chip-label">Financi&euml;n</div></div>
         <div class="imp-chip" data-color="#F472B6" onclick="toggleHomeChip(this,'Relaties')"><div class="imp-chip-icon"><svg><use href="#i-users"/></svg></div><div class="imp-chip-label">Relaties</div></div>
-        <div class="imp-chip" data-color="#A78BFA" onclick="toggleHomeChip(this,'Persoonlijke groei &amp; Skills')"><div class="imp-chip-icon"><svg><use href="#i-brain"/></svg></div><div class="imp-chip-label">Persoonlijke groei &amp; Skills</div></div>
-        <div class="imp-chip" data-color="#818CF8" onclick="toggleHomeChip(this,'Spiritualiteit &amp; Geloof')"><div class="imp-chip-icon"><svg><use href="#i-star"/></svg></div><div class="imp-chip-label">Spiritualiteit &amp; Geloof</div></div>
+        <div class="imp-chip" data-color="#D4E157" onclick="toggleHomeChip(this,'Persoonlijke groei &amp; Skills')"><div class="imp-chip-icon"><svg><use href="#i-brain"/></svg></div><div class="imp-chip-label">Persoonlijke groei &amp; Skills</div></div>
+        <div class="imp-chip" data-color="#FFFFFF" onclick="toggleHomeChip(this,'Spiritualiteit &amp; Geloof')"><div class="imp-chip-icon"><svg><use href="#i-star"/></svg></div><div class="imp-chip-label">Spiritualiteit &amp; Geloof</div></div>
       </div>
       <div class="hs-nav">
         <button class="btn-next locked" id="home-s1-next" onclick="homeStepNext()">Verder gaan &rarr;</button>
@@ -1034,8 +1034,8 @@ footer p{font-size:.68rem;color:var(--dim)}
       <div class="imp-chip" data-color="#60A5FA" onclick="toggleImpChip(this,'Carrière')"><div class="imp-chip-icon"><svg><use href="#i-trending"/></svg></div><div class="imp-chip-label">Carrière</div></div>
       <div class="imp-chip" data-color="#4ADE80" onclick="toggleImpChip(this,'Financiën')"><div class="imp-chip-icon"><svg><use href="#i-banknote"/></svg></div><div class="imp-chip-label">Financiën</div></div>
       <div class="imp-chip" data-color="#F472B6" onclick="toggleImpChip(this,'Relaties')"><div class="imp-chip-icon"><svg><use href="#i-users"/></svg></div><div class="imp-chip-label">Relaties</div></div>
-      <div class="imp-chip" data-color="#A78BFA" onclick="toggleImpChip(this,'Persoonlijke groei &amp; Skills')"><div class="imp-chip-icon"><svg><use href="#i-brain"/></svg></div><div class="imp-chip-label">Persoonlijke groei &amp; Skills</div></div>
-      <div class="imp-chip" data-color="#818CF8" onclick="toggleImpChip(this,'Spiritualiteit &amp; Geloof')"><div class="imp-chip-icon"><svg><use href="#i-star"/></svg></div><div class="imp-chip-label">Spiritualiteit &amp; Geloof</div></div>
+      <div class="imp-chip" data-color="#D4E157" onclick="toggleImpChip(this,'Persoonlijke groei &amp; Skills')"><div class="imp-chip-icon"><svg><use href="#i-brain"/></svg></div><div class="imp-chip-label">Persoonlijke groei &amp; Skills</div></div>
+      <div class="imp-chip" data-color="#FFFFFF" onclick="toggleImpChip(this,'Spiritualiteit &amp; Geloof')"><div class="imp-chip-icon"><svg><use href="#i-star"/></svg></div><div class="imp-chip-label">Spiritualiteit &amp; Geloof</div></div>
     </div>
     <div class="step-nav">
       <button class="btn-next locked" id="s1a-next" onclick="goToStep1b()">Volgende →</button>
@@ -2653,18 +2653,6 @@ function resetTool() {
   if (s1btn) s1btn.classList.add('locked');
   buildProgressBar(1);
   updateProgressBar('1a');
-
-(function initChipColors(){
-  function hexRgb(h){ h=(h||'').replace('#',''); if(h.length===3){h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];} var n=parseInt(h,16)||0; return [(n>>16)&255,(n>>8)&255,n&255]; }
-  document.querySelectorAll('.imp-chip[data-color]').forEach(function(el){
-    var c=hexRgb(el.getAttribute('data-color')), r=c[0], g=c[1], b=c[2];
-    el.style.setProperty('--c','rgb('+r+','+g+','+b+')');
-    el.style.setProperty('--c-bg','rgba('+r+','+g+','+b+',.15)');
-    el.style.setProperty('--c-br','rgba('+r+','+g+','+b+',.42)');
-    el.style.setProperty('--c-sel','rgba('+r+','+g+','+b+',.14)');
-    el.style.setProperty('--c-glow','rgba('+r+','+g+','+b+',.34)');
-  });
-})();
 }
 
 function toggleStepHelp(id) {
@@ -5677,6 +5665,17 @@ function openHashPage(){
   var h = (location.hash || '').replace('#','');
   if (h && document.getElementById('page-' + h)) showPage(h);
 }
+(function initChipColors(){
+  function hexRgb(h){ h=(h||'').replace('#',''); if(h.length===3){h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];} var n=parseInt(h,16)||0; return [(n>>16)&255,(n>>8)&255,n&255]; }
+  document.querySelectorAll('.imp-chip[data-color]').forEach(function(el){
+    var c=hexRgb(el.getAttribute('data-color')), r=c[0], g=c[1], b=c[2];
+    el.style.setProperty('--c','rgb('+r+','+g+','+b+')');
+    el.style.setProperty('--c-bg','rgba('+r+','+g+','+b+',.15)');
+    el.style.setProperty('--c-br','rgba('+r+','+g+','+b+',.42)');
+    el.style.setProperty('--c-sel','rgba('+r+','+g+','+b+',.14)');
+    el.style.setProperty('--c-glow','rgba('+r+','+g+','+b+',.34)');
+  });
+})();
 openHashPage();
 window.addEventListener('hashchange', openHashPage);
 </script>
