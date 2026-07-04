@@ -176,7 +176,6 @@ h1 em{font-style:normal;color:var(--gold)}
 .anders-input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.5rem .75rem;font-size:.82rem;color:var(--white);font-family:inherit}
 .anders-input::placeholder{color:var(--muted)}
 .anders-input:focus{outline:none;border-color:var(--gold)}
-.anders-hint{font-size:.7rem;color:var(--muted);margin-top:.35rem;line-height:1.45}
 .anders-add-btn{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,.35);border-radius:8px;padding:.5rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .anders-add-btn:hover{background:rgba(201,168,76,.1)}
 /* Top 3 prioriteiten */
@@ -187,25 +186,22 @@ h1 em{font-style:normal;color:var(--gold)}
 .top3-hint{font-size:.75rem;color:var(--muted);text-align:center;margin-top:.4rem;min-height:1.2em}
 
 /* step panels */
-.step{display:none}
-.step.active{display:block}.no-slide .step.active{animation:none!important}
-@keyframes stepSlide{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.step.active{animation:none}}
+.step{display:none;animation:fadeIn .2s ease}
+.step.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 .step-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
 .step-q{font-family:'Abolition',sans-serif;font-size:clamp(1.4rem,4vw,2rem);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.5rem}
 .step-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.75rem;line-height:1.7}
-.step-help-btn{background:rgba(201,168,76,.14);border:1.5px solid var(--gold);border-radius:50%;width:1.65rem;height:1.65rem;font-size:.9rem;font-weight:700;color:var(--gold);cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;margin-left:.55rem;vertical-align:middle;position:relative;top:-.05rem;line-height:1;box-shadow:0 0 0 0 rgba(201,168,76,.5);animation:helpPulse 2.6s ease-in-out infinite}
-.step-help-btn:hover{background:var(--gold);color:#141414}
-@keyframes helpPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.45)}55%{box-shadow:0 0 0 6px rgba(201,168,76,0)}}
+.step-help-btn{background:none;border:1px solid var(--border2);border-radius:50%;width:1.25rem;height:1.25rem;font-size:.65rem;color:var(--muted);cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;margin-left:.45rem;vertical-align:middle;position:relative;top:-.08rem;line-height:1}
+.step-help-btn:hover{border-color:var(--gold);color:var(--gold)}
 .step-help-popup{position:absolute;z-index:9999;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;font-size:.8rem;color:var(--muted);line-height:1.65;display:none;box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:280px;width:max-content}
 .step-help-popup.shp-active{display:block}
 .step-video-ph{width:100%;background:var(--bg);border:1px dashed var(--border2);border-radius:8px;height:4.5rem;display:flex;align-items:center;justify-content:center;font-size:.73rem;color:var(--border2);margin-top:.6rem}
 
 /* area chips */
-.area-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.75rem}
-@media(max-width:560px){.area-grid{grid-template-columns:repeat(2,1fr)}}
+.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1.75rem}
+@media(max-width:500px){.area-grid{grid-template-columns:repeat(2,1fr)}}
 .area-chip{border:1px solid var(--border);border-radius:3px;padding:.65rem .5rem;text-align:center;cursor:pointer;transition:all .15s;background:var(--bg2)}
 .area-chip:hover{border-color:var(--border2)}
 .area-chip.selected{border-color:var(--gold);background:rgba(201,168,76,.08);color:var(--gold)}
@@ -217,7 +213,7 @@ h1 em{font-style:normal;color:var(--gold)}
 
 /* ── Step entrance ───────────────────────────────────────────── */
 @keyframes stepFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.step.active:not(.seen-step){animation:stepFadeIn .32s cubic-bezier(.22,.61,.36,1) both}
+.step.active{animation:stepFadeIn .32s cubic-bezier(.22,.61,.36,1) both}
 
 /* ── Fullscreen transition overlay ──────────────────────────── */
 .step-overlay{position:fixed;inset:0;background:#050505;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity .2s ease;gap:.9rem}
@@ -390,10 +386,9 @@ input[type=range].gold-slider::-moz-range-thumb{width:20px;height:20px;border-ra
 .mini-dot.done{background:var(--gold-d)}
 .mini-dot.active{background:var(--gold);box-shadow:0 0 7px rgba(201,168,76,.45)}
 .mini-step{display:none}
-.mini-step.active{display:block}.mini-step.active:not(.seen-step){animation:fadeIn .2s ease}
+.mini-step.active{display:block;animation:fadeIn .2s ease}
 @keyframes jdStepIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.jd-mini.active:not(.seen-step){animation:jdStepIn .38s cubic-bezier(.22,.68,0,1.2) both}
-.no-slide .jd-mini.active,.no-slide .mini-step.active,.no-slide .step.active{animation:none!important}
+.jd-mini.active{animation:jdStepIn .38s cubic-bezier(.22,.68,0,1.2) both}
 /* gesprek USPs */
 .gesprek-usps{display:flex;flex-direction:column;gap:.6rem;margin:1.5rem 0;background:rgba(201,168,76,.04);border:1px solid var(--border);border-radius:4px;padding:1rem 1.1rem}
 .gesprek-usp-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:var(--muted);line-height:1.55}
@@ -402,8 +397,7 @@ input[type=range].gold-slider::-moz-range-thumb{width:20px;height:20px;border-ra
 /* progress bar group (2 doelen) */
 
 /* ── Liquid-glass blue chips (step-1a) ──────────────────────── */
-.imp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
-@media(max-width:560px){.imp-grid{grid-template-columns:repeat(2,1fr)}}
+.imp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem}
 .imp-chip{cursor:pointer;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:var(--bg2);padding:.75rem 1rem;display:flex;align-items:center;gap:.65rem;color:var(--muted);transition:all .18s;user-select:none}
 .imp-chip.selected{background:rgba(59,130,246,.16);border-color:rgba(99,155,255,.5);color:rgba(190,220,255,1);box-shadow:0 0 16px rgba(59,130,246,.18),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .imp-chip-icon{width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -622,7 +616,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 .jd-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:background .25s}
 .jd-dot.active{background:var(--gold)}
 .jd-field-label{font-size:.76rem;color:var(--muted);margin-bottom:.3rem;display:block}
-.jd-input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;font-size:16px;color:var(--white);font-family:inherit;outline:none;box-sizing:border-box;transition:border-color .18s}
+.jd-input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.6rem .8rem;font-size:.84rem;color:var(--white);font-family:inherit;outline:none;box-sizing:border-box;transition:border-color .18s}
 .jd-input:focus{border-color:var(--gold)}
 @keyframes jdFillPulse{0%{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.18)}100%{border-color:var(--border);box-shadow:none}}
 .jd-input.jd-filled{animation:jdFillPulse .55s ease forwards}
@@ -680,9 +674,9 @@ footer p{font-size:.68rem;color:var(--dim)}
 .vb-zone.vb-top .vb-num{border-color:#c9a84c;background:#c9a84c;color:#000;font-weight:700}
 .vb-content{flex:1;font-size:.82rem;color:#aaa;line-height:1.5}
 .vb-zone.vb-top .vb-content{color:#eee}
-.vb-val{display:inline-block;color:#E8C97A;background:rgba(201,168,76,.14);border:1px solid rgba(201,168,76,.55);border-radius:6px;padding:1px 8px;margin:0 2px;cursor:text;font-style:normal;font-weight:600;line-height:1.5;white-space:nowrap}.vb-val:hover{background:rgba(201,168,76,.24);border-color:#C9A84C}
-.vb-val-inp{color:#E8C97A;background:rgba(201,168,76,.14);border:1px solid #C9A84C;border-radius:6px;font-size:16px;font-family:inherit;outline:none;padding:1px 6px;font-weight:600;width:92px}
-.vb-txt{border-bottom:1px dashed rgba(245,240,232,.45);cursor:text;outline:none;padding-bottom:1px}.vb-txt:hover,.vb-txt:focus{border-bottom-color:rgba(245,240,232,.8);background:rgba(255,255,255,.04)}.chk-legend{font-size:.78rem;color:var(--muted);margin:0 0 1rem;line-height:1.5}.chk-legend b{color:var(--white);font-weight:600}
+.vb-val{color:#c9a84c;border-bottom:1px dashed #c9a84c55;cursor:text;font-style:italic;padding:0 2px}
+.vb-val-inp{color:#c9a84c;background:transparent;border:none;border-bottom:1px solid #c9a84c;font-size:.82rem;font-family:inherit;outline:none;padding:0 2px;font-style:italic;width:70px}
+.vb-txt{border-bottom:1px dashed #333;cursor:text;outline:none}
 .vb-txt:focus{border-bottom-color:#555}
 .vb-arr{font-size:.8rem;color:#555;cursor:pointer;flex-shrink:0;padding:.2rem .4rem;border-radius:4px;user-select:none}
 .vb-arr:hover{color:#c9a84c}
@@ -724,11 +718,6 @@ footer p{font-size:.68rem;color:var(--dim)}
 @keyframes rvRise{from{opacity:0;transform:translateY(46px)}to{opacity:1;transform:none}}@keyframes rvRiseSm{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}.anim-on #page-home>section:not(.rv-skip):not(.rv-cursus).rv-in,.anim-on #page-home>.div.rv-in{animation:rvRise .8s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hfc{animation:rvRise .8s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hmod{animation:rvRiseSm .72s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(1){animation-delay:.30s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(2){animation-delay:.44s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(3){animation-delay:.58s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(4){animation-delay:.72s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(5){animation-delay:.86s}@media(prefers-reduced-motion:reduce){.anim-on #page-home>section,.anim-on #page-home>.div,.anim-on .rv-cursus .hfc,.anim-on .rv-cursus .hmod{animation:none!important;opacity:1!important;transform:none!important}}/* OPTIE A */
 @media(min-width:1024px){.wrap{max-width:1120px}.hero{padding:2.2rem 0 2rem}.hero h1{font-size:clamp(2.4rem,4.4vw,3.5rem)}.hero .hb-m{display:none}.hero-sub{max-width:720px;font-size:1.05rem}.vsl-wrap{max-width:min(900px,calc((100vh - 430px) * 16 / 9))}}
 @media(min-width:1440px){.wrap{max-width:1240px}.hero h1{font-size:clamp(2.8rem,4vw,3.6rem)}}
-.chk-row{display:flex;align-items:flex-start;gap:.75rem;padding:.85rem .9rem;border:1px solid var(--border);border-radius:10px;margin-bottom:.6rem;background:var(--bg2);transition:border-color .15s,background .15s}.chk-row.on{border-color:var(--gold);background:rgba(201,168,76,.06)}.chk-box{flex:0 0 auto;width:26px;height:26px;border-radius:6px;border:1.5px solid var(--border2);background:transparent;color:var(--gold);font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-top:2px;font-family:inherit}.chk-row.on .chk-box{border-color:var(--gold);background:rgba(201,168,76,.16)}.chk-body{flex:1;min-width:0;font-size:.95rem;line-height:1.55;color:var(--white)}.chk-del{flex:0 0 auto;width:22px;height:22px;border:none;background:transparent;color:var(--muted);font-size:13px;cursor:pointer;line-height:1;padding:0;margin-top:4px}.chk-del:hover{color:#e05252}.cust-edit{cursor:text;border-bottom:1px dashed transparent}.chk-row:hover .cust-edit{border-bottom-color:rgba(201,168,76,.35)}.vision-context{background:transparent;border:none;padding:0;margin:0}.ctx-toggle{display:inline-flex;align-items:center;gap:.45rem;background:rgba(201,168,76,.09);border:1px solid rgba(201,168,76,.4);border-radius:8px;padding:.5rem .85rem;color:var(--gold-l);font-family:inherit;font-size:.8rem;cursor:pointer;margin:0 0 1rem}.ctx-toggle:hover{background:rgba(201,168,76,.18)}.ctx-caret{transition:transform .2s;font-size:.65rem}.ctx-toggle.open .ctx-caret{transform:rotate(180deg)}.ctx-body{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease,opacity .25s ease;font-size:.86rem;color:var(--muted);line-height:1.6}.ctx-body.open{max-height:500px;opacity:1;margin:-.4rem 0 1rem;padding:.4rem 0}.t3-slot{display:flex;align-items:center;gap:.7rem;border:1px solid var(--border);border-radius:10px;padding:.7rem .85rem;margin-bottom:.5rem;background:var(--bg2)}.t3-slot.filled{border-color:var(--gold);background:rgba(201,168,76,.06)}.t3-slot.empty{border-style:dashed}.t3-slotnum{width:26px;height:26px;border-radius:50%;background:#2a2a2a;color:var(--muted);display:flex;align-items:center;justify-content:center;font-weight:600;flex:0 0 auto;font-size:.9rem}.t3-slot.filled .t3-slotnum{background:var(--gold);color:#000}.t3-slottxt{flex:1;font-size:.92rem;color:var(--white);line-height:1.4}.t3-slotempty{flex:1;font-size:.82rem;color:var(--muted)}.t3-acts{display:flex;gap:.3rem;margin-left:auto}.t3-mini{width:28px;height:28px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:.9rem;font-family:inherit}.t3-mini:hover:not(:disabled){color:var(--gold);border-color:var(--gold)}.t3-mini:disabled{opacity:.3;cursor:default}.t3-opts-label{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:1.4rem 0 .6rem}.t3-opt{display:flex;align-items:center;gap:.6rem;width:100%;text-align:left;border:1px solid var(--border);border-radius:9px;padding:.7rem .85rem;margin-bottom:.5rem;background:var(--bg2);color:var(--white);font-size:.9rem;font-family:inherit;cursor:pointer}.t3-opt:hover:not(:disabled){border-color:var(--border2)}.t3-opt:disabled{opacity:.5;cursor:not-allowed}.t3-opt.used{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.05)}.t3-opt-num{width:22px;height:22px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-size:.75rem;margin-left:auto;flex:0 0 auto}#s5-indicator,#s5-tag{display:none}.jd-textarea{resize:none;overflow:hidden;min-height:2.7rem;line-height:1.5;font-family:inherit;display:block}.jd-dod-card{border:1px solid var(--border);border-radius:10px;padding:.8rem .85rem;background:var(--bg2)}
-.jd-dod-head{font-family:'Abolition',serif;font-size:1rem;letter-spacing:.02em;color:var(--white);margin-bottom:.5rem;line-height:1.25}
-.jd-dod-card .jd-field-label{margin-bottom:.3rem}
-.jd-dod-inp{min-height:2.6rem}
-.jd-dod-chips{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.55rem}
 </style>
 </head>
 <body>
@@ -1090,7 +1079,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div id="nulmeting-areas"></div>
     <div class="step-nav">
       <button class="btn-back" onclick="goToStep(2)">← Terug</button>
-      <button class="btn-next" onclick="validateAndGoToStep3()">Volgende →</button>
+      <button class="btn-next" onclick="validateNulmetingSliders()">Volgende →</button>
     </div>
   </div>
 
@@ -1112,9 +1101,9 @@ footer p{font-size:.68rem;color:var(--dim)}
 
   <!-- STEP 3: Lange termijn visie (per doel, sub-stappen per categorie) -->
   <div class="step" id="step-3">
-    <div class="step-q" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Waar sta jij over 10 tot 20 jaar?<button class="step-help-btn" onclick="toggleStepHelp('shp-vision')">?</button></div>
-    <div class="step-label" id="vision-sublabel" style="text-align:center;margin-top:.5rem">Jouw visie</div>
+    <div class="step-label" id="vision-sublabel">Jouw visie</div>
     <div class="vs-dots-row" id="vs-dots"></div>
+    <div class="step-q" style="display:flex;align-items:center;position:relative">Waar sta jij over 10 tot 20 jaar?<button class="step-help-btn" onclick="toggleStepHelp('shp-vision')">?</button></div>
     <div class="step-help-popup" id="shp-vision">Klik op de zinnen die bij jou passen. Pas de getallen of woorden aan naar jouw situatie.<div class="step-video-ph">▶ Video volgt hier</div></div>
     <div id="vision-chip-grid"></div>
     <div class="vision-composed-section" id="vision-composed-section" style="display:none">
@@ -1140,12 +1129,12 @@ footer p{font-size:.68rem;color:var(--dim)}
   <!-- STEP 4: 3-5 jaar (per doel, 3 vragen) -->
   <div class="step" id="step-4">
     <div class="goal-loop-indicator" id="s4-indicator"></div>
-    <div class="step-q" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Wat bereik jij de komende 3 tot 5 jaar?<button class="step-help-btn" onclick="toggleStepHelp('shp-4')">?</button></div>
-    <div class="step-label" id="s4-label" style="text-align:center;margin-top:.5rem">3 tot 5 jaar</div>
+    <div class="step-label" id="s4-label">3 tot 5 jaar</div>
+    <div class="step-q" style="display:flex;align-items:center;position:relative">Wat bereik jij de komende 3 tot 5 jaar?<button class="step-help-btn" onclick="toggleStepHelp('shp-4')">?</button></div>
     <div class="step-help-popup" id="shp-4">Hier zie je de doelen die je net invulde voor 10-20 jaar. Vul nu je 3-5 jaar tussenresultaten in — pas de getallen aan.<div class="step-video-ph">▶ Video volgt hier</div></div>
     <div class="vision-context" id="s4-context">
-      <button type="button" class="ctx-toggle" onclick="toggleCtx('s4-ctx-body',this)">Bekijk je 10-20-jaarvisie <span class="ctx-caret">▾</span></button>
-      <div class="ctx-body" id="s4-ctx-body"><span id="s4-longterm-text">—</span></div>
+      <strong>Jouw 10-20 jaar visie</strong>
+      <span id="s4-longterm-text">—</span>
     </div>
     <div id="s4-builder"></div>
     <div class="vision-composed-section" id="med-composed-section" style="display:none">
@@ -1172,13 +1161,13 @@ footer p{font-size:.68rem;color:var(--dim)}
   <!-- STEP JAARVISIE: jaardoel chip-selectie (per doel, per categorie) -->
   <div class="step" id="step-jaarvisie">
     <div class="goal-loop-indicator" id="sjv-indicator"></div>
-    <div class="step-q" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Wat wil jij dit jaar bereiken?<button class="step-help-btn" onclick="toggleStepHelp('shp-jv')">?</button></div>
-    <div class="step-label" id="sjv-label" style="text-align:center;margin-top:.5rem">Jouw jaardoel</div>
+    <div class="step-label" id="sjv-label">Jouw jaardoel</div>
     <div class="vs-dots-row" id="jv-dots"></div>
+    <div class="step-q" style="display:flex;align-items:center;position:relative">Wat wil jij dit jaar bereiken?<button class="step-help-btn" onclick="toggleStepHelp('shp-jv')">?</button></div>
     <div class="step-help-popup" id="shp-jv">Selecteer uit je 3-5 jaar visie wat jij dit jaar oppakt. Voeg ook eigen punten toe.<div class="step-video-ph">▶ Video volgt hier</div></div>
     <div class="vision-context" id="sjv-context">
-      <button type="button" class="ctx-toggle" onclick="toggleCtx('sjv-ctx-body',this)">Bekijk je 3-5-jaarvisie <span class="ctx-caret">▾</span></button>
-      <div class="ctx-body" id="sjv-ctx-body"><span id="sjv-medterm-text">—</span></div>
+      <strong>Jouw 3-5 jaar visie</strong>
+      <span id="sjv-medterm-text">—</span>
     </div>
     <div id="sjv-builder"></div>
     <div class="vision-composed-section" id="jv-composed-section" style="display:none">
@@ -1204,8 +1193,8 @@ footer p{font-size:.68rem;color:var(--dim)}
 
   <!-- STEP TOP 3: prioriteiten kiezen -->
   <div class="step" id="step-top3">
-    <div class="step-q" id="t3-question" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Wat zijn jouw drie grootste prioriteiten?<button class="step-help-btn" onclick="toggleStepHelp('shp-top3')">?</button></div>
-    <div class="step-label" id="t3-sublabel" style="text-align:center;margin-top:.5rem">Jouw jaardoel</div>
+    <div class="step-label" id="t3-sublabel">Jouw jaardoel</div>
+    <div class="step-q" id="t3-question" style="display:flex;align-items:center;position:relative">Wat zijn jouw drie grootste prioriteiten?<button class="step-help-btn" onclick="toggleStepHelp('shp-top3')">?</button></div>
     <div class="step-help-popup" id="shp-top3">Tik in volgorde van belangrijkheid — je belangrijkste eerst.<div class="step-video-ph">▶ Video volgt hier</div></div>
     <div id="t3-cards"></div>
     <p class="top3-hint" id="t3-hint">Tik op een optie om hem als #1 te kiezen</p>
@@ -1217,8 +1206,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 
   <div class="step" id="step-5">
     <div class="goal-loop-indicator" id="s5-indicator"></div>
-    <div class="step-label" style="text-align:center">Jouw jaardoel</div>
-    <div class="step-label" id="s5-area" style="text-align:center;margin-top:.3rem;color:var(--muted);font-weight:400"></div>
+    <div class="step-label">Jouw jaardoel</div>
     <div class="goal-tag" id="s5-tag"><svg><use href="#i-star"/></svg><span id="s5-goal-name">Jouw doel</span></div>
 
     <!-- Voortgangs-dots -->
@@ -1236,9 +1224,9 @@ footer p{font-size:.68rem;color:var(--dim)}
       <div class="jd-chips-row" id="jd-wat-chips"></div>
       <div style="margin-top:.9rem">
         <label class="jd-field-label">Jouw jaardoel — verfijn het naar jouw eigen woorden</label>
-        <textarea class="jd-input jd-textarea" id="jd-goal-text" rows="1"
+        <input class="jd-input" id="jd-goal-text" type="text"
           placeholder='Bijv: "Ik verdien €5.000 per maand als freelancer"'
-          oninput="autoGrow(this);saveJdData()"></textarea>
+          oninput="saveJdData()">
       </div>
       <div class="jd-deadline-badge" id="jd-deadline">📅 —</div>
       <div class="step-nav" style="margin-top:1.25rem">
@@ -1251,7 +1239,13 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="jd-mini" id="jd-s2">
       <div class="step-q" style="font-size:clamp(1.1rem,3.2vw,1.45rem);display:flex;align-items:center">Wanneer weet je zeker dat je je doel hebt behaald?<button class="step-help-btn" onclick="toggleStepHelp('shp-jd2')">?</button></div>
       <div class="step-help-popup" id="shp-jd2">Klik op een suggestie of typ zelf. Pas de getallen aan naar jouw situatie.<div class="step-video-ph">▶ Video volgt hier</div></div>
-      <div id="jd-dod-list" style="display:flex;flex-direction:column;gap:.85rem"></div>
+      <div id="jd-bewijs-chips" style="display:flex;flex-direction:column;gap:.45rem;margin-bottom:.65rem"></div>
+      <div>
+        <label class="jd-field-label">Ik weet dat ik mijn doel heb bereikt wanneer:</label>
+        <input class="jd-input" id="jd-bewijs" type="text"
+          placeholder='Bijv: "De weegschaal toont 75 kg en 15% vet"'
+          oninput="saveJdData()">
+      </div>
       <div class="step-nav" style="margin-top:1.25rem">
         <button class="btn-back" onclick="nextJdStep(1)">← Terug</button>
         <button class="btn-next" onclick="nextJdStep(3)">Volgende →</button>
@@ -1307,7 +1301,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 
       <div class="step-nav" style="margin-top:1.25rem">
         <button class="btn-back" onclick="nextJdStep('review')">← Terug</button>
-        <button class="btn-next" onclick="validateAndGoToReview()">Verstuur naar mijn e-mail</button>
+        <button class="btn-next" onclick="validateAndGoToReview()">Plan mijn gratis gesprek →</button>
       </div>
     </div>
 
@@ -1410,7 +1404,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 
     <div style="margin-top:.85rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.65rem">
       <button class="btn-back" onclick="backFromGesprek()">← Terug</button>
-      <button onclick="goToStep('bedankt')" style="background:none;border:none;padding:.35rem;font-size:.76rem;color:var(--muted);cursor:pointer;opacity:.65">Afronden</button>
+      <button onclick="goToStep('bedankt')" style="background:none;border:none;padding:.35rem;font-size:.76rem;color:var(--muted);cursor:pointer;opacity:.65">liever geen gratis gesprek</button>
     </div>
   </div>
 
@@ -1696,9 +1690,7 @@ const visionChips = {
     { label: 'Gewicht & Lichaam', chips: [
       { id:'gh1', tpl:'Ik bereik mijn ideale gewicht van {kg} kg.', fields:[{key:'kg',ph:'75',wide:false}] },
       { id:'gh2', tpl:'Ik ben {X} kilo afgevallen en houd dit structureel bij.', fields:[{key:'X',ph:'15',wide:false}], onlyFor:['Afvallen'] },
-      { id:'gh2b', tpl:'Ik ben {X} kilo aangekomen.', fields:[{key:'X',ph:'8',wide:false}], onlyFor:['Aankomen','Spieropbouw'] },
-      { id:'gh2c', tpl:'Ik voel mij fysiek sterker.', fields:[], onlyFor:['Aankomen','Spieropbouw'] },
-      { id:'gh2d', tpl:'Ik voel mij energieker.', fields:[], onlyFor:['Aankomen','Spieropbouw'] },
+      { id:'gh2b', tpl:'Ik ben {X} kilo aangekomen en voel mij sterker en energieker.', fields:[{key:'X',ph:'8',wide:false}], onlyFor:['Aankomen','Spieropbouw'] },
       { id:'gh3', tpl:'Ik heb een vetpercentage van {pct}%.', fields:[{key:'pct',ph:'15',wide:false}] },
       { id:'gh4', tpl:'Ik pas moeiteloos in maat {maat}.', fields:[{key:'maat',ph:'M / 38',wide:true}] },
       { id:'gh5', tpl:'Ik heb een BMI van {bmi}.', fields:[{key:'bmi',ph:'22',wide:false}] },
@@ -1800,7 +1792,7 @@ const visionChips = {
     { label: 'Kennis & Leren', chips: [
       { id:'pg1', tpl:'Ik lees {X} boeken per jaar.', fields:[{key:'X',ph:'24',wide:false}] },
       { id:'pg2', tpl:'Ik heb {X} opleidingen of cursussen afgerond.', fields:[{key:'X',ph:'5',wide:false}] },
-      { id:'pg3', tpl:'Ik spreek {talen} vloeiend.', fields:[{key:'talen',ph:'Spaans, Frans of Duits',wide:true}] },
+      { id:'pg3', tpl:'Ik spreek {X} talen vloeiend.', fields:[{key:'X',ph:'3',wide:false}] },
       { id:'pg4', tpl:'Ik heb een certificaat of diploma behaald in {vakgebied}.', fields:[{key:'vakgebied',ph:'jouw vakgebied',wide:true}] },
     ]},
     { label: 'Vaardigheden', chips: [
@@ -1818,7 +1810,7 @@ const visionChips = {
     { label: 'Dagelijkse praktijk', chips: [
       { id:'sp1', tpl:'Ik bid of mediteer elke dag {min} minuten.', fields:[{key:'min',ph:'20',wide:false}] },
       { id:'sp2', tpl:'Ik begin elke dag met {ritueel}.', fields:[{key:'ritueel',ph:'stilte / gebed / dankbaarheid',wide:true}] },
-      { id:'sp3', tpl:'Ik lees {X}x per week in {bron}.', fields:[{key:'X',ph:'5',wide:false},{key:'bron',ph:'de Bijbel / de Koran / de Torah',wide:true}] },
+      { id:'sp3', tpl:'Ik lees {X}x per week in mijn heilige boek.', fields:[{key:'X',ph:'5',wide:false}] },
     ]},
     { label: 'Gemeenschap & Geloof', chips: [
       { id:'sp4', tpl:'Ik ben actief lid van een geloofsgemeenschap.', fields:[] },
@@ -2223,12 +2215,6 @@ const nulmetingQuestions = {
   ],
 };
 
-// Terugval als een doel (nog) geen eigen nulmeting-vragen heeft
-const NM_FALLBACK = [
-  { type:'choice', q:'Hoe sta je er nu voor met dit doel?', opts:['Net begonnen','Beetje op weg','Al aardig ver','Bijna waar ik wil zijn'] },
-];
-function getNmQuestions(goalText){ return nulmetingQuestions[goalText] || NM_FALLBACK; }
-
 const durationMessages = {
   'Net bedacht': 'Goed moment om te beginnen. Dit plan helpt jou direct van intentie naar actie.',
   'Paar maanden': 'Je weet wat je wilt. Nu is het zaak het systeem te bouwen dat zorgt dat je het ook volhoudt.',
@@ -2249,8 +2235,7 @@ let medCustomChips = {}; // { gi: { ci: [{id,text}] } } — eigen 3-5 jaar chips
 let selectedJaarChips = {};    // { gi: { chipId: true } }
 let jaarvisieSubIdx = 0;
 let jaarvisieAdditions = {};   // { gi: edited text from review }
-let jaarvisieTextOverrides = {};
-let jaarChipVals = {}; // { gi: { chipId: overrideText } }
+let jaarvisieTextOverrides = {}; // { gi: { chipId: overrideText } }
 let jaarTextComposed = {};     // { gi: composed text }
 let jaarTop3 = {};             // { gi: [{id,text}, ...] } — geordende top 3
 let jdWatSelected = []; // indices of selected top-3 items
@@ -2311,144 +2296,6 @@ const JD_BEWIJS_BY_AREA = {
     'Het staat zwart op wit: ___ (getal, datum of document)',
   ],
 };
-
-// Contextuele DOD-suggesties o.b.v. de prioriteit-tekst zelf
-const DOD_SUGG_RULES = [
-  { kw:['vetperc','vet perc','% vet','vetpercentage','lichaamsvet'], sugg:[
-    'Mijn vetpercentage is ___% \u2014 gemeten en bewezen',
-    'Ik ben van ___% naar ___% vet gegaan',
-    'De meting toont ___% lichaamsvet' ]},
-  { kw:['gewicht','kg','kilo','afval','aankom','weegschaal'], sugg:[
-    'Ik stap op de weegschaal en zie ___ kg staan',
-    'Ik ben van ___ kg naar ___ kg gegaan',
-    'Ik heb ___ kg afgevallen \u2014 zwart op wit' ]},
-  { kw:['marathon','hardloop','hardlop','rennen','loop','5k','10k','halve','afstand'], sugg:[
-    'Ik heb mijn ___ (afstand) gerend en gefinished',
-    'Ik loop ___ km in ___ minuten',
-    'Mijn eindtijd staat op ___ \u2014 aantoonbaar' ]},
-  { kw:['spier','kracht','bench','squat','deadlift','til','gewichten','sterker'], sugg:[
-    'Ik til ___ kg bij de ___ (oefening)',
-    'Ik heb ___ kg spiermassa gewonnen',
-    'Mijn prestatie staat op ___ \u2014 aantoonbaar' ]},
-  { kw:['stap','wandel','beweg','actief','cardio','conditie'], sugg:[
-    'Ik zet gemiddeld ___ stappen per dag \u2014 mijn app bewijst het',
-    'Ik sport ___ keer per week \u2014 aantoonbaar' ]},
-  { kw:['slaap','rust','uur slaap'], sugg:[
-    'Ik slaap gemiddeld ___ uur per nacht \u2014 gemeten',
-    'Mijn slaapscore staat op ___' ]},
-  { kw:['omzet','inkomen','verdien','freelance','salaris'], sugg:[
-    'Mijn bankafschrift toont \u20ac___ netto per maand',
-    'Mijn omzet is \u20ac___ per maand \u2014 in mijn boekhouding' ]},
-  { kw:['spaar','sparen','gespaard','investe','vermogen'], sugg:[
-    'Ik heb \u20ac___ gespaard of ge\u00efnvesteerd \u2014 het staat op mijn rekening' ]},
-  { kw:['schuld','aflos'], sugg:[
-    'Mijn schulden zijn teruggebracht naar \u20ac___ \u2014 mijn overzicht bewijst het' ]},
-  { kw:['klant','deals','verkoop','verkocht','clients'], sugg:[
-    'Ik heb ___ betalende klanten \u2014 zichtbaar in mijn administratie',
-    'Ik heb ___ deals gesloten dit jaar' ]},
-  { kw:['certificaat','diploma','cursus','leren','skill','beheers','taal'], sugg:[
-    'Ik heb mijn ___ certificaat of diploma op zak',
-    'Ik beheers ___ op een niveau dat ik kan aantonen' ]},
-];
-function pickDodSuggestions(text, areaKey){
-  var lower=(text||'').toLowerCase();
-  var out=[];
-  DOD_SUGG_RULES.forEach(function(r){
-    var hit=r.kw.some(function(k){ return lower.indexOf(k)!==-1; });
-    if(hit){ r.sugg.forEach(function(x){ if(out.indexOf(x)===-1) out.push(x); }); }
-  });
-  if(out.length) return out.slice(0,3);
-  return (JD_BEWIJS_BY_AREA[areaKey]||JD_BEWIJS_BY_AREA['default']).slice(0,3);
-}
-// Per-pil DOD: heldere meet-opties specifiek per doel
-const CHIP_DOD = {
-  gh1:["Ik stap op de weegschaal en zie ___ kg staan."],
-  gh2:["Ik stap op de weegschaal en die staat ___ kilo lager dan mijn startgewicht."],
-  gh2b:["Ik stap op de weegschaal en die staat ___ kilo hoger dan mijn startgewicht."],
-  gh2c:["Ik til ___ kg meer dan aan het begin bij de ___ (oefening) — zichtbaar in mijn trainingslogboek."],
-  gh2d:["Ik houd mijn energie dagelijks bij en zit over de laatste ___ weken gemiddeld op een ___/10.", "Ik scoor mijn energie op minstens ___ van de 7 dagen een ___/10 of hoger."],
-  gh3:["Een vetmeting (weegschaal, caliper of scan) toont ___%."],
-  gh4:["Ik trek een broek aan in maat ___ en hij past comfortabel."],
-  gh5:["Ik reken mijn BMI uit met mijn lengte en gewicht en kom uit op ___."],
-  gh6:["Mijn slaaptracker laat over de laatste ___ weken gemiddeld ___ uur slaap per nacht zien.", "Ik geef mijn ochtendenergie een cijfer en word op minstens ___ van de 7 ochtenden met een ___/10 of hoger wakker."],
-  gh7:["Ik geef mijn energie elke dag een cijfer en zit gemiddeld op een ___/10."],
-  gh8:["Ik houd mijn energie bij en scoor op minstens ___ van de 7 dagen een ___/10 of hoger."],
-  gh9:["Ik houd ___ weken lang mijn energie bij en zit geen enkele dag onder een ___/10."],
-  gh10:["Mijn sport-app of agenda toont ___ trainingen per week."],
-  gh11:["Ik heb mijn ___ voltooid en gefinished — met tijd, foto of medaille als bewijs."],
-  gh11b:["Ik presteer aantoonbaar op het niveau van ___ (bevestigd door wedstrijd, selectie of ranking)."],
-  gh12:["Ik til ___ kg bij de ___ (oefening) — vastgelegd in mijn trainingslogboek."],
-  gh13:["Mijn hardloop-app toont ___ km in een tijd van ___."],
-  gh14:["Mijn trainingslogboek toont ___ krachttrainingen per week."],
-  gh15:["Ik houd mijn voeding bij en eet op minstens ___ van de 7 dagen volgens mijn plan."],
-  gh16:["Ik tel mijn glazen en kom op maximaal ___ per week."],
-  gh17:["Mijn meditatie-app toont over de laatste ___ weken gemiddeld ___ minuten per dag."],
-  gh18:["Ik ben aantoonbaar al ___ maanden onafgebroken rook- en middelenvrij."],
-  ca1:["Mijn jaaropgave of administratie toont €___ over het jaar."],
-  ca2:["Mijn boekhouding toont €___ omzet over het jaar."],
-  ca3:["Mijn rekening ontvangt gemiddeld €___ passief inkomen per maand over de laatste ___ maanden."],
-  ca4:["Mijn facturen laten een uurtarief van €___ zien."],
-  ca5:["Mijn vaste of passieve inkomsten (€___ per maand) zijn hoger dan mijn maandlasten (€___)."],
-  ca6:["Mijn functietitel is officieel ___ — op mijn contract of LinkedIn."],
-  ca7:["Ik geef leiding aan ___ mensen — zichtbaar in het organigram."],
-  ca8:["Mijn urenregistratie toont over de laatste ___ weken gemiddeld ___ uur per week."],
-  ca9:["Ik heb ___ aaneengesloten weken volledig op afstand gewerkt zonder problemen."],
-  ca10:["Ik werk aantoonbaar vanuit ___ (minstens ___ weken)."],
-  ca11:["Mijn administratie toont ___ vaste klanten."],
-  ca12:["Mijn loonadministratie toont ___ medewerkers."],
-  ca13:["Mijn klantenlijst of reviews tonen ___+ geholpen mensen."],
-  ca14:["Mijn wachtlijst telt ___ klanten."],
-  ca15:["Ik ben dit jaar ___ keer gevraagd voor media, podia of samenwerkingen in ___."],
-  ca16:["Mijn boek over ___ is af en gepubliceerd (ISBN of verkooppagina als bewijs)."],
-  ca17:["Ik heb dit jaar ___ keer als spreker op een podium gestaan."],
-  ca18:["Mijn ___-account toont ___+ volgers."],
-  fi1:["Mijn bankafschrift toont gemiddeld €___ per maand over de laatste ___ maanden."],
-  fi2:["Mijn rekening ontvangt gemiddeld €___ passief per maand over de laatste ___ maanden."],
-  fi3:["Ik tel ___ losse inkomstenbronnen op mijn rekening."],
-  fi4:["Mijn vermogensoverzicht (bezittingen min schulden) komt uit op €___ netto."],
-  fi5:["Mijn spaarrekening toont €___."],
-  fi6:["Mijn vastgoed is €___ waard volgens taxatie of WOZ."],
-  fi7:["Mijn beleggingsapp toont een portefeuille van €___."],
-  fi8:["Mijn buffer (€___) dekt ___ maanden aan vaste lasten — nagerekend."],
-  fi9:["Mijn schuldenoverzicht staat op €0."],
-  fi10:["Ik heb geen lopende hypotheek of leningen meer — bevestigd door mijn bank."],
-  fi11:["Mijn passieve inkomsten (€___ per maand) dekken mijn maandlasten (€___) volledig."],
-  fi12:["Mijn vermogen gedeeld door mijn jaarlasten komt uit op ___ jaar."],
-  re1:["Wij geven onze verbinding samen een ___/10 als we het bespreken."],
-  re2:["Wij zijn ___ jaar samen en spreken allebei uit dat we gelukkig zijn."],
-  re3:["Wij hebben minstens ___x per week een diep gesprek — dat houden we bij."],
-  re4:["Ik kan ___ vrienden noemen die ik echt vertrouw en de laatste ___ maanden regelmatig zag."],
-  re5:["Ik heb ___ mensen die ik in nood direct kan bellen."],
-  re6:["Ik zie of spreek mijn beste vrienden ___x per maand — zichtbaar in mijn agenda."],
-  re10:["Ik heb op minstens ___ van de 7 dagen een bewust moment met mijn kinderen — dat houd ik bij."],
-  re11:["Ik doe ___x per week bewust iets met mijn kinderen — terug te zien in mijn agenda."],
-  re12:["Wij hebben dit jaar ___ gezinsreizen gemaakt."],
-  re13:["Ik bel of zie mijn ouders ___x per week."],
-  re14:["Wij zien of spreken elkaar minstens ___x per maand."],
-  re7:["Ik heb ___ waardevolle contacten in ___ die ik echt ken en kan bereiken."],
-  re8:["Ik ben lid van een community met ___+ leden."],
-  re9:["Ik heb dit jaar ___ eigen events georganiseerd met minstens ___ deelnemers."],
-  pg1:["Mijn leeslijst telt ___ uitgelezen boeken dit jaar."],
-  pg2:["Ik heb ___ afgeronde opleidingen of cursussen met certificaat."],
-  pg3:["Ik voer in ___ (taal of talen) een vloeiend gesprek van minstens tien minuten."],
-  pg4:["Ik heb mijn ___-certificaat of diploma op zak."],
-  pg5:["Ik heb met ___ minstens ___ opdrachten of projecten opgeleverd die anderen als hoog niveau beoordelen."],
-  pg6:["Ik heb dit jaar ___ trainingen of workshops over ___ gegeven."],
-  pg7:["Mijn eigen methode voor ___ staat op papier en ik heb hem al ___ keer toegepast."],
-  pg8:["Ik volg mijn ochtend- en avondroutine op minstens ___ van de 7 dagen — dat houd ik bij."],
-  pg9:["Mijn meditatie-app toont over de laatste ___ weken gemiddeld ___ minuten per dag."],
-  pg10:["Ik heb mijn traject afgerond en merk ___ concreet terug in mijn dagelijks leven."],
-  sp1:["Ik houd bij dat ik op minstens ___ van de 7 dagen ___ minuten bid of mediteer."],
-  sp2:["Ik start op minstens ___ van de 7 ochtenden met ___ — dat houd ik bij."],
-  sp3:["Ik lees ___x per week in ___ — dat houd ik bij."],
-  sp4:["Ik neem minstens ___x per maand deel aan bijeenkomsten van mijn gemeenschap."],
-  sp5:["Ik heb ___ bedevaarten of retraites voltooid."],
-  sp6:["Ik heb ___ mensen begeleid — zij kunnen dat bevestigen."],
-  sp7:["Mijn overschrijvingen tonen ___% van mijn inkomen aan goede doelen."],
-  sp8:["Ik doe ___x per maand vrijwilligerswerk — terug te zien in mijn agenda."],
-  sp9:["Ik reflecteer wekelijks en kan minstens ___ concrete keuzes noemen waarin ik naar mijn waarden handelde."],
-};
-
 
 // Waarom-opties per categorie
 const JD_WHY_BY_AREA = {
@@ -2551,7 +2398,6 @@ function updateCardSubs(el, curSub) {
 }
 
 function updateProgressBar(stepId) {
-  var _th=document.querySelector('.tool-header'); if(_th) _th.style.display=(stepId==='1a')?'':'none';
   const areas = areaOrder || [];
   const N = areas.length;
 
@@ -2608,12 +2454,10 @@ function showPage(page) {
   const lnk = document.querySelector('[data-page="' + page + '"]');
   if (lnk) lnk.classList.add('active');
   if (page === 'tool') resetTool();
-  scrollTopKeep();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function resetTool() {
-  document.querySelectorAll('.seen-step').forEach(function(el){ el.classList.remove('seen-step'); });
-  jaarChipVals = {};
   currentStep = 1;
   currentGoalIndex = 0;
   selectedGoals = [];
@@ -2832,7 +2676,7 @@ function showAreaGoals(areaIdx) {
   currentStep = 2;
   document.getElementById('step-2').classList.add('active');
   updateProgressBar(2);
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function collectGoalAndShowNulmeting() {
@@ -2855,9 +2699,11 @@ function collectGoalAndShowNulmeting() {
   currentGoalIndex = startIdx;
   buildProgressBar(selectedGoals.length);
   updateGoalLabels();
-  // Nulmeting ("Waar sta je nu?") is bewust overgeslagen op de landingspagina;
-  // die vraag komt terug in de coaching-app. Ga direct naar de 10-20 jaar visie.
-  goToStep(3);
+  renderNulmeting();
+  hideCurrentStep();
+  document.getElementById('step-nulmeting').classList.add('active');
+  updateProgressBar('nulmeting');
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function backFromStep2() {
@@ -2869,7 +2715,7 @@ function backFromStep2() {
     currentStep = 6;
     document.getElementById('step-6').classList.add('active');
     updateProgressBar(6);
-    navScroll();
+    window.scrollTo({top:0, behavior:'smooth'});
   } else {
     goToStep(1);
   }
@@ -2895,7 +2741,7 @@ function renderNulmeting() {
     if (multi) {
       html += '<div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:' + color + ';margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(' + rgb + ',.18)">' + goal.text + '</div>';
     }
-    html += renderNmQuestions(gi, goal.text, color, rgb);
+    html += renderNmSlider(gi, goal.text);
     html += '</div>';
   }
 
@@ -2903,55 +2749,9 @@ function renderNulmeting() {
   container.innerHTML = html;
 }
 
-function renderNmQuestion(q, gi, qi, color, rgb) { return ''; }
-function nmJs(x){ return String(x==null?'':x).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
-function nmAttr(x){ return String(x==null?'':x).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
-function renderNmQuestions(gi, goalText, color, rgb){
-  var qs = getNmQuestions(goalText);
-  var data = nulmetingData[gi] || {};
-  return qs.map(function(q, qi){
-    var uid = 'nmq-' + gi + '-' + qi;
-    var h = '<div class="nm-q-block"><div class="nm-q-label">' + q.q + '</div>';
-    if (q.type === 'stars') {
-      var cur = +data[qi] || 0;
-      h += '<div class="nm-stars" id="' + uid + '">';
-      for (var i = 1; i <= 5; i++) {
-        h += '<span class="nm-star' + (i <= cur ? ' active' : '') + '" onclick="setNmStar(\'' + uid + '\',' + i + ',' + gi + ',' + qi + ')">\u2605</span>';
-      }
-      h += '</div>';
-    } else if (q.type === 'choice') {
-      h += '<div class="nm-choices" id="' + uid + '">';
-      q.opts.forEach(function(opt, idx){
-        var sel = (data[qi] === opt) ? ' selected' : '';
-        h += '<button type="button" class="nm-choice' + sel + '" onclick="setNmChoice(\'' + uid + '\',' + idx + ',\'' + nmJs(opt) + '\',' + gi + ',' + qi + ')">' + opt + '</button>';
-      });
-      h += '</div>';
-    } else if (q.type === 'number') {
-      var nv = (data[qi] !== undefined ? data[qi] : '');
-      h += '<div style="display:flex;align-items:center;gap:.55rem">'
-        + '<input type="number" inputmode="decimal" value="' + nmAttr(nv) + '" placeholder="' + nmAttr(q.ph || '') + '" oninput="setNmInput(\'' + uid + '\',this.value,' + gi + ',' + qi + ')" style="width:130px;background:var(--bg2);border:1px solid var(--border);border-radius:9px;color:var(--white);font-size:16px;padding:.55rem .75rem;font-family:inherit">'
-        + '<span style="font-size:.82rem;color:var(--muted)">' + (q.unit || '') + '</span></div>';
-    } else if (q.type === 'text') {
-      var tv = (data[qi] !== undefined ? data[qi] : '');
-      h += '<input type="text" value="' + nmAttr(tv) + '" placeholder="' + nmAttr(q.ph || '') + '" oninput="setNmInput(\'' + uid + '\',this.value,' + gi + ',' + qi + ')" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:9px;color:var(--white);font-size:16px;padding:.55rem .75rem;font-family:inherit">';
-    }
-    h += '</div>';
-    return h;
-  }).join('');
-}
-function buildNulmetingText(gi){
-  var goal = selectedGoals[gi] || {};
-  var qs = getNmQuestions(goal.text || '');
-  var data = nulmetingData[gi] || {};
-  var parts = [];
-  qs.forEach(function(q, qi){
-    var v = data[qi];
-    if (v !== undefined && v !== null && v !== '') {
-      var vv = (q.type === 'stars') ? (v + '/5') : (q.type === 'number' ? (v + (q.unit ? (' ' + q.unit) : '')) : v);
-      parts.push(q.q + ' ' + vv);
-    }
-  });
-  return parts.join(' \u00B7 ');
+function renderNmQuestion(q, gi, qi, color, rgb) {
+  // Legacy: kept for any remaining calls but new flow uses renderNmSlider per goal
+  return '';
 }
 
 function renderNmSlider(gi, goalText) {
@@ -3041,7 +2841,7 @@ function validateAndGoToStep3() {
   for (var gi = startGi; gi <= endGi; gi++) {
     var goal = selectedGoals[gi];
     if (!goal) continue;
-    var qs = getNmQuestions(goal.text);
+    var qs = nulmetingQuestions[goal.text] || [];
     if (qs.length === 0) continue;
     var data = nulmetingData[gi] || {};
     var hasAnswer = false;
@@ -3057,17 +2857,12 @@ function validateAndGoToStep3() {
     }
   }
   if (missing.length > 0) {
-    alert('Vul eerst je startpunt in voor: ' + missing.join(', '));
+    alert('Geef eerst een cijfer voor: ' + missing.join(', '));
     return;
   }
   goToStep(3);
 }
 
-function scrollTopKeep(){ window.scrollTo({top:0, behavior:'smooth'}); }
-function navScroll(){ /* Bewust: blijf op dezelfde scrollpositie bij Volgende/Terug (geen sprong omhoog) */ }
-function splitCustomGoals(text){
-  return String(text||'').split(/\s+en\s+|[,.;]+/i).map(function(t){ return t.trim(); }).filter(function(t){ return t.length > 0; });
-}
 function goToStep(n) {
   if (n === 'gesprek') { showGesprekStep(); return; }
 
@@ -3080,7 +2875,7 @@ function goToStep(n) {
       var stepEl = document.getElementById('step-3');
       if (stepEl) stepEl.classList.add('active');
       updateProgressBar(3);
-      scrollTopKeep();
+      window.scrollTo({top:0, behavior:'smooth'});
     });
     return;
   }
@@ -3092,7 +2887,7 @@ function goToStep(n) {
       var stepEl = document.getElementById('step-4');
       if (stepEl) stepEl.classList.add('active');
       updateProgressBar(4);
-      scrollTopKeep();
+      window.scrollTo({top:0, behavior:'smooth'});
     });
     return;
   }
@@ -3107,7 +2902,7 @@ function goToStep(n) {
     var s1 = document.getElementById('jd-s1');
     if (s1) s1.classList.add('active');
     document.querySelectorAll('.jd-dot').forEach(function(d,i){ d.classList.toggle('active', i < 0); });
-    navScroll();
+    window.scrollTo({top:0, behavior:'smooth'});
     return;
   }
 
@@ -3126,14 +2921,14 @@ function goToStep(n) {
   var stepEl = document.getElementById('step-' + n);
   if (stepEl) stepEl.classList.add('active');
   updateProgressBar(n);
-  navScroll();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function showEmailStep() {
   hideCurrentStep();
   document.getElementById('step-email').classList.add('active');
   updateProgressBar('email');
-  navScroll();
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function showGesprekStep() {
@@ -3141,7 +2936,7 @@ function showGesprekStep() {
     hideCurrentStep();
     document.getElementById('step-gesprek').classList.add('active');
     updateProgressBar('gesprek');
-    scrollTopKeep();
+    window.scrollTo({top: 0, behavior: 'smooth'});
   });
 }
 
@@ -3153,7 +2948,7 @@ function goalStepBack(step) {
     currentStep = 6;
     document.getElementById('step-6').classList.add('active');
     updateProgressBar(6);
-    navScroll();
+    window.scrollTo({top: 0, behavior: 'smooth'});
   } else {
     showAreaGoals(currentAreaIndex);
   }
@@ -3223,14 +3018,14 @@ function goToStep1b() {
   document.getElementById('step-1a').classList.remove('active');
   document.getElementById('step-1b').classList.add('active');
   updateProgressBar('1b');
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function goToStep1a() {
   document.getElementById('step-1b').classList.remove('active');
   document.getElementById('step-1a').classList.add('active');
   updateProgressBar('1a');
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 const areaIcons = {
@@ -3307,14 +3102,14 @@ function goToStep1c() {
   currentStep = 1;
   showStep1cRecommendation();
   updateProgressBar(1);
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function goToStep1bFromC() {
   document.getElementById('step-1').classList.remove('active');
   document.getElementById('step-1b').classList.add('active');
   updateProgressBar('1b');
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function showStep1cRecommendation() {
@@ -3348,10 +3143,14 @@ function showStep1cRecommendation() {
   if (!banner) return;
 
   if (recommendations.length > 0) {
+    const bodyText = allHighScore
+      ? 'Het gaat je al goed af — maar groeien kan altijd. Stel een doel om nóg verder te komen.'
+      : 'Op basis van jouw scores is hier de meeste ruimte voor verbetering. Je kunt ook een ander gebied kiezen.';
     banner.innerHTML = `<div class="rec-banner">
       <div class="rec-icon"><svg width="14" height="14"><use href="#i-star"/></svg></div>
       <div>
         <div class="rec-title">Onze aanbeveling: ${recommendations.join(' &amp; ')}</div>
+        <div class="rec-body">${bodyText}</div>
       </div>
     </div>`;
     document.querySelectorAll('.area-chip').forEach(c => {
@@ -3556,7 +3355,7 @@ function addVisionCustomChip(gi, ci, text) {
   if (!visionCustomChips[gi]) visionCustomChips[gi] = {};
   if (!visionCustomChips[gi][ci]) visionCustomChips[gi][ci] = [];
   const n = visionCustomChips[gi][ci].length;
-  visionCustomChips[gi][ci].push({ id: 'cvc_' + gi + '_' + ci + '_' + n, text: text, checked: true });
+  visionCustomChips[gi][ci].push({ id: 'cvc_' + gi + '_' + ci + '_' + n, text });
   rebuildVisionText(gi);
   refreshCustomSection(gi, ci);
 }
@@ -3571,7 +3370,7 @@ function removeVisionCustomChip(gi, ci, idx) {
 function submitVisionCustomChip(gi, ci) {
   const inp = document.getElementById('anders-inp-v-' + gi + '_' + ci);
   if (!inp || !inp.value.trim()) return;
-  splitCustomGoals(inp.value).forEach(function(part){ addVisionCustomChip(gi, ci, part); });
+  addVisionCustomChip(gi, ci, inp.value);
 }
 
 function refreshCustomSection(gi, ci) {
@@ -3583,42 +3382,17 @@ function refreshCustomSection(gi, ci) {
   }
 }
 
-function toggleVisionCustom(gi, ci, idx, btn){
-  var arr = (visionCustomChips[gi] || {})[ci]; if (!arr || !arr[idx]) return;
-  var chip = arr[idx];
-  chip.checked = (chip.checked === false);
-  var on = chip.checked !== false;
-  var row = btn.closest('.chk-row'); if (row) row.classList.toggle('on', on);
-  btn.textContent = on ? '\u2713' : '';
-  rebuildVisionText(gi);
-  updateVisionNextBtn();
-}
-function editVisionCustom(gi, ci, idx, el){
-  var arr = (visionCustomChips[gi] || {})[ci]; if (!arr || !arr[idx]) return;
-  var chip = arr[idx];
-  var inp = document.createElement('input');
-  inp.className = 'anders-input'; inp.style.width = '100%'; inp.value = chip.text;
-  el.replaceWith(inp); inp.focus(); inp.select();
-  var done = function(){
-    var v = inp.value.trim();
-    if (v) chip.text = v;
-    rebuildVisionText(gi);
-    refreshCustomSection(gi, ci);
-  };
-  inp.addEventListener('blur', done);
-  inp.addEventListener('keydown', function(e){ if (e.keyCode === 13){ e.preventDefault(); inp.blur(); } });
-}
 function buildCustomPillsHtml(gi, ci) {
   const chips = (visionCustomChips[gi]?.[ci] || []);
-  const pillsHtml = chips.map((chip, idx) => {
-    const on = chip.checked !== false;
-    return '<div class="chk-row' + (on ? ' on' : '') + '" data-ccustom="1">' +
-      '<button type="button" class="chk-box" onclick="toggleVisionCustom(' + gi + ',' + ci + ',' + idx + ',this)" aria-label="Aanvinken">' + (on ? '✓' : '') + '</button>' +
-      '<div class="chk-body"><span class="cust-edit" onclick="editVisionCustom(' + gi + ',' + ci + ',' + idx + ',this)">' + escHtml(chip.text) + '</span></div>' +
-      '<button type="button" class="chk-del" onclick="removeVisionCustomChip(' + gi + ',' + ci + ',' + idx + ')" aria-label="Verwijderen">✕</button>' +
-    '</div>';
-  }).join('');
+  const pillsHtml = chips.map((chip, idx) =>
+    '<div class="vision-card selected collapsed custom-pill">' +
+      '<div class="vc-sentence">' + chip.text +
+        '<span class="ccp-x" onclick="event.stopPropagation();removeVisionCustomChip(' + gi + ',' + ci + ',' + idx + ')">✕</span>' +
+      '</div>' +
+    '</div>'
+  ).join('');
   return '<div class="vision-custom-section">' +
+    '<div class="vision-custom-label">Voeg je eigen optie toe</div>' +
     pillsHtml +
     '<div class="anders-input-row">' +
       '<input class="anders-input" type="text" id="anders-inp-v-' + gi + '_' + ci + '"' +
@@ -3626,119 +3400,81 @@ function buildCustomPillsHtml(gi, ci) {
         ' onkeydown="if(event.keyCode===13){event.preventDefault();submitVisionCustomChip(' + gi + ',' + ci + ')}">' +
       '<button class="btn-add-custom anders-add-btn" onclick="submitVisionCustomChip(' + gi + ',' + ci + ')">+ Voeg optie toe</button>' +
     '</div>' +
-    '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>' +
   '</div>';
 }
 
-var goalCategoryFilter = {
-  'Afvallen': ['Gewicht & Lichaam','Energie & Slaap','Leefstijl & Voeding'],
-  'Aankomen': ['Gewicht & Lichaam','Sport & Prestaties','Leefstijl & Voeding'],
-  'Spieropbouw': ['Gewicht & Lichaam','Sport & Prestaties','Leefstijl & Voeding'],
-  'Een specifieke sportprestatie neerzetten': ['Sport & Prestaties','Energie & Slaap','Leefstijl & Voeding'],
-  'Beter en consistenter slapen': ['Energie & Slaap','Leefstijl & Voeding'],
-  'Meer energie in mijn dagelijks leven': ['Energie & Slaap','Leefstijl & Voeding','Gewicht & Lichaam'],
-  'Betere algemene fitheid': ['Gewicht & Lichaam','Sport & Prestaties','Energie & Slaap','Leefstijl & Voeding']
-};
-function toggleCtx(id, btn){ var b=document.getElementById(id); if(!b) return; var open=b.classList.toggle('open'); if(btn) btn.classList.toggle('open',open); }
 function renderVisionSubStep() {
-  var gi = currentGoalIndex;
-  var area = (selectedGoals[gi] || {}).area;
-  var areaChips = visionChips[area];
+  const goal = goalData[currentGoalIndex] || {};
+  const area = (selectedGoals[currentGoalIndex]||{}).area;
+  const areaChips = visionChips[area];
   if (!areaChips) return;
-  var cats = visibleVisionCats(gi);
-  if (!cats.length) { goToVisionReview(); return; }
-  if (visionSubIdx >= cats.length) visionSubIdx = cats.length - 1;
-  if (visionSubIdx < 0) visionSubIdx = 0;
-  var cat = cats[visionSubIdx];
-  var ci = areaChips.categories.indexOf(cat);
-  var goalText = (selectedGoals[gi] || {}).text || '';
-  var subLabel = document.getElementById('vision-sublabel');
-  if (subLabel) subLabel.textContent = cat.label;
-  var dotsEl = document.getElementById('vs-dots');
-  if (dotsEl) dotsEl.innerHTML = cats.map(function(_, i){ return '<span class="vs-dot ' + (i === visionSubIdx ? 'active' : '') + '"></span>'; }).join('');
-  var vcs = document.getElementById('vision-composed-section'); if (vcs) vcs.style.display = 'none';
-  var grid = document.getElementById('vision-chip-grid');
+  const cats = areaChips.categories;
+  const cat = cats[visionSubIdx];
+  if (!cat) return;
+  if (visionSubIdx === 0) {
+    var aKey = resolveAreaKey(currentGoalIndex);
+  }
+
+  const color = (areaConfig[area]||{}).color || '#C9A84C';
+  const rgb = hexToRgb(color);
+  const total = cats.length;
+  const current = visionSubIdx + 1;
+
+  const subLabel = document.getElementById('vision-sublabel');
+  if (subLabel) subLabel.textContent = `${area}`;
+
+  // Sub-stap dots
+  const dotsEl = document.getElementById('vs-dots');
+  if (dotsEl) dotsEl.innerHTML = cats.map((_, i) =>
+    `<span class="vs-dot ${i === visionSubIdx ? 'active' : ''}"></span>`
+  ).join('');
+
+  const grid = document.getElementById('vision-chip-grid');
   if (!grid) return;
-  if (!selectedChips[gi]) selectedChips[gi] = {};
-  var chips = getSortedChips(cat.chips.filter(function(chip){ return !chip.onlyFor || chip.onlyFor.includes(goalText); }), goalText);
-  var chipsHtml = chips.map(function(chip){
-    var isSel = !!selectedChips[gi][chip.id];
-    return '<div class="chk-row' + (isSel ? ' on' : '') + '" data-chip-id="' + chip.id + '">' +
-      '<button type="button" class="chk-box" onclick="visionTick(this,&quot;' + chip.id + '&quot;,' + gi + ')" aria-label="Aanvinken">' + (isSel ? '✓' : '') + '</button>' +
-      '<div class="chk-body">' + buildVisionItemHtml(gi, chip) + '</div>' +
-    '</div>';
-  }).join('');
-  grid.innerHTML = chipsHtml + '<div id="vcustom-' + gi + '_' + ci + '">' + buildCustomPillsHtml(gi, ci) + '</div>';
-  var navEl = document.getElementById('vision-subnav');
+
+  if (!selectedChips[currentGoalIndex]) selectedChips[currentGoalIndex] = {};
+
+  const goalText = (selectedGoals[currentGoalIndex] || {}).text || '';
+  const filteredVChips = getSortedChips(
+    cat.chips.filter(chip => !chip.onlyFor || chip.onlyFor.includes(goalText)),
+    goalText
+  );
+  grid.innerHTML = `<div class="vc-cat-label">${cat.label}</div>` + filteredVChips.map(chip => {
+    const saved = (selectedChips[currentGoalIndex]||{})[chip.id];
+    const isSelected = !!saved;
+    // Chip is collapsed if it has fields and at least one value is already filled
+    const hasFilledFields = isSelected && chip.fields.length > 0 &&
+      chip.fields.some(f => saved && saved[f.key]);
+    const isCollapsed = hasFilledFields;
+    let sentence = chip.tpl;
+    chip.fields.forEach(f => {
+      const val = (saved && saved[f.key]) ? saved[f.key] : '';
+      const display = isCollapsed
+        ? (val || `<span class="vc-ph">${f.ph}</span>`)
+        : val ? `<span class="vc-val filled">${val}</span>` : `<span class="vc-ph">${f.ph}</span>`;
+      sentence = sentence.replace('{' + f.key + '}', display);
+    });
+    const classes = `vision-card${isSelected?' selected':''}${isCollapsed?' collapsed':''}`;
+    return `<div class="${classes}" id="vc-${chip.id}" onclick="toggleVisionChipNew(this,'${chip.id}',${currentGoalIndex})">
+      <div class="vc-sentence">${sentence}</div>
+      ${isSelected && !isCollapsed && chip.fields.length > 0 ? renderVcFields(chip, currentGoalIndex) : ''}
+    </div>`;
+  }).join('')
+  + `<div id="vcustom-${currentGoalIndex}_${visionSubIdx}">` + buildCustomPillsHtml(currentGoalIndex, visionSubIdx) + '</div>';
+
+  const navEl = document.getElementById('vision-subnav');
   if (navEl) {
-    var isLast = visionSubIdx >= cats.length - 1;
-    var backFn = visionSubIdx === 0 ? "goToStep(2)" : "prevVisionSubStep()";
-    var anySel = chips.some(function(c){ return !!selectedChips[gi][c.id]; }) || ((visionCustomChips[gi] && visionCustomChips[gi][ci]) ? visionCustomChips[gi][ci].some(function(c){ return c.checked !== false; }) : false);
-    navEl.innerHTML = '<button class="btn-back" onclick="' + backFn + '">\u2190 Terug</button>' +
-      (isLast ? '<button class="btn-next" onclick="goToVisionReview()">Volgende stap \u2192</button>'
-              : '<button class="btn-next" onclick="nextVisionSub()">' + (anySel ? 'Volgende \u2192' : 'Niets hier \u2192') + '</button>');
+    const isLast = visionSubIdx >= cats.length - 1;
+    const backFn = visionSubIdx === 0 ? "goToStep('nulmeting')" : "prevVisionSubStep()";
+    navEl.innerHTML = `
+      <button class="btn-back" onclick="${backFn}">← Terug</button>
+      <button class="btn-skip" onclick="skipVisionSub()">Niets hier →</button>
+      ${isLast
+        ? `<button class="btn-next" onclick="goToVisionReview()">Volgende stap →</button>`
+        : `<button class="btn-next" onclick="nextVisionSub()">Volgende →</button>`
+      }
+    `;
   }
-}
-
-function buildVisionItemHtml(gi, chip) {
-  var saved = (selectedChips[gi] || {})[chip.id] || {};
-  var tpl = chip.tpl || chip._text || '';
-  var re = /\{([^}]+)\}/g, out = '', last = 0, m;
-  while ((m = re.exec(tpl))) {
-    out += escHtml(tpl.slice(last, m.index));
-    var key = m[1];
-    var _f = (chip.fields || []).filter(function(x){ return x.key === key; })[0];
-    var val = (saved[key] !== undefined && saved[key] !== '') ? saved[key] : (_f && _f.ph ? _f.ph : '');
-    out += '<span class="vb-val" data-mkey="' + key + '" data-gi="' + gi + '" data-chipid="' + chip.id + '" onclick="visionEditVal(event,this)">' + escHtml(val || '___') + '</span>';
-    last = m.index + m[0].length;
-  }
-  out += escHtml(tpl.slice(last));
-  return '<div>' + out + '</div>';
-}
-
-function visionTick(el, chipId, gi) {
-  if (!selectedChips[gi]) selectedChips[gi] = {};
-  var on = !selectedChips[gi][chipId];
-  if (on) { selectedChips[gi][chipId] = selectedChips[gi][chipId] || {}; }
-  else { delete selectedChips[gi][chipId]; }
-  var row = el.closest('.chk-row');
-  if (row) row.classList.toggle('on', on);
-  el.textContent = on ? '✓' : '';
-  updateVisionNextBtn();
-  if (typeof saveJdData === 'function') saveJdData();
-}
-
-function updateVisionNextBtn(){
-  var nav = document.getElementById('vision-subnav'); if (!nav) return;
-  var btn = nav.querySelector('.btn-next'); if (!btn) return;
-  var oc = btn.getAttribute('onclick') || '';
-  if (oc.indexOf('goToVisionReview') > -1) return;
-  var grid = document.getElementById('vision-chip-grid');
-  var any = grid && grid.querySelector('.chk-row.on');
-  btn.textContent = any ? 'Volgende →' : 'Niets hier →';
-}
-
-function visionEditVal(e, el) {
-  e.stopPropagation();
-  var cur = el.textContent === '___' ? '' : el.textContent;
-  var inp = document.createElement('input');
-  inp.className = 'vb-val-inp'; inp.value = cur; inp.placeholder = 'Vul in...';
-  inp.dataset.mkey = el.dataset.mkey; inp.dataset.gi = el.dataset.gi; inp.dataset.chipid = el.dataset.chipid;
-  el.replaceWith(inp); inp.focus(); inp.select();
-  function done() {
-    var gi = parseInt(inp.dataset.gi), cid = inp.dataset.chipid, key = inp.dataset.mkey;
-    if (!selectedChips[gi]) selectedChips[gi] = {};
-    if (!selectedChips[gi][cid]) selectedChips[gi][cid] = {};
-    selectedChips[gi][cid][key] = inp.value.trim();
-    var sp = document.createElement('span');
-    sp.className = 'vb-val'; sp.dataset.mkey = key; sp.dataset.gi = gi; sp.dataset.chipid = cid;
-    sp.textContent = inp.value.trim() || '___';
-    sp.onclick = function(ev) { visionEditVal(ev, this); };
-    inp.replaceWith(sp);
-    if (typeof saveJdData === 'function') saveJdData();
-  }
-  inp.addEventListener('blur', done);
-  inp.addEventListener('keydown', function(ev){ if (ev.key === 'Enter') { ev.preventDefault(); inp.blur(); } });
 }
 
 function renderVcFields(chip, goalIdx) {
@@ -3834,7 +3570,7 @@ function rebuildVisionText(goalIdx) {
       }
     });
     // Eigen custom pills per sub-stap
-    (visionCustomChips[goalIdx]?.[ci] || []).forEach(chip => { if (chip.checked !== false) lines.push(chip.text); });
+    (visionCustomChips[goalIdx]?.[ci] || []).forEach(chip => lines.push(chip.text));
   });
   if (!visionTexts[goalIdx]) visionTexts[goalIdx] = {};
   visionTexts[goalIdx].composed = lines.join(' ');
@@ -3842,8 +3578,12 @@ function rebuildVisionText(goalIdx) {
   const display = document.getElementById('vision-composed-display');
   const section = document.getElementById('vision-composed-section');
   if (display && section) {
-    display.textContent = lines.join(' ');
-    section.style.display = 'none';   // Bewust verborgen in de 10-20 stap: geen "visie tot nu toe" onderaan
+    if (lines.length > 0) {
+      display.textContent = lines.join(' ');
+      section.style.display = '';
+    } else {
+      section.style.display = 'none';
+    }
   }
 }
 
@@ -3863,7 +3603,7 @@ function getVisionText(gi) {
         lines.push(sentence);
       }
     });
-    (visionCustomChips[gi]?.[ci] || []).forEach(chip => { if (chip.checked !== false) lines.push(chip.text); });
+    (visionCustomChips[gi]?.[ci] || []).forEach(chip => lines.push(chip.text));
   });
   return lines.join(' ');
 }
@@ -3927,7 +3667,7 @@ function visibleMedCats(gi) {
 
   return aData.categories.map((cat, ci) => {
     const standardChips = cat.chips.filter(chip => !!vSel[chip.id]);
-    const customChips   = (visionCustomChips[gi]?.[ci] || []).filter(chip => chip.checked !== false).map(chip => ({
+    const customChips   = (visionCustomChips[gi]?.[ci] || []).map(chip => ({
       id: chip.id, tpl: chip.text, fields: [], _isCustom: true, _text: chip.text, _ci: ci
     }));
     return { label: cat.label, chips: [...standardChips, ...customChips], _ci: ci };
@@ -3973,126 +3713,98 @@ function updateMedTermComposed(gi) {
 }
 
 function renderMedTermSubStep() {
-  var gi = currentGoalIndex;
-  var area = (selectedGoals[gi] || {}).area;
-  var cats = visibleMedCats(gi);
-  var labelEl = document.getElementById('s4-label');
-  if (labelEl) labelEl.textContent = area || '';
-  var ctxEl = document.getElementById('s4-longterm-text');
-  if (ctxEl) ctxEl.textContent = (visionTexts[gi] && visionTexts[gi].composed) || getVisionText(gi) || '—';
-  if (!selectedMedChips[gi]) selectedMedChips[gi] = {};
+  const gi   = currentGoalIndex;
+  const area = (selectedGoals[gi] || {}).area;
+  const cats = visibleMedCats(gi);
   if (!cats.length) { goToMedTermReview(); return; }
-  var vSel = selectedChips[gi] || {};
-  cats.forEach(function(cat){ cat.chips.forEach(function(chip){ if ((chip._isCustom || vSel[chip.id]) && !selectedMedChips[gi][chip.id]) selectedMedChips[gi][chip.id] = Object.assign({}, vSel[chip.id] || {}); }); });
-  var builder = document.getElementById('s4-builder');
-  if (!builder) return;
-  var mc = document.getElementById('med-composed-section'); if (mc) mc.style.display = 'none';
-  builder.innerHTML = cats.map(function(cat){
-    return cat.chips.map(function(chip){
-      var isSel = !!selectedMedChips[gi][chip.id];
-      return '<div class="chk-row' + (isSel ? ' on' : '') + '" data-chip-id="' + chip.id + '">' +
-        '<button type="button" class="chk-box" onclick="medTick(this,&quot;' + chip.id + '&quot;,' + gi + ')" aria-label="Aanvinken">' + (isSel ? '✓' : '') + '</button>' +
-        '<div class="chk-body">' + buildMedItemHtml(gi, chip) + '</div>' +
-      '</div>';
-    }).join('');
-  }).join('');
-  var navEl = document.getElementById('s4-nav');
-  if (navEl) {
-    navEl.innerHTML = '<button class="btn-back" onclick="goToStep(&quot;vision-review&quot;)">← Terug</button>' +
-      '<button class="btn-next" onclick="goToMedTermReview()">Volgende →</button>';
+  const cat = cats[medTermSubIdx];
+  if (!cat)  { goToMedTermReview(); return; }
+  if (medTermSubIdx === 0) {
+    var aKey = resolveAreaKey(gi);
   }
-}
 
-function buildMedItemHtml(gi, chip) {
-  var saved = (selectedMedChips[gi] || {})[chip.id] || {};
-  var tpl = chip.tpl || chip._text || '';
-  var re = /\{([^}]+)\}/g, out = '', last = 0, m;
-  while ((m = re.exec(tpl))) {
-    out += escHtml(tpl.slice(last, m.index));
-    var key = m[1];
-    var _f = (chip.fields || []).filter(function(x){ return x.key === key; })[0];
-    var val = (saved[key] !== undefined && saved[key] !== '') ? saved[key] : (_f && _f.ph ? _f.ph : '');
-    out += '<span class="vb-val" data-mkey="' + key + '" data-gi="' + gi + '" data-chipid="' + chip.id + '" onclick="medEditVal(event,this)">' + escHtml(val || '___') + '</span>';
-    last = m.index + m[0].length;
-  }
-  out += escHtml(tpl.slice(last));
-  return '<div>' + out + '</div>';
-}
+  const color = (areaConfig[area] || {}).color || '#C9A84C';
+  const rgb   = hexToRgb(color);
 
-function medTick(el, chipId, gi) {
+  const labelEl = document.getElementById('s4-label');
+  if (labelEl) labelEl.textContent = area;
+
+  const ctxEl = document.getElementById('s4-longterm-text');
+  if (ctxEl) ctxEl.textContent = (visionTexts[gi] && visionTexts[gi].composed) || getVisionText(gi) || '—';
+
   if (!selectedMedChips[gi]) selectedMedChips[gi] = {};
-  var on = !selectedMedChips[gi][chipId];
-  if (on) { selectedMedChips[gi][chipId] = selectedMedChips[gi][chipId] || {}; }
-  else { delete selectedMedChips[gi][chipId]; }
-  var row = el.closest('.chk-row');
-  if (row) row.classList.toggle('on', on);
-  el.textContent = on ? '✓' : '';
-  if (typeof saveJdData === 'function') saveJdData();
-}
 
-function medEditVal(e, el) {
-  e.stopPropagation();
-  var cur = el.textContent === '___' ? '' : el.textContent;
-  var inp = document.createElement('input');
-  inp.className = 'vb-val-inp'; inp.value = cur; inp.placeholder = 'Vul in...';
-  inp.dataset.mkey = el.dataset.mkey; inp.dataset.gi = el.dataset.gi; inp.dataset.chipid = el.dataset.chipid;
-  el.replaceWith(inp); inp.focus(); inp.select();
-  function done() {
-    var gi = parseInt(inp.dataset.gi), cid = inp.dataset.chipid, key = inp.dataset.mkey;
-    var val = inp.value.trim();
-    if (!selectedMedChips[gi]) selectedMedChips[gi] = {};
-    if (!selectedMedChips[gi][cid]) selectedMedChips[gi][cid] = {};
-    selectedMedChips[gi][cid][key] = val;
-    var sp = document.createElement('span');
-    sp.className = 'vb-val'; sp.dataset.mkey = key; sp.dataset.gi = gi; sp.dataset.chipid = cid;
-    sp.textContent = val || '___';
-    sp.onclick = function(ev) { medEditVal(ev, this); };
-    inp.replaceWith(sp);
-    if (typeof saveJdData === 'function') saveJdData();
-  }
-  inp.addEventListener('blur', done);
-  inp.addEventListener('keydown', function(ev){ if (ev.key === 'Enter') { ev.preventDefault(); inp.blur(); } });
-}
+  // Pre-select chips that user selected in step 3 + custom chips
+  const vSel = selectedChips[gi] || {};
+  cat.chips.forEach(chip => {
+    if ((chip._isCustom || vSel[chip.id]) && !selectedMedChips[gi][chip.id]) {
+      selectedMedChips[gi][chip.id] = {};
+    }
+  });
 
-function buildJaarItemHtml(gi, chip) {
-  if (!jaarChipVals[gi]) jaarChipVals[gi] = {};
-  if (!jaarChipVals[gi][chip.id]) jaarChipVals[gi][chip.id] = Object.assign({}, chip._seed || {});
-  var saved = jaarChipVals[gi][chip.id];
-  var tpl = chip.tpl || chip.text || '';
-  var re = /\{([^}]+)\}/g, out = '', last = 0, m;
-  while ((m = re.exec(tpl))) {
-    out += escHtml(tpl.slice(last, m.index));
-    var key = m[1];
-    var _f = (chip.fields || []).filter(function(x){ return x.key === key; })[0];
-    var val = (saved[key] !== undefined && saved[key] !== '') ? saved[key] : (_f && _f.ph ? _f.ph : '');
-    out += '<span class="vb-val" data-mkey="' + key + '" data-gi="' + gi + '" data-chipid="' + chip.id + '" onclick="jaarEditVal(event,this)">' + escHtml(val || '___') + '</span>';
-    last = m.index + m[0].length;
-  }
-  out += escHtml(tpl.slice(last));
-  return '<div>' + out + '</div>';
-}
+  const builder = document.getElementById('s4-builder');
+  if (!builder) return;
 
-function jaarEditVal(e, el) {
-  e.stopPropagation();
-  var cur = el.textContent === '___' ? '' : el.textContent;
-  var inp = document.createElement('input');
-  inp.className = 'vb-val-inp'; inp.value = cur; inp.placeholder = 'Vul in...';
-  inp.dataset.mkey = el.dataset.mkey; inp.dataset.gi = el.dataset.gi; inp.dataset.chipid = el.dataset.chipid;
-  el.replaceWith(inp); inp.focus(); inp.select();
-  function done() {
-    var gi = parseInt(inp.dataset.gi), cid = inp.dataset.chipid, key = inp.dataset.mkey;
-    if (!jaarChipVals[gi]) jaarChipVals[gi] = {};
-    if (!jaarChipVals[gi][cid]) jaarChipVals[gi][cid] = {};
-    jaarChipVals[gi][cid][key] = inp.value.trim();
-    var sp = document.createElement('span');
-    sp.className = 'vb-val'; sp.dataset.mkey = key; sp.dataset.gi = gi; sp.dataset.chipid = cid;
-    sp.textContent = inp.value.trim() || '___';
-    sp.onclick = function(ev) { jaarEditVal(ev, this); };
-    inp.replaceWith(sp);
-    if (typeof saveJdData === 'function') saveJdData();
+  const medGoalText = (selectedGoals[gi] || {}).text || '';
+  const sortedMedChips = getSortedChips(cat.chips, medGoalText);
+  builder.innerHTML = `<div class="vc-cat-label">${cat.label}</div>` + sortedMedChips.map(chip => {
+    if (chip._isCustom) {
+      // Custom chips: always selected, click to edit text
+      if (!selectedMedChips[gi][chip.id]) selectedMedChips[gi][chip.id] = {};
+      const ctx20 = `<div class="vc-context-label">10-20 jaar: <strong>${chip._text || chip.tpl}</strong></div>`;
+      return `<div class="vision-card selected collapsed" id="mc-${chip.id}">
+        ${ctx20}
+        <div class="vc-sentence" style="cursor:pointer" onclick="startEditMedCustomChip('${chip.id}',${gi})">${chip.tpl} <span style="font-size:.72rem;color:var(--muted);margin-left:.35rem">✎</span></div>
+      </div>`;
+    }
+    const saved    = (selectedMedChips[gi] || {})[chip.id];
+    const isSel    = !!saved;
+    const isFilled = isSel && chip.fields.length > 0 && chip.fields.some(f => saved && saved[f.key]);
+    const isCol    = isFilled;
+
+    // Build 3-5yr sentence
+    let sentence = chip.tpl;
+    chip.fields.forEach(f => {
+      const val  = (saved && saved[f.key]) ? saved[f.key] : '';
+      const disp = isCol
+        ? (val || `<span class="vc-ph">${f.ph}</span>`)
+        : val ? `<span class="vc-val filled">${val}</span>` : `<span class="vc-ph">${f.ph}</span>`;
+      sentence = sentence.replace('{' + f.key + '}', disp);
+    });
+
+    // Build 10-20yr context (values from step 3)
+    const vData = vSel[chip.id];
+    let ctx20 = '';
+    if (vData && chip.fields.length > 0) {
+      let v20 = chip.tpl;
+      chip.fields.forEach(f => { v20 = v20.replace('{' + f.key + '}', vData[f.key] || f.ph); });
+      ctx20 = `<div class="vc-context-label">10-20 jaar: <strong>${v20}</strong></div>`;
+    }
+
+    const cls = `vision-card${isSel ? ' selected' : ''}${isCol ? ' collapsed' : ''}`;
+    return `<div class="${cls}" id="mc-${chip.id}" onclick="toggleMedChip(this,'${chip.id}',${gi})">
+      ${ctx20}
+      <div class="vc-sentence">${sentence}</div>
+      ${isSel && !isCol && chip.fields.length > 0 ? renderMedChipFields(chip, gi) : ''}
+    </div>`;
+  }).join('')
+  + `<div id="mcustom-${gi}_${medTermSubIdx}">` + buildMedCustomPillsHtml(gi, medTermSubIdx) + '</div>';
+
+  updateMedTermComposed(gi);
+
+  const cats2 = visibleMedCats(gi);
+  const navEl = document.getElementById('s4-nav');
+  if (navEl) {
+    const isFirst = medTermSubIdx === 0;
+    const isLast  = medTermSubIdx >= cats2.length - 1;
+    const backFn  = isFirst ? "goToStep('vision-review')" : 'prevMedSubStep()';
+    navEl.innerHTML = `
+      <button class="btn-back" onclick="${backFn}">← Terug</button>
+      <button class="btn-skip" onclick="skipMedTermSub()">Niets hier →</button>
+      ${isLast
+        ? `<button class="btn-next" onclick="goToMedTermReview()">Naar review →</button>`
+        : `<button class="btn-next" onclick="nextMedTermSub()">Volgende →</button>`}`;
   }
-  inp.addEventListener('blur', done);
-  inp.addEventListener('keydown', function(ev){ if (ev.key === 'Enter') { ev.preventDefault(); inp.blur(); } });
 }
 
 function renderMedChipFields(chip, gi) {
@@ -4165,15 +3877,15 @@ function nextMedTermSub() {
   if (medTermSubIdx >= max) { goToMedTermReview(); return; }
   medTermSubIdx++;
   renderMedTermSubStep();
-  navScroll();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-function prevMedTermSub() { medTermSubIdx = Math.max(0, medTermSubIdx - 1); renderMedTermSubStep(); navScroll(); }
+function prevMedTermSub() { medTermSubIdx = Math.max(0, medTermSubIdx - 1); renderMedTermSubStep(); window.scrollTo({top:0,behavior:'smooth'}); }
 
 function prevMedSubStep() {
   if (medTermSubIdx > 0) {
     medTermSubIdx--;
     renderMedTermSubStep();
-    navScroll();
+    window.scrollTo({top:0, behavior:'smooth'});
   } else {
     goToStep('vision-review');
   }
@@ -4222,7 +3934,7 @@ function goToMedTermReview() {
   currentStep = 'medterm-review';
   updateProgressBar('medterm-review');
   renderMedTermReview();
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function goBackFromMedTermReview() {
@@ -4233,7 +3945,7 @@ function goBackFromMedTermReview() {
   currentStep = 4;
   renderMedTermSubStep();
   updateProgressBar(4);
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 // ─── Jaarvisie chip systeem ────────────────────────────────────────────────
@@ -4248,7 +3960,12 @@ function visibleJaarCats(gi) {
     // Medterm standaard chips die geselecteerd zijn in stap 4
     const standardChips = cat.chips
       .filter(chip => !!mSel[chip.id])
-      .map(chip => ({ id: chip.id, tpl: chip.tpl, fields: chip.fields, _fromMed: true, _seed: mSel[chip.id] || {} }));
+      .map(chip => {
+        const data = mSel[chip.id] || {};
+        let text = chip.tpl;
+        chip.fields.forEach(f => { text = text.replace('{' + f.key + '}', data[f.key] || f.ph); });
+        return { id: chip.id, tpl: text, fields: [], _fromMed: true };
+      });
     // Custom chips uit stap 3 die ook in stap 4 aanwezig zijn
     const customMedChips = (visionCustomChips[gi]?.[ci] || [])
       .filter(chip => !!mSel[chip.id])
@@ -4264,16 +3981,15 @@ function visibleJaarCats(gi) {
 function buildJaarvisieText(gi) {
   const sel = selectedJaarChips[gi] || {};
   const cats = visibleJaarCats(gi);
-  const vals = jaarChipVals[gi] || {};
   const parts = [];
-  function fill(chip){
-    var t = chip.tpl || chip.text || '';
-    (chip.fields || []).forEach(function(f){ var v = vals[chip.id] && vals[chip.id][f.key]; t = t.replace('{' + f.key + '}', (v !== undefined && v !== '') ? v : f.ph); });
-    return t;
-  }
-  cats.forEach(function(cat){ cat.chips.forEach(function(chip){ if (sel[chip.id]) parts.push(fill(chip)); }); });
-  Object.values(jaarvisieCustomChips[gi] || {}).forEach(function(subChips){
-    subChips.forEach(function(chip){ if (sel[chip.id]) parts.push(chip.text); });
+  cats.forEach(cat => {
+    cat.chips.forEach(chip => {
+      if (sel[chip.id]) parts.push(getJaarChipText(gi, chip.id, chip.tpl));
+    });
+  });
+  // Jaarvisie eigen custom chips
+  Object.values(jaarvisieCustomChips[gi] || {}).forEach(subChips => {
+    subChips.forEach(chip => { if (sel[chip.id]) parts.push(getJaarChipText(gi, chip.id, chip.text)); });
   });
   return parts.join(' · ');
 }
@@ -4323,7 +4039,7 @@ function removeJaarCustomChip(gi, ci, idx) {
 function submitJaarCustomChip(gi, ci) {
   const inp = document.getElementById('jv-inp-' + gi + '_' + ci);
   if (!inp || !inp.value.trim()) return;
-  splitCustomGoals(inp.value).forEach(function(part){ addJaarCustomChip(gi, ci, part); });
+  addJaarCustomChip(gi, ci, inp.value);
 }
 
 function buildJaarCustomPillsHtml(gi, ci) {
@@ -4336,6 +4052,7 @@ function buildJaarCustomPillsHtml(gi, ci) {
     '</div>'
   ).join('');
   return '<div class="vision-custom-section">' +
+    '<div class="vision-custom-label">Voeg je eigen optie toe</div>' +
     pillsHtml +
     '<div class="anders-input-row">' +
       '<input class="anders-input" type="text" id="jv-inp-' + gi + '_' + ci + '"' +
@@ -4343,7 +4060,6 @@ function buildJaarCustomPillsHtml(gi, ci) {
         ' onkeydown="if(event.keyCode===13){event.preventDefault();submitJaarCustomChip(' + gi + ',' + ci + ')}">' +
       '<button class="btn-add-custom anders-add-btn" onclick="submitJaarCustomChip(' + gi + ',' + ci + ')">+ Voeg optie toe</button>' +
     '</div>' +
-    '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>' +
   '</div>';
 }
 
@@ -4353,7 +4069,7 @@ function renderJaarvisieSubStep() {
 
 // ─── Variant B helpers ────────────────────────────────────────────────────
 
-function buildVbItemHtml_UNUSED(gi, chip) {
+function buildVbItemHtml(gi, chip) {
   var tpl = getJaarChipText(gi, chip.id, chip.tpl || chip.text || '');
   var parts = tpl.split('___');
   var catLabel = chip._cat || '';
@@ -4480,50 +4196,97 @@ function saveVbSelection(gi) {
 function renderJaarvisieVarB(gi) {
   var area = (selectedGoals[gi] || {}).area;
   var cats = visibleJaarCats(gi);
+
   var labelEl = document.getElementById('sjv-label');
   if (labelEl) labelEl.textContent = area || 'Jouw jaardoel';
+
   var dotsEl = document.getElementById('jv-dots');
   if (dotsEl) dotsEl.innerHTML = '';
+
   var ctxTxt = document.getElementById('sjv-medterm-text');
   if (ctxTxt) ctxTxt.textContent = getMedTermText(gi) || '—';
+
   if (!selectedJaarChips[gi]) selectedJaarChips[gi] = {};
-  if (!cats.length) { goToJaarvisieReview(); return; }
-  var html = cats.map(function(cat) {
-    return cat.chips.map(function(chip) {
-      var isSel = !!selectedJaarChips[gi][chip.id];
-      return '<div class="chk-row' + (isSel ? ' on' : '') + '" data-chip-id="' + chip.id + '">' +
-        '<button type="button" class="chk-box" onclick="jvTick(this,&quot;' + chip.id + '&quot;,' + gi + ')" aria-label="Aanvinken">' + (isSel ? '✓' : '') + '</button>' +
-        '<div class="chk-body">' + buildJaarItemHtml(gi, chip) + '</div>' +
-      '</div>';
-    }).join('');
-  }).join('');
+  if (!vbCounts[gi]) vbCounts[gi] = 0;
+
+  // Flatten all chips, attach category label
+  var allChips = [];
+  cats.forEach(function(cat) {
+    cat.chips.forEach(function(chip) {
+      allChips.push(Object.assign({}, chip, { _cat: cat.label }));
+    });
+  });
+
+  if (!allChips.length) { goToJaarvisieReview(); return; }
+
+  // Separate into previously-selected and unselected
+  var selectedChipsList = [];
+  var restChipsList = [];
+  allChips.forEach(function(chip) {
+    if (selectedJaarChips[gi][chip.id]) {
+      selectedChipsList.push(chip);
+    } else {
+      restChipsList.push(chip);
+    }
+  });
+
+  // Assign ranks to already-selected chips
+  vbCounts[gi] = selectedChipsList.length;
+
+  function buildItem(chip, rank) {
+    var numTxt = rank ? rank : '—';
+    var arrTxt = rank ? '↓' : '↑';
+    var arrFn  = rank ? 'vbMoveDown(this,' + gi + ')' : 'vbMoveUp(this,' + gi + ')';
+    var safeId = chip.id.replace(/'/g, "\\'");
+    return '<div class="vb-item" data-chip-id="' + chip.id + '">' +
+      '<div class="vb-num">' + numTxt + '</div>' +
+      '<div class="vb-content">' + buildVbItemHtml(gi, chip) + '</div>' +
+      '<div class="vb-arr" onclick="' + arrFn + '">' + arrTxt + '</div>' +
+    '</div>';
+  }
+
+  var topItems = selectedChipsList.map(function(chip, i) { return buildItem(chip, i + 1); }).join('');
+  var restItems = restChipsList.map(function(chip) { return buildItem(chip, 0); }).join('');
+
+  var emptyDisplay = selectedChipsList.length ? 'none' : 'block';
+
+  var html = '<div class="vb-wrap">' +
+    '<div class="vb-zone vb-top" id="vb-zone-top-' + gi + '">' +
+      '<div class="vb-zone-hdr">' +
+        '<span class="vb-zone-title">★ Mijn jaardoelen</span>' +
+        '<span class="vb-zone-count" id="vb-cnt-' + gi + '">' + vbCounts[gi] + ' gekozen</span>' +
+      '</div>' +
+      '<div class="vb-empty" id="vb-empty-' + gi + '" style="display:' + emptyDisplay + '">Nog geen jaardoel gekozen</div>' +
+      topItems +
+    '</div>' +
+    '<div class="vb-zone" id="vb-zone-rest-' + gi + '">' +
+      '<div class="vb-zone-hdr">' +
+        '<span class="vb-zone-title">Beschikbare doelen</span>' +
+      '</div>' +
+      restItems +
+    '</div>' +
+  '</div>';
+
   var builder = document.getElementById('sjv-builder');
   if (builder) builder.innerHTML = html;
+
+  // Hide the old composed section — no longer needed in VarB
   var composed = document.getElementById('jv-composed-section');
   if (composed) composed.style.display = 'none';
+
   var navEl = document.getElementById('sjv-nav');
   if (navEl) {
     navEl.innerHTML =
-      '<button class="btn-back" onclick="goToStep(&quot;medterm-review&quot;)">← Terug</button>' +
+      '<button class="btn-back" onclick="goToStep(\'medterm-review\')">← Terug</button>' +
       '<button class="btn-next" onclick="vbGoNext(' + gi + ')">Volgende →</button>';
   }
 }
 
-function jvTick(el, chipId, gi) {
-  if (!selectedJaarChips[gi]) selectedJaarChips[gi] = {};
-  var on = !selectedJaarChips[gi][chipId];
-  selectedJaarChips[gi][chipId] = on;
-  var row = el.closest('.chk-row');
-  if (row) row.classList.toggle('on', on);
-  el.textContent = on ? '✓' : '';
-  if (typeof saveJdData === 'function') saveJdData();
-}
-
 function vbGoNext(gi) {
-  var sel = selectedJaarChips[gi] || {};
-  var count = Object.keys(sel).filter(function(k){ return sel[k]; }).length;
-  if (count === 0) { alert('Vink minimaal één punt aan om door te gaan.'); return; }
-  if (typeof saveJdData === 'function') saveJdData();
+  var topZone = document.getElementById('vb-zone-top-' + gi);
+  var count = topZone ? topZone.querySelectorAll('.vb-item').length : 0;
+  if (count === 0) { alert('Kies minimaal één jaardoel om door te gaan.'); return; }
+  saveVbSelection(gi);
   goToJaarvisieReview();
 }
 
@@ -4554,20 +4317,20 @@ function nextJaarSub() {
   if (jaarvisieSubIdx >= max) { goToJaarvisieReview(); return; }
   jaarvisieSubIdx++;
   renderJaarvisieSubStep();
-  navScroll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function prevJaarSub() {
   jaarvisieSubIdx = Math.max(0, jaarvisieSubIdx - 1);
   renderJaarvisieSubStep();
-  navScroll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function prevJaarvisieSubStep() {
   if (jaarvisieSubIdx > 0) {
     jaarvisieSubIdx--;
     renderJaarvisieSubStep();
-    navScroll();
+    window.scrollTo({top:0, behavior:'smooth'});
   } else {
     goToStep('medterm-review');
   }
@@ -4589,7 +4352,7 @@ function goToJaarvisie() {
       currentStep = 'jaarvisie';
       updateProgressBar('jaarvisie');
       renderJaarvisieSubStep();
-      navScroll();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   );
 }
@@ -4599,7 +4362,7 @@ function goBackFromJaarvisie() {
   document.getElementById('step-medterm-review').classList.add('active');
   currentStep = 'medterm-review';
   updateProgressBar('medterm-review');
-  navScroll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function goToJaarvisieReview() {
@@ -4615,7 +4378,7 @@ function goBackFromJaarvisieReview() {
   currentStep = 'jaarvisie';
   renderJaarvisieSubStep();
   updateProgressBar('jaarvisie');
-  navScroll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ─── Jaardoel builder ─────────────────────────────────────────────────────
@@ -4642,7 +4405,7 @@ function nextJdStep(n) {
   });
   if (n === 'review') updateJdAssembled();
   saveJdData();
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function resolveAreaKey(gi) {
@@ -4660,8 +4423,6 @@ function resolveAreaKey(gi) {
 
 function initJaardoelBuilder(gi) {
   const top3 = jaarTop3[gi] || [];
-  var s5AreaEl = document.getElementById('s5-area');
-  if (s5AreaEl) s5AreaEl.textContent = (selectedGoals[gi] || {}).area || '';
   jdWatSelected = [];
   jdWhySelected = [];
   jdWhyCustom   = [];
@@ -4689,7 +4450,7 @@ function initJaardoelBuilder(gi) {
 
   // Goal text pre-fill from prio #1
   const goalInp = document.getElementById('jd-goal-text');
-  if (goalInp && top3[0]) { goalInp.value = top3[0].text; autoGrow(goalInp); }
+  if (goalInp && top3[0]) goalInp.value = top3[0].text;
 
   // BEWIJS suggestie-chips (contextual)
   const bewijsChipsEl = document.getElementById('jd-bewijs-chips');
@@ -4713,9 +4474,8 @@ function initJaardoelBuilder(gi) {
 
   // Restore saved values
   const d = goalData[gi] || {};
-  if (d.jd_goal_text) { const el = document.getElementById('jd-goal-text'); if (el) { el.value = d.jd_goal_text; autoGrow(el); } }
+  if (d.jd_goal_text) { const el = document.getElementById('jd-goal-text'); if (el) el.value = d.jd_goal_text; }
   if (d.jd_bewijs)    { const el = document.getElementById('jd-bewijs');    if (el) el.value = d.jd_bewijs; }
-  renderJdDodFields(gi);
   if (d.jd_wat_selected) {
     jdWatSelected = d.jd_wat_selected.slice();
     document.querySelectorAll('#jd-wat-chips .jd-chip').forEach(el => {
@@ -4802,7 +4562,6 @@ function toggleJdWat(el, gi) {
   if (goalInp) {
     const parts = jdWatSelected.slice().sort().map(i => top3[i] ? top3[i].text : '').filter(Boolean);
     goalInp.value = parts.join(' + ');
-    autoGrow(goalInp);
     goalInp.classList.remove('jd-filled');
     void goalInp.offsetWidth;
     goalInp.classList.add('jd-filled');
@@ -4818,7 +4577,7 @@ function backFromGesprek() {
   var stepEl = document.getElementById('step-5');
   if (stepEl) stepEl.classList.add('active');
   updateProgressBar(5);
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
   setTimeout(function() {
     document.querySelectorAll('.jd-mini').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.jd-dot').forEach(d => d.classList.add('active'));
@@ -4941,72 +4700,13 @@ function updateJdAssembled() {
   saveJdData();
 }
 
-function jdEsc(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function renderJdDodFields(gi){
-  if(gi===undefined) gi=currentGoalIndex;
-  var host=document.getElementById('jd-dod-list'); if(!host) return;
-  var top3=(jaarTop3[gi]||[]);
-  var d=goalData[gi]||{}; var saved=d.jd_dod||{};
-  var icons=['\uD83E\uDD47','\uD83E\uDD48','\uD83E\uDD49'];
-  if(!top3.length){ host.innerHTML='<p style="font-size:.82rem;color:var(--muted)">Geen Top 3 geselecteerd \u2014 ga terug om prioriteiten te kiezen.</p>'; return; }
-  var areaKey=resolveAreaKey(gi);
-  host.innerHTML=top3.map(function(item,i){
-    var key=item.id||('p'+i); var val=saved[key]||'';
-    var sugg=(CHIP_DOD[item.id] && CHIP_DOD[item.id].length) ? CHIP_DOD[item.id] : (JD_BEWIJS_BY_AREA[areaKey]||JD_BEWIJS_BY_AREA['default']).slice(0,3);
-    var chips=sugg.map(function(sg){ return '<div class="jd-chip" data-tpl="'+sg.replace(/"/g,'&quot;')+'" onclick="selectJdDodChip(this)">'+jdEsc(sg)+'</div>'; }).join('');
-    return '<div class="jd-dod-card">'
-      + '<div class="jd-dod-head">'+(icons[i]||'')+' '+jdEsc(item.text)+'</div>'
-      + '<div class="jd-dod-chips">'+chips+'</div>'
-      + '<textarea class="jd-input jd-textarea jd-dod-inp" rows="1" data-dodkey="'+jdEsc(key)+'" placeholder="Klik een optie hierboven of typ zelf..." oninput="autoGrow(this);saveJdDod()">'+jdEsc(val)+'</textarea>'
-      + '</div>';
-  }).join('');
-  host.querySelectorAll('.jd-dod-inp').forEach(function(t){ autoGrow(t); });
-}
-function selectJdDodChip(el){
-  var card=el.closest('.jd-dod-card'); if(!card) return;
-  card.querySelectorAll('.jd-dod-chips .jd-chip').forEach(function(c){ c.classList.remove('selected','jd-expanded'); var e=c.querySelector('.jd-chip-expand'); if(e) e.remove(); });
-  el.classList.add('selected','jd-expanded');
-  var tpl=el.dataset.tpl;
-  var blanks=(tpl.match(/___/g)||[]).length;
-  var tplHtml=tpl.replace(/___/g,'<span class="tpl-blank">___</span>');
-  var exp=document.createElement('div'); exp.className='jd-chip-expand'; exp.onclick=function(e){e.stopPropagation();};
-  var inputsHtml='';
-  for(var b=0;b<blanks;b++){ var ph=blanks>1?('Waarde '+(b+1)+'...'):'Vul in jouw waarde...'; inputsHtml+='<input class="jd-input jd-blank-inp" type="text" placeholder="'+ph+'" data-blank-idx="'+b+'" style="font-size:.82rem;padding:.42rem .7rem;margin-bottom:.35rem" oninput="updateJdDodMulti(this)">'; }
-  exp.innerHTML='<div class="jd-chip-expand-tpl">'+tplHtml+'</div>'+inputsHtml;
-  exp.querySelectorAll('input').forEach(function(inp){ inp.dataset.tpl=tpl; });
-  el.appendChild(exp);
-  var ta=card.querySelector('.jd-dod-inp');
-  if(ta){ ta.value=tpl; autoGrow(ta); saveJdDod(); }
-  setTimeout(function(){ var f=exp.querySelector('input'); if(f) f.focus(); },60);
-}
-function updateJdDodMulti(inp){
-  var chip=inp.closest('.jd-chip.jd-expanded'); if(!chip) return;
-  var card=chip.closest('.jd-dod-card');
-  var tpl=inp.dataset.tpl;
-  var inputs=Array.prototype.slice.call(chip.querySelectorAll('.jd-blank-inp'));
-  var filled=tpl;
-  inputs.forEach(function(x){ var v=x.value.trim()||'___'; filled=filled.replace('___',v); });
-  var ta=card.querySelector('.jd-dod-inp');
-  if(ta){ ta.value=filled; autoGrow(ta); saveJdDod(); }
-}
-function saveJdDod(){
-  var gi=currentGoalIndex; if(!goalData[gi]) goalData[gi]={};
-  var d=goalData[gi]; var map={};
-  document.querySelectorAll('#jd-dod-list .jd-dod-inp').forEach(function(t){ map[t.dataset.dodkey]=t.value; });
-  d.jd_dod=map;
-  var top3=(jaarTop3[gi]||[]);
-  var lines=top3.map(function(item,i){ var k=item.id||('p'+i); var v=(map[k]||'').trim(); return v?(item.text+': '+v):''; }).filter(Boolean);
-  d.jd_bewijs=lines.join(' \u00B7 ');
-  saveJdData();
-}
-function autoGrow(el){ if(!el) return; el.style.height='auto'; el.style.height=(el.scrollHeight)+'px'; }
 function saveJdData() {
   const gi = currentGoalIndex;
   if (!goalData[gi]) goalData[gi] = {};
   const d = goalData[gi];
   d.jd_wat_selected = jdWatSelected.slice();
   d.jd_goal_text = (document.getElementById('jd-goal-text') || {}).value || '';
-  d.jd_bewijs    = (document.getElementById('jd-bewijs')    || {value: d.jd_bewijs || ''}).value || '';
+  d.jd_bewijs    = (document.getElementById('jd-bewijs')    || {}).value || '';
   d.jd_why       = jdWhySelected.slice();
   d.jd_why_custom = jdWhyCustom.slice();
   d.jd_why_text = (document.getElementById('jd-why-text') || {}).value || '';
@@ -5078,7 +4778,7 @@ function getJaarvisieAllSelected(gi) {
   cats.forEach(cat => {
     cat.chips.forEach(chip => {
       if (sel[chip.id] && !seen.has(chip.id)) {
-        all.push({ id: chip.id, text: jaarChipFinalText(gi, chip) });
+        all.push({ id: chip.id, text: getJaarChipText(gi, chip.id, chip.tpl) });
         seen.add(chip.id);
       }
     });
@@ -5086,86 +4786,68 @@ function getJaarvisieAllSelected(gi) {
   return all;
 }
 
-function jaarChipFinalText(gi, chip){
-  var vals = (jaarChipVals[gi] || {})[chip.id] || {};
-  var t = chip.tpl || chip.text || '';
-  (chip.fields || []).forEach(function(f){ var v = vals[f.key]; t = t.replace('{' + f.key + '}', (v !== undefined && v !== '') ? v : f.ph); });
-  return t;
-}
-
 function renderTop3Step() {
-  var gi = currentGoalIndex;
-  var chips = getJaarvisieAllSelected(gi);
+  const gi    = currentGoalIndex;
+  const chips = getJaarvisieAllSelected(gi);
   if (!jaarTop3[gi]) jaarTop3[gi] = [];
-  var count = chips.length;
+
+  const count = chips.length;
+
+  // Auto-skip: 0 or 1 chip — no choice needed
   if (count <= 1) {
     if (count === 1) jaarTop3[gi] = [{ id: chips[0].id, text: chips[0].text }];
-    goToStep(5); return;
+    goToStep(5);
+    return;
   }
-  var maxSelect = Math.min(count, 3);
-  var qEl = document.getElementById('t3-question');
+
+  const maxSelect = Math.min(count, 3);
+
+  // Dynamic question heading
+  const qEl = document.getElementById('t3-question');
   if (qEl) {
-    var helpBtn = qEl.querySelector('.step-help-btn');
-    var helpHtml = helpBtn ? helpBtn.outerHTML : '';
-    var qTxt = count === 2 ? 'Wat is je belangrijkste prioriteit dit jaar?' : 'Wat zijn je ' + maxSelect + ' grootste prioriteiten dit jaar?';
-    qEl.innerHTML = qTxt + helpHtml;
-  }
-  if (jaarTop3[gi].length > maxSelect) jaarTop3[gi] = jaarTop3[gi].slice(0, maxSelect);
-  var chosen = jaarTop3[gi];
-  var slotsHtml = '';
-  for (var i = 0; i < maxSelect; i++) {
-    var c = chosen[i];
-    if (c) {
-      var up = i > 0 ? '<button class="t3-mini" onclick="t3Move(' + i + ',-1)">\u2191</button>' : '<button class="t3-mini" disabled>\u2191</button>';
-      var dn = (i < maxSelect - 1 && chosen[i+1]) ? '<button class="t3-mini" onclick="t3Move(' + i + ',1)">\u2193</button>' : '<button class="t3-mini" disabled>\u2193</button>';
-      slotsHtml += '<div class="t3-slot filled"><span class="t3-slotnum">' + (i+1) + '</span><span class="t3-slottxt">' + c.text + '</span><span class="t3-acts">' + up + dn + '<button class="t3-mini" onclick="t3Remove(' + i + ')">\u00d7</button></span></div>';
+    const helpBtn = qEl.querySelector('.step-help-btn');
+    const helpBtnHtml = helpBtn ? helpBtn.outerHTML : '';
+    if (count === 2) {
+      qEl.innerHTML = 'Wat is jouw grootste prioriteit dit jaar?' + helpBtnHtml;
     } else {
-      slotsHtml += '<div class="t3-slot empty"><span class="t3-slotnum">' + (i+1) + '</span><span class="t3-slotempty">nog leeg \u2014 tik hieronder</span></div>';
+      qEl.innerHTML = 'Wat zijn je <strong>' + maxSelect + '</strong> grootste prioriteiten dit jaar?' + helpBtnHtml;
     }
   }
-  var full = chosen.length >= maxSelect;
-  var optsHtml = '<div class="t3-opts-label">Jouw opties</div>' + chips.map(function(chip){
-    var rankIdx = -1; for (var k=0;k<chosen.length;k++){ if(chosen[k].id===chip.id) rankIdx=k; }
-    if (rankIdx > -1) return '<button class="t3-opt used" disabled>' + chip.text + '<span class="t3-opt-num">' + (rankIdx+1) + '</span></button>';
-    return '<button class="t3-opt" ' + (full ? 'disabled' : '') + ' onclick="t3Add(&quot;' + String(chip.id).replace(/"/g,'&quot;') + '&quot;)">' + chip.text + '</button>';
-  }).join('');
-  var cardsEl = document.getElementById('t3-cards');
-  if (cardsEl) cardsEl.innerHTML = slotsHtml + optsHtml;
-  var n = chosen.length;
-  var hintEl = document.getElementById('t3-hint');
-  if (hintEl) {
-    if (n === 0) hintEl.textContent = 'Tik je belangrijkste prioriteit aan \u2014 die komt op plek #1.';
-    else if (n < maxSelect) hintEl.textContent = 'Nog ' + (maxSelect - n) + ' te kiezen. De volgorde bepaalt de belangrijkheid.';
-    else hintEl.textContent = 'Je top ' + maxSelect + ' staat. Wissel de volgorde met de pijltjes.';
-  }
-  var nextEl = document.getElementById('t3-next');
-  if (nextEl) { var ready = n >= 1; nextEl.style.opacity = ready ? '1' : '.4'; nextEl.style.pointerEvents = ready ? 'auto' : 'none'; }
-  var labelEl = document.getElementById('t3-sublabel');
-  var goal = selectedGoals[gi];
-  if (labelEl && goal) labelEl.textContent = goal.area || 'Jaarvisie';
-}
 
-function t3Add(chipId){
-  var gi = currentGoalIndex;
-  if (!jaarTop3[gi]) jaarTop3[gi] = [];
-  var all = getJaarvisieAllSelected(gi);
-  var maxSel = Math.min(all.length, 3);
-  if (jaarTop3[gi].length >= maxSel) return;
-  if (jaarTop3[gi].some(function(x){ return x.id === chipId; })) return;
-  var chip = all.filter(function(c){ return c.id === chipId; })[0];
-  if (chip) jaarTop3[gi].push({ id: chip.id, text: chip.text });
-  renderTop3Step();
-}
-function t3Remove(i){
-  var gi = currentGoalIndex;
-  if (jaarTop3[gi]) jaarTop3[gi].splice(i, 1);
-  renderTop3Step();
-}
-function t3Move(i, d){
-  var gi = currentGoalIndex; var arr = jaarTop3[gi]; if (!arr) return;
-  var j = i + d; if (j < 0 || j >= arr.length) return;
-  var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
-  renderTop3Step();
+  const rankMap = {};
+  (jaarTop3[gi] || []).forEach((c, i) => { rankMap[c.id] = i + 1; });
+
+  const cardsEl = document.getElementById('t3-cards');
+  if (cardsEl) {
+    cardsEl.innerHTML = chips.map(chip => {
+      const rank = rankMap[chip.id];
+      return `<div class="top3-card${rank ? ' ranked' : ''}" onclick="toggleTop3Card('${chip.id.replace(/'/g,"\\'")}',${gi})">
+        ${rank ? `<div class="top3-badge">${rank}</div>` : ''}
+        ${chip.text}
+      </div>`;
+    }).join('') || '<p style="color:var(--muted);font-size:.85rem">Je hebt nog geen opties geselecteerd in je jaarvisie.</p>';
+  }
+
+  const n      = (jaarTop3[gi] || []).length;
+  const hintEl = document.getElementById('t3-hint');
+  const nextEl = document.getElementById('t3-next');
+  if (hintEl) {
+    if (n === 0)               hintEl.textContent = 'Tik op een optie om hem als #1 te kiezen';
+    else if (n < maxSelect)    hintEl.textContent = 'Goed! Kies ' + (maxSelect === 2 ? 'je #2 optie' : 'nog ' + (maxSelect - n) + ' prioriteit' + (maxSelect - n > 1 ? 'en' : ''));
+    else                       hintEl.textContent = 'Kies ' + maxSelect + ' gekozen — je kunt altijd nog wisselen';
+  }
+  if (nextEl) {
+    const ready = n >= 1;
+    nextEl.style.opacity       = ready ? '1'    : '.4';
+    nextEl.style.pointerEvents = ready ? 'auto' : 'none';
+  }
+
+  // Cap jaarTop3 at maxSelect
+  if (jaarTop3[gi].length > maxSelect) jaarTop3[gi] = jaarTop3[gi].slice(0, maxSelect);
+
+  const labelEl = document.getElementById('t3-sublabel');
+  const goal    = selectedGoals[gi];
+  if (labelEl && goal) labelEl.textContent = goal.area || 'Jaarvisie';
 }
 
 function toggleTop3Card(chipId, gi) {
@@ -5191,7 +4873,7 @@ function goToTop3() {
   currentStep = 'top3';
   updateProgressBar('top3');
   renderTop3Step();
-  navScroll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function goBackFromTop3() {
@@ -5202,7 +4884,7 @@ function goBackFromTop3() {
   currentStep = 'jaarvisie';
   renderJaarvisieSubStep();
   updateProgressBar('jaarvisie');
-  navScroll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function saveJaarvisieEdit(gi, val) {
@@ -5298,7 +4980,7 @@ function removeMedCustomChip(gi, ci, idx) {
 function submitMedCustomChip(gi, ci) {
   var inp = document.getElementById('med-inp-' + gi + '_' + ci);
   if (!inp || !inp.value.trim()) return;
-  splitCustomGoals(inp.value).forEach(function(part){ addMedCustomChip(gi, ci, part); });
+  addMedCustomChip(gi, ci, inp.value);
   inp.value = '';
 }
 
@@ -5312,6 +4994,7 @@ function buildMedCustomPillsHtml(gi, ci) {
     '</div>';
   }).join('');
   return '<div class="vision-custom-section">' +
+    '<div class="vision-custom-label">Voeg je eigen optie toe</div>' +
     pillsHtml +
     '<div class="anders-input-row">' +
       '<input class="anders-input" type="text" id="med-inp-' + gi + '_' + ci + '"' +
@@ -5319,7 +5002,6 @@ function buildMedCustomPillsHtml(gi, ci) {
         ' onkeydown="if(event.keyCode===13){event.preventDefault();submitMedCustomChip(' + gi + ',' + ci + ')}">' +
       '<button class="btn-add-custom anders-add-btn" onclick="submitMedCustomChip(' + gi + ',' + ci + ')">+ Voeg optie toe</button>' +
     '</div>' +
-    '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>' +
   '</div>';
 }
 
@@ -5333,13 +5015,13 @@ function refreshMedCustomSection(gi, ci) {
 function nextVrSub() {
   vrSubIdx++;
   renderVisionReview();
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function prevVrSub() {
   vrSubIdx = Math.max(0, vrSubIdx - 1);
   renderVisionReview();
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function goToVisionReview() {
@@ -5349,7 +5031,7 @@ function goToVisionReview() {
   currentStep = 'vision-review';
   document.getElementById('step-vision-review').classList.add('active');
   updateProgressBar('vision-review');
-  navScroll();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function saveS4Answer(gi, qi, val) {
@@ -5373,63 +5055,26 @@ function setAndersText(val, andersKey, goalIdx) {
   rebuildVisionText(goalIdx);
 }
 
-function visibleVisionCats(gi){
-  var area = (selectedGoals[gi] || {}).area;
-  var aData = visionChips[area];
-  if (!aData) return [];
-  var cats = aData.categories;
-  var goalText = (selectedGoals[gi] || {}).text || '';
-  var allowed = goalCategoryFilter[goalText];
-  return allowed ? cats.filter(function(c){ return allowed.indexOf(c.label) > -1; }) : cats;
-}
-
-var vsAnimTimer = null;
-function vsResetGrid(){
-  var grid = document.getElementById('vision-chip-grid');
-  if (grid){ grid.style.transition = 'none'; grid.style.transform = 'none'; grid.style.opacity = '1'; }
-}
-function vsCancelAnim(){
-  if (vsAnimTimer){ clearTimeout(vsAnimTimer); vsAnimTimer = null; }
-  vsResetGrid();
-}
-function vsPush(dir, applyFn){
-  var grid = document.getElementById('vision-chip-grid');
-  if (!grid) { applyFn(); return; }
-  if (vsAnimTimer){ clearTimeout(vsAnimTimer); vsAnimTimer = null; }
-  var out = dir > 0 ? -46 : 46, inn = dir > 0 ? 46 : -46;
-  grid.style.transition = 'transform .16s ease-in, opacity .16s ease-in';
-  grid.style.opacity = '0'; grid.style.transform = 'translateX(' + out + 'px)';
-  vsAnimTimer = setTimeout(function(){
-    vsAnimTimer = null;
-    applyFn();
-    grid = document.getElementById('vision-chip-grid');
-    if (!grid) return;
-    grid.style.transition = 'none'; grid.style.transform = 'translateX(' + inn + 'px)'; void grid.offsetHeight;
-    grid.style.transition = 'transform .24s cubic-bezier(.2,.7,.2,1), opacity .24s ease-out';
-    grid.style.opacity = '1'; grid.style.transform = 'translateX(0)';
-  }, 170);
-}
-
 function nextVisionSub() {
-  if (vsAnimTimer){ return; }
-  var cats = visibleVisionCats(currentGoalIndex);
-  if (visionSubIdx < cats.length - 1) {
-    vsPush(1, function(){ visionSubIdx++; renderVisionSubStep(); navScroll(); });
+  const area = (selectedGoals[currentGoalIndex]||{}).area;
+  const total = (visionChips[area]?.categories||[]).length;
+  if (visionSubIdx < total - 1) {
+    visionSubIdx++;
+    renderVisionSubStep();
+    window.scrollTo({top:0,behavior:'smooth'});
   } else {
-    vsCancelAnim();
     goToVisionReview();
   }
 }
 
 function prevVisionSubStep() {
-  vsCancelAnim();
+  const area = (selectedGoals[currentGoalIndex]||{}).area;
   if (visionSubIdx > 0) {
     visionSubIdx--;
     renderVisionSubStep();
-    vsResetGrid();
-    navScroll();
+    window.scrollTo({top:0, behavior:'smooth'});
   } else {
-    goToStep(2);
+    goToStep('nulmeting');
   }
 }
 
@@ -5617,7 +5262,6 @@ function buildLeadPayload() {
     return {
       area:  g.area || '',
       score: (nm.score !== undefined ? nm.score : 0),
-      startpunt: buildNulmetingText(gi),
       keuze: g.text || '',
       v20: v20, v5: v5, v1: v1,
       jaardoel: d.jd_goal_text || '',
@@ -5707,27 +5351,6 @@ function homeStepNext(){
 
 <script>
 (function(){var home=document.getElementById("page-home");if(!home)return;var els=[].slice.call(home.children).filter(function(el){if(el.classList.contains("rv-skip"))return false;return el.tagName.toLowerCase()==="section"||el.classList.contains("div");});function check(){var vh=window.innerHeight||document.documentElement.clientHeight;els.forEach(function(el){if(el.classList.contains("rv-in"))return;var r=el.getBoundingClientRect();if(r.top<vh*0.86&&r.bottom>vh*0.04){el.classList.add("rv-in");}});}var t=false;function onScroll(){if(!t){t=true;requestAnimationFrame(function(){check();t=false;});}}window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",onScroll,{passive:true});check();setTimeout(check,60);})();
-</script>
-<script>
-document.addEventListener('click', function(e){
-  var b = e.target && e.target.closest && e.target.closest('.btn-back');
-  if(b){ var d=document.documentElement; d.classList.add('no-slide'); setTimeout(function(){ d.classList.remove('no-slide'); }, 600); }
-}, true);
-</script>
-<script>
-(function(){
-  function markSoon(el){ setTimeout(function(){ el.classList.add('seen-step'); }, 520); }
-  var obs = new MutationObserver(function(muts){
-    muts.forEach(function(m){
-      var el = m.target;
-      if (el.nodeType === 1 && el.classList.contains('active') && !el.classList.contains('seen-step') &&
-          (el.classList.contains('step') || el.classList.contains('jd-mini') || el.classList.contains('mini-step'))){
-        markSoon(el);
-      }
-    });
-  });
-  document.querySelectorAll('.step, .jd-mini, .mini-step').forEach(function(el){ obs.observe(el, {attributes:true, attributeFilter:['class']}); });
-})();
 </script>
 </body>
 </html>
