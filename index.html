@@ -715,7 +715,19 @@ footer p{font-size:.68rem;color:var(--dim)}
   .vsl-wrap{max-width:min(860px,calc((100vh - 500px) * 16 / 9));margin-bottom:1.1rem}
   .cta-note{margin-top:.55rem}
 }
-@keyframes rvRise{from{opacity:0;transform:translateY(46px)}to{opacity:1;transform:none}}@keyframes rvRiseSm{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}.anim-on #page-home>section:not(.rv-skip):not(.rv-cursus).rv-in,.anim-on #page-home>.div.rv-in{animation:rvRise .8s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hfc{animation:rvRise .8s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hmod{animation:rvRiseSm .72s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(1){animation-delay:.30s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(2){animation-delay:.44s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(3){animation-delay:.58s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(4){animation-delay:.72s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(5){animation-delay:.86s}@media(prefers-reduced-motion:reduce){.anim-on #page-home>section,.anim-on #page-home>.div,.anim-on .rv-cursus .hfc,.anim-on .rv-cursus .hmod{animation:none!important;opacity:1!important;transform:none!important}}</style>
+@keyframes rvRise{from{opacity:0;transform:translateY(46px)}to{opacity:1;transform:none}}@keyframes rvRiseSm{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}.anim-on #page-home>section:not(.rv-skip):not(.rv-cursus).rv-in,.anim-on #page-home>.div.rv-in{animation:rvRise .8s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hfc{animation:rvRise .8s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hmod{animation:rvRiseSm .72s cubic-bezier(.2,.7,.2,1) both}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(1){animation-delay:.30s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(2){animation-delay:.44s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(3){animation-delay:.58s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(4){animation-delay:.72s}.anim-on .rv-cursus.rv-in .hfc-modules .hmod:nth-child(5){animation-delay:.86s}@media(prefers-reduced-motion:reduce){.anim-on #page-home>section,.anim-on #page-home>.div,.anim-on .rv-cursus .hfc,.anim-on .rv-cursus .hmod{animation:none!important;opacity:1!important;transform:none!important}}/* OPTIE B - naast elkaar */
+@media(min-width:1024px){
+ .wrap{max-width:1180px}
+ .hero{display:grid;grid-template-columns:1.02fr .98fr;grid-template-areas:'copy video' 'cta video' 'note video';align-items:center;column-gap:3.2rem;text-align:left;padding:2.2rem 0}
+ .hero-copy{grid-area:copy}
+ .hero .eyebrow{justify-content:flex-start}
+ .hero h1{white-space:normal;font-size:clamp(2.4rem,3.6vw,3.6rem);margin-bottom:1rem}
+ .hero-sub{max-width:none;margin:0}
+ .hero .vsl-wrap{grid-area:video;margin:0;max-width:none;width:100%}
+ .hero .btn-primary{grid-area:cta;justify-self:start;margin-top:1.5rem}
+ .hero .cta-note{grid-area:note;text-align:left;margin-top:.6rem}
+}
+</style>
 </head>
 <body>
 <script>if((location.hash||"").replace("#","")==="cursussen"){location.replace("/cursus");}</script>
@@ -745,9 +757,11 @@ footer p{font-size:.68rem;color:var(--dim)}
 <div class="wrap">
 
   <section class="hero">
-    <div class="eyebrow">persoonlijk · concreet · consistent</div>
+    <div class="hero-copy">
+      <div class="eyebrow">persoonlijk · concreet · consistent</div>
     <h1>Haal jij je<br>persoonlijke doelen niet?<br><em>Dat verandert vandaag.</em></h1>
     <p class="hero-sub">Jij werkt hard. Maar niet aan wat voor jou het meest telt. Dat veranderen wij.</p>
+    </div>
     <div class="vsl-wrap">
       <div class="vsl-inner" id="vslInner">
         <iframe id="vslFrame" class="bunny vsl-frame" src="https://iframe.mediadelivery.net/embed/692336/6b0a2c25-6bfa-46d2-ad5f-5882de65ae00?autoplay=true&loop=false&muted=true&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="eager" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>
@@ -833,15 +847,15 @@ footer p{font-size:.68rem;color:var(--dim)}
 
   <section class="rv-skip">
     <style>
-      .wj2-list{max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:1.4rem}
-      .wj2-card{width:min(450px,100%);background:linear-gradient(150deg,#161616,#0e0e0e);border:1px solid var(--border);border-radius:16px;padding:1.8rem 1.7rem 1.5rem;box-shadow:0 18px 50px rgba(0,0,0,.42);opacity:0;transform:translateY(34px) translateX(var(--wjx,0));will-change:opacity,transform}
+      .wj2-list{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:1.1rem}
+      .wj2-card{width:min(640px,100%);background:linear-gradient(150deg,#161616,#0e0e0e);border:1px solid var(--border);border-radius:16px;padding:1.35rem 1.6rem;box-shadow:0 18px 50px rgba(0,0,0,.42);opacity:0;transform:translateY(34px) translateX(var(--wjx,0));will-change:opacity,transform;display:flex;flex-direction:row;align-items:center;gap:1.6rem}.wj2-figure{flex:0 0 auto;min-width:120px}.wj2-body{flex:1;min-width:0}
       .wj2-left{align-self:flex-start;--wjx:-42px}
       .wj2-right{align-self:flex-end;--wjx:42px}
-      @media(max-width:680px){.wj2-card{width:100%;align-self:stretch;--wjx:0}}
-      .wj2-stat{font-family:'Abolition',sans-serif;font-weight:400;font-size:clamp(2.9rem,9vw,4.3rem);line-height:.92;color:var(--gold);letter-spacing:.02em;display:flex;align-items:baseline;gap:.05rem;text-shadow:0 0 28px rgba(201,168,76,.4)}
+      @media(max-width:680px){.wj2-card{width:100%;align-self:stretch;--wjx:0;flex-direction:column;align-items:flex-start;gap:.7rem}.wj2-figure{min-width:0}}
+      .wj2-stat{font-family:'Abolition',sans-serif;font-weight:400;font-size:clamp(2.6rem,7vw,3.7rem);line-height:.9;color:var(--gold);letter-spacing:.02em;display:flex;align-items:baseline;gap:.05rem;text-shadow:0 0 28px rgba(201,168,76,.4)}
       .wj2-stat .unit{font-size:.34em;color:var(--muted);letter-spacing:.04em;margin-left:.2rem}
-      .wj2-sub{font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:.45rem 0 1rem}
-      .wj2-txt{font-size:1.02rem;color:var(--white);line-height:1.55;margin:0 0 1rem}
+      .wj2-sub{font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:.35rem 0 0}
+      .wj2-txt{font-size:1.02rem;color:var(--white);line-height:1.5;margin:0 0 .55rem}
       .wj2-bron{font-size:.63rem;color:#6b6656;text-decoration:underline;text-underline-offset:2px;letter-spacing:.02em}
       .wj2-bron:hover{color:var(--muted)}
       .wj2-toggle{margin-top:.2rem;align-self:flex-start;background:none;border:none;color:var(--gold);font-family:inherit;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;padding:.3rem 0;display:inline-flex;align-items:center;gap:.45rem}
@@ -858,33 +872,45 @@ footer p{font-size:.68rem;color:var(--dim)}
     </div>
     <div class="wj2-list">
       <div class="wj2-card wj2-left">
-        <div class="wj2-stat"><span class="wj2-count" data-from="43" data-to="76">43</span><span class="unit">%</span></div>
-        <div class="wj2-sub">van je doelen &mdash; eerst 43%</div>
-        <p class="wj2-txt">&hellip;je bijna twee keer zoveel van je doelen haalt als je ze opschrijft en met iemand deelt.</p>
-        <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
-        <div class="wj2-more">
+        <div class="wj2-figure">
+          <div class="wj2-stat"><span class="wj2-count" data-from="43" data-to="76">43</span><span class="unit">%</span></div>
+          <div class="wj2-sub">van je doelen &mdash; eerst 43%</div>
+        </div>
+        <div class="wj2-body">
+          <p class="wj2-txt">&hellip;je bijna twee keer zoveel van je doelen haalt als je ze opschrijft en met iemand deelt.</p>
+          <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
+          <div class="wj2-more">
           <p class="wj2-more-txt">267 mensen kregen een doel. Sommigen dachten er alleen over na, anderen schreven het op, vertelden het aan een vriend en gaven elke week door hoe ver ze waren. De eerste groep haalde 43% van hun doelen, de tweede 76%.</p>
           <a class="wj2-studie" href="https://www.dominican.edu/sites/default/files/2020-02/gailmatthews-harvard-goals-researchsummary.pdf" target="_blank" rel="noopener">Bekijk de studie: Matthews, Dominican University &rarr;</a>
         </div>
+        </div>
       </div>
       <div class="wj2-card wj2-right">
-        <div class="wj2-stat">2&times;</div>
-        <div class="wj2-sub">zoveel resultaat</div>
-        <p class="wj2-txt">&hellip;je twee keer zoveel bereikt als je bijhoudt hoe ver je bent.</p>
-        <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
-        <div class="wj2-more">
+        <div class="wj2-figure">
+          <div class="wj2-stat">2&times;</div>
+          <div class="wj2-sub">zoveel resultaat</div>
+        </div>
+        <div class="wj2-body">
+          <p class="wj2-txt">&hellip;je twee keer zoveel bereikt als je bijhoudt hoe ver je bent.</p>
+          <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
+          <div class="wj2-more">
           <p class="wj2-more-txt">Bijna 1.700 mensen wilden afvallen. De ene groep hield een eetdagboek bij, de andere niet. Wie bijhield, viel twee keer zoveel af.</p>
           <a class="wj2-studie" href="https://www.sciencedaily.com/releases/2008/07/080708080738.htm" target="_blank" rel="noopener">Bekijk de studie: Kaiser Permanente, 2008 &rarr;</a>
         </div>
+        </div>
       </div>
       <div class="wj2-card wj2-left">
-        <div class="wj2-stat"><span class="wj2-count" data-from="0" data-to="91">0</span><span class="unit">%</span></div>
-        <div class="wj2-sub">deed het &mdash; vs 38% zonder plan</div>
-        <p class="wj2-txt">&hellip;je iets veel vaker &eacute;cht doet als je precies plant wanneer en waar je het doet.</p>
-        <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
-        <div class="wj2-more">
+        <div class="wj2-figure">
+          <div class="wj2-stat"><span class="wj2-count" data-from="0" data-to="91">0</span><span class="unit">%</span></div>
+          <div class="wj2-sub">deed het &mdash; vs 38% zonder plan</div>
+        </div>
+        <div class="wj2-body">
+          <p class="wj2-txt">&hellip;je iets veel vaker &eacute;cht doet als je precies plant wanneer en waar je het doet.</p>
+          <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
+          <div class="wj2-more">
           <p class="wj2-more-txt">Mensen die wilden sporten werden verdeeld. De ene groep schreef precies op wanneer en waar ze zouden sporten, de andere kreeg alleen een motiverend praatje. Van de plan-groep sportte 91%, van de rest maar 35-38%.</p>
           <a class="wj2-studie" href="https://bpspsychub.onlinelibrary.wiley.com/doi/abs/10.1348/135910702169420" target="_blank" rel="noopener">Bekijk de studie: Milne, Orbell &amp; Sheeran, 2002 &rarr;</a>
+        </div>
         </div>
       </div>
     </div>
