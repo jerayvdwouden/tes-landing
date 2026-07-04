@@ -404,11 +404,11 @@ input[type=range].gold-slider::-moz-range-thumb{width:20px;height:20px;border-ra
 /* ── Liquid-glass blue chips (step-1a) ──────────────────────── */
 .imp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
 @media(max-width:560px){.imp-grid{grid-template-columns:repeat(2,1fr)}}
-.imp-chip{cursor:pointer;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:var(--bg2);padding:1.6rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.85rem;min-height:150px;color:var(--muted);transition:all .18s;user-select:none}
-.imp-chip:hover{border-color:rgba(201,168,76,.55);color:var(--white);transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.4)}
-.imp-chip.selected{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--white);box-shadow:0 0 22px rgba(201,168,76,.2)}
-.imp-chip.selected .imp-chip-icon{background:rgba(201,168,76,.2);border-color:var(--gold)}
-.imp-chip-icon{width:3rem;height:3rem;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+.imp-chip{cursor:pointer;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:var(--bg2);padding:1.6rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.85rem;min-height:150px;color:var(--muted);transition:all .2s ease;user-select:none}
+.imp-chip:hover{border-color:var(--c,var(--gold));color:var(--white);transform:translateY(-3px);box-shadow:0 0 24px var(--c-glow,rgba(201,168,76,.28))}
+.imp-chip.selected{background:var(--c-sel,rgba(201,168,76,.12));border-color:var(--c,var(--gold));color:var(--white);box-shadow:0 0 22px var(--c-glow,rgba(201,168,76,.22))}
+.imp-chip.selected .imp-chip-icon{background:var(--c-br,rgba(201,168,76,.2));border-color:var(--c,var(--gold))}
+.imp-chip-icon{width:3rem;height:3rem;border-radius:50%;background:var(--c-bg,rgba(201,168,76,.1));border:1px solid var(--c-br,rgba(201,168,76,.3));display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--c,var(--gold))}
 .imp-chip-icon svg{width:1.55rem;height:1.55rem}
 .imp-chip-label{font-size:.98rem;line-height:1.3;font-weight:600}
 /* ── Sub-stap indicator dots ────────────────────────────────── */
@@ -2653,6 +2653,18 @@ function resetTool() {
   if (s1btn) s1btn.classList.add('locked');
   buildProgressBar(1);
   updateProgressBar('1a');
+
+(function initChipColors(){
+  function hexRgb(h){ h=(h||'').replace('#',''); if(h.length===3){h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];} var n=parseInt(h,16)||0; return [(n>>16)&255,(n>>8)&255,n&255]; }
+  document.querySelectorAll('.imp-chip[data-color]').forEach(function(el){
+    var c=hexRgb(el.getAttribute('data-color')), r=c[0], g=c[1], b=c[2];
+    el.style.setProperty('--c','rgb('+r+','+g+','+b+')');
+    el.style.setProperty('--c-bg','rgba('+r+','+g+','+b+',.15)');
+    el.style.setProperty('--c-br','rgba('+r+','+g+','+b+',.42)');
+    el.style.setProperty('--c-sel','rgba('+r+','+g+','+b+',.14)');
+    el.style.setProperty('--c-glow','rgba('+r+','+g+','+b+',.34)');
+  });
+})();
 }
 
 function toggleStepHelp(id) {
