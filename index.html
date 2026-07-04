@@ -404,11 +404,13 @@ input[type=range].gold-slider::-moz-range-thumb{width:20px;height:20px;border-ra
 /* ── Liquid-glass blue chips (step-1a) ──────────────────────── */
 .imp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
 @media(max-width:560px){.imp-grid{grid-template-columns:repeat(2,1fr)}}
-.imp-chip{cursor:pointer;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:var(--bg2);padding:.75rem 1rem;display:flex;align-items:center;gap:.65rem;color:var(--muted);transition:all .18s;user-select:none}
-.imp-chip.selected{background:rgba(59,130,246,.16);border-color:rgba(99,155,255,.5);color:rgba(190,220,255,1);box-shadow:0 0 16px rgba(59,130,246,.18),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.imp-chip-icon{width:1.5rem;height:1.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.imp-chip-icon svg{width:1.1rem;height:1.1rem}
-.imp-chip-label{font-size:.78rem;line-height:1.35;font-weight:500}
+.imp-chip{cursor:pointer;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:var(--bg2);padding:1.6rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.85rem;min-height:150px;color:var(--muted);transition:all .18s;user-select:none}
+.imp-chip:hover{border-color:rgba(201,168,76,.55);color:var(--white);transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.4)}
+.imp-chip.selected{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--white);box-shadow:0 0 22px rgba(201,168,76,.2)}
+.imp-chip.selected .imp-chip-icon{background:rgba(201,168,76,.2);border-color:var(--gold)}
+.imp-chip-icon{width:3rem;height:3rem;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+.imp-chip-icon svg{width:1.55rem;height:1.55rem}
+.imp-chip-label{font-size:.98rem;line-height:1.3;font-weight:600}
 /* ── Sub-stap indicator dots ────────────────────────────────── */
 .substep-indicator{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.25rem}
 .ssi-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .22s;display:inline-block}
@@ -2682,6 +2684,7 @@ function showTransition(text, callback) {
 
 // ─── fullscreen intro overlay ──────────────
 var _fsIntroTimer = null;
+var _fsDouble = null;
 
 function showFsIntro(icon, title, sub, onDone) {
   var el = document.getElementById('fs-intro-overlay');
@@ -2694,14 +2697,26 @@ function showFsIntro(icon, title, sub, onDone) {
   el.style.opacity = '0';
   el.style.transition = 'opacity .35s ease';
   requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.opacity = '1'; }); });
-  if (_fsIntroTimer) clearTimeout(_fsIntroTimer);
-  _fsIntroTimer = setTimeout(function(){ dismissFsIntro(); }, 2800);
+  if (_fsIntroTimer) { clearTimeout(_fsIntroTimer); _fsIntroTimer = null; }
 }
 
 function dismissFsIntro() {
-  if (_fsIntroTimer) { clearTimeout(_fsIntroTimer); _fsIntroTimer = null; }
   var el = document.getElementById('fs-intro-overlay');
   if (!el || el.style.display === 'none') return;
+  // Dubbel-intro: eerste tik gaat naar scherm 2, blijft daar staan tot volgende tik
+  if (_fsDouble && _fsDouble.phase === 1) {
+    _fsDouble.phase = 2;
+    el.style.opacity = '0';
+    setTimeout(function(){
+      document.getElementById('fs-intro-icon').textContent  = _fsDouble.icon2;
+      document.getElementById('fs-intro-title').textContent = _fsDouble.title2;
+      document.getElementById('fs-intro-sub').textContent   = _fsDouble.sub2;
+      el.style.opacity = '1';
+    }, 350);
+    return;
+  }
+  _fsDouble = null;
+  if (_fsIntroTimer) { clearTimeout(_fsIntroTimer); _fsIntroTimer = null; }
   el.style.opacity = '0';
   var cb = el._onDone;
   el._onDone = null;
@@ -2714,35 +2729,16 @@ function dismissFsIntro() {
 function showFsIntroDouble(icon1, title1, sub1, icon2, title2, sub2, onDone) {
   var el = document.getElementById('fs-intro-overlay');
   if (!el) { if (onDone) onDone(); return; }
-
-  // Fase 1
+  if (_fsIntroTimer) { clearTimeout(_fsIntroTimer); _fsIntroTimer = null; }
   document.getElementById('fs-intro-icon').textContent  = icon1;
   document.getElementById('fs-intro-title').textContent = title1;
   document.getElementById('fs-intro-sub').textContent   = sub1;
   el.style.display = 'flex';
-  el._onDone = null;
+  el._onDone = onDone;
+  _fsDouble = { phase: 1, icon2: icon2, title2: title2, sub2: sub2 };
   el.style.opacity = '0';
   el.style.transition = 'opacity .4s ease';
   requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.opacity = '1'; }); });
-
-  setTimeout(function() {
-    // Cross-fade naar fase 2
-    el.style.opacity = '0';
-    setTimeout(function() {
-      document.getElementById('fs-intro-icon').textContent  = icon2;
-      document.getElementById('fs-intro-title').textContent = title2;
-      document.getElementById('fs-intro-sub').textContent   = sub2;
-      el.style.opacity = '1';
-
-      setTimeout(function() {
-        el.style.opacity = '0';
-        setTimeout(function() {
-          el.style.display = 'none';
-          if (onDone) onDone();
-        }, 400);
-      }, 2200);
-    }, 400);
-  }, 2200);
 }
 
 
