@@ -4729,7 +4729,24 @@ function validateAndGoToReview() {
   if (!email.includes('@')) { alert('Vul een geldig e-mailadres in.'); return; }
   if (!cb || !cb.checked)   { alert('Je dient akkoord te gaan met de algemene voorwaarden.'); return; }
   saveJdData();
-  goToStep('gesprek');
+  sendLeadAndContinue();
+}
+
+function sendLeadAndContinue() {
+  var btn = document.querySelector('#jd-s4 .btn-next');
+  var orig = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Bezig met versturen…'; }
+  var go = function(){ if (btn) { btn.disabled = false; btn.textContent = orig; } goToStep('gesprek'); };
+  if (typeof LEADMAGNET_SERVICE_URL !== 'string' || LEADMAGNET_SERVICE_URL.indexOf('YOUR-SERVICE') !== -1) { go(); return; }
+  var payload = buildLeadPayload();
+  fetch(LEADMAGNET_SERVICE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function(r){ return r.json().catch(function(){ return {}; }); })
+  .catch(function(e){ console.error('Versturen mislukt:', e); return {}; })
+  .then(function(){ go(); });
 }
 
 function showAvw() {
@@ -5232,8 +5249,8 @@ function toggleBlocker(el, val) {
 const LEADMAGNET_SERVICE_URL = 'https://tes-leadmagnet.onrender.com/genereer';
 
 function buildLeadPayload() {
-  const naam  = ((document.getElementById('naam')  || {}).value || '').trim();
-  const email = ((document.getElementById('email') || {}).value || '').trim();
+  const naam  = ((document.getElementById('jd-naam')  || document.getElementById('naam')  || {}).value || '').trim();
+  const email = ((document.getElementById('jd-email') || document.getElementById('email') || {}).value || '').trim();
   const doelen = selectedGoals.map(function(g, gi) {
     const d   = goalData[gi]      || {};
     const nm  = nulmetingData[gi] || {};
