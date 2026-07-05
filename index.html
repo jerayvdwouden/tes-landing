@@ -5884,7 +5884,7 @@ function buildLeadPayload() {
     const prioriteiten = (jaarTop3[gi] || []).map(function(c) { return c.text; });
     return {
       area:  g.area || '',
-      score: (nm.score !== undefined ? nm.score : 0),
+      score: ((typeof growthData !== 'undefined' && growthData[g.area] !== undefined) ? growthData[g.area] : (nm.score !== undefined ? nm.score : 0)),
       startpunt: buildNulmetingText(gi),
       keuze: g.text || '',
       v20: v20, v5: v5, v1: v1,
