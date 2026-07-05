@@ -732,6 +732,29 @@ footer p{font-size:.68rem;color:var(--dim)}
 .jd-dod-card .jd-field-label{margin-bottom:.3rem}
 .jd-dod-inp{min-height:2.6rem}
 .jd-dod-chips{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.55rem}
+.gb-stage{position:relative;height:210px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;margin:.4rem auto .2rem}
+.gb-box{position:relative;width:120px;height:96px;transition:opacity .4s .35s}
+.gb-open .gb-box{opacity:0;pointer-events:none}
+.gb-base{position:absolute;bottom:0;width:120px;height:70px;background:linear-gradient(180deg,#2a2410,#1a1608);border:1px solid var(--gold);border-radius:6px}
+.gb-vrib{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:16px;height:70px;background:var(--gold);opacity:.85}
+.gb-lid{position:absolute;top:0;width:132px;left:-6px;height:32px;background:linear-gradient(180deg,#3a3016,#241d0c);border:1px solid var(--gold);border-radius:6px;transform-origin:center bottom;transition:transform .55s cubic-bezier(.3,1.4,.5,1),opacity .5s .4s;z-index:3}
+.gb-bow{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:34px;height:22px;z-index:4;transition:transform .5s,opacity .45s}
+.gb-bow::before,.gb-bow::after{content:"";position:absolute;top:0;width:17px;height:22px;background:var(--gold);border-radius:60% 60% 0 60%}
+.gb-bow::before{left:0;transform:rotate(-18deg)}
+.gb-bow::after{right:0;transform:scaleX(-1) rotate(-18deg)}
+.gb-open .gb-lid{transform:translateY(-46px) rotate(-16deg);opacity:0}
+.gb-open .gb-bow{transform:translate(-50%,-70px) rotate(20deg);opacity:0}
+.gb-glow{position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.55),transparent 70%);opacity:0;transform:scale(.3);pointer-events:none}
+.gb-open .gb-glow{animation:gbBurst .7s ease-out .25s}
+@keyframes gbBurst{0%{opacity:0;transform:scale(.3)}40%{opacity:.9}100%{opacity:0;transform:scale(1.5)}}
+.gb-reveal{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;opacity:0;transform:translateY(14px) scale(.96);pointer-events:none;transition:opacity .5s ease .2s,transform .5s cubic-bezier(.2,.8,.2,1) .2s}
+.gb-open .gb-reveal{opacity:1;transform:none;pointer-events:auto}
+.gb-badge{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.gb-title{font-family:'Abolition',serif;font-size:1.3rem;letter-spacing:.02em;color:#fff;text-transform:uppercase;line-height:1}
+.gb-mods{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin:3px 0}
+.gb-mods span{font-size:.6rem;color:#cfc7b6;border:1px solid rgba(201,168,76,.35);border-radius:20px;padding:3px 9px}
+.gb-hint{position:absolute;bottom:0;left:0;right:0;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#6a6a6a;transition:opacity .3s}
+.gb-open .gb-hint{opacity:0}
 </style>
 </head>
 <body>
@@ -1257,7 +1280,7 @@ footer p{font-size:.68rem;color:var(--dim)}
       <div id="jd-dod-list" style="display:flex;flex-direction:column;gap:.85rem"></div>
       <div class="step-nav" style="margin-top:1.25rem">
         <button class="btn-back" onclick="nextJdStep(1)">← Terug</button>
-        <button class="btn-next" onclick="nextJdStep(3)">Volgende →</button>
+        <button class="btn-next" onclick="if(validateDod(currentGoalIndex)){nextJdStep(3);}">Volgende →</button>
       </div>
     </div>
 
@@ -1421,11 +1444,25 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div style="text-align:center;padding:2.5rem 0">
       <div style="font-size:2.5rem;margin-bottom:1rem">&#10003;</div>
       <div style="font-size:1.15rem;font-weight:600;color:var(--white);margin-bottom:.75rem">Jouw visie staat op papier</div>
-      <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin:0 0 1.75rem">Je hebt jouw visie en jaardoel geformuleerd — dat is de eerste grote stap. Wanneer je alsnog een gesprek wil inplannen, sta ik klaar.</p>
+      <p style="font-size:.86rem;color:var(--muted);line-height:1.7;margin:0 0 1.75rem">Je hebt jouw visie en jaardoel geformuleerd — dat is de eerste grote stap. Heb je net een gesprek geboekt? Top, dan spreek ik je snel. Zo niet, dan kun je er hieronder alsnog één plannen.</p>
+
+      <div style="margin:.25rem 0 .2rem"><div style="font-size:.92rem;color:var(--gold);font-weight:600;margin-bottom:.1rem">Nog een cadeautje voor je &#127873;</div><div style="font-size:.78rem;color:var(--muted)">Gratis preview van de cursus — tik om uit te pakken.</div></div>
+      <div class="gb-stage" onclick="this.classList.add('gb-open')">
+        <div class="gb-glow"></div>
+        <div class="gb-box"><div class="gb-base"></div><div class="gb-vrib"></div><div class="gb-lid"></div><div class="gb-bow"></div></div>
+        <div class="gb-reveal">
+          <span class="gb-badge">&#127873; Gratis cadeau</span>
+          <span class="gb-title">Cursus-preview</span>
+          <div class="gb-mods"><span>5 modules</span><span>24 lessen</span><span>Gratis</span></div>
+          <button class="btn-primary" style="padding:.7rem 1.2rem;font-size:.72rem;border-radius:9px;margin-top:.3rem" onclick="event.stopPropagation();window.location.href='/cursus'">Bekijk de cursus &#8594;</button>
+        </div>
+        <div class="gb-hint">tik om uit te pakken</div>
+      </div>
+
       <button onclick="openCalendly()"
         class="btn-primary"
         style="display:block;width:100%;text-align:center;padding:.85rem 1.2rem;font-size:.75rem;border-radius:10px;cursor:pointer;margin-bottom:.75rem">
-        📅 Toch een gesprek inplannen
+        📅 Ik heb nog geen gesprek — plan er alsnog een in
       </button>
       <button onclick="window.location.href='/'"
         style="display:block;width:100%;padding:.55rem;font-size:.78rem;background:none;border:none;cursor:pointer;color:var(--muted)">
@@ -2259,6 +2296,7 @@ let jaarvisieTextOverrides = {};
 let jaarChipVals = {}; // { gi: { chipId: overrideText } }
 let jaarTextComposed = {};     // { gi: composed text }
 let jaarTop3 = {};             // { gi: [{id,text}, ...] } — geordende top 3
+var jdDodPicks = {}; var jdDodVals = {}; var jdDodCustom = {}; // DOD-pillen state per doel
 let jdWatSelected = []; // indices of selected top-3 items
 let jdWhySelected = [];
 const JD_WHY_CHIPS = [
@@ -2558,6 +2596,7 @@ function updateCardSubs(el, curSub) {
 
 function updateProgressBar(stepId) {
   var _th=document.querySelector('.tool-header'); if(_th) _th.style.display=(stepId==='1a')?'':'none';
+  var _pbw=document.querySelector('.progress-bar-wrap'); if(_pbw) _pbw.style.display=(stepId==='gesprek'||stepId==='bedankt')?'none':'';
   const areas = areaOrder || [];
   const N = areas.length;
 
@@ -2645,6 +2684,7 @@ function resetTool() {
   jaarvisieTextOverrides = {};
   jaarTextComposed = {};
   jaarTop3 = {};
+  jdDodPicks = {}; jdDodVals = {}; jdDodCustom = {};
   jdWatSelected = [];
   jdWhySelected = [];
   jdWhyCustom = [];
@@ -5108,63 +5148,135 @@ function updateJdAssembled() {
 }
 
 function jdEsc(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function dodPKey(item, i){ return item.id || ('p'+i); }
+function dodPriorityVals(gi, item){
+  var out=[];
+  var vals=(jaarChipVals[gi]||{})[item.id];
+  if(vals){ Object.keys(vals).forEach(function(k){ if(vals[k]!==undefined && vals[k]!=='') out.push(String(vals[k])); }); }
+  if(!out.length){ var m=String((item&&item.text)||'').match(/\d[\d.,]*\s?%?/g); if(m) out=m.map(function(x){ return x.trim(); }); }
+  return out;
+}
+function dodSugg(gi, item){ var areaKey=resolveAreaKey(gi); return (CHIP_DOD[item.id] && CHIP_DOD[item.id].length) ? CHIP_DOD[item.id] : (JD_BEWIJS_BY_AREA[areaKey]||JD_BEWIJS_BY_AREA['default']).slice(0,3); }
+function dodFillText(gi, optId, tpl, pvals){ pvals=pvals||[]; var vals=(jdDodVals[gi]||{})[optId]||[]; return String(tpl).split('___').reduce(function(acc,seg,i){ if(i===0) return seg; var v=vals[i-1]; if(v===undefined||v==='') v=pvals[i-1]; return acc + ((v!==undefined&&v!=='')?v:'___') + seg; }); }
+function dodValSpanHtml(gi, optId, tpl, pvals){
+  pvals=pvals||[]; var vals=(jdDodVals[gi]||{})[optId]||[]; var segs=String(tpl).split('___'); var out=jdEsc(segs[0]);
+  for(var i=1;i<segs.length;i++){ var v=vals[i-1]; if(v===undefined||v==='') v=pvals[i-1]; var disp=(v!==undefined&&v!=='')?v:'___'; out+='<span class="vb-val" data-optid="'+optId+'" data-blank="'+(i-1)+'" onclick="dodEditVal(event,this)">'+jdEsc(disp)+'</span>'+jdEsc(segs[i]); }
+  return out;
+}
 function renderJdDodFields(gi){
   if(gi===undefined) gi=currentGoalIndex;
   var host=document.getElementById('jd-dod-list'); if(!host) return;
   var top3=(jaarTop3[gi]||[]);
-  var d=goalData[gi]||{}; var saved=d.jd_dod||{};
-  var icons=['\uD83E\uDD47','\uD83E\uDD48','\uD83E\uDD49'];
-  if(!top3.length){ host.innerHTML='<p style="font-size:.82rem;color:var(--muted)">Geen Top 3 geselecteerd \u2014 ga terug om prioriteiten te kiezen.</p>'; return; }
-  var areaKey=resolveAreaKey(gi);
+  var icons=['🥇','🥈','🥉'];
+  if(!top3.length){ host.innerHTML='<p style="font-size:.82rem;color:var(--muted)">Geen Top 3 geselecteerd — ga terug om prioriteiten te kiezen.</p>'; return; }
+  if(!jdDodPicks[gi]) jdDodPicks[gi]={};
   host.innerHTML=top3.map(function(item,i){
-    var key=item.id||('p'+i); var val=saved[key]||'';
-    var sugg=(CHIP_DOD[item.id] && CHIP_DOD[item.id].length) ? CHIP_DOD[item.id] : (JD_BEWIJS_BY_AREA[areaKey]||JD_BEWIJS_BY_AREA['default']).slice(0,3);
-    var chips=sugg.map(function(sg){ return '<div class="jd-chip" data-tpl="'+sg.replace(/"/g,'&quot;')+'" onclick="selectJdDodChip(this)">'+jdEsc(sg)+'</div>'; }).join('');
-    return '<div class="jd-dod-card">'
-      + '<div class="jd-dod-head">'+(icons[i]||'')+' '+jdEsc(item.text)+'</div>'
-      + '<div class="jd-dod-chips">'+chips+'</div>'
-      + '<textarea class="jd-input jd-textarea jd-dod-inp" rows="1" data-dodkey="'+jdEsc(key)+'" placeholder="Klik een optie hierboven of typ zelf..." oninput="autoGrow(this);saveJdDod()">'+jdEsc(val)+'</textarea>'
-      + '</div>';
+    var pKey=dodPKey(item,i); var sugg=dodSugg(gi,item); var pvals=dodPriorityVals(gi,item);
+    var picks=(jdDodPicks[gi][pKey]||{});
+    var rows=sugg.map(function(sg, oi){
+      var optId=pKey+'#'+oi; var on=!!picks[optId];
+      return '<div class="chk-row'+(on?' on':'')+'" data-optid="'+optId+'">'+
+        '<button type="button" class="chk-box" onclick="dodTick(&quot;'+pKey+'&quot;,&quot;'+optId+'&quot;,this)" aria-label="Aanvinken">'+(on?'✓':'')+'</button>'+
+        '<div class="chk-body">'+dodValSpanHtml(gi, optId, sg, pvals)+'</div>'+
+      '</div>';
+    }).join('');
+    var customs=((jdDodCustom[gi]||{})[pKey]||[]);
+    var crows=customs.map(function(c){
+      var optId=pKey+'#c#'+c.id; var on=!!picks[optId];
+      return '<div class="chk-row'+(on?' on':'')+'" data-optid="'+optId+'">'+
+        '<button type="button" class="chk-box" onclick="dodTick(&quot;'+pKey+'&quot;,&quot;'+optId+'&quot;,this)" aria-label="Aanvinken">'+(on?'✓':'')+'</button>'+
+        '<div class="chk-body"><span class="cust-edit" onclick="dodEditCustom(&quot;'+pKey+'&quot;,&quot;'+c.id+'&quot;,this)">'+jdEsc(c.text)+'</span></div>'+
+        '<button type="button" class="chk-del" onclick="dodRemoveCustom(&quot;'+pKey+'&quot;,&quot;'+c.id+'&quot;)" aria-label="Verwijderen">✕</button>'+
+      '</div>';
+    }).join('');
+    return '<div class="jd-dod-card">'+
+      '<div class="jd-dod-head">'+(icons[i]||'')+' '+jdEsc(item.text)+'</div>'+
+      rows + crows +
+      '<div class="anders-input-row" style="margin-top:.55rem"><input class="anders-input" id="dod-add-'+jdEsc(pKey)+'" type="text" placeholder="Voeg je eigen manier toe..." onkeydown="if(event.keyCode===13){event.preventDefault();dodAddCustom(&quot;'+pKey+'&quot;)}"><button class="btn-add-custom anders-add-btn" onclick="dodAddCustom(&quot;'+pKey+'&quot;)">+ Voeg toe</button></div>'+
+    '</div>';
   }).join('');
-  host.querySelectorAll('.jd-dod-inp').forEach(function(t){ autoGrow(t); });
 }
-function selectJdDodChip(el){
-  var card=el.closest('.jd-dod-card'); if(!card) return;
-  card.querySelectorAll('.jd-dod-chips .jd-chip').forEach(function(c){ c.classList.remove('selected','jd-expanded'); var e=c.querySelector('.jd-chip-expand'); if(e) e.remove(); });
-  el.classList.add('selected','jd-expanded');
-  var tpl=el.dataset.tpl;
-  var blanks=(tpl.match(/___/g)||[]).length;
-  var tplHtml=tpl.replace(/___/g,'<span class="tpl-blank">___</span>');
-  var exp=document.createElement('div'); exp.className='jd-chip-expand'; exp.onclick=function(e){e.stopPropagation();};
-  var inputsHtml='';
-  for(var b=0;b<blanks;b++){ var ph=blanks>1?('Waarde '+(b+1)+'...'):'Vul in jouw waarde...'; inputsHtml+='<input class="jd-input jd-blank-inp" type="text" placeholder="'+ph+'" data-blank-idx="'+b+'" style="font-size:.82rem;padding:.42rem .7rem;margin-bottom:.35rem" oninput="updateJdDodMulti(this)">'; }
-  exp.innerHTML='<div class="jd-chip-expand-tpl">'+tplHtml+'</div>'+inputsHtml;
-  exp.querySelectorAll('input').forEach(function(inp){ inp.dataset.tpl=tpl; });
-  el.appendChild(exp);
-  var ta=card.querySelector('.jd-dod-inp');
-  if(ta){ ta.value=tpl; autoGrow(ta); saveJdDod(); }
-  setTimeout(function(){ var f=exp.querySelector('input'); if(f) f.focus(); },60);
+function dodTick(pKey, optId, btn){
+  var gi=currentGoalIndex;
+  if(!jdDodPicks[gi]) jdDodPicks[gi]={}; if(!jdDodPicks[gi][pKey]) jdDodPicks[gi][pKey]={};
+  var on=!jdDodPicks[gi][pKey][optId];
+  if(on) jdDodPicks[gi][pKey][optId]=true; else delete jdDodPicks[gi][pKey][optId];
+  var row=btn.closest('.chk-row'); if(row) row.classList.toggle('on', on);
+  btn.textContent=on?'✓':'';
+  recomputeDod(gi);
 }
-function updateJdDodMulti(inp){
-  var chip=inp.closest('.jd-chip.jd-expanded'); if(!chip) return;
-  var card=chip.closest('.jd-dod-card');
-  var tpl=inp.dataset.tpl;
-  var inputs=Array.prototype.slice.call(chip.querySelectorAll('.jd-blank-inp'));
-  var filled=tpl;
-  inputs.forEach(function(x){ var v=x.value.trim()||'___'; filled=filled.replace('___',v); });
-  var ta=card.querySelector('.jd-dod-inp');
-  if(ta){ ta.value=filled; autoGrow(ta); saveJdDod(); }
+function dodEditVal(e, el){
+  e.stopPropagation();
+  var gi=currentGoalIndex; var optId=el.dataset.optid, bi=parseInt(el.dataset.blank);
+  var cur=el.textContent==='___'?'':el.textContent;
+  var inp=document.createElement('input'); inp.className='vb-val-inp'; inp.value=cur; inp.placeholder='Vul in...';
+  el.replaceWith(inp); inp.focus(); inp.select();
+  var done=function(){
+    var v=inp.value.trim();
+    if(!jdDodVals[gi]) jdDodVals[gi]={}; if(!jdDodVals[gi][optId]) jdDodVals[gi][optId]=[];
+    jdDodVals[gi][optId][bi]=v;
+    var pKey=optId.split('#')[0];
+    if(!jdDodPicks[gi]) jdDodPicks[gi]={}; if(!jdDodPicks[gi][pKey]) jdDodPicks[gi][pKey]={};
+    jdDodPicks[gi][pKey][optId]=true;
+    recomputeDod(gi); renderJdDodFields(gi);
+  };
+  inp.addEventListener('blur',done);
+  inp.addEventListener('keydown',function(ev){ if(ev.keyCode===13){ev.preventDefault();inp.blur();} });
 }
-function saveJdDod(){
-  var gi=currentGoalIndex; if(!goalData[gi]) goalData[gi]={};
-  var d=goalData[gi]; var map={};
-  document.querySelectorAll('#jd-dod-list .jd-dod-inp').forEach(function(t){ map[t.dataset.dodkey]=t.value; });
+function dodAddCustom(pKey){
+  var gi=currentGoalIndex; var inp=document.getElementById('dod-add-'+pKey); if(!inp||!inp.value.trim()) return;
+  if(!jdDodCustom[gi]) jdDodCustom[gi]={}; if(!jdDodCustom[gi][pKey]) jdDodCustom[gi][pKey]=[];
+  if(!jdDodPicks[gi]) jdDodPicks[gi]={}; if(!jdDodPicks[gi][pKey]) jdDodPicks[gi][pKey]={};
+  splitCustomGoals(inp.value).forEach(function(t){ var id='dodc_'+Date.now()+'_'+Math.floor(Math.random()*1e6); jdDodCustom[gi][pKey].push({id:id, text:t}); jdDodPicks[gi][pKey][pKey+'#c#'+id]=true; });
+  recomputeDod(gi); renderJdDodFields(gi);
+}
+function dodEditCustom(pKey, cid, el){
+  var gi=currentGoalIndex; var arr=(jdDodCustom[gi]||{})[pKey]||[]; var chip=null; arr.forEach(function(c){ if(c.id===cid) chip=c; }); if(!chip) return;
+  var inp=document.createElement('input'); inp.className='anders-input'; inp.style.width='100%'; inp.value=chip.text;
+  el.replaceWith(inp); inp.focus(); inp.select();
+  var done=function(){ var parts=splitCustomGoals(inp.value);
+    if(parts.length===0){ dodRemoveCustom(pKey, cid); return; }
+    chip.text=parts[0];
+    for(var k=1;k<parts.length;k++){ var id='dodc_'+Date.now()+'_'+k; arr.push({id:id,text:parts[k]}); jdDodPicks[gi][pKey][pKey+'#c#'+id]=true; }
+    recomputeDod(gi); renderJdDodFields(gi);
+  };
+  inp.addEventListener('blur',done);
+  inp.addEventListener('keydown',function(ev){ if(ev.keyCode===13){ev.preventDefault();inp.blur();} });
+}
+function dodRemoveCustom(pKey, cid){
+  var gi=currentGoalIndex; var arr=(jdDodCustom[gi]||{})[pKey]; if(!arr) return;
+  var idx=-1; arr.forEach(function(c,i){ if(c.id===cid) idx=i; }); if(idx<0) return;
+  if(jdDodPicks[gi]&&jdDodPicks[gi][pKey]) delete jdDodPicks[gi][pKey][pKey+'#c#'+cid];
+  arr.splice(idx,1); recomputeDod(gi); renderJdDodFields(gi);
+}
+function validateDod(gi){
+  if(gi===undefined) gi=currentGoalIndex;
+  var top3=(jaarTop3[gi]||[]); var picks=jdDodPicks[gi]||{}; var missing=[];
+  top3.forEach(function(item,i){
+    var pKey=dodPKey(item,i); var p=picks[pKey]||{};
+    var any=Object.keys(p).some(function(k){ return p[k]; });
+    if(!any) missing.push(item.text);
+  });
+  if(missing.length){
+    alert('Kies voor elk doel minstens \u00e9\u00e9n manier waarop je zeker weet dat je het hebt behaald:\n\n\u2022 '+missing.join('\n\u2022 '));
+    return false;
+  }
+  return true;
+}
+function recomputeDod(gi){
+  if(!goalData[gi]) goalData[gi]={}; var d=goalData[gi]; var top3=(jaarTop3[gi]||[]); var map={};
+  top3.forEach(function(item,i){
+    var pKey=dodPKey(item,i); var sugg=dodSugg(gi,item); var pvals=dodPriorityVals(gi,item); var picks=(jdDodPicks[gi]||{})[pKey]||{}; var parts=[];
+    sugg.forEach(function(sg, oi){ var optId=pKey+'#'+oi; if(picks[optId]) parts.push(dodFillText(gi, optId, sg, pvals)); });
+    ((jdDodCustom[gi]||{})[pKey]||[]).forEach(function(c){ if(picks[pKey+'#c#'+c.id] && c.text) parts.push(c.text); });
+    map[pKey]=parts.join('; ');
+  });
   d.jd_dod=map;
-  var top3=(jaarTop3[gi]||[]);
-  var lines=top3.map(function(item,i){ var k=item.id||('p'+i); var v=(map[k]||'').trim(); return v?(item.text+': '+v):''; }).filter(Boolean);
-  d.jd_bewijs=lines.join(' \u00B7 ');
+  var lines=top3.map(function(item,i){ var k=dodPKey(item,i); var v=(map[k]||'').trim(); return v?(item.text+': '+v):''; }).filter(Boolean);
+  d.jd_bewijs=lines.join(' · ');
   saveJdData();
 }
+function saveJdDod(){ recomputeDod(currentGoalIndex); }
 function autoGrow(el){ if(!el) return; el.style.height='auto'; el.style.height=(el.scrollHeight)+'px'; }
 function saveJdData() {
   const gi = currentGoalIndex;
