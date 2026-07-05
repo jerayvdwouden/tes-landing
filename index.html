@@ -5319,12 +5319,12 @@ function sendLeadAndContinue() {
   var payload = buildLeadPayload();
   fetch(LEADMAGNET_SERVICE_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(payload)
   })
-  .then(function(r){ return r.json().catch(function(){ return {}; }); })
-  .catch(function(e){ console.error('Versturen mislukt:', e); return {}; })
-  .then(function(){ go(); });
+  .then(function(){ go(); })
+  .catch(function(e){ console.error('Versturen mislukt:', e); go(); });
 }
 
 function showAvw() {
