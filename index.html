@@ -2920,19 +2920,17 @@ function showAreaGoals(areaIdx) {
 function collectGoalAndShowNulmeting() {
   const area = areaOrder[currentAreaIndex] || '';
   const goalEls = [...document.querySelectorAll('.goal-card.selected')];
-  let newGoals = goalEls.map(el => ({
-    text: el.querySelector('.gc-text').textContent,
-    area: el.dataset.area || area,
-    color: (areaConfig[area]||{}).color || '#C9A84C',
-  }));
-  if (!newGoals.length) {
+  let keuzes = goalEls.map(el => (el.querySelector('.gc-text').textContent || '').trim()).filter(Boolean);
+  if (!keuzes.length) {
     const safeA = area.replace(/[^a-z0-9]/gi,'_');
     const own = document.getElementById('own-'+safeA)?.value?.trim();
-    if (own) newGoals = [{ text: own, area, color: (areaConfig[area]||{}).color||'#C9A84C' }];
+    if (own) keuzes = [own];
   }
-  if (!newGoals.length) { alert('Kies minstens één doel.'); return; }
+  if (!keuzes.length) { alert('Kies minstens één doel.'); return; }
+  // Meerdere keuzes binnen één gebied = ÉÉN doel; de losse keuzes bepalen welke visie-rijen je krijgt.
   const startIdx = selectedGoals.length;
-  newGoals.forEach(g => { selectedGoals.push(g); goalData.push({}); });
+  selectedGoals.push({ text: keuzes[0], keuzes: keuzes, area: area, color: (areaConfig[area]||{}).color || '#C9A84C' });
+  goalData.push({});
   areaGoalEndIndex = selectedGoals.length - 1;
   currentGoalIndex = startIdx;
   buildProgressBar(selectedGoals.length);
@@ -5775,13 +5773,21 @@ function setAndersText(val, andersKey, goalIdx) {
 }
 
 function visibleVisionCats(gi){
-  var area = (selectedGoals[gi] || {}).area;
+  var g = selectedGoals[gi] || {};
+  var area = g.area;
   var aData = visionChips[area];
   if (!aData) return [];
   var cats = aData.categories;
-  var goalText = (selectedGoals[gi] || {}).text || '';
-  var allowed = goalCategoryFilter[goalText];
-  return allowed ? cats.filter(function(c){ return allowed.indexOf(c.label) > -1; }) : cats;
+  // Meerdere keuzes in één gebied → toon de categorie-rijen van ÁLLE keuzes samen (met dedupe).
+  var keuzes = (g.keuzes && g.keuzes.length) ? g.keuzes.slice() : [g.text || ''];
+  var allowed = []; var showAll = false;
+  keuzes.forEach(function(k){
+    var a = goalCategoryFilter[k];
+    if (!a) { showAll = true; return; }            // keuze zonder filter → toon alles (veilig)
+    a.forEach(function(lbl){ if (allowed.indexOf(lbl) < 0) allowed.push(lbl); });
+  });
+  if (showAll || !allowed.length) return cats;
+  return cats.filter(function(c){ return allowed.indexOf(c.label) > -1; });
 }
 
 var vsAnimTimer = null;
