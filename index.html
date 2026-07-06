@@ -4931,13 +4931,13 @@ function initJaardoelBuilder(gi) {
   const d = goalData[gi] || {};
   if (d.jd_goal_text) { const el = document.getElementById('jd-goal-text'); if (el) { el.value = d.jd_goal_text; autoGrow(el); } }
   if (d.jd_bewijs)    { const el = document.getElementById('jd-bewijs');    if (el) el.value = d.jd_bewijs; }
-  renderJdDodFields(gi);
   if (d.jd_wat_selected) {
     jdWatSelected = d.jd_wat_selected.slice();
     document.querySelectorAll('#jd-wat-chips .jd-chip').forEach(el => {
       el.classList.toggle('selected', jdWatSelected.includes(+el.dataset.widx));
     });
   }
+  renderJdDodFields(gi); // ná herstel van de jaardoel-keuze, zodat DOD exact die keuze volgt
   if (d.jd_why) {
     jdWhySelected = d.jd_why.slice();
     document.querySelectorAll('#jd-why-chips .jd-chip').forEach(el => {
@@ -5024,6 +5024,10 @@ function toggleJdWat(el, gi) {
     goalInp.classList.add('jd-filled');
   }
   saveJdData();
+  // DOD-stap moet exact de gekozen jaardoel-prioriteiten volgen
+  var _g = (gi!==undefined?gi:currentGoalIndex);
+  renderJdDodFields(_g);
+  recomputeDod(_g);
 }
 
 function backFromGesprek() {
@@ -5173,14 +5177,25 @@ function dodValSpanHtml(gi, optId, tpl, pvals){
   for(var i=1;i<segs.length;i++){ var v=vals[i-1]; if(v===undefined||v==='') v=pvals[i-1]; var disp=(v!==undefined&&v!=='')?v:'___'; out+='<span class="vb-val" data-optid="'+optId+'" data-blank="'+(i-1)+'" onclick="dodEditVal(event,this)">'+jdEsc(disp)+'</span>'+jdEsc(segs[i]); }
   return out;
 }
+// Welke top-3 prioriteiten heeft de klant gekozen als jaardoel? Alleen die krijgen een DOD.
+function dodPickedIdx(gi){
+  if(gi===undefined) gi=currentGoalIndex;
+  var top3=(jaarTop3[gi]||[]);
+  var sel = (gi===currentGoalIndex && Array.isArray(jdWatSelected)) ? jdWatSelected : (goalData[gi]||{}).jd_wat_selected;
+  if(!Array.isArray(sel)) return top3.map(function(_,i){ return i; }); // nooit gekozen → toon alles (veilige fallback)
+  return sel.filter(function(i){ return i>=0 && i<top3.length; }).slice().sort(function(a,b){ return a-b; });
+}
 function renderJdDodFields(gi){
   if(gi===undefined) gi=currentGoalIndex;
   var host=document.getElementById('jd-dod-list'); if(!host) return;
   var top3=(jaarTop3[gi]||[]);
   var icons=['🥇','🥈','🥉'];
   if(!top3.length){ host.innerHTML='<p style="font-size:.82rem;color:var(--muted)">Geen Top 3 geselecteerd — ga terug om prioriteiten te kiezen.</p>'; return; }
+  var idxs=dodPickedIdx(gi);
+  if(!idxs.length){ host.innerHTML='<p style="font-size:.82rem;color:var(--muted)">Kies eerst bij de vorige stap welke prioriteit(en) je jaardoel worden — alleen daarvoor bepaal je hier wanneer je ze hebt behaald.</p>'; return; }
   if(!jdDodPicks[gi]) jdDodPicks[gi]={};
-  host.innerHTML=top3.map(function(item,i){
+  host.innerHTML=idxs.map(function(i){
+    var item=top3[i];
     var pKey=dodPKey(item,i); var sugg=dodSugg(gi,item); var pvals=dodPriorityVals(gi,item);
     var picks=(jdDodPicks[gi][pKey]||{});
     var rows=sugg.map(function(sg, oi){
@@ -5262,8 +5277,8 @@ function dodRemoveCustom(pKey, cid){
 function validateDod(gi){
   if(gi===undefined) gi=currentGoalIndex;
   var top3=(jaarTop3[gi]||[]); var picks=jdDodPicks[gi]||{}; var missing=[];
-  top3.forEach(function(item,i){
-    var pKey=dodPKey(item,i); var p=picks[pKey]||{};
+  dodPickedIdx(gi).forEach(function(i){
+    var item=top3[i]; var pKey=dodPKey(item,i); var p=picks[pKey]||{};
     var any=Object.keys(p).some(function(k){ return p[k]; });
     if(!any) missing.push(item.text);
   });
@@ -5275,14 +5290,15 @@ function validateDod(gi){
 }
 function recomputeDod(gi){
   if(!goalData[gi]) goalData[gi]={}; var d=goalData[gi]; var top3=(jaarTop3[gi]||[]); var map={};
-  top3.forEach(function(item,i){
-    var pKey=dodPKey(item,i); var sugg=dodSugg(gi,item); var pvals=dodPriorityVals(gi,item); var picks=(jdDodPicks[gi]||{})[pKey]||{}; var parts=[];
+  var pickedIdx=dodPickedIdx(gi);
+  pickedIdx.forEach(function(i){
+    var item=top3[i]; var pKey=dodPKey(item,i); var sugg=dodSugg(gi,item); var pvals=dodPriorityVals(gi,item); var picks=(jdDodPicks[gi]||{})[pKey]||{}; var parts=[];
     sugg.forEach(function(sg, oi){ var optId=pKey+'#'+oi; if(picks[optId]) parts.push(dodFillText(gi, optId, sg, pvals)); });
     ((jdDodCustom[gi]||{})[pKey]||[]).forEach(function(c){ if(picks[pKey+'#c#'+c.id] && c.text) parts.push(c.text); });
     map[pKey]=parts.join('; ');
   });
   d.jd_dod=map;
-  var lines=top3.map(function(item,i){ var k=dodPKey(item,i); var v=(map[k]||'').trim(); return v?(item.text+': '+v):''; }).filter(Boolean);
+  var lines=pickedIdx.map(function(i){ var item=top3[i]; var k=dodPKey(item,i); var v=(map[k]||'').trim(); return v?(item.text+': '+v):''; }).filter(Boolean);
   d.jd_bewijs=lines.join(' · ');
   saveJdData();
 }
