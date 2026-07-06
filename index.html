@@ -732,7 +732,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 .jd-dod-card .jd-field-label{margin-bottom:.3rem}
 .jd-dod-inp{min-height:2.6rem}
 .jd-dod-chips{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.55rem}
-.gb-stage{position:relative;height:210px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;margin:.4rem auto .2rem}
+.gb-stage{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;margin:.4rem auto .2rem}
 .gb-box{position:relative;width:120px;height:96px;transition:opacity .4s .35s}
 .gb-open .gb-box{opacity:0;pointer-events:none}
 .gb-base{position:absolute;bottom:0;width:120px;height:70px;background:linear-gradient(180deg,#2a2410,#1a1608);border:1px solid var(--gold);border-radius:6px}
@@ -755,6 +755,17 @@ footer p{font-size:.68rem;color:var(--dim)}
 .gb-mods span{font-size:.6rem;color:#cfc7b6;border:1px solid rgba(201,168,76,.35);border-radius:20px;padding:3px 9px}
 .gb-hint{position:absolute;bottom:0;left:0;right:0;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#6a6a6a;transition:opacity .3s}
 .gb-open .gb-hint{opacity:0}
+.cc{width:300px;max-width:88%;border:1px solid rgba(201,168,76,.4);border-radius:16px;overflow:hidden;background:#141414;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.cc-media{position:relative;aspect-ratio:16/9;overflow:hidden}
+.cc-media img{width:100%;height:100%;object-fit:cover;display:block}
+.cc-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55))}
+.cc-badge{position:absolute;top:10px;left:10px;z-index:2;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#1a140a;background:var(--gold);font-weight:800;border-radius:20px;padding:4px 9px}
+.cc-play{position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(201,168,76,.92);color:#1a140a;display:flex;align-items:center;justify-content:center;font-size:1.1rem;padding-left:3px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.cc-body{padding:14px 14px 16px;text-align:center}
+.cc-title{font-family:'Abolition',serif;font-size:1.35rem;font-weight:400;letter-spacing:.02em;text-transform:uppercase;line-height:1.05;margin:0 0 8px;color:#fff}
+.cc-mods{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.cc-mods span{font-size:.62rem;color:#cfc7b6;border:1px solid rgba(201,168,76,.35);border-radius:20px;padding:3px 9px}
+.cc-btn{display:inline-block;background:var(--gold);color:#1a140a;font-weight:700;font-size:.8rem;border:none;border-radius:9px;padding:.6rem 1.1rem;cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
@@ -1451,10 +1462,18 @@ footer p{font-size:.68rem;color:var(--dim)}
         <div class="gb-glow"></div>
         <div class="gb-box"><div class="gb-base"></div><div class="gb-vrib"></div><div class="gb-lid"></div><div class="gb-bow"></div></div>
         <div class="gb-reveal">
-          <span class="gb-badge">&#127873; Gratis cadeau</span>
-          <span class="gb-title">Cursus-preview</span>
-          <div class="gb-mods"><span>5 modules</span><span>24 lessen</span><span>Gratis</span></div>
-          <button class="btn-primary" style="padding:.7rem 1.2rem;font-size:.72rem;border-radius:9px;margin-top:.3rem" onclick="event.stopPropagation();window.location.href='/cursus'">Bekijk de cursus &#8594;</button>
+          <div class="cc">
+            <div class="cc-media">
+              <span class="cc-badge">&#127873; Gratis cadeau</span>
+              <div class="cc-play">&#9654;</div>
+              <img src="/cursus/cursus-hero.jpg" alt="The Execution System cursus" loading="lazy">
+            </div>
+            <div class="cc-body">
+              <div class="cc-title">The Execution System</div>
+              <div class="cc-mods"><span>5 modules</span><span>24 lessen</span><span>Gratis</span></div>
+              <button class="cc-btn" onclick="event.stopPropagation();window.location.href='/cursus'">Bekijk de cursus &#8594;</button>
+            </div>
+          </div>
         </div>
         <div class="gb-hint">tik om uit te pakken</div>
       </div>
