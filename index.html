@@ -1823,10 +1823,12 @@ const visionChips = {
       { id:'re5', tpl:'Ik heb {X} vaste mensen om mij heen die er altijd voor mij zijn.', fields:[{key:'X',ph:'5',wide:false}] },
       { id:'re6', tpl:'Ik spreek mijn beste vrienden minstens {X}x per maand.', fields:[{key:'X',ph:'2',wide:false}] },
     ]},
-    { label: 'Familie & Gezin', chips: [
+    { label: 'Kinderen & Gezin', chips: [
       { id:'re10', tpl:'Ik ben er elke dag voor mijn kinderen.', fields:[] },
       { id:'re11', tpl:'Ik doe minstens {X}x per week iets met mijn kinderen.', fields:[{key:'X',ph:'3',wide:false}] },
       { id:'re12', tpl:'Ik doe {X}x per jaar een gezinsreis.', fields:[{key:'X',ph:'2',wide:false}] },
+    ]},
+    { label: 'Ouders & Familie', chips: [
       { id:'re13', tpl:'Ik bel of zie mijn ouders minstens {X}x per week.', fields:[{key:'X',ph:'2',wide:false}] },
       { id:'re14', tpl:'Ik heb een warme, hechte band met mijn familie.', fields:[] },
     ]},
@@ -3680,7 +3682,15 @@ var goalCategoryFilter = {
   'Een specifieke sportprestatie neerzetten': ['Sport & Prestaties','Energie & Slaap','Leefstijl & Voeding'],
   'Beter en consistenter slapen': ['Energie & Slaap','Leefstijl & Voeding'],
   'Meer energie in mijn dagelijks leven': ['Energie & Slaap','Leefstijl & Voeding','Gewicht & Lichaam'],
-  'Betere algemene fitheid': ['Gewicht & Lichaam','Sport & Prestaties','Energie & Slaap','Leefstijl & Voeding']
+  'Betere algemene fitheid': ['Gewicht & Lichaam','Sport & Prestaties','Energie & Slaap','Leefstijl & Voeding'],
+  // Relaties — visie-vragen per soort relatie
+  'Een sterke, liefdevolle relatie opbouwen': ['Partnerrelatie'],
+  'Dieper contact met mijn partner': ['Partnerrelatie'],
+  'Hechtere en diepere vriendschappen': ['Vriendschappen'],
+  'Meer echte verbinding in mijn sociale leven': ['Vriendschappen','Netwerk & Community'],
+  'Meer aanwezig zijn voor mijn gezin': ['Kinderen & Gezin','Ouders & Familie'],
+  'Meer kwaliteitstijd met mijn kinderen': ['Kinderen & Gezin'],
+  'Betere relatie met mijn ouders of familie': ['Ouders & Familie']
 };
 function toggleCtx(id, btn){ var b=document.getElementById(id); if(!b) return; var open=b.classList.toggle('open'); if(btn) btn.classList.toggle('open',open); }
 function renderVisionSubStep() {
