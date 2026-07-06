@@ -3,7 +3,7 @@
 <head>
 <script>document.documentElement.classList.add('anim-on');</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>The Execution System</title>
 <style>
 :root{color-scheme:light}
@@ -780,6 +780,10 @@ footer p{font-size:.68rem;color:var(--dim)}
 .avw-sec p{font-size:.9rem;line-height:1.6;color:#e6e0d4;margin:0}
 .avw-foot{padding:14px 18px;border-top:1px solid rgba(201,168,76,.18)}
 .avw-foot button{width:100%;background:var(--gold);color:#1a140a;border:none;border-radius:9px;padding:.7rem;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit}
+/* Voorkom dat iPhone inzoomt zodra je een invoerveld aantikt (font < 16px = auto-zoom) */
+@media (max-width:640px){
+  input[type="text"],input[type="email"],input[type="number"],input[type="tel"],input[type="search"],textarea,select{font-size:16px}
+}
 </style>
 </head>
 <body>
@@ -3638,6 +3642,7 @@ function addVisionCustomChip(gi, ci, text) {
   visionCustomChips[gi][ci].push({ id: 'cvc_' + gi + '_' + ci + '_' + n, text: text, checked: true });
   rebuildVisionText(gi);
   refreshCustomSection(gi, ci);
+  updateVisionNextBtn();
 }
 
 function removeVisionCustomChip(gi, ci, idx) {
@@ -3645,6 +3650,7 @@ function removeVisionCustomChip(gi, ci, idx) {
   visionCustomChips[gi][ci].splice(idx, 1);
   rebuildVisionText(gi);
   refreshCustomSection(gi, ci);
+  updateVisionNextBtn();
 }
 
 function submitVisionCustomChip(gi, ci) {
@@ -3799,10 +3805,20 @@ function updateVisionNextBtn(){
   var nav = document.getElementById('vision-subnav'); if (!nav) return;
   var btn = nav.querySelector('.btn-next'); if (!btn) return;
   var oc = btn.getAttribute('onclick') || '';
-  if (oc.indexOf('goToVisionReview') > -1) return;
-  var grid = document.getElementById('vision-chip-grid');
-  var any = grid && grid.querySelector('.chk-row.on');
-  btn.textContent = any ? 'Volgende →' : 'Niets hier →';
+  if (oc.indexOf('goToVisionReview') > -1) return; // laatste categorie: altijd 'Volgende stap'
+  // Bereken op basis van de DATA (niet de DOM), zodat ook eigen pillen meetellen
+  var gi = currentGoalIndex;
+  var area = (selectedGoals[gi] || {}).area;
+  var areaChips = visionChips[area];
+  var cats = visibleVisionCats(gi);
+  var cat = cats[visionSubIdx];
+  if (!areaChips || !cat) return;
+  var ci = areaChips.categories.indexOf(cat);
+  var goalText = (selectedGoals[gi] || {}).text || '';
+  var sc = selectedChips[gi] || {};
+  var anyStd = cat.chips.some(function(c){ return (!c.onlyFor || c.onlyFor.includes(goalText)) && !!sc[c.id]; });
+  var anyCustom = (visionCustomChips[gi] && visionCustomChips[gi][ci]) ? visionCustomChips[gi][ci].some(function(c){ return c.checked !== false; }) : false;
+  btn.textContent = (anyStd || anyCustom) ? 'Volgende →' : 'Niets hier →';
 }
 
 function visionEditVal(e, el) {
