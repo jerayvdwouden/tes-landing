@@ -4138,8 +4138,7 @@ function renderMedTermSubStep() {
   if (ctxEl) ctxEl.textContent = (visionTexts[gi] && visionTexts[gi].composed) || getVisionText(gi) || '—';
   if (!selectedMedChips[gi]) selectedMedChips[gi] = {};
   if (!cats.length) { goToMedTermReview(); return; }
-  var vSel = selectedChips[gi] || {};
-  cats.forEach(function(cat){ cat.chips.forEach(function(chip){ if ((chip._isCustom || vSel[chip.id]) && !selectedMedChips[gi][chip.id]) selectedMedChips[gi][chip.id] = Object.assign({}, vSel[chip.id] || {}); }); });
+  // Pillen NIET automatisch aanvinken bij 3-5 jaar visie — klant kiest zelf (zelfde gedrag als jaarvisie)
   var builder = document.getElementById('s4-builder');
   if (!builder) return;
   var mc = document.getElementById('med-composed-section'); if (mc) mc.style.display = 'none';
