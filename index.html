@@ -766,6 +766,20 @@ footer p{font-size:.68rem;color:var(--dim)}
 .cc-mods{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
 .cc-mods span{font-size:.62rem;color:#cfc7b6;border:1px solid rgba(201,168,76,.35);border-radius:20px;padding:3px 9px}
 .cc-btn{display:inline-block;background:var(--gold);color:#1a140a;font-weight:700;font-size:.8rem;border:none;border-radius:9px;padding:.6rem 1.1rem;cursor:pointer;font-family:inherit}
+.avw-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .2s}
+.avw-overlay.show{opacity:1}
+.avw-modal{background:#0d0d0d;border:1px solid rgba(201,168,76,.18);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6);max-width:460px;width:100%;max-height:88vh;display:flex;flex-direction:column;transform:translateY(10px) scale(.98);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.avw-overlay.show .avw-modal{transform:none}
+.avw-head{position:relative;padding:18px 18px 14px;border-bottom:1px solid rgba(201,168,76,.18)}
+.avw-tag{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.avw-title{font-family:'Abolition',serif;font-size:1.5rem;letter-spacing:.02em;text-transform:uppercase;font-weight:400;margin:3px 0 0;line-height:1;color:#fff}
+.avw-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;border:1px solid rgba(201,168,76,.18);background:transparent;color:var(--muted);font-size:1rem;cursor:pointer;font-family:inherit}
+.avw-body{overflow-y:auto;padding:16px 18px 20px}
+.avw-sec{margin:0 0 18px}
+.avw-sec h3{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 6px}
+.avw-sec p{font-size:.9rem;line-height:1.6;color:#e6e0d4;margin:0}
+.avw-foot{padding:14px 18px;border-top:1px solid rgba(201,168,76,.18)}
+.avw-foot button{width:100%;background:var(--gold);color:#1a140a;border:none;border-radius:9px;padding:.7rem;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
@@ -1337,7 +1351,7 @@ footer p{font-size:.68rem;color:var(--dim)}
         <div style="display:flex;align-items:flex-start;gap:.65rem;padding:.85rem;border:1px solid var(--border);border-radius:8px;background:var(--bg2);margin-top:.1rem">
           <input type="checkbox" id="jd-consent-cb" style="margin-top:.15rem;accent-color:var(--gold);flex-shrink:0;width:1rem;height:1rem" onchange="saveJdData()">
           <label for="jd-consent-cb" style="font-size:.79rem;color:var(--muted);line-height:1.6;cursor:pointer">
-            Ik ga akkoord met de <button type="button" onclick="showAvw()" style="background:none;border:none;padding:0;color:var(--gold);font-size:.79rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px">algemene voorwaarden</button> — waaronder dat The Execution System mijn e-mailadres mag gebruiken om mij te contacteren over mijn coaching traject.
+            Ik ga akkoord met de <button type="button" onclick="showAvw()" style="background:none;border:none;padding:0;color:var(--gold);font-size:.79rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px">voorwaarden &amp; privacy</button> — waaronder dat The Execution System mijn e-mailadres mag gebruiken om contact met mij op te nemen.
           </label>
         </div>
       </div>
@@ -5384,7 +5398,7 @@ function validateAndGoToReview() {
   var cb    = document.getElementById('jd-consent-cb');
   if (!naam.trim())         { alert('Vul je naam in om door te gaan.'); return; }
   if (!email.includes('@')) { alert('Vul een geldig e-mailadres in.'); return; }
-  if (!cb || !cb.checked)   { alert('Je dient akkoord te gaan met de algemene voorwaarden.'); return; }
+  if (!cb || !cb.checked)   { alert('Je dient akkoord te gaan met de voorwaarden en privacy.'); return; }
   saveJdData();
   sendLeadAndContinue();
 }
@@ -5407,11 +5421,35 @@ function sendLeadAndContinue() {
 }
 
 function showAvw() {
-  alert('Algemene Voorwaarden — The Execution System\n\n' +
-    '• The Execution System mag je e-mailadres gebruiken om je te contacteren over je coaching traject.\n' +
-    '• Jouw gegevens worden vertrouwelijk behandeld en niet gedeeld met derden.\n' +
-    '• Je kunt je op elk moment afmelden via de link in onze e-mails.\n\n' +
-    'Het volledige document volgt zodra de website live gaat.');
+  var ex = document.getElementById('avw-overlay');
+  if (ex) { ex.classList.add('show'); return; }
+  var ov = document.createElement('div');
+  ov.id = 'avw-overlay'; ov.className = 'avw-overlay';
+  ov.addEventListener('click', function(e){ if (e.target === ov) closeAvw(); });
+  ov.innerHTML = `<div class="avw-modal">
+    <div class="avw-head">
+      <div class="avw-tag">The Execution System</div>
+      <div class="avw-title">Voorwaarden &amp; privacy</div>
+      <button type="button" class="avw-close" onclick="closeAvw()" aria-label="Sluiten">&#10005;</button>
+    </div>
+    <div class="avw-body">
+      <div class="avw-sec"><h3>Jouw gegevens</h3><p>We vragen je naam, e-mailadres en je antwoorden. Die gebruiken we om je het werkblad te mailen en contact met je op te nemen. We verkopen je gegevens nooit en bewaren ze niet langer dan nodig.</p></div>
+      <div class="avw-sec"><h3>E-mail</h3><p>We mailen je over je werkblad en je traject. Geen mail meer willen? Onderaan elke mail zit een afmeldknop.</p></div>
+      <div class="avw-sec"><h3>Jouw rechten</h3><p>Je mag altijd je gegevens opvragen, laten aanpassen of laten verwijderen, en je toestemming intrekken. Mail daarvoor naar jryisahia@gmail.com. Niet tevreden? Je kunt een klacht indienen bij de Autoriteit Persoonsgegevens.</p></div>
+      <div class="avw-sec"><h3>Wat je krijgt</h3><p>Het werkblad en de cursus zijn algemene tips &mdash; geen persoonlijk medisch, financieel of juridisch advies. Je resultaat hangt vooral van jezelf af; we beloven geen vaste uitkomst.</p></div>
+      <div class="avw-sec"><h3>Van wie het is</h3><p>De cursus, video&rsquo;s en het werkblad zijn van The Execution System. Gebruik ze voor jezelf &mdash; niet doorverkopen of delen.</p></div>
+      <div class="avw-sec"><h3>Klein &amp; simpel</h3><p>Nederlands recht geldt. Passen we iets aan, dan staat de nieuwste versie op de website.</p></div>
+    </div>
+    <div class="avw-foot"><button type="button" onclick="closeAvw()">Sluiten</button></div>
+  </div>`;
+  document.body.appendChild(ov);
+  requestAnimationFrame(function(){ ov.classList.add('show'); });
+}
+function closeAvw() {
+  var ov = document.getElementById('avw-overlay');
+  if (!ov) return;
+  ov.classList.remove('show');
+  setTimeout(function(){ if (ov && ov.parentNode) ov.parentNode.removeChild(ov); }, 220);
 }
 
 function openCalendly() {
