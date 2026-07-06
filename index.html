@@ -3111,7 +3111,8 @@ function validateAndGoToStep3() {
 function scrollTopKeep(){ window.scrollTo({top:0, behavior:'smooth'}); }
 function navScroll(){ /* Bewust: blijf op dezelfde scrollpositie bij Volgende/Terug (geen sprong omhoog) */ }
 function splitCustomGoals(text){
-  return String(text||'').split(/\s+en\s+|[,;+]+|\.(?=\s|$)/i).map(function(t){ return t.trim(); }).filter(function(t){ return t.length > 0; });
+  // Splitsen op punt (maar niet binnen getallen zoals 10.000) en plus. NIET op "en" of komma.
+  return String(text||'').split(/\.(?=\s|$)|\s*\+\s*/).map(function(t){ return t.trim(); }).filter(function(t){ return t.length > 0; });
 }
 function goToStep(n) {
   if (n === 'gesprek') { showGesprekStep(); return; }
@@ -3671,7 +3672,7 @@ function buildCustomPillsHtml(gi, ci) {
         ' onkeydown="if(event.keyCode===13){event.preventDefault();submitVisionCustomChip(' + gi + ',' + ci + ')}">' +
       '<button class="btn-add-custom anders-add-btn" onclick="submitVisionCustomChip(' + gi + ',' + ci + ')">+ Voeg optie toe</button>' +
     '</div>' +
-    '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>' +
+    '<div class="anders-hint">Meerdere doelen? Scheid ze met een punt of plus \u2014 wij maken er losse pillen van.</div>' +
   '</div>';
 }
 
@@ -3971,7 +3972,7 @@ function drawReviewPills(){
   list.forEach(function(item,i){
     html+='<div class="chk-row on"><div class="chk-body"><span class="cust-edit" onclick="revPillEdit('+i+',this)">'+escHtml(item.text)+'</span></div><button type="button" class="chk-del" onclick="revPillDel('+i+')" aria-label="Verwijderen">✕</button></div>';
   });
-  html+='<div class="anders-input-row" style="margin-top:.7rem"><input class="anders-input" id="rev-add-inp" type="text" placeholder="Voeg toe..." onkeydown="if(event.keyCode===13){event.preventDefault();revPillAdd()}"><button class="btn-add-custom anders-add-btn" onclick="revPillAdd()">+ Voeg toe</button></div><div class="anders-hint">Meerdere? Scheid met komma, punt, \'en\' of + — wij maken er losse pillen van. Toevoegingen komen terug in de volgende stap.</div></div>';
+  html+='<div class="anders-input-row" style="margin-top:.7rem"><input class="anders-input" id="rev-add-inp" type="text" placeholder="Voeg toe..." onkeydown="if(event.keyCode===13){event.preventDefault();revPillAdd()}"><button class="btn-add-custom anders-add-btn" onclick="revPillAdd()">+ Voeg toe</button></div><div class="anders-hint">Meerdere? Scheid met een punt of + — wij maken er losse pillen van. Toevoegingen komen terug in de volgende stap.</div></div>';
   cfg.container.innerHTML=html;
 }
 function revPillAdd(){ var cfg=_activeRev; if(!cfg) return; var inp=document.getElementById('rev-add-inp'); if(!inp||!inp.value.trim()) return; splitCustomGoals(inp.value).forEach(function(t){ cfg.addCustom(t); }); cfg.sync(); drawReviewPills(); }
@@ -4152,7 +4153,7 @@ function renderMedTermSubStep() {
       + '<input class="anders-input" type="text" id="med-add-inp-' + gi + '" placeholder="Voeg je eigen 3-5 jaar doel toe..." onkeydown="if(event.keyCode===13){event.preventDefault();submitMedOwnCustom(' + gi + ')}">'
       + '<button class="btn-add-custom anders-add-btn" onclick="submitMedOwnCustom(' + gi + ')">+ Voeg optie toe</button>'
     + '</div>'
-    + '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>'
+    + '<div class="anders-hint">Meerdere doelen? Scheid ze met een punt of plus \u2014 wij maken er losse pillen van.</div>'
   + '</div>';
   var navEl = document.getElementById('s4-nav');
   if (navEl) {
@@ -4508,7 +4509,7 @@ function buildJaarCustomPillsHtml(gi, ci) {
         ' onkeydown="if(event.keyCode===13){event.preventDefault();submitJaarCustomChip(' + gi + ',' + ci + ')}">' +
       '<button class="btn-add-custom anders-add-btn" onclick="submitJaarCustomChip(' + gi + ',' + ci + ')">+ Voeg optie toe</button>' +
     '</div>' +
-    '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>' +
+    '<div class="anders-hint">Meerdere doelen? Scheid ze met een punt of plus \u2014 wij maken er losse pillen van.</div>' +
   '</div>';
 }
 
@@ -4711,7 +4712,7 @@ function renderJaarvisieVarB(gi) {
       + '<input class="anders-input" type="text" id="jaar-add-inp-' + gi + '" placeholder="Voeg je eigen jaardoel toe..." onkeydown="if(event.keyCode===13){event.preventDefault();submitJaarOwnCustom(' + gi + ')}">'
       + '<button class="btn-add-custom anders-add-btn" onclick="submitJaarOwnCustom(' + gi + ')">+ Voeg optie toe</button>'
     + '</div>'
-    + '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>'
+    + '<div class="anders-hint">Meerdere doelen? Scheid ze met een punt of plus \u2014 wij maken er losse pillen van.</div>'
   + '</div>';
   var builder = document.getElementById('sjv-builder');
   if (builder) builder.innerHTML = html;
@@ -5647,7 +5648,7 @@ function buildMedCustomPillsHtml(gi, ci) {
         ' onkeydown="if(event.keyCode===13){event.preventDefault();submitMedCustomChip(' + gi + ',' + ci + ')}">' +
       '<button class="btn-add-custom anders-add-btn" onclick="submitMedCustomChip(' + gi + ',' + ci + ')">+ Voeg optie toe</button>' +
     '</div>' +
-    '<div class="anders-hint">Meerdere doelen? Scheid ze met een komma \u2014 wij maken er losse pillen van.</div>' +
+    '<div class="anders-hint">Meerdere doelen? Scheid ze met een punt of plus \u2014 wij maken er losse pillen van.</div>' +
   '</div>';
 }
 
