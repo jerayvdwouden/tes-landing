@@ -5139,20 +5139,54 @@ function updateJdAssembled() {
       + '</div></div>';
   }
 
+  // ── Jaardoel-kaart: nette gelabelde rijen met bolletjes-opsomming ──
+  var area = (selectedGoals[gi] || {}).area || '';
+  if (typeof recomputeDod === 'function') recomputeDod(gi); // zorg dat jd_dod vers is
+  var dodMap = (goalData[gi] || {}).jd_dod || {};
+  var top3 = jaarTop3[gi] || [];
+  var pickedIdx = (typeof dodPickedIdx === 'function') ? dodPickedIdx(gi) : top3.map(function(_, i){ return i; });
+  var bewijsItems = pickedIdx.map(function(i){
+    var item = top3[i]; if (!item) return null;
+    var pKey = dodPKey(item, i); var sub = (dodMap[pKey] || '').trim();
+    return { main: item.text, sub: sub };
+  }).filter(function(x){ return x && (x.main || x.sub); });
+  var whyItems = (whyText || '').split(/\s·\s/).map(function(s){ return s.trim(); }).filter(Boolean);
+  var DOT = '<span style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:7px"></span>';
+
   html += '<div class="jd-tl-item">'
     + '<div class="jd-tl-dot"><div class="jd-tl-diamond"></div></div>'
     + '<div class="jd-tl-goal-card">'
-    + '<div style="font-family:' + SERIF + ';font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Mijn Jaardoel</div>';
+    + '<div style="font-family:' + SERIF + ';font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Mijn Jaardoel' + (area ? ' · ' + jdEsc(area) : '') + '</div>';
 
   if (goalText) {
-    html += '<div style="font-family:' + SERIF + ';font-size:1.2rem;color:var(--white);line-height:1.4;margin-bottom:12px">' + goalText + '</div>';
+    html += '<div style="font-family:' + SERIF + ';font-size:1.2rem;color:var(--white);line-height:1.4;margin-bottom:12px">' + jdEsc(goalText) + '</div>';
   }
 
-  html += '<div style="border-top:1px solid rgba(201,168,76,.18);padding-top:10px;display:flex;flex-direction:column;gap:4px">';
-  html += '<span style="font-size:.78rem;color:var(--muted)">📅 ' + deadline + '</span>';
-  if (bewijs)   html += '<span style="font-size:.78rem;color:var(--muted)">Bewijs: ' + bewijs + '</span>';
-  if (whyText)  html += '<span style="font-size:.78rem;color:var(--muted)">Waarom: ' + whyText + '</span>';
-  html += '</div></div></div>';
+  html += '<div style="display:inline-block;background:rgba(201,168,76,.14);border:1px solid rgba(201,168,76,.4);color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.05em;padding:.34rem .68rem;border-radius:999px;margin-bottom:6px">📅 ' + jdEsc(deadline) + '</div>';
+
+  if (bewijsItems.length) {
+    html += '<div style="border-top:1px solid rgba(201,168,76,.18);padding-top:12px;margin-top:10px">'
+      + '<div style="font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px">Zo weet ik dat ik het heb behaald</div>';
+    bewijsItems.forEach(function(b){
+      html += '<div style="display:flex;gap:.6rem;align-items:flex-start;margin-bottom:9px">' + DOT
+        + '<div style="font-size:.9rem;color:var(--white);line-height:1.35">' + jdEsc(b.main)
+        + (b.sub ? '<span style="display:block;font-size:.78rem;color:var(--muted);margin-top:1px;line-height:1.35">' + jdEsc(b.sub) + '</span>' : '')
+        + '</div></div>';
+    });
+    html += '</div>';
+  }
+
+  if (whyItems.length) {
+    html += '<div style="border-top:1px solid rgba(201,168,76,.18);padding-top:12px;margin-top:8px">'
+      + '<div style="font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px">Waarom dit belangrijk is</div>';
+    whyItems.forEach(function(w){
+      html += '<div style="display:flex;gap:.6rem;align-items:flex-start;margin-bottom:7px">' + DOT
+        + '<span style="font-size:.88rem;color:#e6e0d4;line-height:1.35">' + jdEsc(w) + '</span></div>';
+    });
+    html += '</div>';
+  }
+
+  html += '</div></div>';
 
   html += '</div>';
   el.innerHTML = html;
