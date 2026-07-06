@@ -6001,7 +6001,12 @@ function buildLeadPayload() {
     const prioriteiten = (jaarTop3[gi] || []).map(function(c) { return c.text; });
     return {
       area:  g.area || '',
-      score: ((typeof growthData !== 'undefined' && growthData[g.area] !== undefined) ? growthData[g.area] : (nm.score !== undefined ? nm.score : 0)),
+      score: (function(){
+        var gd = (typeof growthData !== 'undefined') ? growthData[g.area] : undefined;
+        if (typeof gd === 'number' && !isNaN(gd) && gd >= 1) return gd;
+        if (typeof nm.score === 'number' && !isNaN(nm.score) && nm.score >= 1) return nm.score;
+        return 6; // zichtbare standaard — nooit 0 sturen als de schuif niet is aangeraakt
+      })(),
       startpunt: buildNulmetingText(gi),
       keuze: g.text || '',
       v20: v20, v5: v5, v1: v1,
