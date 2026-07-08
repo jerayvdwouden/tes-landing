@@ -21,7 +21,7 @@
 body{background:var(--bg);color:var(--white);font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;min-height:100vh}
 
 .page-wrap{position:relative;min-height:100vh}
-.glow-top{position:fixed;width:700px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%);top:-180px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:0}
+.glow-top{position:fixed;width:min(700px,100vw);height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 65%);top:-180px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:0}
 .noise{position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
 
 .wrap{max-width:700px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
@@ -1358,7 +1358,11 @@ footer p{font-size:.68rem;color:var(--dim)}
       <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:.85rem">
         <div>
           <label class="jd-field-label">Voornaam</label>
-          <input class="jd-input" id="jd-naam" type="text" placeholder="Jouw naam..." oninput="saveJdData()">
+          <input class="jd-input" id="jd-naam" type="text" placeholder="Jouw voornaam..." oninput="saveJdData()">
+        </div>
+        <div>
+          <label class="jd-field-label">Achternaam</label>
+          <input class="jd-input" id="jd-achternaam" type="text" placeholder="Jouw achternaam..." oninput="saveJdData()">
         </div>
         <div>
           <label class="jd-field-label">E-mailadres</label>
@@ -4441,6 +4445,7 @@ function saveMedCustomChip(chipId, gi, newText) {
 
 function goToMedTermReview() {
   const gi = currentGoalIndex;
+  if (!buildMedTermText(gi).trim()) { alert('Kies of vul minstens één punt in voor je 3-5 jaar visie voordat je verder gaat.'); return; }
   document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
   document.getElementById('step-medterm-review').classList.add('active');
   currentStep = 'medterm-review';
@@ -4876,6 +4881,7 @@ function goBackFromJaarvisie() {
 }
 
 function goToJaarvisieReview() {
+  if (!buildJaarvisieText(currentGoalIndex).trim()) { alert('Kies of vul minstens één punt in voor je jaarvisie voordat je verder gaat.'); return; }
   // step-jaarvisie-review is removed from the flow; go directly to top3
   goToTop3();
 }
@@ -5040,6 +5046,7 @@ function initJaardoelBuilder(gi) {
     renderJdWhyCustomPills();
   }
   if (d.jd_naam)    { const el = document.getElementById('jd-naam');       if (el) el.value   = d.jd_naam; }
+  if (d.jd_achternaam) { const el = document.getElementById('jd-achternaam'); if (el) el.value = d.jd_achternaam; }
   if (d.jd_email)   { const el = document.getElementById('jd-email');      if (el) el.value   = d.jd_email; }
   if (d.jd_consent) { const el = document.getElementById('jd-consent-cb'); if (el) el.checked = d.jd_consent; }
   if (d.jd_why_text) { var wta = document.getElementById('jd-why-text'); if(wta) wta.value = d.jd_why_text; }
@@ -5445,6 +5452,7 @@ function saveJdData() {
   d.jd_why_custom = jdWhyCustom.slice();
   d.jd_why_text = (document.getElementById('jd-why-text') || {}).value || '';
   d.jd_naam    = (document.getElementById('jd-naam')       || {}).value   || '';
+  d.jd_achternaam = (document.getElementById('jd-achternaam') || {}).value  || '';
   d.jd_email   = (document.getElementById('jd-email')      || {}).value   || '';
   d.jd_consent = (document.getElementById('jd-consent-cb') || {}).checked || false;
   const allWhy   = [...jdWhySelected, ...jdWhyCustom];
@@ -5457,9 +5465,11 @@ function saveJdData() {
 
 function validateAndGoToReview() {
   var naam  = (document.getElementById('jd-naam')  || {}).value || '';
+  var achternaam = (document.getElementById('jd-achternaam') || {}).value || '';
   var email = (document.getElementById('jd-email') || {}).value || '';
   var cb    = document.getElementById('jd-consent-cb');
-  if (!naam.trim())         { alert('Vul je naam in om door te gaan.'); return; }
+  if (!naam.trim())         { alert('Vul je voornaam in om door te gaan.'); return; }
+  if (!achternaam.trim())   { alert('Vul je achternaam in om door te gaan.'); return; }
   if (!email.includes('@')) { alert('Vul een geldig e-mailadres in.'); return; }
   if (!cb || !cb.checked)   { alert('Je dient akkoord te gaan met de voorwaarden en privacy.'); return; }
   saveJdData();
@@ -5520,7 +5530,8 @@ function openCalendly() {
   const d  = goalData[gi] || {};
   let url  = 'https://calendly.com/jryisahia/new-meeting';
   const params = [];
-  if (d.jd_naam)  params.push('name='  + encodeURIComponent(d.jd_naam));
+  var _fullNaam = ((d.jd_naam || '') + ' ' + (d.jd_achternaam || '')).trim();
+  if (_fullNaam)  params.push('name='  + encodeURIComponent(_fullNaam));
   if (d.jd_email) params.push('email=' + encodeURIComponent(d.jd_email));
   if (params.length) url += '?' + params.join('&');
   window.open(url, '_blank', 'noopener,noreferrer');
@@ -6073,7 +6084,9 @@ function toggleBlocker(el, val) {
 const LEADMAGNET_SERVICE_URL = 'https://tes-leadmagnet.onrender.com/genereer';
 
 function buildLeadPayload() {
-  const naam  = ((document.getElementById('jd-naam')  || document.getElementById('naam')  || {}).value || '').trim();
+  const voornaam   = ((document.getElementById('jd-naam')  || document.getElementById('naam')  || {}).value || '').trim();
+  const achternaam = ((document.getElementById('jd-achternaam') || {}).value || '').trim();
+  const naam  = (voornaam + ' ' + achternaam).trim();
   const email = ((document.getElementById('jd-email') || document.getElementById('email') || {}).value || '').trim();
   const doelen = selectedGoals.map(function(g, gi) {
     const d   = goalData[gi]      || {};
@@ -6101,7 +6114,7 @@ function buildLeadPayload() {
       prioriteiten: prioriteiten
     };
   });
-  return { naam: naam, email: email, doelen: doelen };
+  return { naam: naam, voornaam: voornaam, achternaam: achternaam, email: email, doelen: doelen };
 }
 
 function submitAndNext() {
