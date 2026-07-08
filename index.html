@@ -282,6 +282,11 @@ h1 em{font-style:normal;color:var(--gold)}
 .btn-skip{background:transparent;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;padding:.4rem 0;font-family:inherit;transition:color .15s}
 .btn-skip:hover{color:var(--white)}
 
+/* ── Prominente jaartal-badge per visie-stap ─────────────────── */
+.yr-badge{display:flex;align-items:center;justify-content:center;gap:.5rem;border-radius:12px;padding:.7rem 1rem;margin:0 auto 1rem;max-width:340px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;font-size:1rem;line-height:1.1;text-align:center}
+.yr-badge.yr-10{background:rgba(176,176,192,.14);border:1.5px solid rgba(176,176,192,.55);color:#b0b0c0}
+.yr-badge.yr-5{background:rgba(212,170,96,.14);border:1.5px solid rgba(212,170,96,.6);color:#d4aa60}
+.yr-badge.yr-1{background:rgba(201,168,76,.16);border:1.5px solid rgba(201,168,76,.7);color:var(--gold)}
 /* ── Vision sub-stap dots ────────────────────────────────────── */
 .vs-dots-row{display:flex;gap:.4rem;justify-content:center;margin-bottom:1rem}
 .vs-dot{width:6px;height:6px;border-radius:50%;background:var(--border2);transition:all .22s}
@@ -1168,6 +1173,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 
   <!-- STEP 3: Lange termijn visie (per doel, sub-stappen per categorie) -->
   <div class="step" id="step-3">
+    <div class="yr-badge yr-10">🔭 Over 10 – 20 jaar</div>
     <div class="step-q" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Waar sta jij over 10 tot 20 jaar?<button class="step-help-btn" onclick="toggleStepHelp('shp-vision')">?</button></div>
     <div class="step-label" id="vision-sublabel" style="text-align:center;margin-top:.5rem">Jouw visie</div>
     <div class="vs-dots-row" id="vs-dots"></div>
@@ -1196,6 +1202,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <!-- STEP 4: 3-5 jaar (per doel, 3 vragen) -->
   <div class="step" id="step-4">
     <div class="goal-loop-indicator" id="s4-indicator"></div>
+    <div class="yr-badge yr-5">🎯 Over 3 – 5 jaar</div>
     <div class="step-q" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Wat bereik jij de komende 3 tot 5 jaar?<button class="step-help-btn" onclick="toggleStepHelp('shp-4')">?</button></div>
     <div class="step-label" id="s4-label" style="text-align:center;margin-top:.5rem">3 tot 5 jaar</div>
     <div class="step-help-popup" id="shp-4">Hier zie je de doelen die je net invulde voor 10-20 jaar. Vul nu je 3-5 jaar tussenresultaten in — pas de getallen aan.<div class="step-video-ph">▶ Video volgt hier</div></div>
@@ -1228,6 +1235,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <!-- STEP JAARVISIE: jaardoel chip-selectie (per doel, per categorie) -->
   <div class="step" id="step-jaarvisie">
     <div class="goal-loop-indicator" id="sjv-indicator"></div>
+    <div class="yr-badge yr-1">⭐ Dit jaar — 1 jaar</div>
     <div class="step-q" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Wat wil jij dit jaar bereiken?<button class="step-help-btn" onclick="toggleStepHelp('shp-jv')">?</button></div>
     <div class="step-label" id="sjv-label" style="text-align:center;margin-top:.5rem">Jouw jaardoel</div>
     <div class="vs-dots-row" id="jv-dots"></div>
@@ -1374,7 +1382,7 @@ footer p{font-size:.68rem;color:var(--dim)}
       <div id="jd-full-review" style="margin-top:.75rem"></div>
       <div class="step-nav" style="margin-top:1.25rem">
         <button class="btn-back" onclick="nextJdStep(3)">← Terug</button>
-        <button class="btn-next" onclick="nextJdStep(4)">Stuur mijn visie &amp; jaardoel op →</button>
+        <button class="btn-next" id="jd-review-next-btn" onclick="jdReviewNext()">Stuur mijn visie &amp; jaardoel op →</button>
       </div>
     </div>
   </div>
@@ -4902,9 +4910,31 @@ function nextJdStep(n) {
   document.querySelectorAll('.jd-dot').forEach(function(dot, i){
     dot.classList.toggle('active', i < dotCount);
   });
-  if (n === 'review') updateJdAssembled();
+  if (n === 'review') { updateJdAssembled(); updateJdReviewNextBtn(); }
   saveJdData();
   navScroll();
+}
+
+function updateJdReviewNextBtn() {
+  var btn = document.getElementById('jd-review-next-btn');
+  if (!btn) return;
+  if (currentGoalIndex < selectedGoals.length - 1) {
+    var ng = selectedGoals[currentGoalIndex + 1] || {};
+    var naam = (typeof jdEsc === 'function') ? jdEsc(ng.area || ng.text || 'volgende') : (ng.area || ng.text || 'volgende');
+    btn.innerHTML = 'Door naar doel ' + (currentGoalIndex + 2) + ': ' + naam + ' →';
+  } else {
+    btn.innerHTML = 'Stuur mijn visie &amp; jaardoel op →';
+  }
+}
+
+function jdReviewNext() {
+  saveJdData();
+  if (currentGoalIndex < selectedGoals.length - 1) {
+    currentGoalIndex++;
+    goToStep(3);
+  } else {
+    nextJdStep(4);
+  }
 }
 
 function resolveAreaKey(gi) {
