@@ -1756,9 +1756,7 @@ const goalsByArea = {
   ],
   'Persoonlijke groei & Skills': [
     {icon:'i-brain', text:'Een nieuwe, concrete vaardigheid leren'},
-    {icon:'i-moon',  text:'Meer structuur en rust in mijn hoofd'},
     {icon:'i-book',  text:'Meer lezen en kennis opdoen'},
-    {icon:'i-star',  text:'Weten wat mijn volgende grote stap is'},
   ],
   'Spiritualiteit & Geloof': [
     {icon:'i-moon',  text:'Dagelijkse rust inbouwen in mijn routine'},
@@ -1817,6 +1815,7 @@ const visionChips = {
       { id:'ca10', tpl:'Ik werk vanuit {locatie}.', fields:[{key:'locatie',ph:'thuis / Barcelona / Bali',wide:true}] },
     ]},
     { label: 'Bedrijf & Klanten', chips: [
+      { id:'ca11b', tpl:'Ik heb mijn eigen {soort} bedrijf opgezet.', fields:[{key:'soort',ph:'webdesign / coaching / horeca',wide:true}] },
       { id:'ca11', tpl:'Ik heb {X} vaste klanten.', fields:[{key:'X',ph:'20',wide:false}] },
       { id:'ca12', tpl:'Mijn bedrijf heeft {X} medewerkers.', fields:[{key:'X',ph:'5',wide:false}] },
       { id:'ca13', tpl:'Ik heb {X}+ mensen geholpen met {resultaat}.', fields:[{key:'X',ph:'500',wide:false},{key:'resultaat',ph:'hun doelen bereiken',wide:true}] },
@@ -1883,7 +1882,8 @@ const visionChips = {
       { id:'pg4', tpl:'Ik heb een certificaat of diploma behaald in {vakgebied}.', fields:[{key:'vakgebied',ph:'jouw vakgebied',wide:true}] },
     ]},
     { label: 'Vaardigheden', chips: [
-      { id:'pg5', tpl:'Ik beheers {skill} op hoog niveau.', fields:[{key:'skill',ph:'jouw skill',wide:true}] },
+      { id:'pg5', tpl:'Ik beheers {skill} op {niveau} niveau.', fields:[{key:'skill',ph:'jouw skill',wide:true},{key:'niveau',ph:'hoog / pro',wide:false}] },
+      { id:'pg5b', tpl:'Ik bespeel {instrument}.', fields:[{key:'instrument',ph:'piano / gitaar / viool',wide:true}] },
       { id:'pg6', tpl:'Ik geef trainingen of workshops over {onderwerp}.', fields:[{key:'onderwerp',ph:'jouw onderwerp',wide:true}] },
       { id:'pg7', tpl:'Ik heb mijn eigen methode ontwikkeld voor {onderwerp}.', fields:[{key:'onderwerp',ph:'productiviteit',wide:true}] },
     ]},
@@ -1895,7 +1895,7 @@ const visionChips = {
   ]},
   'Spiritualiteit & Geloof': { categories: [
     { label: 'Dagelijkse praktijk', chips: [
-      { id:'sp1', tpl:'Ik bid of mediteer elke dag {min} minuten.', fields:[{key:'min',ph:'20',wide:false}] },
+      { id:'sp1', tpl:'Ik {activiteit} elke dag {min} minuten.', fields:[{key:'activiteit',ph:'bid / mediteer',wide:false},{key:'min',ph:'20',wide:false}] },
       { id:'sp2', tpl:'Ik begin elke dag met {ritueel}.', fields:[{key:'ritueel',ph:'stilte / gebed / dankbaarheid',wide:true}] },
       { id:'sp3', tpl:'Ik lees {X}x per week in {bron}.', fields:[{key:'X',ph:'5',wide:false},{key:'bron',ph:'de Bijbel / de Koran / de Torah',wide:true}] },
     ]},
@@ -2543,6 +2543,7 @@ const JD_WHY_BY_AREA = {
   groei:       [{label:'🌱 Blijven groeien',value:'Blijven groeien'},{label:'💪 Bewijzen aan mezelf',value:'Bewijzen aan mezelf'},{label:'🚀 Meer kansen creëren',value:'Meer kansen creëren'},{label:'🏆 Mijn potentieel benutten',value:'Mijn potentieel benutten'},{label:'😊 Voldoening voelen',value:'Voldoening voelen'}],
   bijdrage:    [{label:'🌍 Impact maken',value:'Impact maken'},{label:'❤️ Anderen helpen',value:'Anderen helpen'},{label:'🚀 Iets betekenisvols achterlaten',value:'Iets betekenisvols achterlaten'},{label:'💪 Trots zijn op mijn bijdrage',value:'Trots zijn op mijn bijdrage'},{label:'😊 Voldoening & purpose',value:'Voldoening en purpose'}],
   avontuur:    [{label:'🌟 Meer van het leven genieten',value:'Meer van het leven genieten'},{label:'⚡ Voelen dat ik leef',value:'Voelen dat ik leef'},{label:'🗺️ Nieuwe ervaringen opdoen',value:'Nieuwe ervaringen opdoen'},{label:'💪 Grenzen verleggen',value:'Grenzen verleggen'},{label:'👨‍👩‍👧 Herinneringen maken',value:'Herinneringen maken'}],
+  spiritualiteit: [{label:'🕊️ Innerlijke rust',value:'Innerlijke rust'},{label:'🙏 Mijn geloof verdiepen',value:'Mijn geloof verdiepen'},{label:'🧭 Leven vanuit mijn waarden',value:'Leven vanuit mijn waarden'},{label:'💛 Meer dankbaarheid',value:'Meer dankbaarheid'},{label:'🌱 Innerlijke groei',value:'Innerlijke groei'}],
   default:     [{label:'💸 Financiële vrijheid',value:'Financiële vrijheid'},{label:'👨‍👩‍👧 Voor mijn gezin',value:'Voor mijn gezin'},{label:'❤️ Meer energie & gezondheid',value:'Meer energie en gezondheid'},{label:'🚀 Meer impact maken',value:'Meer impact maken'},{label:'💪 Mezelf bewijzen',value:'Mezelf bewijzen en groeien'}],
 };
 
@@ -3726,7 +3727,7 @@ var goalCategoryFilter = {
   'Dieper contact met mijn partner': ['Partnerrelatie'],
   'Hechtere en diepere vriendschappen': ['Vriendschappen'],
   'Meer echte verbinding in mijn sociale leven': ['Vriendschappen','Netwerk & Community'],
-  'Meer aanwezig zijn voor mijn gezin': ['Kinderen & Gezin','Ouders & Familie'],
+  'Meer aanwezig zijn voor mijn gezin': ['Kinderen & Gezin'],
   'Meer kwaliteitstijd met mijn kinderen': ['Kinderen & Gezin'],
   'Betere relatie met mijn ouders of familie': ['Ouders & Familie']
 };
@@ -3766,7 +3767,7 @@ function renderVisionSubStep() {
     var backFn = visionSubIdx === 0 ? "goToStep(2)" : "prevVisionSubStep()";
     var anySel = chips.some(function(c){ return !!selectedChips[gi][c.id]; }) || ((visionCustomChips[gi] && visionCustomChips[gi][ci]) ? visionCustomChips[gi][ci].some(function(c){ return c.checked !== false; }) : false);
     navEl.innerHTML = '<button class="btn-back" onclick="' + backFn + '">\u2190 Terug</button>' +
-      (isLast ? '<button class="btn-next" onclick="goToVisionReview()">Volgende stap \u2192</button>'
+      (isLast ? '<button class="btn-next" onclick="goToVisionReviewValidated()">Volgende stap \u2192</button>'
               : '<button class="btn-next" onclick="nextVisionSub()">' + (anySel ? 'Volgende \u2192' : 'Niets hier \u2192') + '</button>');
   }
 }
@@ -4211,7 +4212,9 @@ function renderMedTermSubStep() {
 function buildMedItemHtml(gi, chip) {
   var _ov=(medTextOverrides[gi]||{})[chip.id];
   if(_ov!==undefined && _ov!==null) return '<div>'+escHtml(_ov)+'</div>';
-  var saved = (selectedMedChips[gi] || {})[chip.id] || {};
+  // Neem ingevulde waarden uit de 10-20 visie over als basis (med-waarden gaan er overheen).
+  var visVals = (selectedChips[gi] || {})[chip.id] || {};
+  var saved = Object.assign({}, visVals, (selectedMedChips[gi] || {})[chip.id] || {});
   var tpl = chip.tpl || chip._text || '';
   var re = /\{([^}]+)\}/g, out = '', last = 0, m;
   while ((m = re.exec(tpl))) {
@@ -4843,18 +4846,13 @@ function skipJaarSub() {
 
 function goToJaarvisie() {
   jaarvisieSubIdx = 0;
-  showFsIntroDouble(
-    '✨', 'Jouw Visie Is Compleet', 'Jouw 10-20 jaar en 3-5 jaar visie zijn helder.',
-    '🏆', 'Nu Stellen We Jouw Jaardoel Op', 'Een concreet doel dat je dit jaar daadwerkelijk gaat behalen.',
-    function() {
-      document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
-      document.getElementById('step-jaarvisie').classList.add('active');
-      currentStep = 'jaarvisie';
-      updateProgressBar('jaarvisie');
-      renderJaarvisieSubStep();
-      navScroll();
-    }
-  );
+  // "Jouw Visie Is Compleet"-animatie bewust verwijderd — direct door naar de jaarvisie.
+  document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('step-jaarvisie').classList.add('active');
+  currentStep = 'jaarvisie';
+  updateProgressBar('jaarvisie');
+  renderJaarvisieSubStep();
+  navScroll();
 }
 
 function goBackFromJaarvisie() {
@@ -4918,6 +4916,7 @@ function resolveAreaKey(gi) {
   if (area.includes('groei') || area.includes('leren') || area.includes('ontwikkel') || area.includes('mindset')) return 'groei';
   if (area.includes('bijdrage') || area.includes('impact') || area.includes('community')) return 'bijdrage';
   if (area.includes('avontuur') || area.includes('reizen') || area.includes('ervaring')) return 'avontuur';
+  if (area.includes('spiritu') || area.includes('geloof') || area.includes('zingev')) return 'spiritualiteit';
   return 'default';
 }
 
@@ -5741,6 +5740,19 @@ function prevVrSub() {
   navScroll();
 }
 
+function visionHasAnySelection(gi){
+  var sc = selectedChips[gi] || {};
+  if (Object.keys(sc).length > 0) return true;
+  var cc = visionCustomChips[gi] || {};
+  return Object.keys(cc).some(function(ci){ return (cc[ci] || []).some(function(c){ return c.checked !== false; }); });
+}
+function goToVisionReviewValidated(){
+  if (!visionHasAnySelection(currentGoalIndex)) {
+    alert('Kies minstens één punt voor je visie voordat je verder gaat.');
+    return;
+  }
+  goToVisionReview();
+}
 function goToVisionReview() {
   hideCurrentStep();
   vrSubIdx = currentGoalIndex;
