@@ -631,6 +631,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 .jd-input.jd-filled{animation:jdFillPulse .55s ease forwards}
 .jd-input::placeholder{color:var(--muted)}
 .jd-chips-row,.jd-proof-chips,.jd-why-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.1rem}
+#jd-wat-chips{flex-direction:column;align-items:stretch;gap:0}
 .jd-chip{border:1px solid var(--border);border-radius:20px;padding:.4rem .85rem;font-size:.79rem;color:var(--muted);cursor:pointer;transition:all .18s;background:var(--bg2);line-height:1.4;user-select:none}
 .jd-chip:hover{border-color:var(--border2);color:var(--white)}
 .jd-chip.selected{border-color:var(--gold);background:rgba(201,168,76,.1);color:var(--white)}
@@ -4935,8 +4936,10 @@ function initJaardoelBuilder(gi) {
     if (top3.length > 0) {
       const icons = ['🥇','🥈','🥉'];
       watEl.innerHTML = top3.map((item, i) =>
-        '<div class="jd-chip wat-chip' + (i === 0 ? ' selected' : '') + '"' +
-        ' data-widx="' + i + '" onclick="toggleJdWat(this,' + gi + ')">' + icons[i] + ' ' + item.text + '</div>'
+        '<div class="chk-row wat-chip' + (i === 0 ? ' on' : '') + '" data-widx="' + i + '" onclick="toggleJdWat(this,' + gi + ')" style="cursor:pointer">' +
+          '<button type="button" class="chk-box" tabindex="-1" aria-hidden="true">' + (i === 0 ? '✓' : '') + '</button>' +
+          '<div class="chk-body">' + icons[i] + ' ' + item.text + '</div>' +
+        '</div>'
       ).join('');
       // pre-select first item
       jdWatSelected = [0];
@@ -4949,9 +4952,9 @@ function initJaardoelBuilder(gi) {
   const dlEl = document.getElementById('jd-deadline');
   if (dlEl) dlEl.textContent = '📅 ' + jdDeadlineText();
 
-  // Goal text pre-fill from prio #1
+  // Goal text NIET voorinvullen (verwarrend) — toon de #1 prioriteit als placeholder/suggestie.
   const goalInp = document.getElementById('jd-goal-text');
-  if (goalInp && top3[0]) { goalInp.value = top3[0].text; autoGrow(goalInp); }
+  if (goalInp && top3[0]) { goalInp.value = ''; goalInp.placeholder = top3[0].text; autoGrow(goalInp); }
 
   // BEWIJS suggestie-chips (contextual)
   const bewijsChipsEl = document.getElementById('jd-bewijs-chips');
@@ -4979,11 +4982,14 @@ function initJaardoelBuilder(gi) {
   if (d.jd_bewijs)    { const el = document.getElementById('jd-bewijs');    if (el) el.value = d.jd_bewijs; }
   if (d.jd_wat_selected) {
     jdWatSelected = d.jd_wat_selected.slice();
-    document.querySelectorAll('#jd-wat-chips .jd-chip').forEach(el => {
-      el.classList.toggle('selected', jdWatSelected.includes(+el.dataset.widx));
+    document.querySelectorAll('#jd-wat-chips .wat-chip').forEach(el => {
+      var on = jdWatSelected.includes(+el.dataset.widx);
+      el.classList.toggle('on', on);
+      var b = el.querySelector('.chk-box'); if (b) b.textContent = on ? '✓' : '';
     });
   }
   renderJdDodFields(gi); // ná herstel van de jaardoel-keuze, zodat DOD exact die keuze volgt
+  recomputeDod(gi);      // standaard voorgevinkte DOD ook meteen in de data zetten
   if (d.jd_why) {
     jdWhySelected = d.jd_why.slice();
     document.querySelectorAll('#jd-why-chips .jd-chip').forEach(el => {
@@ -5052,13 +5058,11 @@ function updateJdBewijsMulti(changedInp) {
 function toggleJdWat(el, gi) {
   const idx = +el.dataset.widx;
   const pos = jdWatSelected.indexOf(idx);
-  if (pos !== -1) {
-    jdWatSelected.splice(pos, 1);
-    el.classList.remove('selected');
-  } else {
-    jdWatSelected.push(idx);
-    el.classList.add('selected');
-  }
+  const on = pos === -1;
+  if (!on) { jdWatSelected.splice(pos, 1); }
+  else { jdWatSelected.push(idx); }
+  el.classList.toggle('on', on);
+  var _box = el.querySelector('.chk-box'); if (_box) _box.textContent = on ? '✓' : '';
   const top3 = jaarTop3[gi !== undefined ? gi : currentGoalIndex] || [];
   const goalInp = document.getElementById('jd-goal-text');
   if (goalInp) {
@@ -5277,6 +5281,8 @@ function renderJdDodFields(gi){
   host.innerHTML=idxs.map(function(i){
     var item=top3[i];
     var pKey=dodPKey(item,i); var sugg=dodSugg(gi,item); var pvals=dodPriorityVals(gi,item);
+    // Standaard alvast de eerste manier voorvinken (alleen als nog niet aangeraakt)
+    if(!jdDodPicks[gi][pKey] && sugg.length){ jdDodPicks[gi][pKey]={}; jdDodPicks[gi][pKey][pKey+'#0']=true; }
     var picks=(jdDodPicks[gi][pKey]||{});
     var rows=sugg.map(function(sg, oi){
       var optId=pKey+'#'+oi; var on=!!picks[optId];
@@ -5390,6 +5396,11 @@ function saveJdData() {
   const d = goalData[gi];
   d.jd_wat_selected = jdWatSelected.slice();
   d.jd_goal_text = (document.getElementById('jd-goal-text') || {}).value || '';
+  if (!d.jd_goal_text) {
+    var _t3 = jaarTop3[currentGoalIndex] || [];
+    var _sel = (jdWatSelected && jdWatSelected.length ? jdWatSelected : [0]).map(function(i){ return (_t3[i] || {}).text; }).filter(Boolean);
+    if (_sel.length) d.jd_goal_text = _sel.join(' + ');
+  }
   d.jd_bewijs    = (document.getElementById('jd-bewijs')    || {value: d.jd_bewijs || ''}).value || '';
   d.jd_why       = jdWhySelected.slice();
   d.jd_why_custom = jdWhyCustom.slice();
