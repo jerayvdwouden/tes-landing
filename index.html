@@ -1198,7 +1198,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="step-label" id="vr-sublabel">Jouw 10-20 jaar visie</div>
     <div class="vs-dots-row" id="vr-dots"></div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Hier is wat je zojuist hebt opgebouwd<button class="step-help-btn" onclick="toggleStepHelp('shp-vr')">?</button></div>
-    <div class="step-help-popup" id="shp-vr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph has-vid" data-vid="9c227df7-e291-43df-a708-2d3c3d93c01a">▶ Tik voor de video</div></div>
+    <div class="step-help-popup" id="shp-vr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph">▶ Video volgt hier</div></div>
     <div id="vr-cards"></div>
     <div class="step-nav" id="vr-nav">
       <button class="btn-back" onclick="goToStep(3)">← Terug</button>
@@ -1230,7 +1230,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <div class="step" id="step-medterm-review">
     <div class="step-label" id="mtr-sublabel">Jouw 3-5 jaar visie</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Hier is wat je zojuist hebt opgebouwd<button class="step-help-btn" onclick="toggleStepHelp('shp-mtr')">?</button></div>
-    <div class="step-help-popup" id="shp-mtr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph has-vid" data-vid="81be5449-dcc9-4290-8094-5e3b211c34da">▶ Tik voor de video</div></div>
+    <div class="step-help-popup" id="shp-mtr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph">▶ Video volgt hier</div></div>
     <div id="mtr-cards"></div>
     <div class="step-nav" id="mtr-nav">
       <button class="btn-back" onclick="goBackFromMedTermReview()">← Terug</button>
@@ -1720,7 +1720,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <div id="fs-intro-icon" style="font-size:3rem;margin-bottom:1.2rem"></div>
   <div id="fs-intro-title" style="font-family:'Abolition',serif;font-size:2rem;letter-spacing:.06em;text-transform:uppercase;color:#c9a84c;margin-bottom:.75rem"></div>
   <div id="fs-intro-sub" style="font-size:.9rem;color:#a0a0a0;max-width:280px;line-height:1.65;margin-bottom:1.5rem"></div>
-  <div class="step-video-ph has-vid" style="width:100%;max-width:320px;margin-bottom:1.2rem"><div style="position:relative;width:100%;padding-top:56.25%"><iframe src="https://iframe.mediadelivery.net/embed/692336/b4f3089f-a0d0-4498-a56a-c55ca360eed1?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div></div>
+  <div id="fs-intro-vid" style="width:100%;max-width:320px;margin-bottom:1.2rem;display:none"></div>
   <div style="font-size:.72rem;color:#555;letter-spacing:.08em">TIKT OM DOOR TE GAAN</div>
 </div>
 <!-- FOOTER -->
@@ -2802,12 +2802,24 @@ function showTransition(text, callback) {
 var _fsIntroTimer = null;
 var _fsDouble = null;
 
-function showFsIntro(icon, title, sub, onDone) {
+function setFsIntroVideo(guid){
+  var vid = document.getElementById('fs-intro-vid');
+  if (!vid) return;
+  if (guid) {
+    vid.style.display = 'block';
+    vid.innerHTML = '<div style="position:relative;width:100%;padding-top:56.25%"><iframe src="https://iframe.mediadelivery.net/embed/692336/' + guid + '?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>';
+  } else {
+    vid.style.display = 'none';
+    vid.innerHTML = '';
+  }
+}
+function showFsIntro(icon, title, sub, onDone, guid) {
   var el = document.getElementById('fs-intro-overlay');
   if (!el) { if (onDone) onDone(); return; }
   document.getElementById('fs-intro-icon').textContent  = icon;
   document.getElementById('fs-intro-title').textContent = title;
   document.getElementById('fs-intro-sub').textContent   = sub;
+  setFsIntroVideo(guid);
   el.style.display = 'flex';
   el._onDone = onDone;
   el.style.opacity = '0';
@@ -2838,6 +2850,7 @@ function dismissFsIntro() {
   el._onDone = null;
   setTimeout(function(){
     el.style.display = 'none';
+    setFsIntroVideo(null);
     if (cb) cb();
   }, 350);
 }
@@ -2849,6 +2862,7 @@ function showFsIntroDouble(icon1, title1, sub1, icon2, title2, sub2, onDone) {
   document.getElementById('fs-intro-icon').textContent  = icon1;
   document.getElementById('fs-intro-title').textContent = title1;
   document.getElementById('fs-intro-sub').textContent   = sub1;
+  setFsIntroVideo(null);
   el.style.display = 'flex';
   el._onDone = onDone;
   _fsDouble = { phase: 1, icon2: icon2, title2: title2, sub2: sub2 };
@@ -3192,7 +3206,7 @@ function goToStep(n) {
       if (stepEl) stepEl.classList.add('active');
       updateProgressBar(3);
       scrollTopKeep();
-    });
+    }, '9c227df7-e291-43df-a708-2d3c3d93c01a');
     return;
   }
   if (n === 4) {
@@ -3204,7 +3218,7 @@ function goToStep(n) {
       if (stepEl) stepEl.classList.add('active');
       updateProgressBar(4);
       scrollTopKeep();
-    });
+    }, '81be5449-dcc9-4290-8094-5e3b211c34da');
     return;
   }
   if (n === 5) {
@@ -3253,7 +3267,7 @@ function showGesprekStep() {
     document.getElementById('step-gesprek').classList.add('active');
     updateProgressBar('gesprek');
     scrollTopKeep();
-  });
+  }, 'b4f3089f-a0d0-4498-a56a-c55ca360eed1');
 }
 
 function goalStepBack(step) {
