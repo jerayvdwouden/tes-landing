@@ -204,6 +204,7 @@ h1 em{font-style:normal;color:var(--gold)}
 .step-help-popup{position:absolute;z-index:9999;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;font-size:.8rem;color:var(--muted);line-height:1.65;display:none;box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:280px;width:max-content}
 .step-help-popup.shp-active{display:block}
 .step-video-ph{width:100%;background:var(--bg);border:1px dashed var(--border2);border-radius:8px;height:4.5rem;display:flex;align-items:center;justify-content:center;font-size:.73rem;color:var(--border2);margin-top:.6rem}
+.step-video-ph.has-vid{height:auto;min-height:0;border:none;background:transparent;padding:0;color:var(--gold);cursor:pointer;display:block;text-align:center}
 
 /* area chips */
 .area-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.75rem}
@@ -1094,7 +1095,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     </div>
     <div class="step-label">Ontdek jouw doelen · 1 van 3</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Wat is voor jou nu het meest waardevol?<button class="step-help-btn" onclick="toggleStepHelp('shp-1a')">?</button></div>
-    <div class="step-help-popup" id="shp-1a">Selecteer de gebieden die er voor jou écht toe doen. Je kiest straks op welk onderdeel je een concreet doel stelt.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-1a">Selecteer de gebieden die er voor jou écht toe doen. Je kiest straks op welk onderdeel je een concreet doel stelt.<div class="step-video-ph has-vid" data-vid="ca809012-813a-4869-87ed-897c8afca219">▶ Tik voor de video</div></div>
     <div class="imp-grid" id="imp-grid">
       <div class="imp-chip" data-color="#e05252" onclick="toggleImpChip(this,'Gezondheid &amp; Fysiek')"><div class="imp-chip-icon"><svg><use href="#i-heart"/></svg></div><div class="imp-chip-label">Gezondheid &amp; Fysiek</div></div>
       <div class="imp-chip" data-color="#60A5FA" onclick="toggleImpChip(this,'Carrière')"><div class="imp-chip-icon"><svg><use href="#i-trending"/></svg></div><div class="imp-chip-label">Carrière</div></div>
@@ -1117,7 +1118,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     </div>
     <div class="step-label">Ontdek jouw doelen · 2 van 3</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Hoe staat het er voor?<button class="step-help-btn" onclick="toggleStepHelp('shp-1b')">?</button></div>
-    <div class="step-help-popup" id="shp-1b">Geef per gebied een eerlijk beeld — dit helpt ons straks een aanbeveling te doen.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-1b">Geef per gebied een eerlijk beeld — dit helpt ons straks een aanbeveling te doen.<div class="step-video-ph has-vid" data-vid="509b2567-77f6-42f8-a7ef-3062ff749949">▶ Tik voor de video</div></div>
     <div id="growth-cards"></div>
     <div class="step-nav">
       <button class="btn-back" onclick="goToStep1a()">← Terug</button>
@@ -1134,7 +1135,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     </div>
     <div class="step-label">Ontdek jouw doelen · 3 van 3</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Op welk gebied stel je jouw doel?<button class="step-help-btn" onclick="toggleStepHelp('shp-1c')">?</button></div>
-    <div class="step-help-popup" id="shp-1c">Je kunt maximaal 2 gebieden kiezen.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-1c">Je kunt maximaal 2 gebieden kiezen.<div class="step-video-ph has-vid" data-vid="fedbd458-5f37-41d5-a2dc-9a84b053fbd4">▶ Tik voor de video</div></div>
     <div id="s1-recommendation"></div>
     <div class="area-grid" id="area-grid">
       <div class="area-chip cc-rd" onclick="toggleArea(this,'Gezondheid &amp; Fysiek')"><div class="ai"><svg><use href="#i-heart"/></svg></div><div class="al">Gezondheid &amp; Fysiek</div></div>
@@ -1154,7 +1155,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <div class="step" id="step-nulmeting">
     <div class="step-label">Jouw startpunt</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Waar sta je nu?<button class="step-help-btn" onclick="toggleStepHelp('shp-nulmeting')">?</button></div>
-    <div class="step-help-popup" id="shp-nulmeting">Een eerlijk beeld van waar je nu staat, zodat je straks kunt zien hoeveel je hebt gegroeid.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-nulmeting">Een eerlijk beeld van waar je nu staat, zodat je straks kunt zien hoeveel je hebt gegroeid.<div class="step-video-ph has-vid" data-vid="acbe3970-eb7b-4f1a-8410-30572e21c0e3">▶ Tik voor de video</div></div>
     <div id="nulmeting-areas"></div>
     <div class="step-nav">
       <button class="btn-back" onclick="goToStep(2)">← Terug</button>
@@ -1167,7 +1168,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div id="s2-area-indicator"></div>
     <div class="step-label" id="s2-label">Jouw doelen</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Wat wil jij bereiken?<button class="step-help-btn" onclick="toggleStepHelp('shp-2')">?</button></div>
-    <div class="step-help-popup" id="shp-2">Selecteer het doel dat jou het meest aanspreekt voor dit gebied.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-2">Selecteer het doel dat jou het meest aanspreekt voor dit gebied.<div class="step-video-ph has-vid" data-vid="0f8af5a8-4eb3-4c0a-ad36-e38fa4e17352">▶ Tik voor de video</div></div>
     <div id="goal-counter" style="font-size:.75rem;color:var(--muted);text-align:right;margin-bottom:.5rem">Nog geen doel gekozen</div>
     <div class="goal-grid" id="goal-grid">
       <!-- dynamisch ingevuld via JS -->
@@ -1183,7 +1184,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="yrbox o1 s shine"><button class="qmark" onclick="toggleStepHelp('shp-vision')">?</button><div class="yrq">Waar sta jij over <span class="n">10 tot 20 jaar</span>?</div></div>
     <div class="step-label" id="vision-sublabel" style="display:none">Jouw visie</div>
     <div class="vs-dots-row" id="vs-dots"></div>
-    <div class="step-help-popup" id="shp-vision">Klik op de zinnen die bij jou passen. Pas de getallen of woorden aan naar jouw situatie.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-vision">Klik op de zinnen die bij jou passen. Pas de getallen of woorden aan naar jouw situatie.<div class="step-video-ph has-vid" data-vid="e01f45cd-befa-42e9-bba1-a8b982880624">▶ Tik voor de video</div></div>
     <div id="vision-chip-grid"></div>
     <div class="vision-composed-section" id="vision-composed-section" style="display:none">
       <div class="composed-label">Jouw visie tot nu toe</div>
@@ -1197,7 +1198,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="step-label" id="vr-sublabel">Jouw 10-20 jaar visie</div>
     <div class="vs-dots-row" id="vr-dots"></div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Hier is wat je zojuist hebt opgebouwd<button class="step-help-btn" onclick="toggleStepHelp('shp-vr')">?</button></div>
-    <div class="step-help-popup" id="shp-vr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-vr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph has-vid" data-vid="9c227df7-e291-43df-a708-2d3c3d93c01a">▶ Tik voor de video</div></div>
     <div id="vr-cards"></div>
     <div class="step-nav" id="vr-nav">
       <button class="btn-back" onclick="goToStep(3)">← Terug</button>
@@ -1210,7 +1211,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="goal-loop-indicator" id="s4-indicator"></div>
     <div class="yrbox o1 b shine"><button class="qmark" onclick="toggleStepHelp('shp-4')">?</button><div class="yrq">Wat bereik jij de komende <span class="n">3 tot 5 jaar</span>?</div></div>
     <div class="step-label" id="s4-label" style="display:none">3 tot 5 jaar</div>
-    <div class="step-help-popup" id="shp-4">Hier zie je de doelen die je net invulde voor 10-20 jaar. Vul nu je 3-5 jaar tussenresultaten in — pas de getallen aan.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-4">Hier zie je de doelen die je net invulde voor 10-20 jaar. Vul nu je 3-5 jaar tussenresultaten in — pas de getallen aan.<div class="step-video-ph has-vid" data-vid="65fe17a8-c60e-47bb-ba78-d7ba1c3523e9">▶ Tik voor de video</div></div>
     <div class="vision-context" id="s4-context">
       <button type="button" class="ctx-toggle" onclick="toggleCtx('s4-ctx-body',this)">Bekijk je 10-20-jaarvisie <span class="ctx-caret">▾</span></button>
       <div class="ctx-body" id="s4-ctx-body"><span id="s4-longterm-text">—</span></div>
@@ -1229,7 +1230,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <div class="step" id="step-medterm-review">
     <div class="step-label" id="mtr-sublabel">Jouw 3-5 jaar visie</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Hier is wat je zojuist hebt opgebouwd<button class="step-help-btn" onclick="toggleStepHelp('shp-mtr')">?</button></div>
-    <div class="step-help-popup" id="shp-mtr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-mtr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph has-vid" data-vid="81be5449-dcc9-4290-8094-5e3b211c34da">▶ Tik voor de video</div></div>
     <div id="mtr-cards"></div>
     <div class="step-nav" id="mtr-nav">
       <button class="btn-back" onclick="goBackFromMedTermReview()">← Terug</button>
@@ -1243,7 +1244,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="yrbox o1 g shine"><button class="qmark" onclick="toggleStepHelp('shp-jv')">?</button><div class="yrq">Wat wil jij <span class="n">dit jaar</span> bereiken?</div></div>
     <div class="step-label" id="sjv-label" style="display:none">Jouw jaardoel</div>
     <div class="vs-dots-row" id="jv-dots"></div>
-    <div class="step-help-popup" id="shp-jv">Selecteer uit je 3-5 jaar visie wat jij dit jaar oppakt. Voeg ook eigen punten toe.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-jv">Selecteer uit je 3-5 jaar visie wat jij dit jaar oppakt. Voeg ook eigen punten toe.<div class="step-video-ph has-vid" data-vid="68acf9b3-b4e7-44be-835d-3c67f572aed1">▶ Tik voor de video</div></div>
     <div class="vision-context" id="sjv-context">
       <button type="button" class="ctx-toggle" onclick="toggleCtx('sjv-ctx-body',this)">Bekijk je 3-5-jaarvisie <span class="ctx-caret">▾</span></button>
       <div class="ctx-body" id="sjv-ctx-body"><span id="sjv-medterm-text">—</span></div>
@@ -1262,7 +1263,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <div class="step" id="step-jaarvisie-review">
     <div class="step-label" id="jvr-sublabel">Jouw jaarvisie</div>
     <div class="step-q" style="display:flex;align-items:center;position:relative">Hier is jouw jaarvisie<button class="step-help-btn" onclick="toggleStepHelp('shp-jvr')">?</button></div>
-    <div class="step-help-popup" id="shp-jvr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-jvr">Klik in de tekst om hem direct aan te passen — voeg toe of verander wat je wil.<div class="step-video-ph has-vid" data-vid="e52575f6-8293-4458-b91a-06569af4b76c">▶ Tik voor de video</div></div>
     <div id="jvr-cards"></div>
     <div class="step-nav" id="jvr-nav">
       <button class="btn-back" onclick="goBackFromJaarvisieReview()">← Terug</button>
@@ -1274,7 +1275,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <div class="step" id="step-top3">
     <div class="step-q" id="t3-question" style="display:flex;align-items:center;justify-content:center;position:relative;text-align:center">Wat zijn jouw drie grootste prioriteiten?<button class="step-help-btn" onclick="toggleStepHelp('shp-top3')">?</button></div>
     <div class="step-label" id="t3-sublabel" style="text-align:center;margin-top:.5rem">Jouw jaardoel</div>
-    <div class="step-help-popup" id="shp-top3">Tik in volgorde van belangrijkheid — je belangrijkste eerst.<div class="step-video-ph">▶ Video volgt hier</div></div>
+    <div class="step-help-popup" id="shp-top3">Tik in volgorde van belangrijkheid — je belangrijkste eerst.<div class="step-video-ph has-vid" data-vid="4c39f67b-f618-40da-a2f5-f378990a6fcb">▶ Tik voor de video</div></div>
     <div id="t3-cards"></div>
     <p class="top3-hint" id="t3-hint">Tik op een optie om hem als #1 te kiezen</p>
     <div class="step-nav" id="t3-nav">
@@ -1300,7 +1301,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <!-- Stap 1: Wat -->
     <div class="jd-mini" id="jd-s1">
       <div class="step-q" style="font-size:clamp(1.1rem,3.2vw,1.45rem);display:flex;align-items:center">Wat wil je dit jaar bereiken?<button class="step-help-btn" onclick="toggleStepHelp('shp-jd1')">?</button></div>
-      <div class="step-help-popup" id="shp-jd1">Jouw #1 prioriteit staat al klaar — pas aan wat je wil.<div class="step-video-ph">▶ Video volgt hier</div></div>
+      <div class="step-help-popup" id="shp-jd1">Jouw #1 prioriteit staat al klaar — pas aan wat je wil.<div class="step-video-ph has-vid" data-vid="3c712868-7c8a-410e-a90e-a33f9456cb68">▶ Tik voor de video</div></div>
       <div class="jd-chips-row" id="jd-wat-chips"></div>
       <div style="margin-top:.9rem">
         <label class="jd-field-label">Jouw jaardoel — verfijn het naar jouw eigen woorden</label>
@@ -1318,7 +1319,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <!-- Stap 2: Meetbaar -->
     <div class="jd-mini" id="jd-s2">
       <div class="step-q" style="font-size:clamp(1.1rem,3.2vw,1.45rem);display:flex;align-items:center">Wanneer weet je zeker dat je je doel hebt behaald?<button class="step-help-btn" onclick="toggleStepHelp('shp-jd2')">?</button></div>
-      <div class="step-help-popup" id="shp-jd2">Klik op een suggestie of typ zelf. Pas de getallen aan naar jouw situatie.<div class="step-video-ph">▶ Video volgt hier</div></div>
+      <div class="step-help-popup" id="shp-jd2">Klik op een suggestie of typ zelf. Pas de getallen aan naar jouw situatie.<div class="step-video-ph has-vid" data-vid="c34ee7be-2abb-4458-b57c-55693dab44fa">▶ Tik voor de video</div></div>
       <div id="jd-dod-list" style="display:flex;flex-direction:column;gap:.85rem"></div>
       <div class="step-nav" style="margin-top:1.25rem">
         <button class="btn-back" onclick="nextJdStep(1)">← Terug</button>
@@ -1329,7 +1330,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <!-- Stap 3: Waarom -->
     <div class="jd-mini" id="jd-s3">
       <div class="step-q" style="font-size:clamp(1.1rem,3.2vw,1.45rem);display:flex;align-items:center">Waarom is dit jouw prioriteit?<button class="step-help-btn" onclick="toggleStepHelp('shp-jd3')">?</button></div>
-      <div class="step-help-popup" id="shp-jd3">Kies alles wat klopt. Voeg ook je eigen reden toe.<div class="step-video-ph">▶ Video volgt hier</div></div>
+      <div class="step-help-popup" id="shp-jd3">Kies alles wat klopt. Voeg ook je eigen reden toe.<div class="step-video-ph has-vid" data-vid="06f24b42-336e-4378-87bd-6568c59e1ac0">▶ Tik voor de video</div></div>
       <div class="jd-why-chips" id="jd-why-chips"></div>
       <div id="jd-why-display" style="margin-top:.6rem">
         <label class="jd-field-label">Jouw drijfveren:</label>
@@ -1354,7 +1355,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <!-- Stap 4: Naam + E-mail + Toestemming -->
     <div class="jd-mini" id="jd-s4">
       <div class="step-q" style="font-size:clamp(1.1rem,3.2vw,1.45rem);display:flex;align-items:center">Stuur je visie &amp; jaardoel naar jezelf toe<button class="step-help-btn" onclick="toggleStepHelp('shp-jd4')">?</button></div>
-      <div class="step-help-popup" id="shp-jd4">Zodat we jouw visie en jaardoel naar je kunnen sturen, en je gesprek makkelijk in te plannen is.<div class="step-video-ph">▶ Video volgt hier</div></div>
+      <div class="step-help-popup" id="shp-jd4">Zodat we jouw visie en jaardoel naar je kunnen sturen, en je gesprek makkelijk in te plannen is.<div class="step-video-ph has-vid" data-vid="29c21ddf-6341-4a6f-868d-d5be48d73bba">▶ Tik voor de video</div></div>
 
       <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:.85rem">
         <div>
@@ -1386,7 +1387,7 @@ footer p{font-size:.68rem;color:var(--dim)}
     <!-- Review: Optie A Tijdreis -->
     <div class="jd-mini" id="jd-s-review">
       <div class="step-q" style="font-size:clamp(1.1rem,3.2vw,1.45rem);display:flex;align-items:center">Jouw visie &amp; jaardoel 🎯<button class="step-help-btn" onclick="toggleStepHelp('shp-review')">?</button></div>
-      <div class="step-help-popup" id="shp-review">Alles op een rij — dit is waarvoor jij gaat dit jaar.<div class="step-video-ph">▶ Video volgt hier</div></div>
+      <div class="step-help-popup" id="shp-review">Alles op een rij — dit is waarvoor jij gaat dit jaar.<div class="step-video-ph has-vid" data-vid="bcf1dcbc-857f-4eea-9ccc-537a85cc1c88">▶ Tik voor de video</div></div>
       <div id="jd-full-review" style="margin-top:.75rem"></div>
       <div class="step-nav" style="margin-top:1.25rem">
         <button class="btn-back" onclick="nextJdStep(3)">← Terug</button>
@@ -1719,7 +1720,7 @@ footer p{font-size:.68rem;color:var(--dim)}
   <div id="fs-intro-icon" style="font-size:3rem;margin-bottom:1.2rem"></div>
   <div id="fs-intro-title" style="font-family:'Abolition',serif;font-size:2rem;letter-spacing:.06em;text-transform:uppercase;color:#c9a84c;margin-bottom:.75rem"></div>
   <div id="fs-intro-sub" style="font-size:.9rem;color:#a0a0a0;max-width:280px;line-height:1.65;margin-bottom:1.5rem"></div>
-  <div class="step-video-ph" style="width:100%;max-width:320px;margin-bottom:1.2rem">▶ Video volgt hier</div>
+  <div class="step-video-ph has-vid" style="width:100%;max-width:320px;margin-bottom:1.2rem"><div style="position:relative;width:100%;padding-top:56.25%"><iframe src="https://iframe.mediadelivery.net/embed/692336/b4f3089f-a0d0-4498-a56a-c55ca360eed1?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div></div>
   <div style="font-size:.72rem;color:#555;letter-spacing:.08em">TIKT OM DOOR TE GAAN</div>
 </div>
 <!-- FOOTER -->
@@ -2764,7 +2765,18 @@ function toggleStepHelp(id) {
   if (!el) return;
   var wasActive = el.classList.contains('shp-active');
   document.querySelectorAll('.step-help-popup.shp-active').forEach(function(p){ p.classList.remove('shp-active'); });
-  if (!wasActive) el.classList.add('shp-active');
+  if (!wasActive) {
+    el.classList.add('shp-active');
+    var ph = el.querySelector('.step-video-ph[data-vid]');
+    if (ph && !ph.dataset.loaded) {
+      ph.dataset.loaded = '1';
+      var g = ph.getAttribute('data-vid');
+      ph.innerHTML = '<div style="position:relative;width:100%;padding-top:56.25%">'
+        + '<iframe src="https://iframe.mediadelivery.net/embed/692336/' + g + '?autoplay=false&loop=false&muted=false&preload=false&responsive=true" '
+        + 'loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%" '
+        + 'allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>';
+    }
+  }
 }
 
 document.addEventListener('click', function(e) {
