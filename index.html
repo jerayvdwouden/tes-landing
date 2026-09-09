@@ -798,6 +798,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 @media (max-width:640px){
   input[type="text"],input[type="email"],input[type="number"],input[type="tel"],input[type="search"],textarea,select{font-size:16px}
 }
+.field select{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--white);padding:.85rem 1rem;font:inherit;font-size:.95rem}.field select option{background:#111}
 </style>
 <style id="v10-css">
 #v10{color:#F5F0E8;font-family:'DM Sans',system-ui,sans-serif;font-weight:300;line-height:normal}
@@ -986,6 +987,24 @@ footer p{font-size:.68rem;color:var(--dim)}
 </style>
 </head>
 <body>
+<script>/* meting — zelfde code als src/meting.js in tes-backend */(function(){
+  var API='https://tes-backend-mbyy.onrender.com/api/t';
+  function gc(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):'';}
+  function sc(n,v,sec){document.cookie=n+'='+encodeURIComponent(v)+'; Max-Age='+sec+'; Path=/; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'');}
+  function clean(s){return String(s||'').toLowerCase().replace(/[^a-z0-9:_.-]/g,'').slice(0,60);}
+  var qs=new URLSearchParams(location.search), ref=clean(qs.get('ref')), bron=ref;
+  if(!bron){try{var h=document.referrer?new URL(document.referrer).hostname:'';if(h&&!/executionsystem\.nl$/.test(h))bron='extern:'+h.replace(/^www\./,'');}catch(e){}}
+  var eerste=gc('tes_src'); if(!eerste){eerste=bron||'direct';sc('tes_src',eerste,90*86400);}
+  var laatste=bron||gc('tes_lsrc')||'direct'; sc('tes_lsrc',laatste,1800);
+  var sid=gc('tes_sid')||(Math.random().toString(36).slice(2)+Date.now().toString(36)); sc('tes_sid',sid,1800);
+  if(ref){qs.delete('ref');try{history.replaceState(null,'',location.pathname+(qs.toString()?'?'+qs:'')+location.hash);}catch(e){}}
+  function send(soort,pad,meta){sc('tes_sid',sid,1800);var body=JSON.stringify({soort:soort,sid:sid,eb:eerste,lb:laatste,pad:pad||location.pathname,meta:meta||null});
+    try{if(navigator.sendBeacon&&navigator.sendBeacon(API,new Blob([body],{type:'text/plain'})))return;}catch(e){}
+    try{fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true});}catch(e){}}
+  window.tesMeet=send; window.tesBron=function(){return {sid:sid,eb:eerste,lb:laatste};};
+})();
+tesMeet('pageview',location.pathname);
+</script>
 <script>if((location.hash||"").replace("#","")==="cursussen"){location.replace("/cursus");}</script>
 <div class="page-wrap">
 <div class="glow-top"></div>
@@ -1828,9 +1847,21 @@ footer p{font-size:.68rem;color:var(--dim)}
         <label>Jouw naam</label>
         <input type="text" id="naam" placeholder="Voornaam"/>
       </div>
-      <div class="field" style="margin-bottom:0">
+      <div class="field">
         <label>E-mailadres</label>
         <input type="email" id="email" placeholder="jij@voorbeeld.nl"/>
+      </div>
+      <div class="field">
+        <label>Hoe ken je mij? <span style="opacity:.55;text-transform:none;letter-spacing:0">(mag leeg)</span></label>
+        <select id="hoe-ken" onchange="hoeKenChange()"><option value="">—</option><option>YouTube</option><option>Instagram</option><option>TikTok</option><option>LinkedIn</option><option value="Via iemand anders">Via iemand anders</option><option value="Anders">Anders</option></select>
+      </div>
+      <div class="field" id="hoe-ken-anders-wrap" style="display:none">
+        <label>Namelijk</label>
+        <input type="text" id="hoe-ken-anders" placeholder="Bijv. een podcast, een vriend…"/>
+      </div>
+      <div class="field" id="doorverwezen-wrap" style="display:none;margin-bottom:0">
+        <label>Door wie ben je doorverwezen?</label>
+        <input type="text" id="doorverwezen" placeholder="Voornaam"/>
       </div>
     </div>
     <p style="font-size:.75rem;color:var(--dim);margin-bottom:1.5rem">Je ontvangt jouw plan als PDF. Geen spam, afmelden kan altijd.</p>
@@ -1898,7 +1929,7 @@ footer p{font-size:.68rem;color:var(--dim)}
         <div class="gb-hint">tik om uit te pakken</div>
       </div>
 
-      <button onclick="openCalendly()"
+      <button onclick="goToStep('gesprek')"
         class="btn-primary"
         style="display:block;width:100%;text-align:center;padding:.85rem 1.2rem;font-size:.75rem;border-radius:10px;cursor:pointer;margin-bottom:.75rem">
         📅 Ik heb nog geen gesprek — plan er alsnog een in
@@ -3049,6 +3080,7 @@ function closeNavMenu(){
   if(l) l.classList.remove('open'); if(b) b.classList.remove('open');
 }
 function showPage(page) {
+  if (window.tesMeet) { tesMeet('pageview', '/' + page); if (page === 'tool' && !window.__tesStart) { window.__tesStart = 1; tesMeet('stepper_start', '/tool'); } }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -5853,6 +5885,7 @@ function sendLeadAndContinue() {
   if (btn) { btn.disabled = true; btn.textContent = 'Bezig met versturen…'; }
   var go = function(){ if (btn) { btn.disabled = false; btn.textContent = orig; } goToStep('gesprek'); };
   if (typeof LEADMAGNET_SERVICE_URL !== 'string' || LEADMAGNET_SERVICE_URL.indexOf('YOUR-SERVICE') !== -1) { go(); return; }
+  if (window.tesMeet) tesMeet('stepper_complete', '/tool');
   var payload = buildLeadPayload();
   fetch(LEADMAGNET_SERVICE_URL, {
     method: 'POST',
@@ -6485,9 +6518,13 @@ function buildLeadPayload() {
       prioriteiten: prioriteiten
     };
   });
-  return { naam: naam, voornaam: voornaam, achternaam: achternaam, email: email, doelen: doelen };
+  return {
+    hoe_ken_je_mij: (function(){ var a=document.getElementById('hoe-ken'), b=document.getElementById('hoe-ken-anders'); var v=a?a.value:''; if(v==='Anders'&&b&&b.value.trim()) v='Anders: '+b.value.trim(); return v; })(),
+    doorverwezen_door: ((document.getElementById('doorverwezen')||{}).value||'').trim(),
+    meting: (window.tesBron ? tesBron() : null), naam: naam, voornaam: voornaam, achternaam: achternaam, email: email, doelen: doelen };
 }
 
+function hoeKenChange(){ var v=(document.getElementById('hoe-ken')||{}).value||''; var a=document.getElementById('hoe-ken-anders-wrap'), d=document.getElementById('doorverwezen-wrap'); if(a) a.style.display=v==='Anders'?'':'none'; if(d) d.style.display=v==='Via iemand anders'?'':'none'; }
 function submitAndNext() {
   const email = ((document.getElementById('email') || {}).value || '').trim();
   if (!email) { alert('Vul je e-mailadres in zodat we je plan kunnen sturen.'); return; }
@@ -6504,6 +6541,7 @@ function submitAndNext() {
     return;
   }
 
+  if (window.tesMeet) tesMeet('stepper_complete', '/tool');
   const payload = buildLeadPayload();
   fetch(LEADMAGNET_SERVICE_URL, {
     method: 'POST',
@@ -6786,7 +6824,11 @@ function trajectIsAangemeld(){ try{ return localStorage.getItem('tes_traject_aan
 window.addEventListener('message',function(e){
   if(!e.data||e.data.event!=='calendly.event_scheduled') return;
   if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
-  trajectAangemeld();
+  var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
+  var plek=(fr&&fr.closest('#page-tool'))?'stepper':'traject';
+  var p=(e.data.payload||{});
+  if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:String((p.event||{}).uri||''),invitee:String((p.invitee||{}).uri||'')});
+  if(plek==='traject') trajectAangemeld();
 });
 // chips → stepper (zelfde mechanisme als de homepage)
 function toggleTaChip(el, area){
