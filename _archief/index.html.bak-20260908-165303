@@ -799,191 +799,6 @@ footer p{font-size:.68rem;color:var(--dim)}
   input[type="text"],input[type="email"],input[type="number"],input[type="tel"],input[type="search"],textarea,select{font-size:16px}
 }
 </style>
-<style id="v10-css">
-#v10{color:#F5F0E8;font-family:'DM Sans',system-ui,sans-serif;font-weight:300;line-height:normal}
-#v10 section,#v10 div,#v10 article{background:none;border:0;border-radius:0;padding:0;margin:0}
-#v10 h1,#v10 h2,#v10 h3,#v10 p{margin:0;text-shadow:none;letter-spacing:normal;text-transform:none;color:inherit;font-weight:inherit}
-#v10 a:hover{color:#C9A84C}
-#v10{
-  --bg:#0A0A0A; --bg2:#1A1512; --ink:#0E0C0A;
-  --gold:#C9A84C; --gold-l:#E8C97A; --gold-d:#8A6E2F;
-  --white:#F5F0E8; --muted:#A09880; --dim:#6E675A;
-  --line:rgba(245,240,232,.12);
-  --display:'Abolition','Bebas Neue',sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,monospace;
-  --ease:cubic-bezier(.2,.7,.2,1);
-  --gutter:clamp(20px,4vw,60px);
-}
-#v10 *,#v10 *::before,#v10 *::after{box-sizing:border-box}
-#v10 a{color:var(--white);text-decoration:none}
-#v10 a:hover{color:var(--gold)}
-#v10 ::selection{background:rgba(201,168,76,.28)}
-#v10 h1,#v10 h2,#v10 h3,#v10 p{margin:0}
-#v10 img{display:block}
-#v10 .root{position:relative;isolation:isolate;background:var(--bg);color:var(--white);overflow-x:clip}
-#v10 .glow{position:fixed;left:50%;top:40%;width:min(120vw,1400px);aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(201,168,76,.13),rgba(201,168,76,0) 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);will-change:transform}
-#v10 .mono{font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;font-size:12px}
-#v10 .mono.gold{color:var(--gold)}
-#v10 .mono.muted{color:var(--muted)}
-#v10 .display{font-family:var(--display);font-weight:400;text-transform:uppercase}
-#v10 .btn{display:inline-block;background:var(--gold);color:var(--bg);font-size:17px;font-weight:500;padding:18px 36px;border-radius:2px;transition:transform .4s var(--ease),background .3s,box-shadow .4s}
-#v10 .btn:hover{color:var(--bg);transform:translateY(-3px);background:var(--gold-l);box-shadow:0 18px 40px rgba(201,168,76,.28)}
-#v10 .btn.big{font-size:19px;padding:22px 52px;box-shadow:0 20px 60px rgba(201,168,76,.22)}
-#v10 .btn.big:hover{transform:none;box-shadow:0 28px 80px rgba(201,168,76,.38)}
-#v10 .btn.small{font-size:15px;padding:12px 22px}
-#v10 .btn.small:hover{transform:none;box-shadow:none}
-#v10 [data-cols]{display:grid;gap:48px}
-#v10 [data-cols="4"]{grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
-#v10 [data-cols="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media (max-width:1040px){#v10 [data-cols="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
-#v10 [data-cols="3"]{gap:28px}}
-@media (max-width:640px){#v10 [data-cols="4"]{grid-template-columns:minmax(0,1fr)}
-#v10 [data-cols="3"]{grid-template-columns:minmax(0,1fr);gap:48px}}
-#v10 [data-reveal]{opacity:0;transform:translateY(32px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-#v10 [data-reveal="in"]{opacity:1;transform:none}
-#v10 [data-tilt]{transform-style:preserve-3d;will-change:transform}
-#v10 [data-tilt][data-reveal="in"]{transition:opacity 1s,transform .55s var(--ease),box-shadow .55s var(--ease),background .4s}
-#v10 [data-tilt][data-reveal="in"]:hover,#v10 [data-tilt].tilt-on:hover{background:#1E1915}
-@keyframes tes-panel{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-#v10 [data-panel]>*{animation:tes-panel .55s var(--ease) both}
-#v10 [data-magnet]{transition:transform .5s var(--ease),background .3s,box-shadow .5s}
-#v10 .hatch{background:var(--ink);background-image:repeating-linear-gradient(135deg,rgba(245,240,232,.035) 0 1px,transparent 1px 10px)}
-#v10 .nav{position:sticky;top:0;z-index:20;height:76px;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.6) 70%,rgba(10,10,10,0));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-#v10 .brand{display:flex;align-items:center;gap:12px}
-#v10 .brand img{width:28px;height:28px;object-fit:contain}
-#v10 .brand span{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase}
-#v10 .nav-links{display:flex;align-items:center;gap:32px}
-#v10 .nav-links a:not(.btn){font-size:15px;color:var(--muted)}
-#v10 .nav-links a:not(.btn):hover{color:var(--gold)}
-#v10 .btn.small{white-space:nowrap}
-@media (max-width:760px){#v10 .nav-links a:not(.btn){display:none}}
-@media (max-width:480px){#v10 .nav{height:64px}
-#v10 .btn.small{font-size:14px;padding:10px 16px}
-#v10 .brand span{font-size:10px;letter-spacing:.18em}}
-#v10 .v10-hero{position:relative;z-index:1;padding:48px clamp(20px,6vw,120px) clamp(80px,9vw,140px);display:flex;flex-direction:column;gap:48px;align-items:center;max-width:1440px;margin:0 auto}
-#v10 .v10-hero-copy{position:relative;display:flex;flex-direction:column;gap:28px;max-width:900px;align-items:center;text-align:center}
-#v10 .v10-hero h1{font-size:clamp(64px,7.4vw,112px);line-height:.88;text-wrap:pretty}
-#v10 .v10-hero-copy p{font-size:clamp(18px,1.5vw,22px);line-height:1.55;max-width:560px;text-wrap:pretty}
-#v10 .stage{position:relative;display:flex;justify-content:center;align-items:center;perspective:2000px;width:100%}
-#v10 .stage-glow{position:absolute;width:80%;height:80%;background:radial-gradient(closest-side,rgba(138,110,47,.2),rgba(10,10,10,0) 72%);pointer-events:none}
-#v10 .obj{position:relative;width:100%;max-width:760px;aspect-ratio:16/9;transform-style:preserve-3d;transform:rotateX(4deg);will-change:transform;cursor:pointer}
-#v10 .obj-b2{position:absolute;inset:0;background:#1E1A16;transform:translateZ(-16px)}
-#v10 .obj-b1{position:absolute;inset:0;background:#2A241E;transform:translateZ(-8px);box-shadow:0 50px 120px rgba(0,0,0,.75)}
-#v10 .obj-face{position:absolute;inset:0;border:1px solid rgba(245,240,232,.12);display:flex;align-items:center;justify-content:center;overflow:hidden}
-#v10 .obj-face::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(138,110,47,.18),rgba(10,10,10,0) 60%)}
-#v10 .obj-face::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(245,240,232,.07) 0%,rgba(245,240,232,0) 40%);pointer-events:none}
-#v10 .play{position:relative;width:112px;height:112px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;transition:background .3s}
-#v10 .obj:hover .play{background:var(--gold)}
-#v10 .play i{width:0;height:0;border-left:28px solid var(--white);border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:8px;transition:border-left-color .3s}
-#v10 .obj:hover .play i{border-left-color:var(--bg)}
-#v10 .obj-cap{position:absolute;left:22px;bottom:18px;right:22px;display:flex;justify-content:space-between;gap:24px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.7}
-@media (max-width:640px){#v10 .play{width:80px;height:80px}
-#v10 .play i{border-left-width:20px;border-top-width:12px;border-bottom-width:12px}
-#v10 .obj-cap{font-size:9px;left:14px;right:14px;bottom:12px}}
-#v10 .quotes{max-width:1200px;margin:0 auto;padding:0 var(--gutter) clamp(80px,9vw,140px);display:flex;flex-direction:column;gap:40px}
-#v10 .quote{display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--line);padding:24px 20px 20px;margin:0 -20px}
-#v10 .quote p{font-size:19px;line-height:1.5;font-style:italic;text-wrap:pretty}
-#v10 .who{display:flex;align-items:center;gap:14px}
-#v10 .avatar{width:44px;height:44px;border-radius:50%;background:var(--ink);background-image:repeating-linear-gradient(135deg,rgba(245,240,232,.06) 0 1px,transparent 1px 6px);flex:none}
-#v10 .who-txt{display:flex;flex-direction:column;gap:3px}
-#v10 .who-txt b{font-size:15px;font-weight:400}
-#v10 .who-txt span,#v10 .note{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-#v10 .note{color:var(--dim)}
-#v10 .info{background:var(--bg2)}
-#v10 .tabs-wrap{max-width:1200px;margin:0 auto;padding:clamp(64px,7vw,100px) var(--gutter) 0;display:flex;justify-content:center}
-#v10 .tabs{display:flex;gap:6px;padding:6px;border:1px solid rgba(245,240,232,.14);border-radius:2px;background:var(--bg)}
-#v10 .tab{padding:14px 26px;border-radius:2px;cursor:pointer;font-size:15px;font-weight:500;letter-spacing:.01em;min-height:44px;display:flex;align-items:center;background:transparent;color:var(--muted);border:0;font-family:inherit;transition:background .3s,color .3s}
-#v10 .tab:hover{color:var(--white)}
-#v10 .tab[aria-selected="true"]{background:var(--gold);color:var(--bg)}
-@media (max-width:480px){#v10 .tab{padding:12px 14px;font-size:14px}}
-#v10 .panel{position:relative}
-#v10 .pane{padding:clamp(56px,6vw,80px) var(--gutter) clamp(80px,9vw,140px)}
-#v10 .pane[hidden]{display:none}
-#v10 .krijgt-in{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:72px;align-items:center}
-#v10 .sec-head{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
-#v10 .sec-head h2{font-size:clamp(56px,6.4vw,96px);line-height:.9;text-wrap:balance;max-width:900px}
-#v10 .card{display:flex;flex-direction:column;gap:22px;padding:20px;margin:-20px}
-#v10 .card-img{aspect-ratio:4/3;display:flex;align-items:flex-end;padding:20px;position:relative}
-#v10 .card-num{position:absolute;left:20px;top:16px;font-family:var(--display);font-size:64px;line-height:1;color:var(--gold)}
-#v10 .card-cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.7}
-#v10 .card h3{font-size:26px;line-height:1.2;font-weight:400}
-#v10 .card p{font-size:17px;line-height:1.6;text-wrap:pretty}
-#v10 .gar-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:start}
-#v10 .gar-l{display:flex;flex-direction:column;gap:32px}
-#v10 .gar-l h2{font-size:clamp(56px,6.2vw,92px);line-height:.9;text-wrap:pretty}
-#v10 .gar-r{display:flex;flex-direction:column;gap:28px;padding-top:12px}
-#v10 .gar-r .lead{font-size:clamp(18px,1.5vw,22px);line-height:1.55;text-wrap:pretty}
-#v10 .gar-r .sub{font-size:17px;line-height:1.6;color:var(--muted);text-wrap:pretty}
-@media (max-width:400px){#v10 .gar-in{grid-template-columns:minmax(0,1fr)}}
-#v10 .faq-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:64px;align-items:start}
-#v10 .faq-l{display:flex;flex-direction:column;gap:22px}
-#v10 .faq-l h2{font-size:clamp(36px,4vw,56px);line-height:1.06;font-weight:400;letter-spacing:-.015em}
-#v10 .faq-l p{font-size:17px;line-height:1.6;color:var(--muted);max-width:420px;text-wrap:pretty}
-#v10 .faq{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-#v10 .q{border-bottom:1px solid var(--line)}
-#v10 .q-btn{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;cursor:pointer;min-height:44px;width:100%;background:none;border:0;color:inherit;font-family:inherit;text-align:left}
-#v10 .q-btn span:first-child{font-size:clamp(18px,1.5vw,22px);line-height:1.35;font-weight:400}
-#v10 .q-mark{font-family:var(--mono);font-size:18px;color:var(--gold);flex:none;width:24px;text-align:center}
-#v10 .q-a{display:flex;flex-direction:column;gap:14px;padding:0 48px 28px 0}
-#v10 .q-a[hidden]{display:none}
-#v10 .q-a p{font-size:17px;line-height:1.65;text-wrap:pretty}
-@media (max-width:640px){#v10 .q-a{padding-right:24px}}
-#v10 .stap{position:relative;overflow:hidden;background:var(--bg2);padding:clamp(100px,12vw,180px) var(--gutter)}
-#v10 .para{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
-#v10 .para-1{width:1100px;height:1100px;background:radial-gradient(closest-side,rgba(201,168,76,.16),rgba(26,21,18,0) 70%)}
-#v10 .para-2{width:min(92vw,900px);aspect-ratio:1;border:1px solid rgba(201,168,76,.18)}
-#v10 .para-3{width:min(70vw,620px);aspect-ratio:1;border:1px solid rgba(201,168,76,.12)}
-#v10 .stap-in{position:relative;max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:32px}
-#v10 .stap h2{font-size:clamp(72px,9vw,140px);line-height:.88;text-wrap:balance}
-#v10 .stap p{font-size:clamp(18px,1.5vw,22px);line-height:1.55;max-width:560px;text-wrap:pretty}
-#v10 .stap .fine{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-#v10 .foot{max-width:1200px;margin:0 auto;padding:56px var(--gutter) 64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
-#v10 .foot .brand img{width:26px;height:26px}
-#v10 .foot span,#v10 .foot a{font-size:14px;color:var(--muted)}
-#v10 .foot-links{display:flex;gap:32px}
-@media (prefers-reduced-motion:reduce){#v10 [data-reveal]{opacity:1;transform:none;transition:none}
-#v10 [data-panel]>*{animation:none}}
-
-#v10 .prep{max-width:560px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;padding:28px 24px;border:1px solid rgba(201,168,76,.28);border-radius:2px;background:rgba(10,10,10,.55)}
-#v10 .prep h3{font-size:24px;line-height:1.2;font-weight:400}
-#v10 .prep p{font-size:16px;line-height:1.6;color:#A09880;max-width:440px}
-#v10 .btn.ghost{background:transparent;color:#F5F0E8;border:1px solid rgba(201,168,76,.5);box-shadow:none;font-size:15px;padding:14px 26px}
-#v10 .btn.ghost:hover{background:rgba(201,168,76,.1);color:#F5F0E8;transform:none;box-shadow:none}
-#v10 .cal{width:100%;max-width:540px;display:flex;flex-direction:column;gap:14px;align-items:center}
-#v10 .cal .calendly-inline-widget{width:100%;border:1px solid rgba(245,240,232,.12);border-radius:2px;overflow:hidden;background:#0A0A0A}
-@media(max-width:640px){#v10 .cal .calendly-inline-widget{height:640px}}
-
-#v10 .cta-row{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
-#v10 .cta-row.links{align-items:flex-start;text-align:left;margin-top:8px}
-@media(max-width:820px){#v10 .cta-row.links{align-items:center;text-align:center}}
-</style>
-<style id="nav-groups-css">
-.nav-group{position:relative}
-.nav-group-btn .chev{font-size:.55rem;margin-left:.25rem;opacity:.7;display:inline-block;transition:transform .2s}
-.nav-group.open .nav-group-btn .chev{transform:rotate(180deg)}
-.nav-group-btn.active{color:var(--gold)}
-.nav-menu{position:absolute;top:calc(100% + 4px);left:0;min-width:210px;display:none;flex-direction:column;background:rgba(12,12,12,.98);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:8px;padding:.4rem;box-shadow:0 14px 34px rgba(0,0,0,.45);z-index:101}
-.nav-group:hover .nav-menu,.nav-group.open .nav-menu{display:flex}
-.nav-menu .nav-link{text-align:left;white-space:nowrap;padding:.6rem .85rem;border-radius:6px}
-.nav-menu .nav-link:hover{background:rgba(255,255,255,.04);color:var(--white)}
-.nav-cta.active{background:linear-gradient(135deg,#F0D98A 0%,#E8C97A 45%,#FAEAA0 70%,#E8C97A 100%)}
-@media(max-width:600px){
-  .nav-group{width:100%}
-  .nav-group-btn{width:100%;text-align:left;pointer-events:none;color:var(--gold-d);font-size:.58rem;letter-spacing:.2em;padding:.85rem .85rem .15rem}
-  .nav-group-btn .chev{display:none}
-  .nav-menu{position:static;display:flex;border:0;background:none;box-shadow:none;backdrop-filter:none;padding:0 0 .35rem .5rem;min-width:0}
-  .nav-menu .nav-link{padding:.75rem .85rem;white-space:normal}
-}
-
-/* desktop: logo | links gecentreerd | knop */
-@media(min-width:601px){
-  .nav-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem}
-  .logo{margin-right:0;justify-self:start}
-  .nav-links{justify-self:center;gap:.6rem}
-  .nav-link{font-size:.68rem;padding:.5rem 1rem}
-  .nav-cta{justify-self:end;margin-left:0}
-}
-</style>
 </head>
 <body>
 <script>if((location.hash||"").replace("#","")==="cursussen"){location.replace("/cursus");}</script>
@@ -997,15 +812,11 @@ footer p{font-size:.68rem;color:var(--dim)}
     <div class="logo" onclick="showPage('home')">The Execution System</div>
     <div class="nav-links">
       <button class="nav-link active" data-page="home" onclick="showPage('home');closeNavMenu()">Home</button>
-      <div class="nav-group" id="nav-gratis">
-        <button class="nav-link nav-group-btn" type="button" onclick="toggleNavGroup(this)" aria-haspopup="true" aria-expanded="false">Gratis waarde <span class="chev">▾</span></button>
-        <div class="nav-menu">
-          <button class="nav-link" data-page="tool" onclick="showPage('tool');closeNavMenu()">Jaardoel in 5 minuten</button>
-          <button class="nav-link" data-page="cursussen" onclick="closeNavMenu();window.location.href='/cursus'">Cursussen</button>
-        </div>
-      </div>
+      <button class="nav-link" data-page="tool" onclick="showPage('tool');closeNavMenu()">Jaardoel in 5 Minuten</button>
+      <button class="nav-link" data-page="cursussen" onclick="closeNavMenu();window.location.href='/cursus'">Cursussen</button>
+      <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek');closeNavMenu()">Gesprek</button>
     </div>
-    <button class="nav-cta" data-page="traject" onclick="showPage('traject');closeNavMenu()">Begin nu →</button>
+    <button class="nav-cta" onclick="showPage('tool')">Begin nu →</button>
     <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -1024,7 +835,7 @@ footer p{font-size:.68rem;color:var(--dim)}
         <iframe id="vslFrame" class="bunny vsl-frame" src="https://iframe.mediadelivery.net/embed/692336/0d86c42a-640a-4bed-b1cd-9558008dbb9c?autoplay=true&loop=false&muted=true&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="eager" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>
       </div>
     </div>
-    <button class="btn-primary" onclick="showPage('traject')">Ik wil mijn doelen halen →</button>
+    <button class="btn-primary" onclick="showPage('tool')">Ik wil mijn doelen halen →</button>
     <p class="cta-note">Geen betaalkaart &nbsp;·&nbsp; Geen verplichting</p>
   </section>
 
@@ -1249,205 +1060,10 @@ footer p{font-size:.68rem;color:var(--dim)}
   <section class="cta-bottom">
     <h2>Jouw doelen.<br><em>Ons systeem.</em></h2>
     <p>Ik begeleid een select aantal mensen tegelijk en bouw samen met jou het systeem dat zorgt dat jij eindelijk consistent de stappen zet richting jouw doelen.</p>
-    <button class="btn-primary" onclick="showPage('traject')" style="display:block;max-width:380px;margin:0 auto .85rem">Ik wil mijn doelen halen →</button>
-    <p class="cta-note">Geen verplichting &nbsp;·&nbsp; Of <span style="color:var(--gold);cursor:pointer;text-decoration:underline" onclick="showPage('traject')">plan direct een gesprek</span></p>
+    <button class="btn-primary" onclick="showPage('tool')" style="display:block;max-width:380px;margin:0 auto .85rem">Ik wil mijn doelen halen →</button>
+    <p class="cta-note">Geen verplichting &nbsp;·&nbsp; Of <span style="color:var(--gold);cursor:pointer;text-decoration:underline" onclick="showPage('gesprek')">plan direct een gesprek</span></p>
   </section>
 
-</div>
-</div>
-
-<!-- ═══════════════════════════════════════════
-     PAGE: TRAJECT (v10)
-════════════════════════════════════════════ -->
-<div class="page" id="page-traject">
-<div class="root" id="v10">
-  <div class="glow" id="glow"></div>
-
-  <!-- 01 hero -->
-  <section class="v10-hero" id="top" aria-label="Introductie">
-    <div class="v10-hero-copy" data-reveal>
-      <div class="mono gold">Jouw doel · gegarandeerd resultaat</div>
-      <h1 class="display">Jouw belangrijkste doel.<br>In twaalf weken gehaald.</h1>
-      <p>Twaalf weken werken we samen aan jouw doel. Aan het eind staat er een resultaat &mdash; of je krijgt je geld terug.</p>
-    </div>
-
-    <div class="stage" id="stage">
-      <div class="stage-glow"></div>
-      <div class="obj" id="obj" role="button" tabindex="0" aria-label="Video afspelen">
-        <div class="obj-b2"></div>
-        <div class="obj-b1"></div>
-        <div class="obj-face hatch">
-          <div class="play"><i></i></div>
-          <div class="obj-cap"><span>Video — Jeray aan tafel: wat het is, hoe een week eruitziet</span><span>01:30</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta-row" data-reveal>
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Ik wil mijn doel halen</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
-  </section>
-
-  <!-- 02 wat mensen zeggen -->
-  <section class="quotes" aria-label="Wat mensen zeggen">
-    <div class="mono muted">Wat mensen zeggen</div>
-    <div data-cols="4">
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Ik had dit doel drie jaar op een lijstje. In week negen stond het getal er. Niet omdat ik ineens discipline had, maar omdat ik elke vrijdag moest laten zien wat ik gedaan had.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 34</b><span>Van 6 naar 15 vaste klanten</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
-      </article>
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Week vijf was slecht. Normaal stop ik dan. Nu belde Jeray op donderdag, en maandag zat ik er weer in. Dat is het hele verschil geweest.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 41</b><span>Twaalf kilo eraf</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
-      </article>
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Drie minuten per dag klonk te weinig. Het is precies genoeg. Ik open de app, zie één actie, doe hem. Meer is het niet — en daarom werkt het.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 29</b><span>Het boek af</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
-      </article>
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Ik wist alles al. Dat was juist het probleem. Wat ik niet had, was iemand die elke week keek of ik het ook deed. Na twaalf weken stond de buffer er.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 38</b><span>€25.000 buffer</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
-      </article>
-    </div>
-    <div class="cta-row" data-reveal>
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
-  </section>
-
-  <!-- 03 wat je krijgt · garantie · vragen -->
-  <section class="info" id="info" aria-label="Wat je krijgt, garantie en vragen">
-    <div class="tabs-wrap">
-      <div class="tabs" role="tablist">
-        <button class="tab" role="tab" data-tab="krijgt" aria-selected="false" aria-controls="pane-krijgt">Wat je krijgt</button>
-        <button class="tab" role="tab" data-tab="garantie" aria-selected="true" aria-controls="pane-garantie">Garantie</button>
-        <button class="tab" role="tab" data-tab="vragen" aria-selected="false" aria-controls="pane-vragen">Vragen</button>
-      </div>
-    </div>
-
-    <div class="panel" id="panel">
-
-      <div class="pane" id="pane-krijgt" role="tabpanel" hidden>
-        <div class="krijgt-in" data-panel>
-          <div class="sec-head">
-            <div class="mono gold">Wat je krijgt</div>
-            <h2 class="display">Dit krijg je, twaalf weken lang</h2>
-          </div>
-          <div data-cols="3" style="width:100%">
-            <div class="card" data-tilt>
-              <div class="card-img hatch"><span class="card-num">01</span><span class="card-cap">Foto — tafel, twee koppen koffie, vol vel papier</span></div>
-              <h3>Elke week een uur met mij</h3>
-              <p>Één-op-één, online, op een vast moment. We kijken wat er wel en niet gebeurde en bouwen de week erna. Tussendoor zie ik je scores meelopen en bel ik vóór het wegzakt. Vastgelopen? Je bereikt me in de app.</p>
-            </div>
-            <div class="card" data-tilt>
-              <div class="card-img hatch"><span class="card-num">02</span><span class="card-cap">Screenshot — app, dagweergave met één actie</span></div>
-              <h3>Je eigen app, om je doel gebouwd</h3>
-              <p>Je doel, uitgewerkt tot acties met dag en tijd. Elke dag drie minuten afvinken; elke vrijdag dertig minuten je week scoren. Je ziet zwart op wit of je beweegt — in week vier, niet in maand zes.</p>
-            </div>
-            <div class="card" data-tilt>
-              <div class="card-img hatch"><span class="card-num">03</span><span class="card-cap">Foto — whiteboard, streep door week 12</span></div>
-              <h3>Een meetbaar resultaat na twaalf weken</h3>
-              <p>In week één maken we je doel meetbaar: niet fitter worden, maar twaalf kilo eraf vóór 1 december. In week twaalf staat er een getal. Staat het er niet, dan krijg je je geld terug.</p>
-            </div>
-          </div>
-          <div class="cta-row">
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Ik wil mijn doel halen</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
-        </div>
-      </div>
-
-      <div class="pane" id="pane-garantie" role="tabpanel">
-        <div class="gar-in" data-panel>
-          <div class="gar-l">
-            <div class="mono gold">De garantie</div>
-            <h2 class="display">Geen resultaat? Geld terug.</h2>
-          </div>
-          <div class="gar-r">
-            <p class="lead">Ik garandeer je resultaat. Aan het begin van je traject leggen we samen vast welke doelen je in twaalf weken haalt. Haal je die niet, dan krijg je je volledige investering terug.</p>
-            <p class="sub">Als jij je doel niet haalt, heb ik niets geleverd. Hoe goed de gesprekken ook waren.</p>
-        <p class="mono muted" style="font-size:11px;letter-spacing:.14em;line-height:1.8">Aanvraag binnen 14 dagen na afloop &middot; geldt per traject &middot; niet met terugwerkende kracht</p>
-            <div class="cta-row links">
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Ik wil mijn doel halen</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pane" id="pane-vragen" role="tabpanel" hidden>
-        <div class="faq-in" data-panel>
-          <div class="faq-l">
-            <h2>Wat je wilt weten voor je belt.</h2>
-            <p>Kort en eerlijk. Staat je vraag er niet bij, dan is dat waar het gesprek voor is.</p>
-            <div class="cta-row links">
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
-          </div>
-          <div class="faq" id="faq"></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 04 de stap -->
-  <section class="stap" id="gesprek" aria-label="Plan een gesprek">
-    <div class="para para-1" data-para="0.06"></div>
-    <div class="para para-2" data-para="0.14"></div>
-    <div class="para para-3" data-para="-0.1"></div>
-    <div class="stap-in" data-reveal>
-      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
-      <h2 class="display">Eén gratis uur.<br>Daarna heb je een plan.</h2>
-      <p>In een uur maken we je doel meetbaar, bouwen we je eerste actieplan en spreken we af hoe je jezelf de komende twaalf weken vasthoudt. Plus het gratis Execution System Werkboek.</p>
-      <div class="cal" data-reveal>
-        <div class="mono muted">Kies een moment dat jou uitkomt</div>
-        <div class="calendly-inline-widget" id="v10-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:600px"></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- na het boeken van een gesprek -->
-<div id="traject-aangemeld" class="wrap" hidden>
-  <section class="hero">
-    <div class="hs-eyebrow">Je staat ingepland</div>
-    <h1>Tot snel.<br><em>Zo haal je het meeste uit ons uur.</em></h1>
-    <p class="hero-sub">In deze video vertel ik waar je je precies voor hebt aangemeld en hoe je je voorbereidt op ons gesprek.</p>
-    <div class="vsl-wrap"><div class="vsl-inner">
-      <iframe id="ta-video" class="bunny vsl-frame" data-src="https://iframe.mediadelivery.net/embed/692336/TA_VIDEO_GUID?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>
-    </div></div>
-    <p class="cta-note">De bevestiging met de Zoom-link staat in je mail</p>
-  </section>
-
-  <div class="div"><span>bereid je voor</span></div>
-
-  <section>
-    <div class="hs-wrap">
-      <div class="hs-eyebrow">V&oacute;&oacute;r ons gesprek &middot; 5 minuten</div>
-      <h2 class="hs-h2">Vul je jaardoel in</h2>
-      <p class="hs-sub">Dan beginnen we niet bij nul en halen we het meeste uit het uur. Beantwoord de eerste vraag en je zit meteen in de tool.</p>
-      <div class="hs-q">Wat is voor jou nu het meest waardevol?</div>
-      <div class="imp-grid" id="ta-imp-grid">
-        <div class="imp-chip" data-color="#e05252" onclick="toggleTaChip(this,'Gezondheid &amp; Fysiek')"><div class="imp-chip-icon"><svg><use href="#i-heart"/></svg></div><div class="imp-chip-label">Gezondheid &amp; Fysiek</div></div>
-        <div class="imp-chip" data-color="#60A5FA" onclick="toggleTaChip(this,'Carri&egrave;re')"><div class="imp-chip-icon"><svg><use href="#i-trending"/></svg></div><div class="imp-chip-label">Carri&egrave;re</div></div>
-        <div class="imp-chip" data-color="#4ADE80" onclick="toggleTaChip(this,'Financi&euml;n')"><div class="imp-chip-icon"><svg><use href="#i-banknote"/></svg></div><div class="imp-chip-label">Financi&euml;n</div></div>
-        <div class="imp-chip" data-color="#F472B6" onclick="toggleTaChip(this,'Relaties')"><div class="imp-chip-icon"><svg><use href="#i-users"/></svg></div><div class="imp-chip-label">Relaties</div></div>
-        <div class="imp-chip" data-color="#D4E157" onclick="toggleTaChip(this,'Persoonlijke groei &amp; Skills')"><div class="imp-chip-icon"><svg><use href="#i-brain"/></svg></div><div class="imp-chip-label">Persoonlijke groei &amp; Skills</div></div>
-        <div class="imp-chip" data-color="#FFFFFF" onclick="toggleTaChip(this,'Spiritualiteit &amp; Geloof')"><div class="imp-chip-icon"><svg><use href="#i-star"/></svg></div><div class="imp-chip-label">Spiritualiteit &amp; Geloof</div></div>
-      </div>
-      <div class="hs-nav">
-        <button class="btn-next locked" id="ta-s1-next" onclick="taStepNext()">Verder gaan &rarr;</button>
-      </div>
-      <p style="margin-top:2.5rem;font-size:.72rem;color:var(--dim)"><span style="cursor:pointer;text-decoration:underline" onclick="trajectToonPagina()">&larr; Terug naar de trajectpagina</span></p>
-    </div>
-  </section>
 </div>
 </div>
 
@@ -2028,6 +1644,46 @@ footer p{font-size:.68rem;color:var(--dim)}
     </div>
   </div>
 
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: GESPREK
+════════════════════════════════════════════ -->
+<div class="page" id="page-gesprek">
+<div class="gesprek-wrap">
+  <h2>Van jouw doel naar<br><em>een concreet plan</em></h2>
+  <p class="sub">1 uur met Jeray. Jouw persoonlijke doel als startpunt — we bouwen samen het concrete systeem en de eerste acties waarmee jij direct aan de slag kunt. Gratis.</p>
+
+  <div class="gesprek-card">
+    <div class="gesprek-card-top">
+      <ul class="gesprek-items">
+        <li><strong>Jouw jaardoel scherp stellen</strong> — zodat het concreet, meetbaar en motiverend is.</li>
+        <li><strong>Jouw eerste actieplan bouwen</strong> — welke acties brengen jou het snelst richting jouw doel?</li>
+        <li><strong>De obstakels in kaart brengen</strong> — wat houdt je tegen en hoe omzeil je dat?</li>
+        <li><strong>Een systeem afspreken</strong> — hoe houd jij jezelf accountable de komende 12 weken?</li>
+      </ul>
+    </div>
+    <div class="gesprek-prep">
+      <div class="gp-icon">&#10022;</div>
+      <div class="gp-txt">
+        <strong>Vul eerst je jaardoel in &mdash; 5 minuten</strong>
+        <span>Dat is de basis van ons gesprek. Zo halen we samen meteen het meeste eruit.</span>
+        <button class="gp-btn" onclick="showPage('tool')">Nu mijn jaardoel invullen &rarr;</button>
+      </div>
+    </div>
+    <div class="gesprek-placeholder">
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem">Kies een datum en tijd die jou uitkomt:</p>
+      <!-- Calendly inline widget -->
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c"
+           style="min-width:280px;height:620px;border-radius:12px;overflow:hidden"></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <p style="font-size:.72rem;color:var(--dim);margin-top:.75rem;font-style:italic">Geen verplichting · 1 uur · Online via Google Meet</p>
+    </div>
+  </div>
+
+  <p style="margin-top:1.75rem;font-size:.78rem;color:var(--dim)">Heb je de doel-tool nog niet gedaan? <span style="color:var(--gold);cursor:pointer;text-decoration:underline" onclick="showPage('tool')">Start eerst de gratis tool →</span></p>
 </div>
 </div>
 
@@ -6597,240 +6253,6 @@ document.addEventListener('click', function(e){
   });
   document.querySelectorAll('.step, .jd-mini, .mini-step').forEach(function(el){ obs.observe(el, {attributes:true, attributeFilter:['class']}); });
 })();
-</script>
-<script>
-(() => {
-  const FAQ = [
-    { q: 'Hoe ziet een week eruit?', a: [
-      'Elke dag drie minuten: je opent de app, ziet de ene actie die vandaag telt, en vinkt af wat je gedaan hebt.',
-      'Elke vrijdag dertig minuten: je scoort je week op uitvoering. Een getal, geen gevoel.',
-      'Elke week een uur met mij, één-op-één, op een vast moment. We kijken terug en bouwen de week erna.' ] },
-    { q: 'Wat heb ik na twaalf weken?', a: [
-      'Een meetbaar resultaat op het doel dat we in week één hebben vastgelegd. Geen goed voornemen, een getal.',
-      'En de keuze: door naar een volgende ronde met een nieuw doel, of stoppen. Er zit geen verplichting aan.' ] },
-    { q: 'Is dit iets voor mij?', a: [
-      'Ja, als je een doel hebt dat je al langer voor je ziet, weet wat je moet doen, en het toch niet van de grond komt. Ondernemer, werknemer, sporter — het doel maakt niet uit, zolang het meetbaar te maken is.',
-      'Nee, als je nog niet weet wat je wilt, of als je iemand zoekt die het werk voor je doet. Ik houd je vast; het doen blijft van jou.' ] },
-    { q: 'Is dit online?', a: [
-      'Ja, helemaal. De wekelijkse sessie doen we via Zoom, de app staat op je telefoon. Waar je woont maakt niet uit.' ] },
-    { q: 'Wat als het niet lukt?', a: [
-      'Aan het begin leggen we vast welke doelen je in twaalf weken haalt. Haal je die niet, dan krijg je je volledige investering terug — aanvragen binnen 14 dagen na afloop.',
-      'Als jij je doel niet haalt, heb ik niets geleverd. Zo simpel is het.' ] },
-  ];
-
-  const TILT = 1;                                   // tiltStrength uit het ontwerp (0–2)
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const root = document.getElementById('v10');
-  const glow = document.getElementById('glow');
-  const obj = document.getElementById('obj');
-  const stage = document.getElementById('stage');
-  const $$ = (s, el = root) => Array.from(el.querySelectorAll(s));
-
-  /* ── FAQ ─────────────────────────────────────────────────── */
-  const faqEl = document.getElementById('faq');
-  let openQ = 0;
-  function renderFaq() {
-    faqEl.innerHTML = '';
-    FAQ.forEach((f, i) => {
-      const open = openQ === i;
-      const q = document.createElement('div'); q.className = 'q';
-      const b = document.createElement('button'); b.className = 'q-btn'; b.type = 'button';
-      b.setAttribute('aria-expanded', open);
-      b.innerHTML = `<span>${f.q}</span><span class="q-mark">${open ? '–' : '+'}</span>`;
-      b.addEventListener('click', () => { openQ = openQ === i ? -1 : i; renderFaq(); });
-      const a = document.createElement('div'); a.className = 'q-a'; if (!open) a.hidden = true;
-      f.a.forEach(t => { const p = document.createElement('p'); p.textContent = t; a.appendChild(p); });
-      q.append(b, a); faqEl.appendChild(q);
-    });
-  }
-  renderFaq();
-
-  /* ── tabs ────────────────────────────────────────────────── */
-  const tabs = $$('.tab');
-  const panes = { krijgt: document.getElementById('pane-krijgt'), garantie: document.getElementById('pane-garantie'), vragen: document.getElementById('pane-vragen') };
-  function pick(k) {
-    tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.tab === k));
-    Object.entries(panes).forEach(([key, p]) => {
-      p.hidden = key !== k;
-      if (key === k) {                              // paneel-animatie opnieuw afspelen
-        const inner = p.firstElementChild;
-        inner.style.animation = 'none'; void inner.offsetWidth; inner.style.animation = '';
-      }
-    });
-    scanReveal();
-  }
-  tabs.forEach(t => t.addEventListener('click', () => pick(t.dataset.tab)));
-  $$('[data-pick]').forEach(a => a.addEventListener('click', () => pick(a.dataset.pick)));
-
-  /* ── reveal ──────────────────────────────────────────────── */
-  const seen = new WeakSet();
-  const revealIO = new IntersectionObserver(es => {
-    es.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      const sibs = Array.from(el.parentElement.children).filter(c => c.hasAttribute('data-reveal'));
-      el.style.transitionDelay = (sibs.indexOf(el) % 4) * 110 + 'ms';
-      el.setAttribute('data-reveal', 'in');
-      revealIO.unobserve(el);
-    });
-  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
-  function scanReveal() {
-    const pg = root.closest('.page'); if (pg && !pg.classList.contains('active')) return;   // alleen als de pagina zichtbaar is
-    const vh = innerHeight;
-    $$('[data-reveal]:not([data-reveal="in"])').forEach(el => {
-      if (seen.has(el)) return;
-      seen.add(el);
-      if (el.getBoundingClientRect().top < vh * 0.95) el.setAttribute('data-reveal', 'in');
-      else revealIO.observe(el);
-    });
-  }
-  if (reduce) { $$('[data-reveal]').forEach(el => el.setAttribute('data-reveal', 'in')); }
-  else if (root.closest('.page') && root.closest('.page').classList.contains('active')) scanReveal();
-  addEventListener('resize', scanReveal);
-  window.__v10scan = scanReveal;
-
-  /* ── tilt · magnet · glow · parallax · hero-object ───────── */
-  const paras = $$('[data-para]');
-  const magnets = $$('[data-magnet]');
-  let mouse = null, tilted = null;
-  const target = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
-
-  function tiltTo(el, e) {
-    const r = el.getBoundingClientRect();
-    const nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
-    const s = TILT * 6;
-    el.style.transform = `perspective(1100px) rotateX(${-ny * s}deg) rotateY(${nx * s}deg) translateY(-6px)`;
-    el.style.boxShadow = '0 30px 70px rgba(0,0,0,.5)';
-    el.style.zIndex = '2';
-    el.classList.add('tilt-on');
-  }
-  function untilt(el) { el.style.transform = ''; el.style.boxShadow = ''; el.style.zIndex = ''; el.classList.remove('tilt-on'); }
-
-  if (!reduce) {
-    root.addEventListener('mousemove', e => {
-      mouse = { x: e.clientX, y: e.clientY };
-      const t = e.target.closest ? e.target.closest('[data-tilt]') : null;
-      if (tilted && tilted !== t) { untilt(tilted); tilted = null; }
-      if (t) { tilted = t; tiltTo(t, e); }
-      magnets.forEach(m => {
-        const r = m.getBoundingClientRect();
-        const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
-        m.style.transform = Math.hypot(dx, dy) < 240 ? `translate(${dx * .28}px, ${dy * .28}px) scale(1.04)` : '';
-      });
-    });
-    root.addEventListener('mouseleave', () => {
-      mouse = null;
-      if (tilted) { untilt(tilted); tilted = null; }
-      magnets.forEach(m => { m.style.transform = ''; });
-    });
-    stage.addEventListener('mousemove', e => {
-      const r = stage.getBoundingClientRect();
-      const nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5;
-      target.x = -ny * 6 * TILT; target.y = nx * 8 * TILT;
-    });
-    stage.addEventListener('mouseleave', () => { target.x = 0; target.y = 0; });
-
-    const loop = () => {
-      const t = performance.now() / 1000;
-      const vh = innerHeight;
-      if (glow) {
-        const mx = mouse ? (mouse.x / innerWidth - .5) * 120 : 0;
-        const my = mouse ? (mouse.y / vh - .5) * 80 : 0;
-        glow.style.transform = `translate(calc(-50% + ${Math.sin(t * .25) * 140 + mx}px), calc(-50% + ${Math.cos(t * .19) * 90 + my - scrollY * .08}px))`;
-      }
-      paras.forEach(p => {
-        const r = p.parentElement.getBoundingClientRect();
-        const off = (r.top + r.height / 2 - vh / 2) * parseFloat(p.dataset.para);
-        p.style.transform = `translate(-50%, calc(-50% + ${off}px))`;
-      });
-      if (obj) {
-        cur.x += (target.x - cur.x) * .07;
-        cur.y += (target.y - cur.y) * .07;
-        const sc = Math.min(scrollY / 600, 1);
-        obj.style.transform = `translateY(${Math.sin(t * .8) * 6 + sc * 40}px) rotateX(${4 + cur.x - sc * 6}deg) rotateY(${cur.y + sc * 6}deg)`;
-      }
-      requestAnimationFrame(loop);
-    };
-    requestAnimationFrame(loop);
-  }
-
-  /* ── video (placeholder) ─────────────────────────────────── */
-  // Zodra er een video is: zet hier de URL en vervang de inhoud van .obj-face door een <video> of embed.
-  const VIDEO_URL = '';
-  obj.addEventListener('click', () => { if (VIDEO_URL) location.href = VIDEO_URL; });
-  obj.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); obj.click(); } });
-})();
-
-
-
-// ── Traject: scherm na het boeken ────────────────────────────
-var TA_VIDEO_GUID = '0d86c42a-640a-4bed-b1cd-9558008dbb9c';   // ← vervang door de guid van de nieuwe "je staat ingepland"-video
-function trajectAangemeld(){
-  try{ localStorage.setItem('tes_traject_aangemeld','1'); }catch(e){}
-  if(!document.getElementById('page-traject').classList.contains('active')) showPage('traject');
-  trajectToonAangemeld();
-}
-function trajectToonAangemeld(){
-  var v=document.getElementById('v10'), a=document.getElementById('traject-aangemeld'); if(!v||!a) return;
-  v.style.display='none'; a.hidden=false;
-  var f=document.getElementById('ta-video'); if(f&&!f.src) f.src=f.dataset.src.replace('TA_VIDEO_GUID',TA_VIDEO_GUID);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function trajectToonPagina(){
-  var v=document.getElementById('v10'), a=document.getElementById('traject-aangemeld'); if(!v||!a) return;
-  a.hidden=true; v.style.display=''; window.scrollTo({top:0,behavior:'smooth'});
-  if(window.__v10scan) setTimeout(window.__v10scan,60);
-}
-function trajectIsAangemeld(){ try{ return localStorage.getItem('tes_traject_aangemeld')==='1'; }catch(e){ return false; } }
-// Calendly meldt de boeking aan de pagina
-window.addEventListener('message',function(e){
-  if(!e.data||e.data.event!=='calendly.event_scheduled') return;
-  if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
-  trajectAangemeld();
-});
-// chips → stepper (zelfde mechanisme als de homepage)
-function toggleTaChip(el, area){
-  if(typeof toggleImpChip==='function') toggleImpChip(el, area);
-  var any=document.querySelectorAll('#ta-imp-grid .imp-chip.selected').length>0;
-  var b=document.getElementById('ta-s1-next'); if(b) b.classList.toggle('locked',!any);
-}
-function taStepNext(){
-  var chips=[].slice.call(document.querySelectorAll('#ta-imp-grid .imp-chip.selected'));
-  var sel=chips.map(function(c){ return c.querySelector('.imp-chip-label').textContent; });
-  if(!sel.length) return;
-  showPage('tool');
-  document.querySelectorAll('#imp-grid .imp-chip').forEach(function(chip){
-    var lbl=chip.querySelector('.imp-chip-label'); var name=lbl?lbl.textContent:'';
-    if(sel.indexOf(name)>-1&&!chip.classList.contains('selected')) toggleImpChip(chip,name);
-  });
-  chips.forEach(function(c){ c.classList.remove('selected'); c.style.borderColor='';c.style.background='';c.style.boxShadow=''; var ic=c.querySelector('.imp-chip-icon svg'); if(ic) ic.style.color=''; var lb=c.querySelector('.imp-chip-label'); if(lb) lb.style.color=''; });
-  var hb=document.getElementById('ta-s1-next'); if(hb) hb.classList.add('locked');
-  if(typeof goToStep1b==='function') goToStep1b();
-}
-// ?aangemeld=1 toont het scherm zonder te boeken (om te bekijken); ?aangemeld=0 wist de onthouden status
-(function(){ var q=new URLSearchParams(location.search).get('aangemeld'); if(q==='0'){ try{localStorage.removeItem('tes_traject_aangemeld');}catch(e){} } if(q==='1'){ setTimeout(trajectAangemeld,50); } })();
-
-
-// Alle CTA's op Traject: naar de agenda scrollen
-function v10NaarAgenda(){ v10InitCal(); var el=document.getElementById('v10-cal'); if(!el) return;
-  var y=el.getBoundingClientRect().top+window.scrollY-84; window.scrollTo({top:y,behavior:'smooth'}); }
-// Calendly op de Traject-pagina: pas laden als de pagina zichtbaar is
-function v10InitCal(n){ n=n||0; const el=document.getElementById('v10-cal'); if(!el||el.querySelector('iframe')) return;
-  if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:el.dataset.url,parentElement:el}); }
-  else if(n<20) setTimeout(()=>v10InitCal(n+1),500); }
-// Traject-pagina: reveal-animaties starten zodra de pagina getoond wordt
-(function(){ const sp=window.showPage; if(typeof sp==='function'){ window.showPage=function(p){ sp(p); if(p==='traject'){ if(trajectIsAangemeld()){ trajectToonAangemeld(); } else { trajectToonPagina(); v10InitCal(); } } }; } })();
-</script>
-<script>
-// Uitklapmenu "Gratis waarde": hover op desktop, klik op touch; buiten klikken sluit.
-function toggleNavGroup(btn){ const g=btn.closest('.nav-group'); const open=!g.classList.contains('open'); document.querySelectorAll('.nav-group.open').forEach(x=>x.classList.remove('open')); g.classList.toggle('open',open); btn.setAttribute('aria-expanded',open); }
-document.addEventListener('click',e=>{ if(!e.target.closest('.nav-group')) document.querySelectorAll('.nav-group.open').forEach(g=>{ g.classList.remove('open'); g.querySelector('.nav-group-btn').setAttribute('aria-expanded','false'); }); });
-(function(){ const sp=window.showPage; if(typeof sp!=='function') return;
-  window.showPage=function(p){ sp(p);
-    document.querySelectorAll('.nav-group').forEach(g=>g.querySelector('.nav-group-btn').classList.toggle('active',!!g.querySelector('.nav-link.active')));
-    document.querySelectorAll('.nav-cta').forEach(b=>b.classList.toggle('active',b.dataset.page===p));
-    document.querySelectorAll('.nav-group.open').forEach(g=>g.classList.remove('open'));
-  }; })();
 </script>
 </body>
 </html>
