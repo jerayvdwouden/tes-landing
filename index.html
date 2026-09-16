@@ -1445,6 +1445,9 @@ tesMeet('pageview',location.pathname);
     <p class="cta-note">De bevestiging met de Zoom-link staat in je mail</p>
   </section>
 
+  <div id="ta-al-gedaan" class="div" style="display:none"><span>je jaardoel heb ik al &middot; tot snel</span></div>
+
+  <div id="ta-bereid-voor">
   <div class="div"><span>bereid je voor</span></div>
 
   <section>
@@ -1467,6 +1470,7 @@ tesMeet('pageview',location.pathname);
       <p style="margin-top:2.5rem;font-size:.72rem;color:var(--dim)"><span style="cursor:pointer;text-decoration:underline" onclick="trajectToonPagina()">&larr; Terug naar de trajectpagina</span></p>
     </div>
   </section>
+  </div>
 </div>
 </div>
 
@@ -1891,7 +1895,7 @@ tesMeet('pageview',location.pathname);
     </div>
 
     <!-- Calendly inline widget -->
-    <div class="calendly-inline-widget"
+    <div class="calendly-inline-widget" id="gesprek-cal"
          data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c"
          style="min-width:280px;height:620px;border-radius:12px;overflow:hidden"></div>
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -5883,7 +5887,8 @@ function sendLeadAndContinue() {
   var btn = document.querySelector('#jd-s4 .btn-next');
   var orig = btn ? btn.textContent : '';
   if (btn) { btn.disabled = true; btn.textContent = 'Bezig met versturen…'; }
-  var go = function(){ if (btn) { btn.disabled = false; btn.textContent = orig; } goToStep('gesprek'); };
+  var go = function(){ if (btn) { btn.disabled = false; btn.textContent = orig; } goToStep('gesprek'); calendlyHerlaad('gesprek-cal'); };
+  try { var _g = toolKlaarGegevens(); if (_g) localStorage.setItem('tes_tool_klaar', JSON.stringify(_g)); } catch (e) {}
   if (typeof LEADMAGNET_SERVICE_URL !== 'string' || LEADMAGNET_SERVICE_URL.indexOf('YOUR-SERVICE') !== -1) { go(); return; }
   if (window.tesMeet) tesMeet('stepper_complete', '/tool');
   var payload = buildLeadPayload();
@@ -5929,16 +5934,37 @@ function closeAvw() {
   setTimeout(function(){ if (ov && ov.parentNode) ov.parentNode.removeChild(ov); }, 220);
 }
 
-function openCalendly() {
+// ─── Calendly vooraf invullen ─────────────────────────────────────────────
+// De boekingspagina heeft één verplichte vraag: "Heb je de gratis tool al
+// ingevuld?" (a1). Wie de tool net heeft gedaan krijgt Ja + naam + e-mail al
+// ingevuld; een onbekende bezoeker op de Traject-pagina kiest zelf.
+function toolKlaarGegevens() {
   const gi = currentGoalIndex;
   const d  = goalData[gi] || {};
-  let url  = 'https://calendly.com/jryisahia/new-meeting';
-  const params = [];
-  var _fullNaam = ((d.jd_naam || '') + ' ' + (d.jd_achternaam || '')).trim();
-  if (_fullNaam)  params.push('name='  + encodeURIComponent(_fullNaam));
-  if (d.jd_email) params.push('email=' + encodeURIComponent(d.jd_email));
-  if (params.length) url += '?' + params.join('&');
-  window.open(url, '_blank', 'noopener,noreferrer');
+  var naam = ((d.jd_naam || '') + ' ' + (d.jd_achternaam || '')).trim();
+  if (naam || d.jd_email) return { naam: naam, email: d.jd_email || '' };
+  try { var v = JSON.parse(localStorage.getItem('tes_tool_klaar') || 'null'); if (v && (v.naam || v.email)) return v; } catch (e) {}
+  return null;
+}
+function calendlyParams(basisUrl) {
+  var g = toolKlaarGegevens();
+  if (!g) return basisUrl;
+  var params = ['a1=' + encodeURIComponent('Ja')];
+  if (g.naam)  params.push('name='  + encodeURIComponent(g.naam));
+  if (g.email) params.push('email=' + encodeURIComponent(g.email));
+  return basisUrl + (basisUrl.indexOf('?') >= 0 ? '&' : '?') + params.join('&');
+}
+// Laadt een inline widget opnieuw met de ingevulde gegevens (de widget is al
+// bij het laden van de pagina met de kale URL opgebouwd).
+function calendlyHerlaad(id) {
+  var el = document.getElementById(id); if (!el || !window.Calendly || !Calendly.initInlineWidget) return;
+  var url = calendlyParams(el.dataset.url);
+  if (el.dataset.geladen === url) return;
+  el.innerHTML = ''; el.dataset.geladen = url;
+  Calendly.initInlineWidget({ url: url, parentElement: el });
+}
+function openCalendly() {
+  window.open(calendlyParams('https://calendly.com/jryisahia/new-meeting'), '_blank', 'noopener,noreferrer');
 }
 
 // ─── Top 3 prioriteiten ───────────────────────────────────────────────────
@@ -6812,6 +6838,10 @@ function trajectToonAangemeld(){
   var v=document.getElementById('v10'), a=document.getElementById('traject-aangemeld'); if(!v||!a) return;
   v.style.display='none'; a.hidden=false;
   var f=document.getElementById('ta-video'); if(f&&!f.src) f.src=f.dataset.src.replace('TA_VIDEO_GUID',TA_VIDEO_GUID);
+  // Tool op dit apparaat al afgemaakt → niet nog een keer om het jaardoel vragen
+  var klaar=!!toolKlaarGegevens();
+  var b=document.getElementById('ta-bereid-voor'), g=document.getElementById('ta-al-gedaan');
+  if(b) b.style.display=klaar?'none':''; if(g) g.style.display=klaar?'':'none';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function trajectToonPagina(){
@@ -6827,7 +6857,14 @@ window.addEventListener('message',function(e){
   var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
   var plek=(fr&&fr.closest('#page-tool'))?'stepper':'traject';
   var p=(e.data.payload||{});
-  if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:String((p.event||{}).uri||''),invitee:String((p.invitee||{}).uri||'')});
+  var eventUri=String((p.event||{}).uri||''), inviteeUri=String((p.invitee||{}).uri||'');
+  if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:eventUri,invitee:inviteeUri});
+  // Boeking doorgeven aan de backend: die zet (of vult) de lead in het dashboard
+  try{
+    var g=(typeof toolKlaarGegevens==='function')?toolKlaarGegevens():null;
+    var body=JSON.stringify({invitee:inviteeUri,event:eventUri,plek:plek,naam:g?g.naam:'',email:g?g.email:'',sid:(window.tesBron?tesBron().sid:'')});
+    fetch('https://tes-backend-mbyy.onrender.com/api/planmeeting',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});
+  }catch(e){}
   if(plek==='traject') trajectAangemeld();
 });
 // chips → stepper (zelfde mechanisme als de homepage)
@@ -6858,7 +6895,7 @@ function v10NaarAgenda(){ v10InitCal(); var el=document.getElementById('v10-cal'
   var y=el.getBoundingClientRect().top+window.scrollY-84; window.scrollTo({top:y,behavior:'smooth'}); }
 // Calendly op de Traject-pagina: pas laden als de pagina zichtbaar is
 function v10InitCal(n){ n=n||0; const el=document.getElementById('v10-cal'); if(!el||el.querySelector('iframe')) return;
-  if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:el.dataset.url,parentElement:el}); }
+  if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:calendlyParams(el.dataset.url),parentElement:el}); }
   else if(n<20) setTimeout(()=>v10InitCal(n+1),500); }
 // Traject-pagina: reveal-animaties starten zodra de pagina getoond wordt
 (function(){ const sp=window.showPage; if(typeof sp==='function'){ window.showPage=function(p){ sp(p); if(p==='traject'){ if(trajectIsAangemeld()){ trajectToonAangemeld(); } else { trajectToonPagina(); v10InitCal(); } } }; } })();
