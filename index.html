@@ -1020,6 +1020,7 @@ tesMeet('pageview',location.pathname);
         <button class="nav-link nav-group-btn" type="button" onclick="toggleNavGroup(this)" aria-haspopup="true" aria-expanded="false">Gratis waarde <span class="chev">▾</span></button>
         <div class="nav-menu">
           <button class="nav-link" data-page="tool" onclick="showPage('tool');closeNavMenu()">Jaardoel in 5 minuten</button>
+          <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Gratis weggevers</button>
           <button class="nav-link" data-page="cursussen" onclick="closeNavMenu();window.location.href='/cursus'">Cursussen</button>
         </div>
       </div>
@@ -1951,6 +1952,138 @@ tesMeet('pageview',location.pathname);
 <!-- ═══════════════════════════════════════════
      PAGE: CURSUSSEN
 ════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════
+     PAGE: WEGGEVERS (gratis downloads)
+════════════════════════════════════════════ -->
+<style id="wg-css">
+#page-weggevers .wg-wrap{max-width:1100px;margin:0 auto;padding:3.5rem 1.25rem 0}
+.wg-head{text-align:center;max-width:640px;margin:0 auto 2.5rem}
+.wg-eye{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.wg-head h1{margin-bottom:.9rem}
+.wg-head h1 em{font-style:normal;color:var(--gold)}
+.wg-sub{color:var(--muted);font-size:1rem;line-height:1.65}
+/* begin hier */
+.wg-start{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:3rem}
+.wg-start-card{position:relative;overflow:hidden;background:linear-gradient(160deg,#141210,#0c0b09);border:1px solid var(--border2);border-radius:16px;padding:1.6rem 1.5rem 1.5rem;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s}
+.wg-start-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(201,168,76,.15)}
+.wg-start-card:before{content:'';position:absolute;inset:-40% auto auto -20%;width:60%;aspect-ratio:1;background:radial-gradient(circle,rgba(201,168,76,.16),transparent 65%);pointer-events:none}
+.wg-start-k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.6rem}
+.wg-start-t{font-family:'Abolition',sans-serif;font-size:1.7rem;letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin-bottom:.5rem}
+.wg-start-s{color:var(--muted);font-size:.9rem;line-height:1.55;margin-bottom:1.1rem}
+.wg-start-b{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+/* filters */
+.wg-cats{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:2.25rem}
+.wg-cat{background:none;border:1px solid var(--border);border-radius:999px;padding:.5rem 1rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .15s}
+.wg-cat:hover{border-color:var(--border2);color:var(--white)}
+.wg-cat.on{background:rgba(201,168,76,.12);border-color:var(--gold);color:var(--gold)}
+/* secties + kaarten */
+.wg-sec{margin-bottom:3rem}
+.wg-sec-h{font-family:'Abolition',sans-serif;font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2.6rem;display:flex;align-items:center;gap:1rem}
+.wg-sec-h:after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
+.wg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2.6rem 1.25rem}
+.wg-card{position:relative;background:linear-gradient(180deg,#131110,#0d0c0b);border:1px solid var(--border);border-radius:14px;padding:3rem 1.25rem 1.4rem;text-align:center;display:flex;flex-direction:column;transition:border-color .2s,transform .2s,box-shadow .2s}
+.wg-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.wg-ico{position:absolute;top:-34px;left:50%;transform:translateX(-50%);width:68px;height:68px;border-radius:50%;background:#0A0A0A;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px #0A0A0A,0 0 24px rgba(201,168,76,.12)}
+.wg-ico svg{width:28px;height:28px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wg-card:hover .wg-ico{border-color:var(--gold);box-shadow:0 0 0 6px #0A0A0A,0 0 30px rgba(201,168,76,.28)}
+.wg-t{font-family:'Abolition',sans-serif;font-size:1.35rem;letter-spacing:.03em;text-transform:uppercase;line-height:1.08;margin-bottom:.5rem;color:var(--white)}
+.wg-s{color:var(--muted);font-size:.86rem;line-height:1.5;margin-bottom:1.1rem;flex:1}
+.wg-btn{background:linear-gradient(135deg,#E8C97A 0%,#C9A84C 40%,#F0D98A 65%,#C9A84C 100%);color:#000;border:none;border-radius:4px;padding:.75rem 1.4rem;font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s}
+.wg-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,.28)}
+.wg-empty{text-align:center;color:var(--muted);padding:2.5rem 1rem;border:1px dashed var(--border);border-radius:14px;font-size:.9rem}
+/* cta-banner */
+.wg-cta{position:relative;overflow:hidden;margin:1rem 0 2rem;padding:2.6rem 1.5rem;border:1px solid var(--border2);border-radius:18px;background:radial-gradient(ellipse at 20% 0%,rgba(201,168,76,.14),transparent 55%),linear-gradient(160deg,#141210,#0a0a0a);text-align:center}
+.wg-cta-k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.wg-cta h2{font-family:'Abolition',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:.05em;text-transform:uppercase;line-height:1.05;margin-bottom:.6rem}
+.wg-cta p{color:var(--muted);max-width:520px;margin:0 auto 1.4rem;font-size:.95rem;line-height:1.6}
+/* modal */
+.wg-ov{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px}
+.wg-ov.show{display:flex}
+.wg-modal{background:#0d0d0d;border:1px solid var(--border2);border-radius:18px;width:100%;max-width:440px;max-height:90vh;overflow:auto;padding:1.6rem 1.5rem 1.5rem;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+.wg-x{position:absolute;top:.8rem;right:.9rem;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;line-height:1}
+.wg-m-k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.wg-m-t{font-family:'Abolition',sans-serif;font-size:1.7rem;letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin-bottom:.35rem}
+.wg-m-s{color:var(--muted);font-size:.88rem;line-height:1.55;margin-bottom:1.2rem}
+.wg-modal .field label{color:var(--muted)}
+.wg-modal .jd-input{margin:0}
+.wg-modal select.jd-input option{background:#111}
+.wg-m-fine{font-size:.72rem;color:var(--dim);margin-top:.8rem;text-align:center}
+.wg-ok{display:none;text-align:center;padding:.5rem 0 0}
+.wg-ok .wg-m-t{margin-bottom:.6rem}
+.wg-ok a{color:var(--gold)}
+@media(max-width:640px){.wg-start{grid-template-columns:1fr}#page-weggevers .wg-wrap{padding-top:2.25rem}.wg-grid{grid-template-columns:1fr 1fr;gap:2.6rem .8rem}.wg-card{padding:2.8rem .9rem 1.2rem}.wg-t{font-size:1.15rem}.wg-s{font-size:.8rem}.wg-btn{padding:.7rem 1rem;font-size:.6rem}}
+@media(max-width:400px){.wg-grid{grid-template-columns:1fr}}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wg-i-doel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
+  <symbol id="wg-i-plan" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3M13 14h3M8 17.5h3"/></symbol>
+  <symbol id="wg-i-boek" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h13"/><path d="M9 7h6"/></symbol>
+  <symbol id="wg-i-lijst" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M3.5 6l1.2 1.2L7 4.8M3.5 12l1.2 1.2L7 10.8M3.5 18l1.2 1.2L7 16.8"/></symbol>
+  <symbol id="wg-i-vlam" viewBox="0 0 24 24"><path d="M12 3c1 3 4 4.5 4 8.5A4 4 0 0 1 8 11.5c0-1 .3-1.8.8-2.5.3 1 .9 1.6 1.7 1.8C10 8 10.5 5.5 12 3z"/><path d="M12 21a6 6 0 0 1-6-6c0-1.5.5-2.8 1.3-3.8"/><path d="M18 15a6 6 0 0 1-6 6"/></symbol>
+  <symbol id="wg-i-kompas" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+  <symbol id="wg-i-grafiek" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 15l3-4 3 2 5-6"/></symbol>
+  <symbol id="wg-i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M13 8l3 3"/></symbol>
+</svg>
+<div class="page" id="page-weggevers">
+<div class="wg-wrap">
+  <div class="wg-head">
+    <div class="wg-eye">Gratis waarde</div>
+    <h1>Gratis <em>weggevers</em></h1>
+    <p class="wg-sub">Werkbladen, templates en checklists uit The Execution System. Kies wat je nodig hebt, vul je e-mail in en je hebt 'm direct.</p>
+  </div>
+
+  <div class="wg-start">
+    <div class="wg-start-card" onclick="showPage('tool')">
+      <div class="wg-start-k">Begin hier · 5 minuten</div>
+      <div class="wg-start-t">Jouw jaardoel op papier</div>
+      <div class="wg-start-s">Beantwoord een paar vragen en je hebt jouw doel voor dit jaar, met een eerste plan, in je mail.</div>
+      <span class="wg-start-b">Start de tool &rarr;</span>
+    </div>
+    <div class="wg-start-card" onclick="window.location.href='/cursus'">
+      <div class="wg-start-k">Gratis cursus · 24 lessen</div>
+      <div class="wg-start-t">De methode, stap voor stap</div>
+      <div class="wg-start-s">De complete methode achter The Execution System in 5 modules, om in je eigen tempo te volgen.</div>
+      <span class="wg-start-b">Bekijk de cursus &rarr;</span>
+    </div>
+  </div>
+
+  <div class="wg-cats" id="wg-cats" hidden></div>
+  <div id="wg-lijst"><div class="wg-empty">Weggevers laden&hellip;</div></div>
+
+  <div class="wg-cta">
+    <div class="wg-cta-k">Wil je meer dan een pdf?</div>
+    <h2>Jouw belangrijkste doel.<br>In twaalf weken gehaald.</h2>
+    <p>Persoonlijke begeleiding, wekelijkse meetings en een systeem dat je consistent houdt. Met resultaatgarantie.</p>
+    <button class="btn-primary" onclick="showPage('traject')">Bekijk het traject &rarr;</button>
+  </div>
+</div>
+
+<div class="wg-ov" id="wg-ov" onclick="if(event.target===this)wgSluit()">
+  <div class="wg-modal" role="dialog" aria-modal="true">
+    <button class="wg-x" onclick="wgSluit()" aria-label="Sluiten">&times;</button>
+    <form id="wg-form" onsubmit="wgVerstuur(event)">
+      <div class="wg-m-k">Gratis download</div>
+      <div class="wg-m-t" id="wg-m-t"></div>
+      <div class="wg-m-s" id="wg-m-s">Vul je gegevens in en de pdf komt direct.</div>
+      <div class="field"><label>Voornaam</label><input class="jd-input" id="wg-naam" autocomplete="given-name" placeholder="Jouw voornaam"/></div>
+      <div class="field"><label>E-mailadres</label><input class="jd-input" id="wg-email" type="email" required autocomplete="email" placeholder="jij@voorbeeld.nl"/></div>
+      <div class="field"><label>Hoe ken je mij? <span style="text-transform:none;letter-spacing:0">(mag leeg)</span></label>
+        <select class="jd-input" id="wg-hoe" onchange="wgHoeChange()"><option value="">&mdash;</option><option>YouTube</option><option>Instagram</option><option>TikTok</option><option>LinkedIn</option><option value="Via iemand anders">Via iemand anders</option><option value="Anders">Anders</option></select>
+      </div>
+      <div class="field" id="wg-hoe-anders-wrap" style="display:none"><label>Namelijk</label><input class="jd-input" id="wg-hoe-anders" placeholder="Bijv. een podcast, een vriend&hellip;"/></div>
+      <div class="field" id="wg-door-wrap" style="display:none"><label>Door wie ben je doorverwezen?</label><input class="jd-input" id="wg-door" placeholder="Voornaam"/></div>
+      <button class="btn-next" id="wg-btn" type="submit" style="width:100%">Stuur mij de pdf &rarr;</button>
+      <div class="wg-m-fine">Je krijgt de pdf direct. Geen spam, afmelden kan altijd.</div>
+    </form>
+    <div class="wg-ok" id="wg-ok">
+      <div class="wg-m-k">Gelukt</div>
+      <div class="wg-m-t">De download start</div>
+      <p class="wg-m-s">Start hij niet vanzelf? <a id="wg-dl" href="#" target="_blank" rel="noopener">Klik dan hier.</a></p>
+      <button class="btn-next" type="button" onclick="wgSluit()" style="width:100%">Sluiten</button>
+    </div>
+  </div>
+</div>
+</div>
 <div class="page" id="page-cursussen">
 <div class="mc-wrap">
 
@@ -6910,6 +7043,74 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.nav-group')) docum
     document.querySelectorAll('.nav-cta').forEach(b=>b.classList.toggle('active',b.dataset.page===p));
     document.querySelectorAll('.nav-group.open').forEach(g=>g.classList.remove('open'));
   }; })();
+</script>
+<script>
+// ─── Weggevers-pagina ─────────────────────────────────────────
+var WG_API='https://tes-backend-mbyy.onrender.com';
+var WG_ICONEN=['doel','plan','boek','lijst','vlam','kompas','grafiek','pen'];
+var WG_LIJST=null, WG_CAT='', WG_HUIDIG=null;
+function wgEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function wgLaad(){
+  if (WG_LIJST) { wgRender(); return; }
+  fetch(WG_API+'/api/weggevers').then(function(r){ return r.json(); })
+    .then(function(d){ WG_LIJST=(d&&d.weggevers)||[]; wgRender(); })
+    .catch(function(){ WG_LIJST=[]; wgRender(); });
+}
+function wgKaart(w){
+  var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel';
+  return '<div class="wg-card"><div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>'
+    +'<div class="wg-t">'+wgEsc(w.titel)+'</div>'
+    +'<div class="wg-s">'+wgEsc(w.beschrijving||'')+'</div>'
+    +'<div><button class="wg-btn" type="button" onclick="wgOpen(\''+wgEsc(w.slug)+'\')">Download &rarr;</button></div></div>';
+}
+function wgRender(){
+  var lijst=document.getElementById('wg-lijst'), cats=document.getElementById('wg-cats');
+  if (!WG_LIJST.length){ lijst.innerHTML='<div class="wg-empty">De eerste weggevers komen eraan. Begin ondertussen met de tool of de cursus hierboven.</div>'; cats.hidden=true; return; }
+  var namen=[]; WG_LIJST.forEach(function(w){ var c=(w.categorie||'').trim(); if(c&&namen.indexOf(c)<0) namen.push(c); });
+  if (namen.length>1){
+    cats.hidden=false;
+    cats.innerHTML=['<button class="wg-cat'+(WG_CAT?'':' on')+'" onclick="wgFilter(\'\')">Alles</button>'].concat(namen.map(function(c){ return '<button class="wg-cat'+(WG_CAT===c?' on':'')+'" onclick="wgFilter(\''+wgEsc(c)+'\')">'+wgEsc(c)+'</button>'; })).join('');
+  } else cats.hidden=true;
+  var groepen={}, volgorde=[];
+  WG_LIJST.forEach(function(w){ var c=(w.categorie||'').trim()||'Downloads'; if(WG_CAT&&c!==WG_CAT) return; if(!groepen[c]){ groepen[c]=[]; volgorde.push(c); } groepen[c].push(w); });
+  lijst.innerHTML=volgorde.map(function(c){ return '<div class="wg-sec">'+(namen.length>1||c!=='Downloads'?'<div class="wg-sec-h">'+wgEsc(c)+'</div>':'')+'<div class="wg-grid">'+groepen[c].map(wgKaart).join('')+'</div></div>'; }).join('');
+}
+function wgFilter(c){ WG_CAT=c; wgRender(); }
+function wgOpen(slug){
+  var w=(WG_LIJST||[]).filter(function(x){ return x.slug===slug; })[0]; if(!w) return;
+  WG_HUIDIG=w;
+  document.getElementById('wg-m-t').textContent=w.titel;
+  document.getElementById('wg-form').style.display=''; document.getElementById('wg-ok').style.display='none';
+  var b=document.getElementById('wg-btn'); b.disabled=false;
+  // Naam en e-mail al bekend van de tool? Dan alvast invullen.
+  var g=(typeof toolKlaarGegevens==='function')?toolKlaarGegevens():null;
+  if(g){ if(g.naam&&!document.getElementById('wg-naam').value) document.getElementById('wg-naam').value=g.naam.split(' ')[0]; if(g.email&&!document.getElementById('wg-email').value) document.getElementById('wg-email').value=g.email; }
+  document.getElementById('wg-ov').classList.add('show');
+  if(window.tesMeet) tesMeet('pageview','/weggevers/'+slug,{weggever:slug});
+  setTimeout(function(){ (document.getElementById('wg-naam').value?document.getElementById('wg-email'):document.getElementById('wg-naam')).focus(); },50);
+}
+function wgSluit(){ document.getElementById('wg-ov').classList.remove('show'); }
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') wgSluit(); });
+function wgHoeChange(){ var v=document.getElementById('wg-hoe').value; document.getElementById('wg-hoe-anders-wrap').style.display=v==='Anders'?'':'none'; document.getElementById('wg-door-wrap').style.display=v==='Via iemand anders'?'':'none'; }
+function wgVerstuur(e){
+  e.preventDefault(); if(!WG_HUIDIG) return;
+  var b=document.getElementById('wg-btn'); b.disabled=true; var orig=b.textContent; b.textContent='Bezig…';
+  var h=document.getElementById('wg-hoe').value; if(h==='Anders'&&document.getElementById('wg-hoe-anders').value.trim()) h='Anders: '+document.getElementById('wg-hoe-anders').value.trim();
+  var m=window.tesBron?tesBron():{sid:'',eb:'',lb:''};
+  fetch(WG_API+'/api/weggever/'+encodeURIComponent(WG_HUIDIG.slug),{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({naam:document.getElementById('wg-naam').value,email:document.getElementById('wg-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wg-door').value,sid:m.sid,eb:m.eb,lb:m.lb})})
+  .then(function(r){ return r.json(); }).then(function(d){
+    if(!d.ok){ alert(d.error||'Er ging iets mis.'); b.disabled=false; b.textContent=orig; return; }
+    var url=d.download+'&sid='+encodeURIComponent(m.sid)+'&eb='+encodeURIComponent(m.eb)+'&lb='+encodeURIComponent(m.lb);
+    document.getElementById('wg-form').style.display='none'; document.getElementById('wg-ok').style.display='block'; document.getElementById('wg-dl').href=url;
+    b.disabled=false; b.textContent=orig;
+    window.location.href=url;
+  }).catch(function(){ alert('Er ging iets mis. Probeer het opnieuw.'); b.disabled=false; b.textContent=orig; });
+}
+// Pagina tonen → lijst laden
+(function(){ var sp=window.showPage; if(typeof sp!=='function') return; window.showPage=function(p){ sp(p); if(p==='weggevers') wgLaad(); };
+  // Direct via /#weggevers geopend? Dan is de pagina al getoond vóór deze code liep.
+  var pg=document.getElementById('page-weggevers'); if(pg&&pg.classList.contains('active')) wgLaad(); })();
 </script>
 </body>
 </html>
