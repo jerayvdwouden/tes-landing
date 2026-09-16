@@ -2012,6 +2012,9 @@ tesMeet('pageview',location.pathname);
 .wg-modal .jd-input{margin:0}
 .wg-modal select.jd-input option{background:#111}
 .wg-m-fine{font-size:.72rem;color:var(--dim);margin-top:.8rem;text-align:center}
+.wg-snel-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center;color:var(--muted);font-size:.9rem;line-height:1.5;margin-bottom:1rem}
+.wg-snel-box strong{color:var(--white);font-weight:500;word-break:break-all}
+.wg-link{color:var(--gold);cursor:pointer;text-decoration:underline}
 .wg-ok{display:none;text-align:center;padding:.5rem 0 0}
 .wg-ok .wg-m-t{margin-bottom:.6rem}
 .wg-ok a{color:var(--gold)}
@@ -2071,6 +2074,12 @@ tesMeet('pageview',location.pathname);
       <div class="wg-m-k">Gratis download</div>
       <div class="wg-m-t" id="wg-m-t"></div>
       <div class="wg-m-s" id="wg-m-s">Vul je gegevens in en de pdf komt direct.</div>
+      <div id="wg-snel" style="display:none">
+        <div class="wg-snel-box">Ik ken je al. Sturen naar<br><strong id="wg-snel-email"></strong>?</div>
+        <button class="btn-next" id="wg-snel-btn" type="submit" style="width:100%">Ja, stuur mij de pdf &rarr;</button>
+        <div class="wg-m-fine"><span class="wg-link" onclick="wgAnderAdres()">Ander e-mailadres gebruiken</span></div>
+      </div>
+      <div id="wg-velden">
       <div class="field"><label>Voornaam</label><input class="jd-input" id="wg-naam" autocomplete="given-name" placeholder="Jouw voornaam"/></div>
       <div class="field"><label>E-mailadres</label><input class="jd-input" id="wg-email" type="email" required autocomplete="email" placeholder="jij@voorbeeld.nl"/></div>
       <div class="field"><label>Hoe ken je mij? <span style="text-transform:none;letter-spacing:0">(mag leeg)</span></label>
@@ -2080,6 +2089,7 @@ tesMeet('pageview',location.pathname);
       <div class="field" id="wg-door-wrap" style="display:none"><label>Door wie ben je doorverwezen?</label><input class="jd-input" id="wg-door" placeholder="Voornaam"/></div>
       <button class="btn-next" id="wg-btn" type="submit" style="width:100%">Stuur mij de pdf &rarr;</button>
       <div class="wg-m-fine">Je krijgt de pdf direct. Geen spam, afmelden kan altijd.</div>
+      </div>
     </form>
     <div class="wg-ok" id="wg-ok">
       <div class="wg-m-k">Gelukt</div>
@@ -7088,25 +7098,38 @@ function wgOpen(slug){
   document.getElementById('wg-m-t').textContent=w.titel;
   document.getElementById('wg-form').style.display=''; document.getElementById('wg-ok').style.display='none';
   var b=document.getElementById('wg-btn'); b.disabled=false;
-  // Naam en e-mail al bekend van de tool? Dan alvast invullen.
-  var g=(typeof toolKlaarGegevens==='function')?toolKlaarGegevens():null;
-  if(g){ if(g.naam&&!document.getElementById('wg-naam').value) document.getElementById('wg-naam').value=g.naam.split(' ')[0]; if(g.email&&!document.getElementById('wg-email').value) document.getElementById('wg-email').value=g.email; }
+  // Al bekend (eerdere download of de tool)? Dan één knop i.p.v. het formulier.
+  var g=wgBekend();
+  if(g){ if(g.naam&&!document.getElementById('wg-naam').value) document.getElementById('wg-naam').value=g.naam.split(' ')[0]; if(g.email) document.getElementById('wg-email').value=g.email; }
+  var snel=!!(g&&g.email);
+  document.getElementById('wg-snel').style.display=snel?'':'none';
+  document.getElementById('wg-velden').style.display=snel?'none':'';
+  document.getElementById('wg-m-s').textContent=snel?'Eén klik en de pdf komt direct.':'Vul je gegevens in en de pdf komt direct.';
+  if(snel) document.getElementById('wg-snel-email').textContent=g.email;
   document.getElementById('wg-ov').classList.add('show');
   if(window.tesMeet) tesMeet('pageview','/weggevers/'+slug,{weggever:slug});
-  setTimeout(function(){ (document.getElementById('wg-naam').value?document.getElementById('wg-email'):document.getElementById('wg-naam')).focus(); },50);
+  if(!snel) setTimeout(function(){ (document.getElementById('wg-naam').value?document.getElementById('wg-email'):document.getElementById('wg-naam')).focus(); },50);
 }
+// Wie is dit? Eerst de tool (naam + e-mail), anders een eerdere download op dit apparaat.
+function wgBekend(){
+  var g=(typeof toolKlaarGegevens==='function')?toolKlaarGegevens():null; if(g&&g.email) return g;
+  try{ var v=JSON.parse(localStorage.getItem('tes_contact')||'null'); if(v&&v.email) return v; }catch(e){}
+  return null;
+}
+function wgAnderAdres(){ document.getElementById('wg-snel').style.display='none'; document.getElementById('wg-velden').style.display=''; document.getElementById('wg-email').value=''; document.getElementById('wg-m-s').textContent='Vul je gegevens in en de pdf komt direct.'; document.getElementById('wg-email').focus(); }
 function wgSluit(){ document.getElementById('wg-ov').classList.remove('show'); }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') wgSluit(); });
 function wgHoeChange(){ var v=document.getElementById('wg-hoe').value; document.getElementById('wg-hoe-anders-wrap').style.display=v==='Anders'?'':'none'; document.getElementById('wg-door-wrap').style.display=v==='Via iemand anders'?'':'none'; }
 function wgVerstuur(e){
   e.preventDefault(); if(!WG_HUIDIG) return;
-  var b=document.getElementById('wg-btn'); b.disabled=true; var orig=b.textContent; b.textContent='Bezig…';
+  var b=document.getElementById('wg-snel').style.display==='none'?document.getElementById('wg-btn'):document.getElementById('wg-snel-btn'); b.disabled=true; var orig=b.textContent; b.textContent='Bezig…';
   var h=document.getElementById('wg-hoe').value; if(h==='Anders'&&document.getElementById('wg-hoe-anders').value.trim()) h='Anders: '+document.getElementById('wg-hoe-anders').value.trim();
   var m=window.tesBron?tesBron():{sid:'',eb:'',lb:''};
   fetch(WG_API+'/api/weggever/'+encodeURIComponent(WG_HUIDIG.slug),{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({naam:document.getElementById('wg-naam').value,email:document.getElementById('wg-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wg-door').value,sid:m.sid,eb:m.eb,lb:m.lb})})
   .then(function(r){ return r.json(); }).then(function(d){
     if(!d.ok){ alert(d.error||'Er ging iets mis.'); b.disabled=false; b.textContent=orig; return; }
+    try{ localStorage.setItem('tes_contact',JSON.stringify({naam:document.getElementById('wg-naam').value.trim(),email:document.getElementById('wg-email').value.trim().toLowerCase()})); }catch(e){}
     var url=d.download+'&sid='+encodeURIComponent(m.sid)+'&eb='+encodeURIComponent(m.eb)+'&lb='+encodeURIComponent(m.lb);
     document.getElementById('wg-form').style.display='none'; document.getElementById('wg-ok').style.display='block'; document.getElementById('wg-dl').href=url;
     b.disabled=false; b.textContent=orig;
