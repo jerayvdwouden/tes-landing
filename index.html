@@ -1963,7 +1963,9 @@ tesMeet('pageview',location.pathname);
 .wg-head h1 em{font-style:normal;color:var(--gold)}
 .wg-sub{color:var(--muted);font-size:1rem;line-height:1.65}
 /* begin hier */
-.wg-start{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:3rem}
+.wg-start{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:3rem}
+.wg-start-traject{border-color:var(--gold);background:linear-gradient(160deg,#1a1610,#0c0b09)}
+.wg-start-traject:before{background:radial-gradient(circle,rgba(201,168,76,.3),transparent 65%)}
 .wg-start-card{position:relative;overflow:hidden;background:linear-gradient(160deg,#141210,#0c0b09);border:1px solid var(--border2);border-radius:16px;padding:1.6rem 1.5rem 1.5rem;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s}
 .wg-start-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(201,168,76,.15)}
 .wg-start-card:before{content:'';position:absolute;inset:-40% auto auto -20%;width:60%;aspect-ratio:1;background:radial-gradient(circle,rgba(201,168,76,.16),transparent 65%);pointer-events:none}
@@ -1991,11 +1993,6 @@ tesMeet('pageview',location.pathname);
 .wg-btn{background:linear-gradient(135deg,#E8C97A 0%,#C9A84C 40%,#F0D98A 65%,#C9A84C 100%);color:#000;border:none;border-radius:4px;padding:.75rem 1.4rem;font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s}
 .wg-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,.28)}
 .wg-empty{text-align:center;color:var(--muted);padding:2.5rem 1rem;border:1px dashed var(--border);border-radius:14px;font-size:.9rem}
-/* cta-banner */
-.wg-cta{position:relative;overflow:hidden;margin:1rem 0 2rem;padding:2.6rem 1.5rem;border:1px solid var(--border2);border-radius:18px;background:radial-gradient(ellipse at 20% 0%,rgba(201,168,76,.14),transparent 55%),linear-gradient(160deg,#141210,#0a0a0a);text-align:center}
-.wg-cta-k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
-.wg-cta h2{font-family:'Abolition',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:.05em;text-transform:uppercase;line-height:1.05;margin-bottom:.6rem}
-.wg-cta p{color:var(--muted);max-width:520px;margin:0 auto 1.4rem;font-size:.95rem;line-height:1.6}
 /* modal */
 .wg-ov{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px}
 .wg-ov.show{display:flex}
@@ -2011,6 +2008,7 @@ tesMeet('pageview',location.pathname);
 .wg-ok{display:none;text-align:center;padding:.5rem 0 0}
 .wg-ok .wg-m-t{margin-bottom:.6rem}
 .wg-ok a{color:var(--gold)}
+@media(max-width:900px){.wg-start{grid-template-columns:1fr 1fr}.wg-start-traject{grid-column:1/-1}}
 @media(max-width:640px){.wg-start{grid-template-columns:1fr}#page-weggevers .wg-wrap{padding-top:2.25rem}.wg-grid{grid-template-columns:1fr 1fr;gap:2.6rem .8rem}.wg-card{padding:2.8rem .9rem 1.2rem}.wg-t{font-size:1.15rem}.wg-s{font-size:.8rem}.wg-btn{padding:.7rem 1rem;font-size:.6rem}}
 @media(max-width:400px){.wg-grid{grid-template-columns:1fr}}
 </style>
@@ -2045,17 +2043,17 @@ tesMeet('pageview',location.pathname);
       <div class="wg-start-s">De complete methode achter The Execution System in 5 modules, om in je eigen tempo te volgen.</div>
       <span class="wg-start-b">Bekijk de cursus &rarr;</span>
     </div>
+    <div class="wg-start-card wg-start-traject" onclick="showPage('traject')">
+      <div class="wg-start-k">Het traject &middot; 12 weken</div>
+      <div class="wg-start-t">Jouw doel. Gehaald.</div>
+      <div class="wg-start-s">Persoonlijke begeleiding, wekelijkse meetings en een systeem dat je consistent houdt. Met resultaatgarantie.</div>
+      <span class="wg-start-b">Bekijk het traject &rarr;</span>
+    </div>
   </div>
 
   <div class="wg-cats" id="wg-cats" hidden></div>
   <div id="wg-lijst"><div class="wg-empty">Weggevers laden&hellip;</div></div>
 
-  <div class="wg-cta">
-    <div class="wg-cta-k">Wil je meer dan een pdf?</div>
-    <h2>Jouw belangrijkste doel.<br>In twaalf weken gehaald.</h2>
-    <p>Persoonlijke begeleiding, wekelijkse meetings en een systeem dat je consistent houdt. Met resultaatgarantie.</p>
-    <button class="btn-primary" onclick="showPage('traject')">Bekijk het traject &rarr;</button>
-  </div>
 </div>
 
 <div class="wg-ov" id="wg-ov" onclick="if(event.target===this)wgSluit()">
