@@ -1993,6 +1993,13 @@ tesMeet('pageview',location.pathname);
 .wg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2.6rem 1.25rem}
 .wg-card{position:relative;background:linear-gradient(180deg,#131110,#0d0c0b);border:1px solid var(--border);border-radius:14px;padding:3rem 1.25rem 1.4rem;text-align:center;display:flex;flex-direction:column;transition:border-color .2s,transform .2s,box-shadow .2s}
 .wg-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.wg-card{cursor:pointer}
+.wg-card.met-thumb{padding-top:0;overflow:hidden}
+.wg-thumb{aspect-ratio:16/9;background:#0c0c0c;border-bottom:1px solid var(--border);margin:0 -1.25rem 2.6rem}
+.wg-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:saturate(.9);border-radius:14px 14px 0 0}
+.wg-card.met-thumb{overflow:visible}
+.wg-thumb{position:relative;overflow:visible}
+.wg-card.met-thumb .wg-thumb .wg-ico{top:auto;bottom:-34px}
 .wg-ico{position:absolute;top:-34px;left:50%;transform:translateX(-50%);width:68px;height:68px;border-radius:50%;background:#0A0A0A;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px #0A0A0A,0 0 24px rgba(201,168,76,.12)}
 .wg-ico svg{width:28px;height:28px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .wg-card:hover .wg-ico{border-color:var(--gold);box-shadow:0 0 0 6px #0A0A0A,0 0 30px rgba(201,168,76,.28)}
@@ -2097,6 +2104,122 @@ tesMeet('pageview',location.pathname);
       <div class="wg-m-t">De download start</div>
       <p class="wg-m-s">Start hij niet vanzelf? <a id="wg-dl" href="#" target="_blank" rel="noopener">Klik dan hier.</a></p>
       <button class="btn-next" type="button" onclick="wgSluit()" style="width:100%">Sluiten</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- ═══════════════════════════════════════════
+     PAGE: WEGGEVER (één weggever, met preview)
+════════════════════════════════════════════ -->
+<style id="wd-css">
+#page-weggever .wd-wrap{max-width:1100px;margin:0 auto;padding:2.2rem 1.25rem 0}
+.wd-terug{display:inline-block;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;margin-bottom:1.6rem}
+.wd-terug:hover{color:var(--gold)}
+.wd-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:start}
+/* preview */
+.wd-preview{position:relative;aspect-ratio:1/1;overflow:hidden;border-radius:16px}
+.wd-pg{position:absolute;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.6),0 0 0 1px rgba(201,168,76,.18);background:#f4f1ec;aspect-ratio:210/297}
+.wd-pg img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.wd-pg-2{left:22%;top:0;width:66%;transform:rotate(3deg);filter:blur(2.5px) brightness(.72);z-index:1}
+.wd-pg-1{left:2%;top:2.4rem;width:66%;transform:rotate(-2.5deg);z-index:2}
+.wd-pg-2:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,0) 30%,rgba(10,10,10,.85) 100%)}
+.wd-preview:after{content:'';position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(180deg,rgba(10,10,10,0),var(--bg) 70%);z-index:3;pointer-events:none}
+.wd-pages{position:absolute;left:50%;transform:translateX(-50%);bottom:1.2rem;z-index:4;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border2);border-radius:999px;padding:.5rem .9rem;background:rgba(10,10,10,.85);backdrop-filter:blur(6px)}
+.wd-preview.geen{display:flex;align-items:center;justify-content:center;min-height:320px;border:1px dashed var(--border);border-radius:16px}
+.wd-preview.geen .wg-ico{position:static;transform:none;width:110px;height:110px;box-shadow:none}
+.wd-preview.geen .wg-ico svg{width:46px;height:46px}
+/* tekst + formulier */
+.wd-eye{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.wd-h1{font-family:'Abolition',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:.03em;text-transform:uppercase;line-height:1;margin-bottom:.8rem}
+.wd-sub{color:var(--muted);font-size:1.02rem;line-height:1.6;margin-bottom:1.3rem}
+.wd-punten{list-style:none;padding:0;margin:0 0 1.6rem}
+.wd-punten li{position:relative;padding-left:1.4rem;margin-bottom:.5rem;color:var(--white);font-size:.92rem;line-height:1.5}
+.wd-punten li:before{content:'';position:absolute;left:0;top:.55rem;width:.55rem;height:.55rem;border-radius:50%;background:var(--gold)}
+.wd-form{background:linear-gradient(180deg,#131110,#0d0c0b);border:1px solid var(--border2);border-radius:16px;padding:1.4rem 1.4rem 1.2rem}
+.wd-form-k{font-family:'Abolition',sans-serif;font-size:1.25rem;letter-spacing:.03em;text-transform:uppercase;margin-bottom:.2rem}
+.wd-form-s{color:var(--muted);font-size:.85rem;margin-bottom:1rem}
+.wd-form .field{margin-bottom:.9rem}
+.wd-form .field label{color:var(--muted)}
+.wd-fine{font-size:.7rem;color:var(--dim);margin-top:.7rem;text-align:center}
+.wd-ok{display:none;text-align:center;padding:.4rem 0 0}
+.wd-ok .wd-form-k{margin-bottom:.4rem}
+.wd-ok a{color:var(--gold)}
+/* verder kijken */
+.wd-sec{margin-top:4rem}
+.wd-sec-h{font-family:'Abolition',sans-serif;font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2.6rem;display:flex;align-items:center;gap:1rem}
+.wd-sec-h:after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)}
+.wd-sec .wg-start{margin-bottom:0}
+@media(max-width:820px){.wd-hero{grid-template-columns:1fr;gap:1.5rem}.wd-preview{max-width:420px;margin:0 auto;width:100%}.wd-pg-1{top:1.6rem}}
+@media(max-width:640px){#page-weggever .wd-wrap{padding-top:1.4rem}}
+</style>
+<div class="page" id="page-weggever">
+<div class="wd-wrap">
+  <span class="wd-terug" onclick="showPage('weggevers')">&larr; Alle weggevers</span>
+  <div class="wd-hero">
+    <div class="wd-preview" id="wd-preview"></div>
+    <div>
+      <div class="wd-eye" id="wd-eye">Gratis weggever</div>
+      <h1 class="wd-h1" id="wd-titel">&nbsp;</h1>
+      <p class="wd-sub" id="wd-sub"></p>
+      <ul class="wd-punten" id="wd-punten"></ul>
+      <div class="wd-form">
+        <form id="wd-form" onsubmit="wdVerstuur(event)">
+          <div class="wd-form-k" id="wd-form-k">Stuur mij de pdf</div>
+          <div class="wd-form-s" id="wd-form-s">Vul je gegevens in en je hebt 'm direct.</div>
+          <div id="wd-snel" style="display:none">
+            <div class="wg-snel-box">Ik ken je al. Sturen naar<br><strong id="wd-snel-email"></strong>?</div>
+            <button class="btn-next" id="wd-snel-btn" type="submit" style="width:100%">Ja, stuur mij de pdf &rarr;</button>
+            <div class="wd-fine"><span class="wg-link" onclick="wdAnderAdres()">Ander e-mailadres gebruiken</span></div>
+          </div>
+          <div id="wd-velden">
+            <div class="field"><label>Voornaam</label><input class="jd-input" id="wd-naam" autocomplete="given-name" placeholder="Jouw voornaam"/></div>
+            <div class="field"><label>E-mailadres</label><input class="jd-input" id="wd-email" type="email" required autocomplete="email" placeholder="jij@voorbeeld.nl"/></div>
+            <div class="field"><label>Hoe ken je mij? <span style="text-transform:none;letter-spacing:0">(mag leeg)</span></label>
+              <select class="jd-input" id="wd-hoe" onchange="wdHoeChange()"><option value="">&mdash;</option><option>YouTube</option><option>Instagram</option><option>TikTok</option><option>LinkedIn</option><option value="Via iemand anders">Via iemand anders</option><option value="Anders">Anders</option></select>
+            </div>
+            <div class="field" id="wd-hoe-anders-wrap" style="display:none"><label>Namelijk</label><input class="jd-input" id="wd-hoe-anders" placeholder="Bijv. een podcast, een vriend&hellip;"/></div>
+            <div class="field" id="wd-door-wrap" style="display:none"><label>Door wie ben je doorverwezen?</label><input class="jd-input" id="wd-door" placeholder="Voornaam"/></div>
+            <button class="btn-next" id="wd-btn" type="submit" style="width:100%">Stuur mij de pdf &rarr;</button>
+            <div class="wd-fine">Je krijgt de pdf direct. Geen spam, afmelden kan altijd.</div>
+          </div>
+        </form>
+        <div class="wd-ok" id="wd-ok">
+          <div class="wd-eye">Gelukt</div>
+          <div class="wd-form-k">De download start</div>
+          <p class="wd-form-s">Start hij niet vanzelf? <a id="wd-dl" href="#" target="_blank" rel="noopener">Klik dan hier.</a></p>
+          <button class="btn-next" type="button" onclick="showPage('tool')" style="width:100%">Volgende stap: jouw jaardoel in 5 minuten &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wd-sec" id="wd-andere-sec" hidden>
+    <div class="wd-sec-h">Ook gratis</div>
+    <div class="wg-grid" id="wd-andere"></div>
+  </div>
+
+  <div class="wd-sec">
+    <div class="wd-sec-h">Verder kijken</div>
+    <div class="wg-start">
+      <div class="wg-start-card" onclick="showPage('tool')">
+        <div class="wg-start-k">Begin hier · 5 minuten</div>
+        <div class="wg-start-t">Jouw jaardoel op papier</div>
+        <div class="wg-start-s">Beantwoord een paar vragen en je hebt jouw doel voor dit jaar, met een eerste plan, in je mail.</div>
+        <span class="wg-start-b">Start de tool &rarr;</span>
+      </div>
+      <div class="wg-start-card" onclick="window.location.href='/cursus'">
+        <div class="wg-start-k">Gratis cursus · 24 lessen</div>
+        <div class="wg-start-t">De methode, stap voor stap</div>
+        <div class="wg-start-s">De complete methode achter The Execution System in 5 modules, om in je eigen tempo te volgen.</div>
+        <span class="wg-start-b">Bekijk de cursus &rarr;</span>
+      </div>
+      <div class="wg-start-card wg-start-traject" onclick="showPage('traject')">
+        <div class="wg-start-tag">1-op-1</div>
+        <div class="wg-start-k">Het traject &middot; 12 weken</div>
+        <div class="wg-start-t">Jouw doel. Gehaald.</div>
+        <div class="wg-start-s">Persoonlijke begeleiding, wekelijkse meetings en een systeem dat je consistent houdt. Met resultaatgarantie.</div>
+        <span class="wg-start-b">Bekijk het traject &rarr;</span>
+      </div>
     </div>
   </div>
 </div>
@@ -7074,11 +7197,12 @@ function wgLaad(){
     .catch(function(){ WG_LIJST=[]; wgRender(); });
 }
 function wgKaart(w){
-  var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel';
-  return '<div class="wg-card"><div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>'
+  var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel', vb=(w.voorbeelden||[])[0];
+  return '<div class="wg-card'+(vb?' met-thumb':'')+'" onclick="openWeggever(\''+wgEsc(w.slug)+'\')">'
+    +(vb?'<div class="wg-thumb"><img src="'+wgEsc(vb)+'" alt="" loading="lazy"><div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div></div>':'<div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>')
     +'<div class="wg-t">'+wgEsc(w.titel)+'</div>'
     +'<div class="wg-s">'+wgEsc(w.beschrijving||'')+'</div>'
-    +'<div><button class="wg-btn" type="button" onclick="wgOpen(\''+wgEsc(w.slug)+'\')">Download &rarr;</button></div></div>';
+    +'<div><button class="wg-btn" type="button">Bekijk &amp; download &rarr;</button></div></div>';
 }
 function wgRender(){
   var lijst=document.getElementById('wg-lijst'), cats=document.getElementById('wg-cats');
@@ -7121,26 +7245,96 @@ function wgAnderAdres(){ document.getElementById('wg-snel').style.display='none'
 function wgSluit(){ document.getElementById('wg-ov').classList.remove('show'); }
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') wgSluit(); });
 function wgHoeChange(){ var v=document.getElementById('wg-hoe').value; document.getElementById('wg-hoe-anders-wrap').style.display=v==='Anders'?'':'none'; document.getElementById('wg-door-wrap').style.display=v==='Via iemand anders'?'':'none'; }
-function wgVerstuur(e){
-  e.preventDefault(); if(!WG_HUIDIG) return;
-  var b=document.getElementById('wg-snel').style.display==='none'?document.getElementById('wg-btn'):document.getElementById('wg-snel-btn'); b.disabled=true; var orig=b.textContent; b.textContent='Bezig…';
-  var h=document.getElementById('wg-hoe').value; if(h==='Anders'&&document.getElementById('wg-hoe-anders').value.trim()) h='Anders: '+document.getElementById('wg-hoe-anders').value.trim();
-  var m=window.tesBron?tesBron():{sid:'',eb:'',lb:''};
-  fetch(WG_API+'/api/weggever/'+encodeURIComponent(WG_HUIDIG.slug),{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({naam:document.getElementById('wg-naam').value,email:document.getElementById('wg-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wg-door').value,sid:m.sid,vid:m.vid,eb:m.eb,lb:m.lb})})
+// Gedeeld: e-mail achterlaten → lead in het dashboard → downloadlink terug
+function wgVerzend(slug, g, b, klaar){
+  b.disabled=true; var orig=b.textContent; b.textContent='Bezig…';
+  var m=window.tesBron?tesBron():{sid:'',vid:'',eb:'',lb:''};
+  fetch(WG_API+'/api/weggever/'+encodeURIComponent(slug),{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({naam:g.naam,email:g.email,hoe_ken_je_mij:g.hoe_ken_je_mij,doorverwezen_door:g.doorverwezen_door,sid:m.sid,vid:m.vid,eb:m.eb,lb:m.lb})})
   .then(function(r){ return r.json(); }).then(function(d){
     if(!d.ok){ alert(d.error||'Er ging iets mis.'); b.disabled=false; b.textContent=orig; return; }
-    try{ localStorage.setItem('tes_contact',JSON.stringify({naam:document.getElementById('wg-naam').value.trim(),email:document.getElementById('wg-email').value.trim().toLowerCase()})); }catch(e){}
-    var url=d.download+'&sid='+encodeURIComponent(m.sid)+'&eb='+encodeURIComponent(m.eb)+'&lb='+encodeURIComponent(m.lb);
-    document.getElementById('wg-form').style.display='none'; document.getElementById('wg-ok').style.display='block'; document.getElementById('wg-dl').href=url;
+    try{ localStorage.setItem('tes_contact',JSON.stringify({naam:String(g.naam||'').trim(),email:String(g.email||'').trim().toLowerCase()})); }catch(e){}
     b.disabled=false; b.textContent=orig;
-    window.location.href=url;
+    klaar(d.download+'&sid='+encodeURIComponent(m.sid)+'&eb='+encodeURIComponent(m.eb)+'&lb='+encodeURIComponent(m.lb));
   }).catch(function(){ alert('Er ging iets mis. Probeer het opnieuw.'); b.disabled=false; b.textContent=orig; });
+}
+function wgVerstuur(e){
+  e.preventDefault(); if(!WG_HUIDIG) return;
+  var b=document.getElementById('wg-snel').style.display==='none'?document.getElementById('wg-btn'):document.getElementById('wg-snel-btn');
+  var h=document.getElementById('wg-hoe').value; if(h==='Anders'&&document.getElementById('wg-hoe-anders').value.trim()) h='Anders: '+document.getElementById('wg-hoe-anders').value.trim();
+  wgVerzend(WG_HUIDIG.slug,{naam:document.getElementById('wg-naam').value,email:document.getElementById('wg-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wg-door').value},b,function(url){
+    document.getElementById('wg-form').style.display='none'; document.getElementById('wg-ok').style.display='block'; document.getElementById('wg-dl').href=url;
+    window.location.href=url;
+  });
 }
 // Pagina tonen → lijst laden
 (function(){ var sp=window.showPage; if(typeof sp!=='function') return; window.showPage=function(p){ sp(p); if(p==='weggevers') wgLaad(); };
   // Direct via /#weggevers geopend? Dan is de pagina al getoond vóór deze code liep.
   var pg=document.getElementById('page-weggevers'); if(pg&&pg.classList.contains('active')) wgLaad(); })();
 </script>
+<script>
+// ─── Weggever-pagina (één weggever) ───────────────────────────
+var WD_SLUG=null, WD=null;
+function openWeggever(slug){
+  WD_SLUG=slug; WD=null;
+  showPage('weggever');
+  try{ history.replaceState(null,'',location.pathname+location.search+'#weggever='+encodeURIComponent(slug)); }catch(e){}
+  document.getElementById('wd-titel').innerHTML='&nbsp;'; document.getElementById('wd-sub').textContent=''; document.getElementById('wd-punten').innerHTML=''; document.getElementById('wd-preview').innerHTML='';
+  document.getElementById('wd-form').style.display=''; document.getElementById('wd-ok').style.display='none';
+  fetch(WG_API+'/api/weggever/'+encodeURIComponent(slug)).then(function(r){ return r.json(); }).then(function(w){
+    if(!w||w.error){ document.getElementById('wd-titel').textContent='Deze weggever bestaat niet (meer)'; document.getElementById('wd-form').style.display='none'; return; }
+    WD=w; wdRender(w);
+    if(window.tesMeet) tesMeet('pageview','/weggevers/'+slug,{weggever:slug});
+  }).catch(function(){ document.getElementById('wd-titel').textContent='Kon de weggever niet laden'; });
+  // andere weggevers
+  var toon=function(){ var rest=(WG_LIJST||[]).filter(function(x){ return x.slug!==slug; }); var sec=document.getElementById('wd-andere-sec'); sec.hidden=!rest.length; document.getElementById('wd-andere').innerHTML=rest.slice(0,4).map(wgKaart).join(''); };
+  if(WG_LIJST) toon(); else fetch(WG_API+'/api/weggevers').then(function(r){return r.json();}).then(function(d){ WG_LIJST=(d&&d.weggevers)||[]; toon(); }).catch(function(){});
+}
+function wdRender(w){
+  document.getElementById('wd-eye').textContent='Gratis weggever'+(w.categorie?' · '+w.categorie:'');
+  document.getElementById('wd-titel').textContent=w.titel;
+  document.getElementById('wd-sub').textContent=w.beschrijving||'';
+  var punten=(w.inhoud||'').split(/\n+/).map(function(s){ return s.replace(/^[-•·*]\s*/,'').trim(); }).filter(Boolean);
+  document.getElementById('wd-punten').innerHTML=punten.map(function(p){ return '<li>'+wgEsc(p)+'</li>'; }).join('');
+  var pv=document.getElementById('wd-preview'), vb=w.voorbeelden||[];
+  if(vb.length){
+    pv.className='wd-preview';
+    pv.innerHTML=(vb[1]?'<div class="wd-pg wd-pg-2"><img src="'+wgEsc(vb[1])+'" alt=""></div>':'')+'<div class="wd-pg wd-pg-1"><img src="'+wgEsc(vb[0])+'" alt="Voorbeeld van '+wgEsc(w.titel)+'"></div>'
+      +(w.paginas?'<div class="wd-pages">'+w.paginas+' pagina\'s · pdf</div>':'<div class="wd-pages">pdf</div>');
+  } else {
+    var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel';
+    pv.className='wd-preview geen'; pv.innerHTML='<div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>';
+  }
+  document.getElementById('wd-form-k').textContent='Stuur mij '+(/^de |^het /i.test(w.titel)?w.titel:'de pdf');
+  // bekend? dan één knop
+  var g=wgBekend();
+  if(g){ if(g.naam&&!document.getElementById('wd-naam').value) document.getElementById('wd-naam').value=g.naam.split(' ')[0]; if(g.email) document.getElementById('wd-email').value=g.email; }
+  var snel=!!(g&&g.email);
+  document.getElementById('wd-snel').style.display=snel?'':'none';
+  document.getElementById('wd-velden').style.display=snel?'none':'';
+  document.getElementById('wd-form-s').textContent=snel?'Eén klik en de pdf komt direct.':'Vul je gegevens in en je hebt \'m direct.';
+  if(snel) document.getElementById('wd-snel-email').textContent=g.email;
+  var kop=document.getElementById('wd-snel-btn'); if(kop) kop.textContent='Ja, stuur mij de pdf →';
+}
+function wdAnderAdres(){ document.getElementById('wd-snel').style.display='none'; document.getElementById('wd-velden').style.display=''; document.getElementById('wd-email').value=''; document.getElementById('wd-form-s').textContent='Vul je gegevens in en je hebt \'m direct.'; document.getElementById('wd-email').focus(); }
+function wdHoeChange(){ var v=document.getElementById('wd-hoe').value; document.getElementById('wd-hoe-anders-wrap').style.display=v==='Anders'?'':'none'; document.getElementById('wd-door-wrap').style.display=v==='Via iemand anders'?'':'none'; }
+function wdVerstuur(e){
+  e.preventDefault(); if(!WD) return;
+  var snel=document.getElementById('wd-snel').style.display!=='none';
+  var b=snel?document.getElementById('wd-snel-btn'):document.getElementById('wd-btn');
+  var h=document.getElementById('wd-hoe').value; if(h==='Anders'&&document.getElementById('wd-hoe-anders').value.trim()) h='Anders: '+document.getElementById('wd-hoe-anders').value.trim();
+  wgVerzend(WD.slug,{naam:document.getElementById('wd-naam').value,email:document.getElementById('wd-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wd-door').value},b,function(url){
+    document.getElementById('wd-form').style.display='none'; document.getElementById('wd-ok').style.display='block'; document.getElementById('wd-dl').href=url;
+    window.location.href=url;
+  });
+}
+// Direct geopend via #weggever=<slug> (deellink)?
+(function(){
+  function checkHash(){ var m=(location.hash||'').match(/^#weggever=([a-z0-9-]+)/i); if(m){ openWeggever(m[1]); return true; } return false; }
+  if(!checkHash()){ /* niets */ }
+  window.addEventListener('hashchange', checkHash);
+})();
+</script>
+
 </body>
 </html>
