@@ -30,7 +30,27 @@ a{color:var(--gold);text-decoration:none;}
 .sitenav .nav-link:hover{color:#fff;}
 .sitenav .nav-link.active{color:var(--gold);}
 .sitenav .nav-cta{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0A0A0B;background:linear-gradient(135deg,#E8C97A,#C9A84C 45%,#F0D98A 70%,#C9A84C);border:0;border-radius:4px;padding:.55rem 1rem;cursor:pointer;flex-shrink:0;margin-left:.4rem;text-decoration:none;box-shadow:0 0 10px rgba(201,168,76,.4);}
-@media(max-width:760px){.sitenav .nav-links{display:none;}}
+.sitenav .nav-group{position:relative}
+.sitenav .nav-group:after{content:'';position:absolute;left:-12px;right:-12px;top:100%;height:16px}
+.sitenav .nav-group-btn .chev{font-size:.55rem;margin-left:.25rem;opacity:.7;display:inline-block;transition:transform .2s}
+.sitenav .nav-group.open .nav-group-btn .chev{transform:rotate(180deg)}
+.sitenav .nav-menu{position:absolute;top:calc(100% + 10px);left:0;min-width:210px;display:none;flex-direction:column;background:rgba(12,12,12,.98);backdrop-filter:blur(14px);border:1px solid rgba(201,168,76,.18);border-radius:8px;padding:.4rem;box-shadow:0 14px 34px rgba(0,0,0,.5);z-index:50}
+.sitenav .nav-group:hover .nav-menu,.sitenav .nav-group.open .nav-menu,.sitenav .nav-group.blijf .nav-menu{display:flex}
+.sitenav .nav-menu .nav-link{text-align:left;white-space:nowrap;padding:.6rem .85rem;border-radius:6px}
+.sitenav .nav-menu .nav-link:hover{background:rgba(255,255,255,.04);color:#fff}
+.sitenav .nav-burger{display:none;width:40px;height:40px;border:1px solid rgba(201,168,76,.35);border-radius:8px;background:none;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin-left:.4rem}
+.sitenav .nav-burger span{display:block;width:18px;height:1.5px;background:var(--gold)}
+@media(max-width:760px){
+  .sitenav .nav-links{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:rgba(10,10,10,.98);border-bottom:1px solid var(--line);padding:.6rem 1rem 1rem;gap:0}
+  .sitenav.menu-open .nav-links{display:flex}
+  .sitenav .nav-link{padding:.8rem .5rem;font-size:12px}
+  .sitenav .nav-group-btn{width:100%;text-align:left;display:flex;justify-content:space-between}
+  .sitenav .nav-menu{position:static;display:none;border:0;background:none;box-shadow:none;padding:0 0 0 .8rem}
+  .sitenav .nav-group:hover .nav-menu{display:none}
+  .sitenav .nav-group.open .nav-menu{display:flex}
+  .sitenav .nav-burger{display:flex}
+  .sitenav .nav-cta{margin-left:auto}
+}
 /* hero */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);}
 .hero .glow{position:absolute;right:-12%;top:-30%;width:680px;height:680px;border-radius:50%;
@@ -199,15 +219,27 @@ a{color:var(--gold);text-decoration:none;}
 .mcard .mbody .mtt{font-family:'Abolition',var(--sans),sans-serif;text-transform:uppercase;letter-spacing:.6px;font-size:28px;line-height:1.04;}
 </style></head><body>
 <nav class="sitenav"><div class="nav-inner">
-  <a class="logo" href="https://executionsystem.nl/">The Execution System</a>
-  <div class="nav-links">
-    <a class="nav-link" href="https://executionsystem.nl/#home">Home</a>
-    <a class="nav-link" href="https://executionsystem.nl/#tool">Jaardoel in 5 Minuten</a>
-    <a class="nav-link active" href="/cursus">Cursussen</a>
-    <a class="nav-link" href="https://executionsystem.nl/#gesprek">Gesprek</a>
+  <a class="logo" href="/">The Execution System</a>
+  <div class="nav-links" id="nav-links">
+    <a class="nav-link" href="/">Home</a>
+    <div class="nav-group" id="nav-gratis">
+      <button class="nav-link nav-group-btn active" type="button" onclick="toggleNavGroup(this)" aria-haspopup="true" aria-expanded="false">Gratis waarde <span class="chev">&#9662;</span></button>
+      <div class="nav-menu">
+        <a class="nav-link" href="/#tool">Jaardoel in 5 minuten</a>
+        <a class="nav-link" href="/#weggevers">Gratis weggevers</a>
+        <a class="nav-link active" href="/cursus">Cursussen</a>
+      </div>
+    </div>
   </div>
-  <a class="nav-cta" href="https://executionsystem.nl/#tool">Begin nu &rarr;</a>
+  <a class="nav-cta" href="/#traject">Begin nu &rarr;</a>
+  <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </div></nav>
+<script>
+function toggleNavGroup(btn){ var g=btn.closest('.nav-group'); var open=!g.classList.contains('open'); g.classList.toggle('open',open); btn.setAttribute('aria-expanded',open); }
+document.addEventListener('click',function(e){ if(!e.target.closest('.nav-group')){ var g=document.querySelector('.nav-group.open'); if(g){ g.classList.remove('open'); g.querySelector('.nav-group-btn').setAttribute('aria-expanded','false'); } } });
+document.querySelectorAll('.nav-group').forEach(function(g){ var t=null; g.addEventListener('mouseenter',function(){ clearTimeout(t); g.classList.add('blijf'); }); g.addEventListener('mouseleave',function(){ clearTimeout(t); t=setTimeout(function(){ g.classList.remove('blijf'); },350); }); });
+function toggleNavMenu(){ document.querySelector('.sitenav').classList.toggle('menu-open'); }
+</script>
 
 <!-- HOME -->
 <div id="view-home">
