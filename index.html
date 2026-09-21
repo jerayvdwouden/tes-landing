@@ -1848,13 +1848,21 @@ tesMeet('pageview',location.pathname);
       </div>
     </div>
 
-    <div style="margin-bottom:1.1rem">
+    <div style="margin-bottom:1.1rem" id="gesprek-tekst">
       <div style="font-size:clamp(1rem,3vw,1.3rem);font-weight:700;color:var(--white);margin-bottom:.45rem">Klaar voor de volgende stap?</div>
       <p style="font-size:.86rem;color:var(--muted);line-height:1.65;margin:0">
         Je hebt je visie en jaardoel geformuleerd. Nu is het tijd voor een gratis gesprek — dan stel ik samen met jou een concreet plan op om jouw jaardoel te bereiken.
       </p>
     </div>
 
+    <!-- Al een gesprek ingepland? Dan geen agenda, maar een bevestiging -->
+    <div id="gesprek-al" style="display:none;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);border-left:3px solid var(--gold);border-radius:12px;padding:1.1rem 1.2rem;margin-bottom:1rem">
+      <div style="font-family:'Abolition',sans-serif;font-size:1.3rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.3rem">Je staat al ingepland</div>
+      <p style="font-size:.86rem;color:var(--muted);line-height:1.6;margin:0 0 .8rem">Je jaardoel is binnen. Ik lees het door v&oacute;&oacute;r ons gesprek, zodat we niet bij nul beginnen. De bevestiging met de Zoom-link staat in je mail.</p>
+      <button class="btn-next" onclick="goToStep('bedankt')" style="width:100%">Afronden &rarr;</button>
+      <p style="font-size:.72rem;color:var(--dim);margin:.7rem 0 0;text-align:center"><span class="wg-link" onclick="gesprekZetAangemeld(false)">Toch nog geen gesprek ingepland? Kies hier een moment</span></p>
+    </div>
+    <div id="gesprek-nog" style="display:none;font-size:.78rem;color:var(--muted);text-align:center;margin:0 0 .8rem"><span class="wg-link" onclick="gesprekZetAangemeld(true)">Ik heb al een gesprek met Jeray ingepland &rarr;</span></div>
     <!-- Calendly inline widget -->
     <div class="calendly-inline-widget" id="gesprek-cal"
          data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c"
@@ -1894,7 +1902,7 @@ tesMeet('pageview',location.pathname);
         <div class="gb-hint">tik om uit te pakken</div>
       </div>
 
-      <button onclick="goToStep('gesprek')"
+      <button onclick="goToStep('gesprek')" id="bedankt-plan"
         class="btn-primary"
         style="display:block;width:100%;text-align:center;padding:.85rem 1.2rem;font-size:.75rem;border-radius:10px;cursor:pointer;margin-bottom:.75rem">
         📅 Ik heb nog geen gesprek — plan er alsnog een in
@@ -3869,7 +3877,7 @@ function goToStep(n) {
   if (n === 'jaarvisie') { jaarvisieSubIdx = 0; renderJaarvisieSubStep(); }
   if (n === 'nulmeting') { renderNulmeting(); }
   if (n === 'top3') { renderTop3Step(); }
-  if (n === 'bedankt') { /* no extra init */ }
+  if (n === 'bedankt') { var bp=document.getElementById('bedankt-plan'); if(bp) bp.style.display=(typeof trajectIsAangemeld==='function'&&trajectIsAangemeld())?'none':'block'; }
   hideCurrentStep();
   currentStep = n;
   var stepEl = document.getElementById('step-' + n);
@@ -3890,8 +3898,23 @@ function showGesprekStep() {
     hideCurrentStep();
     document.getElementById('step-gesprek').classList.add('active');
     updateProgressBar('gesprek');
+    gesprekToonStand();
     scrollTopKeep();
   }, 'b4f3089f-a0d0-4498-a56a-c55ca360eed1');
+}
+// Gesprek-stap: al geboekt (op dit apparaat, of zelf aangegeven) → bevestiging i.p.v. agenda
+function gesprekToonStand(){
+  var al = (typeof trajectIsAangemeld==='function') && trajectIsAangemeld();
+  var a=document.getElementById('gesprek-al'), n=document.getElementById('gesprek-nog'), c=document.getElementById('gesprek-cal'), t=document.getElementById('gesprek-tekst');
+  if(a) a.style.display = al ? '' : 'none';
+  if(n) n.style.display = al ? 'none' : '';
+  if(c) c.style.display = al ? 'none' : '';
+  if(t) t.style.display = al ? 'none' : '';
+}
+function gesprekZetAangemeld(ja){
+  try{ if(ja) localStorage.setItem('tes_traject_aangemeld','1'); else localStorage.removeItem('tes_traject_aangemeld'); }catch(e){}
+  if(window.tesMeet && ja) tesMeet('planmeeting_booked','/stepper',{plek:'stepper',zelf:'1'});
+  gesprekToonStand(); if(!ja) calendlyHerlaad('gesprek-cal');
 }
 
 function goalStepBack(step) {
@@ -7110,6 +7133,7 @@ window.addEventListener('message',function(e){
     fetch('https://tes-backend-mbyy.onrender.com/api/planmeeting',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});
   }catch(e){}
   if(plek==='traject') trajectAangemeld();
+  else { try{ localStorage.setItem('tes_traject_aangemeld','1'); }catch(e){} var al=document.getElementById('gesprek-al'); if(al){ gesprekToonStand(); al.scrollIntoView({behavior:'smooth',block:'center'}); } }
 });
 // chips → stepper (zelfde mechanisme als de homepage)
 function toggleTaChip(el, area){
