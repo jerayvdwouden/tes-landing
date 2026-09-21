@@ -114,6 +114,27 @@ h1 em{font-style:normal;color:var(--gold)}
 .fc-cta.disabled{background:transparent;color:var(--muted);border:1px solid var(--dim);cursor:default;pointer-events:none}
 
 /* bezwaren */
+/* home: testimonials + vragen (zelfde uitstraling als de trajectpagina) */
+.hq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem}
+.hq-q{display:flex;flex-direction:column;gap:1rem;border-top:1px solid var(--border);padding:1.4rem 0 .4rem}
+.hq-q p{font-size:1.02rem;line-height:1.55;font-style:italic;color:var(--white);margin:0}
+.hq-who{display:flex;align-items:center;gap:.8rem}
+.hq-avatar{width:40px;height:40px;border-radius:50%;background:#1A1512;background-image:repeating-linear-gradient(135deg,rgba(245,240,232,.06) 0 1px,transparent 1px 6px);flex:none}
+.hq-who b{display:block;font-size:.9rem;font-weight:400;color:var(--white)}
+.hq-who span{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hfaq{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:2.5rem;align-items:start}
+.hfaq-l h2{font-family:'DM Sans',system-ui,sans-serif;font-weight:300;font-size:clamp(1.9rem,4.5vw,2.6rem);line-height:1.08;letter-spacing:-.01em;text-transform:none;margin:0 0 .8rem}
+.hfaq-l p{font-size:.95rem;line-height:1.6;color:var(--muted);margin:0 0 1.4rem}
+.hfaq-note{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.7rem}
+.hfaq-list{border-top:1px solid var(--border)}
+.hfaq-q{border-bottom:1px solid var(--border)}
+.hfaq-btn{display:flex;justify-content:space-between;align-items:center;gap:1.2rem;width:100%;padding:1.1rem 0;background:none;border:0;color:var(--white);font-family:inherit;text-align:left;cursor:pointer}
+.hfaq-btn span:first-child{font-size:1.05rem;line-height:1.35;font-weight:300}
+.hfaq-mark{font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--gold);flex:none;width:1.4rem;text-align:center}
+.hfaq-a{padding:0 2rem 1.3rem 0}
+.hfaq-a p{font-size:.92rem;line-height:1.65;color:var(--muted);margin:0 0 .7rem}
+.hfaq-a p:last-child{margin-bottom:0}
+@media(max-width:640px){.hq-grid{grid-template-columns:1fr}.hfaq{grid-template-columns:1fr;gap:1.5rem}.hfaq-a{padding-right:1rem}}
 .obj-head{text-align:center;margin-bottom:2rem}
 .obj-head h2{font-family:'Abolition',sans-serif;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem}
 .obj-head p{font-size:.88rem;color:var(--muted);max-width:420px;margin:0 auto}
@@ -1123,149 +1144,59 @@ tesMeet('pageview',location.pathname);
     </div><button class="hmod-arrow hmod-next" onclick="hfcScroll(1)" aria-label="Volgende">›</button></div>
   </section>
 
-  <div class="div"><span>de wetenschap</span></div>
+  <div class="div"><span>wat mensen zeggen</span></div>
 
-  <section class="rv-skip">
-    <style>
-      .wj2-list{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:1.1rem}
-      .wj2-card{width:min(640px,100%);background:linear-gradient(150deg,#161616,#0e0e0e);border:1px solid var(--border);border-radius:16px;padding:1.35rem 1.6rem;box-shadow:0 18px 50px rgba(0,0,0,.42);opacity:0;transform:translateY(34px) translateX(var(--wjx,0));will-change:opacity,transform;display:flex;flex-direction:row;align-items:center;gap:1.6rem}.wj2-figure{flex:0 0 auto;min-width:120px}.wj2-body{flex:1;min-width:0}
-      .wj2-left{align-self:flex-start;--wjx:-42px}
-      .wj2-right{align-self:flex-end;--wjx:42px}
-      @media(max-width:680px){.wj2-card{width:100%;align-self:stretch;--wjx:0;flex-direction:column;align-items:flex-start;gap:.7rem}.wj2-figure{min-width:0}}
-      .wj2-stat{font-family:'Abolition',sans-serif;font-weight:400;font-size:clamp(2.6rem,7vw,3.7rem);line-height:.9;color:var(--gold);letter-spacing:.02em;display:flex;align-items:baseline;gap:.05rem;text-shadow:0 0 28px rgba(201,168,76,.4)}
-      .wj2-stat .unit{font-size:.34em;color:var(--muted);letter-spacing:.04em;margin-left:.2rem}
-      .wj2-sub{font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:.35rem 0 0}
-      .wj2-txt{font-size:1.02rem;color:var(--white);line-height:1.5;margin:0 0 .55rem}
-      .wj2-bron{font-size:.63rem;color:#6b6656;text-decoration:underline;text-underline-offset:2px;letter-spacing:.02em}
-      .wj2-bron:hover{color:var(--muted)}
-      .wj2-toggle{margin-top:.2rem;align-self:flex-start;background:none;border:none;color:var(--gold);font-family:inherit;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;padding:.3rem 0;display:inline-flex;align-items:center;gap:.45rem}
-      .wj2-ic{display:inline-flex;width:1.05rem;height:1.05rem;align-items:center;justify-content:center;border:1px solid var(--gold);border-radius:50%;font-size:.85rem;line-height:1;transition:transform .3s}
-      .wj2-toggle.open .wj2-ic{transform:rotate(45deg)}
-      .wj2-more{max-height:0;overflow:hidden;opacity:0;transition:max-height .45s ease,opacity .35s ease,margin-top .3s ease}
-      .wj2-more.open{max-height:500px;opacity:1;margin-top:.6rem}
-      .wj2-more-txt{font-size:.86rem;color:var(--muted);line-height:1.6;margin:0 0 .7rem}
-      .wj2-studie{font-size:.72rem;color:var(--gold-l);text-decoration:underline;text-underline-offset:2px}
-      .wj2-studie:hover{color:var(--gold)}
-    </style>
-    <div class="section-head">
-      <h2 class="free-h2">Wist je <span class="u">dat?</span></h2>
+  <section class="hq" aria-label="Wat mensen zeggen">
+    <div class="hq-grid">
+      <article class="hq-q">
+        <p>&ldquo;Ik had dit doel drie jaar op een lijstje. In week negen stond het getal er. Niet omdat ik ineens discipline had, maar omdat ik elke vrijdag moest laten zien wat ik gedaan had.&rdquo;</p>
+        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 34</b><span>Van 6 naar 15 vaste klanten</span></div></div>
+      </article>
+      <article class="hq-q">
+        <p>&ldquo;Week vijf was slecht. Normaal stop ik dan. Nu belde Jeray op donderdag, en maandag zat ik er weer in. Dat is het hele verschil geweest.&rdquo;</p>
+        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 41</b><span>Twaalf kilo eraf</span></div></div>
+      </article>
+      <article class="hq-q">
+        <p>&ldquo;Drie minuten per dag klonk te weinig. Het is precies genoeg. Ik open de app, zie &eacute;&eacute;n actie, doe hem. Meer is het niet &mdash; en daarom werkt het.&rdquo;</p>
+        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 29</b><span>Het boek af</span></div></div>
+      </article>
+      <article class="hq-q">
+        <p>&ldquo;Ik wist alles al. Dat was juist het probleem. Wat ik niet had, was iemand die elke week keek of ik het ook deed. Na twaalf weken stond de buffer er.&rdquo;</p>
+        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 38</b><span>&euro;25.000 buffer</span></div></div>
+      </article>
     </div>
-    <div class="wj2-list">
-      <div class="wj2-card wj2-left">
-        <div class="wj2-figure">
-          <div class="wj2-stat"><span class="wj2-count" data-from="43" data-to="76">43</span><span class="unit">%</span></div>
-          <div class="wj2-sub">van je doelen &mdash; eerst 43%</div>
-        </div>
-        <div class="wj2-body">
-          <p class="wj2-txt">&hellip;je bijna twee keer zoveel van je doelen haalt als je ze opschrijft en met iemand deelt.</p>
-          <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
-          <div class="wj2-more">
-          <p class="wj2-more-txt">267 mensen kregen een doel. Sommigen dachten er alleen over na, anderen schreven het op, vertelden het aan een vriend en gaven elke week door hoe ver ze waren. De eerste groep haalde 43% van hun doelen, de tweede 76%.</p>
-          <a class="wj2-studie" href="https://www.dominican.edu/sites/default/files/2020-02/gailmatthews-harvard-goals-researchsummary.pdf" target="_blank" rel="noopener">Bekijk de studie: Matthews, Dominican University &rarr;</a>
-        </div>
-        </div>
-      </div>
-      <div class="wj2-card wj2-right">
-        <div class="wj2-figure">
-          <div class="wj2-stat">2&times;</div>
-          <div class="wj2-sub">zoveel resultaat</div>
-        </div>
-        <div class="wj2-body">
-          <p class="wj2-txt">&hellip;je twee keer zoveel bereikt als je bijhoudt hoe ver je bent.</p>
-          <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
-          <div class="wj2-more">
-          <p class="wj2-more-txt">Bijna 1.700 mensen wilden afvallen. De ene groep hield een eetdagboek bij, de andere niet. Wie bijhield, viel twee keer zoveel af.</p>
-          <a class="wj2-studie" href="https://www.sciencedaily.com/releases/2008/07/080708080738.htm" target="_blank" rel="noopener">Bekijk de studie: Kaiser Permanente, 2008 &rarr;</a>
-        </div>
-        </div>
-      </div>
-      <div class="wj2-card wj2-left">
-        <div class="wj2-figure">
-          <div class="wj2-stat"><span class="wj2-count" data-from="0" data-to="91">0</span><span class="unit">%</span></div>
-          <div class="wj2-sub">deed het &mdash; vs 38% zonder plan</div>
-        </div>
-        <div class="wj2-body">
-          <p class="wj2-txt">&hellip;je iets veel vaker &eacute;cht doet als je precies plant wanneer en waar je het doet.</p>
-          <button class="wj2-toggle" aria-expanded="false" onclick="wjToggle(this)">Meer weten <span class="wj2-ic">+</span></button>
-          <div class="wj2-more">
-          <p class="wj2-more-txt">Mensen die wilden sporten werden verdeeld. De ene groep schreef precies op wanneer en waar ze zouden sporten, de andere kreeg alleen een motiverend praatje. Van de plan-groep sportte 91%, van de rest maar 35-38%.</p>
-          <a class="wj2-studie" href="https://bpspsychub.onlinelibrary.wiley.com/doi/abs/10.1348/135910702169420" target="_blank" rel="noopener">Bekijk de studie: Milne, Orbell &amp; Sheeran, 2002 &rarr;</a>
-        </div>
-        </div>
-      </div>
-    </div>
-    <script>
-    function wjToggle(btn){var m=btn.nextElementSibling;var op=btn.classList.toggle('open');btn.setAttribute('aria-expanded',op);if(m)m.classList.toggle('open',op);}
-    (function(){
-      var list=document.querySelector('.wj2-list');if(!list)return;
-      var cards=[].slice.call(list.querySelectorAll('.wj2-card'));
-      function clamp(v){return v<0?0:v>1?1:v;}
-      function update(){
-        var vh=window.innerHeight||document.documentElement.clientHeight;
-        cards.forEach(function(c){
-          var r=c.getBoundingClientRect();
-          var start=vh*0.90, end=vh*0.45;
-          var p=clamp((start-r.top)/(start-end));
-          var dir=c.classList.contains('wj2-right')?1:-1;
-          c.style.opacity=p;
-          c.style.transform='translateY('+((1-p)*34).toFixed(1)+'px) translateX('+((1-p)*42*dir).toFixed(1)+'px)';
-          var n=c.querySelector('.wj2-count');
-          if(n){var from=+n.dataset.from||0,to=+n.dataset.to||0;n.textContent=Math.round(from+(to-from)*p);}
-        });
-      }
-      var ticking=false;
-      function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(function(){update();ticking=false;});}}
-      window.addEventListener('scroll',onScroll,{passive:true});
-      window.addEventListener('resize',onScroll,{passive:true});
-      update();
-    })();
-    </script>
   </section>
+
 
 
 
   <div class="div"><span>veelgehoorde bezwaren</span></div>
 
-  <section>
-    <div class="obj-head">
-      <h2>Misschien denk jij ook...</h2>
-      <p>Dit zijn de meest gehoorde redenen waarom mensen wachten. Dit is de werkelijkheid.</p>
+  <section class="hfaq" aria-label="Veelgehoorde bezwaren">
+    <div class="hfaq-l">
+      <h2>Misschien denk jij ook&hellip;</h2>
+      <p>De meest gehoorde redenen om te wachten &mdash; en wat er echt van klopt.</p>
+      <button class="btn-primary" onclick="showPage('traject')">Ik wil mijn doelen halen &rarr;</button>
+      <div class="hfaq-note">Gratis gesprek &middot; 1 uur &middot; online</div>
     </div>
-    <div class="obj-grid">
-      <div class="obj-card">
-        <div class="obj-top">
-          <div class="obj-icon">✕</div>
-          <div>
-            <div class="obj-label">Bezwaar</div>
-            <div class="obj-myth">"Ik heb hier geen tijd voor."</div>
-          </div>
-        </div>
-        <div class="obj-bottom">
-          <div class="obj-check">✓</div>
-          <div>
-            <div class="obj-truth-label">De werkelijkheid</div>
-            <p class="obj-truth">Het systeem kost je <strong>3 minuten per dag</strong> en 30 minuten per week om je week te scoren en te plannen. Meer tijd heb je niet nodig — je hebt structuur nodig, geen extra uren.</p>
-          </div>
-        </div>
-      </div>
-      <div class="obj-card">
-        <div class="obj-top">
-          <div class="obj-icon">✕</div>
-          <div>
-            <div class="obj-label">Bezwaar</div>
-            <div class="obj-myth">"Ik weet al wat ik moet doen. Ik heb geen begeleiding nodig."</div>
-          </div>
-        </div>
-        <div class="obj-bottom">
-          <div class="obj-check">✓</div>
-          <div>
-            <div class="obj-truth-label">De werkelijkheid</div>
-            <p class="obj-truth">Dat is precies het probleem. 50% van de Nederlanders is overgewicht — <strong>niet omdat ze niet weten hoe ze gezonder kunnen leven</strong>, maar omdat kennis alleen nooit genoeg is. Het verschil zit in de uitvoering. Dit systeem bouwt je dat.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="hfaq-list" id="hfaq"></div>
   </section>
+  <script>
+  (function(){
+    var VRAGEN=[
+      { q:'&ldquo;Ik heb hier geen tijd voor.&rdquo;', a:['Het systeem kost je drie minuten per dag en dertig minuten per week om je week te scoren en te plannen.','Meer tijd heb je niet nodig. Je hebt structuur nodig, geen extra uren.'] },
+      { q:'&ldquo;Ik weet al wat ik moet doen.&rdquo;', a:['Dat is precies het probleem. De helft van Nederland heeft overgewicht &mdash; niet omdat ze niet weten hoe het gezonder kan, maar omdat kennis alleen nooit genoeg is.','Het verschil zit in doen, bijhouden en iemand die elke week kijkt of het gebeurt.'] },
+      { q:'Is dit iets voor mij?', a:['Ja, als je een doel hebt dat je al langer voor je ziet, weet wat je moet doen, en het toch niet van de grond komt. Ondernemer, werknemer, sporter &mdash; het doel maakt niet uit, zolang het meetbaar te maken is.','Nee, als je nog niet weet wat je wilt, of als je iemand zoekt die het werk voor je doet. Ik houd je vast; het doen blijft van jou.'] },
+      { q:'Is dit online?', a:['Ja, helemaal. De wekelijkse sessie doen we via Zoom, de app staat op je telefoon. Waar je woont maakt niet uit.'] },
+      { q:'Wat als het niet lukt?', a:['Aan het begin leggen we vast welke doelen je in twaalf weken haalt. Haal je die niet, dan krijg je je volledige investering terug.','Als jij je doel niet haalt, heb ik niets geleverd. Zo simpel is het.'] }
+    ];
+    var el=document.getElementById('hfaq'); if(!el) return; var open=0;
+    function render(){ el.innerHTML=VRAGEN.map(function(f,i){ var o=i===open; return '<div class="hfaq-q'+(o?' open':'')+'"><button class="hfaq-btn" type="button" aria-expanded="'+o+'" onclick="hfaqToggle('+i+')"><span>'+f.q+'</span><span class="hfaq-mark">'+(o?'&minus;':'+')+'</span></button><div class="hfaq-a"'+(o?'':' hidden')+'>'+f.a.map(function(t){return '<p>'+t+'</p>';}).join('')+'</div></div>'; }).join(''); }
+    window.hfaqToggle=function(i){ open=(open===i)?-1:i; render(); };
+    render();
+  })();
+  </script>
+
 
   <div class="div" id="wachtlijst"><span>klaar om te beginnen?</span></div>
 
