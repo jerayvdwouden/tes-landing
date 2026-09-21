@@ -3332,7 +3332,7 @@ function closeNavMenu(){
 function showPage(page) {
   if (window.tesMeet) { tesMeet('pageview', '/' + page); if (page === 'tool' && !window.__tesStart) { window.__tesStart = 1; tesMeet('stepper_start', '/tool'); } }
   // Adresbalk bijhouden, zodat verversen en de terugknop op dezelfde pagina blijven
-  try { if (page !== 'weggever') history.replaceState(null, '', location.pathname + location.search + (page === 'home' ? '' : '#' + page)); } catch (e) {}
+  try { if (page !== 'weggever') history.replaceState(null, '', '/' + location.search + (page === 'home' ? '' : '#' + page)); } catch (e) {}
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -7271,7 +7271,7 @@ var WD_SLUG=null, WD=null;
 function openWeggever(slug){
   WD_SLUG=slug; WD=null;
   showPage('weggever');
-  try{ history.replaceState(null,'',location.pathname+location.search+'#weggever='+encodeURIComponent(slug)); }catch(e){}
+  try{ history.replaceState(null,'','/weggever/'+encodeURIComponent(slug)+location.search); }catch(e){}
   document.getElementById('wd-titel').innerHTML='&nbsp;'; document.getElementById('wd-sub').textContent=''; document.getElementById('wd-punten').innerHTML=''; document.getElementById('wd-preview').innerHTML='';
   document.getElementById('wd-form').style.display=''; document.getElementById('wd-ok').style.display='none';
   fetch(WG_API+'/api/weggever/'+encodeURIComponent(slug)).then(function(r){ return r.json(); }).then(function(w){
@@ -7323,7 +7323,7 @@ function wdVerstuur(e){
 }
 // Direct geopend via #weggever=<slug> (deellink)?
 (function(){
-  function checkHash(){ var m=(location.hash||'').match(/^#weggever=([a-z0-9-]+)/i); if(m){ openWeggever(m[1]); return true; } return false; }
+  function checkHash(){ var m=(location.hash||'').match(/^#weggever=([a-z0-9-]+)/i) || (location.pathname||'').match(/^\/weggever\/([a-z0-9-]+)/i); if(m){ openWeggever(m[1]); return true; } return false; }
   if(!checkHash()){ /* niets */ }
   window.addEventListener('hashchange', checkHash);
 })();
