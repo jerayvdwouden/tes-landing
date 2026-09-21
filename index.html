@@ -870,6 +870,8 @@ footer p{font-size:.68rem;color:var(--dim)}
 #v10 [data-cols]{display:grid;gap:48px}
 #v10 [data-cols="4"]{grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
 #v10 [data-cols="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+#v10 [data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;max-width:1000px;margin:0 auto}
+@media (max-width:720px){#v10 [data-cols="2"]{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:1040px){#v10 [data-cols="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
 #v10 [data-cols="3"]{gap:28px}}
 @media (max-width:640px){#v10 [data-cols="4"]{grid-template-columns:minmax(0,1fr)}
@@ -1169,20 +1171,12 @@ tesMeet('pageview',location.pathname);
   <section class="hq" aria-label="Wat mensen zeggen">
     <div class="hq-grid">
       <article class="hq-q">
-        <p>&ldquo;Ik had dit doel drie jaar op een lijstje. In week negen stond het getal er. Niet omdat ik ineens discipline had, maar omdat ik elke vrijdag moest laten zien wat ik gedaan had.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 34</b><span>Van 6 naar 15 vaste klanten</span></div></div>
+        <p>&ldquo;Ik heb twee startende ondernemers geholpen: voor allebei heb ik een marketingstrategie gebouwd, met onderzoek en voorbeelden erbij. Daarmee heb ik praktijkervaring opgedaan en bewijs opgebouwd dat ik kan laten zien aan bedrijven. Daarvoor had ik vooral dromen, maar geen push. Wat het verschil maakte: het systeem dwingt je om eerlijk te zijn. Ik kan niet drie weken lang hetzelfde zeggen.&rdquo;</p>
+        <div class="hq-who"><div class="hq-avatar"></div><div><b>Max Groenendijk</b><span>Creative Business student &middot; twee marketingstrategie&euml;n gebouwd</span></div></div>
       </article>
       <article class="hq-q">
-        <p>&ldquo;Week vijf was slecht. Normaal stop ik dan. Nu belde Jeray op donderdag, en maandag zat ik er weer in. Dat is het hele verschil geweest.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 41</b><span>Twaalf kilo eraf</span></div></div>
-      </article>
-      <article class="hq-q">
-        <p>&ldquo;Drie minuten per dag klonk te weinig. Het is precies genoeg. Ik open de app, zie &eacute;&eacute;n actie, doe hem. Meer is het niet &mdash; en daarom werkt het.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 29</b><span>Het boek af</span></div></div>
-      </article>
-      <article class="hq-q">
-        <p>&ldquo;Ik wist alles al. Dat was juist het probleem. Wat ik niet had, was iemand die elke week keek of ik het ook deed. Na twaalf weken stond de buffer er.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Naam &middot; 38</b><span>&euro;25.000 buffer</span></div></div>
+        <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen. Dat was nooit in me opgekomen; puur door die gesprekken zijn we daarop uitgekomen.&rdquo;</p>
+        <div class="hq-who"><div class="hq-avatar"></div><div><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
       </article>
     </div>
   </section>
@@ -1276,26 +1270,14 @@ tesMeet('pageview',location.pathname);
   <!-- 02 wat mensen zeggen -->
   <section class="quotes" aria-label="Wat mensen zeggen">
     <div class="mono muted">Wat mensen zeggen</div>
-    <div data-cols="4">
+    <div data-cols="2">
       <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Ik had dit doel drie jaar op een lijstje. In week negen stond het getal er. Niet omdat ik ineens discipline had, maar omdat ik elke vrijdag moest laten zien wat ik gedaan had.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 34</b><span>Van 6 naar 15 vaste klanten</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
+        <p>&ldquo;Ik heb twee startende ondernemers geholpen: voor allebei heb ik een marketingstrategie gebouwd, met onderzoek en voorbeelden erbij. Daarmee heb ik praktijkervaring opgedaan en bewijs opgebouwd dat ik kan laten zien aan bedrijven. Daarvoor had ik vooral dromen, maar geen push. Wat het verschil maakte: het systeem dwingt je om eerlijk te zijn. Ik kan niet drie weken lang hetzelfde zeggen.&rdquo;</p>
+        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Max Groenendijk</b><span>Creative Business student &middot; twee marketingstrategie&euml;n gebouwd</span></div></div>
       </article>
       <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Week vijf was slecht. Normaal stop ik dan. Nu belde Jeray op donderdag, en maandag zat ik er weer in. Dat is het hele verschil geweest.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 41</b><span>Twaalf kilo eraf</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
-      </article>
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Drie minuten per dag klonk te weinig. Het is precies genoeg. Ik open de app, zie één actie, doe hem. Meer is het niet — en daarom werkt het.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 29</b><span>Het boek af</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
-      </article>
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Ik wist alles al. Dat was juist het probleem. Wat ik niet had, was iemand die elke week keek of ik het ook deed. Na twaalf weken stond de buffer er.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Naam · 38</b><span>€25.000 buffer</span></div></div>
-        <div class="note">Voorbeeld — vervangen door echte quote en foto</div>
+        <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen. Dat was nooit in me opgekomen; puur door die gesprekken zijn we daarop uitgekomen.&rdquo;</p>
+        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
       </article>
     </div>
     <div class="cta-row" data-reveal>
