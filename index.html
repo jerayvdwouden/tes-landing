@@ -945,11 +945,15 @@ footer p{font-size:.68rem;color:var(--dim)}
 #v10 .card-cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.7}
 #v10 .card h3{font-size:26px;line-height:1.2;font-weight:400}
 #v10 .card p{font-size:17px;line-height:1.6;text-wrap:pretty}
-#v10 .gar-in{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px}
-#v10 .gar-in h2{font-size:clamp(44px,5.5vw,76px);line-height:.92;text-wrap:balance}
-#v10 .gar-in .lead{font-size:clamp(18px,1.5vw,21px);line-height:1.55;text-wrap:pretty}
-#v10 .gar-in .sub{font-size:17px;line-height:1.6;color:var(--muted);text-wrap:pretty}
-#v10 .gar-in .cta-row{margin-top:10px}
+#v10 .gar-in{max-width:640px;margin:0 auto}
+#v10 .gar-kaart{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:clamp(40px,5vw,56px) clamp(24px,5vw,56px) clamp(36px,4vw,48px);border:1px solid rgba(201,168,76,.45);border-radius:28px;background:linear-gradient(170deg,rgba(201,168,76,.12) 0%,rgba(26,21,18,.6) 40%,rgba(10,10,10,.9) 100%);box-shadow:0 40px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(245,240,232,.08)}
+#v10 .gar-kaart::before{content:'';position:absolute;inset:-1px;border-radius:28px;background:radial-gradient(ellipse at 50% -20%,rgba(201,168,76,.35),transparent 55%);pointer-events:none}
+#v10 .gar-zegel{width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.5);box-shadow:0 0 34px rgba(201,168,76,.28);margin-bottom:4px}
+#v10 .gar-zegel svg{width:44px;height:44px}
+#v10 .gar-kaart h2{font-size:clamp(44px,5.5vw,72px);line-height:.92}
+#v10 .gar-kaart .lead{font-size:clamp(17px,1.4vw,20px);line-height:1.55;text-wrap:pretty;max-width:520px}
+#v10 .gar-kaart .sub{font-size:16px;line-height:1.6;color:var(--muted);margin-top:-6px}
+#v10 .gar-kaart .btn{margin-top:14px}
 #v10 .faq-in{max-width:760px;margin:0 auto;display:flex;flex-direction:column;align-items:stretch;gap:36px}
 #v10 .faq-l{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
 #v10 .faq-l h2{font-size:clamp(40px,5vw,68px);line-height:.95;text-wrap:balance}
@@ -1344,13 +1348,13 @@ tesMeet('pageview',location.pathname);
 
       <div class="pane" id="pane-garantie" role="tabpanel">
         <div class="gar-in" data-panel>
-          <div class="mono gold">De garantie</div>
-          <h2 class="display">Geen resultaat? Geld terug.</h2>
-          <p class="lead">Ik garandeer je resultaat. Aan het begin van je traject leggen we samen vast welke doelen je in twaalf weken haalt. Haal je die niet, dan krijg je je volledige investering terug.</p>
-          <p class="sub">Als jij je doel niet haalt, heb ik niets geleverd. Hoe goed de gesprekken ook waren.</p>
-          <div class="cta-row">
+          <div class="gar-kaart">
+            <div class="gar-zegel" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4l15 5.5v12c0 10-6.4 18-15 22-8.6-4-15-12-15-22v-12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 24.5l5.5 5.5L32 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="mono gold">De garantie</div>
+            <h2 class="display">Geen resultaat.<br>Geld terug.</h2>
+            <p class="lead">In week &eacute;&eacute;n leggen we vast welk doel je in twaalf weken haalt. Haal je het niet, dan krijg je je volledige investering terug.</p>
+            <p class="sub">Als jij je doel niet haalt, heb ik niets geleverd.</p>
             <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
-            <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
           </div>
         </div>
       </div>
