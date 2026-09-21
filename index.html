@@ -915,7 +915,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 @media (max-width:640px){#v10 .play{width:80px;height:80px}
 #v10 .play i{border-left-width:20px;border-top-width:12px;border-bottom-width:12px}
 #v10 .obj-cap{font-size:9px;left:14px;right:14px;bottom:12px}}
-#v10 .quotes{max-width:1200px;margin:0 auto;padding:0 var(--gutter) clamp(80px,9vw,140px);display:flex;flex-direction:column;gap:40px}
+#v10 .quotes{max-width:1200px;margin:0 auto;padding:0 var(--gutter) clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:40px}
 #v10 .quote{display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--line);padding:24px 20px 20px;margin:0 -20px}
 #v10 .quote p{font-size:19px;line-height:1.5;font-style:italic;text-wrap:pretty}
 #v10 .who{display:flex;align-items:center;gap:14px}
@@ -925,14 +925,14 @@ footer p{font-size:.68rem;color:var(--dim)}
 #v10 .who-txt span,#v10 .note{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 #v10 .note{color:var(--dim)}
 #v10 .info{position:relative;background:transparent}
-#v10 .tabs-wrap{max-width:1200px;margin:0 auto;padding:clamp(64px,7vw,100px) var(--gutter) 0;display:flex;justify-content:center}
+#v10 .tabs-wrap{max-width:1200px;margin:0 auto;padding:clamp(28px,3vw,44px) var(--gutter) 0;display:flex;justify-content:center}
 #v10 .tabs{display:flex;gap:6px;padding:6px;border:1px solid rgba(245,240,232,.14);border-radius:2px;background:var(--bg)}
 #v10 .tab{padding:14px 26px;border-radius:2px;cursor:pointer;font-size:15px;font-weight:500;letter-spacing:.01em;min-height:44px;display:flex;align-items:center;background:transparent;color:var(--muted);border:0;font-family:inherit;transition:background .3s,color .3s}
 #v10 .tab:hover{color:var(--white)}
 #v10 .tab[aria-selected="true"]{background:var(--gold);color:var(--bg)}
 @media (max-width:480px){#v10 .tab{padding:12px 14px;font-size:14px}}
 #v10 .panel{position:relative}
-#v10 .pane{padding:clamp(56px,6vw,80px) var(--gutter) clamp(80px,9vw,140px)}
+#v10 .pane{padding:clamp(44px,5vw,64px) var(--gutter) clamp(48px,6vw,80px)}
 #v10 .pane[hidden]{display:none}
 #v10 .krijgt-in{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:72px;align-items:center}
 #v10 .sec-head{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
@@ -945,33 +945,33 @@ footer p{font-size:.68rem;color:var(--dim)}
 #v10 .card-cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.7}
 #v10 .card h3{font-size:26px;line-height:1.2;font-weight:400}
 #v10 .card p{font-size:17px;line-height:1.6;text-wrap:pretty}
-#v10 .gar-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:start}
-#v10 .gar-l{display:flex;flex-direction:column;gap:32px}
-#v10 .gar-l h2{font-size:clamp(56px,6.2vw,92px);line-height:.9;text-wrap:pretty}
-#v10 .gar-r{display:flex;flex-direction:column;gap:28px;padding-top:12px}
-#v10 .gar-r .lead{font-size:clamp(18px,1.5vw,22px);line-height:1.55;text-wrap:pretty}
-#v10 .gar-r .sub{font-size:17px;line-height:1.6;color:var(--muted);text-wrap:pretty}
-@media (max-width:400px){#v10 .gar-in{grid-template-columns:minmax(0,1fr)}}
-#v10 .faq-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:64px;align-items:start}
-#v10 .faq-l{display:flex;flex-direction:column;gap:22px}
-#v10 .faq-l h2{font-size:clamp(36px,4vw,56px);line-height:1.06;font-weight:400;letter-spacing:-.015em}
-#v10 .faq-l p{font-size:17px;line-height:1.6;color:var(--muted);max-width:420px;text-wrap:pretty}
-#v10 .faq{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-#v10 .q{border-bottom:1px solid var(--line)}
-#v10 .q-btn{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;cursor:pointer;min-height:44px;width:100%;background:none;border:0;color:inherit;font-family:inherit;text-align:left}
+#v10 .gar-in{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px}
+#v10 .gar-in h2{font-size:clamp(44px,5.5vw,76px);line-height:.92;text-wrap:balance}
+#v10 .gar-in .lead{font-size:clamp(18px,1.5vw,21px);line-height:1.55;text-wrap:pretty}
+#v10 .gar-in .sub{font-size:17px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+#v10 .gar-in .cta-row{margin-top:10px}
+#v10 .faq-in{max-width:760px;margin:0 auto;display:flex;flex-direction:column;align-items:stretch;gap:36px}
+#v10 .faq-l{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+#v10 .faq-l h2{font-size:clamp(40px,5vw,68px);line-height:.95;text-wrap:balance}
+#v10 .faq-l p{font-size:17px;line-height:1.6;color:var(--muted);max-width:460px;text-wrap:pretty}
+#v10 .faq{display:flex;flex-direction:column;gap:12px}
+#v10 .q{border:1px solid rgba(201,168,76,.28);border-radius:999px;background:rgba(255,255,255,.02);transition:border-color .2s,background .2s,border-radius .3s var(--ease)}
+#v10 .q:hover{border-color:rgba(201,168,76,.55)}
+#v10 .q.open{border-radius:26px;border-color:var(--gold);background:rgba(201,168,76,.07)}
+#v10 .q-btn{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:18px 26px;cursor:pointer;min-height:44px;width:100%;background:none;border:0;color:inherit;font-family:inherit;text-align:left}
 #v10 .q-btn span:first-child{font-size:clamp(18px,1.5vw,22px);line-height:1.35;font-weight:400}
 #v10 .q-mark{font-family:var(--mono);font-size:18px;color:var(--gold);flex:none;width:24px;text-align:center}
-#v10 .q-a{display:flex;flex-direction:column;gap:14px;padding:0 48px 28px 0}
+#v10 .q-a{display:flex;flex-direction:column;gap:14px;padding:0 26px 24px 26px}
 #v10 .q-a[hidden]{display:none}
 #v10 .q-a p{font-size:17px;line-height:1.65;text-wrap:pretty}
-@media (max-width:640px){#v10 .q-a{padding-right:24px}}
-#v10 .stap{position:relative;overflow:hidden;background:transparent;padding:clamp(100px,12vw,180px) var(--gutter)}
+@media (max-width:640px){#v10 .q-a{padding:0 20px 20px}#v10 .q-btn{padding:16px 20px}}
+#v10 .stap{position:relative;overflow:hidden;background:transparent;padding:clamp(56px,7vw,100px) var(--gutter) clamp(100px,12vw,180px)}
 #v10 .para{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
 #v10 .para-1{width:1100px;height:1100px;background:radial-gradient(closest-side,rgba(201,168,76,.14),rgba(10,10,10,0) 70%)}
 #v10 .para-2{width:min(92vw,900px);aspect-ratio:1;border:1px solid rgba(201,168,76,.18)}
 #v10 .para-3{width:min(70vw,620px);aspect-ratio:1;border:1px solid rgba(201,168,76,.12)}
 #v10 .stap-in{position:relative;max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:32px}
-#v10 .stap h2{font-size:clamp(72px,9vw,140px);line-height:.88;text-wrap:balance}
+#v10 .stap h2{font-size:clamp(44px,5.5vw,84px);line-height:.92;text-wrap:balance}
 #v10 .stap p{font-size:clamp(18px,1.5vw,22px);line-height:1.55;max-width:560px;text-wrap:pretty}
 #v10 .stap .fine{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 #v10 .foot{max-width:1200px;margin:0 auto;padding:56px var(--gutter) 64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
@@ -1344,18 +1344,13 @@ tesMeet('pageview',location.pathname);
 
       <div class="pane" id="pane-garantie" role="tabpanel">
         <div class="gar-in" data-panel>
-          <div class="gar-l">
-            <div class="mono gold">De garantie</div>
-            <h2 class="display">Geen resultaat? Geld terug.</h2>
-          </div>
-          <div class="gar-r">
-            <p class="lead">Ik garandeer je resultaat. Aan het begin van je traject leggen we samen vast welke doelen je in twaalf weken haalt. Haal je die niet, dan krijg je je volledige investering terug.</p>
-            <p class="sub">Als jij je doel niet haalt, heb ik niets geleverd. Hoe goed de gesprekken ook waren.</p>
-        <p class="mono muted" style="font-size:11px;letter-spacing:.14em;line-height:1.8">Aanvraag binnen 14 dagen na afloop &middot; geldt per traject &middot; niet met terugwerkende kracht</p>
-            <div class="cta-row links">
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Ik wil mijn doel halen</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
+          <div class="mono gold">De garantie</div>
+          <h2 class="display">Geen resultaat? Geld terug.</h2>
+          <p class="lead">Ik garandeer je resultaat. Aan het begin van je traject leggen we samen vast welke doelen je in twaalf weken haalt. Haal je die niet, dan krijg je je volledige investering terug.</p>
+          <p class="sub">Als jij je doel niet haalt, heb ik niets geleverd. Hoe goed de gesprekken ook waren.</p>
+          <div class="cta-row">
+            <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
           </div>
         </div>
       </div>
@@ -1363,14 +1358,15 @@ tesMeet('pageview',location.pathname);
       <div class="pane" id="pane-vragen" role="tabpanel" hidden>
         <div class="faq-in" data-panel>
           <div class="faq-l">
-            <h2>Wat je wilt weten voor je belt.</h2>
+            <div class="mono gold">Vragen</div>
+            <h2 class="display">Wat je wilt weten voor je belt.</h2>
             <p>Kort en eerlijk. Staat je vraag er niet bij, dan is dat waar het gesprek voor is.</p>
-            <div class="cta-row links">
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
           </div>
           <div class="faq" id="faq"></div>
+          <div class="cta-row">
+            <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
+          </div>
         </div>
       </div>
 
@@ -6964,7 +6960,7 @@ document.addEventListener('click', function(e){
     faqEl.innerHTML = '';
     FAQ.forEach((f, i) => {
       const open = openQ === i;
-      const q = document.createElement('div'); q.className = 'q';
+      const q = document.createElement('div'); q.className = 'q' + (open ? ' open' : '');
       const b = document.createElement('button'); b.className = 'q-btn'; b.type = 'button';
       b.setAttribute('aria-expanded', open);
       b.innerHTML = `<span>${f.q}</span><span class="q-mark">${open ? '–' : '+'}</span>`;
@@ -6985,7 +6981,7 @@ document.addEventListener('click', function(e){
       p.hidden = key !== k;
       if (key === k) {                              // paneel-animatie opnieuw afspelen
         const inner = p.firstElementChild;
-        inner.style.animation = 'none'; void inner.offsetWidth; inner.style.animation = '';
+        Array.from(inner.children).forEach(c => { c.style.animation = 'none'; void c.offsetWidth; c.style.animation = ''; });
       }
     });
     scanReveal();
