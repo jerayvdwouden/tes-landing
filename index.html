@@ -938,8 +938,10 @@ footer p{font-size:.68rem;color:var(--dim)}
 #v10 .sec-head{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
 #v10 .sec-head h2{font-size:clamp(56px,6.4vw,96px);line-height:.9;text-wrap:balance;max-width:900px}
 #v10 .card{display:flex;flex-direction:column;gap:22px;padding:20px;margin:-20px}
-#v10 .card-img{aspect-ratio:4/3;display:flex;align-items:flex-end;padding:20px;position:relative}
-#v10 .card-num{position:absolute;left:20px;top:16px;font-family:var(--display);font-size:64px;line-height:1;color:var(--gold)}
+#v10 .card-img{aspect-ratio:4/3;display:flex;align-items:flex-end;padding:20px;position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink)}
+#v10 .card-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+#v10 .card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.45) 0%,rgba(10,10,10,0) 40%);pointer-events:none}
+#v10 .card-num{position:absolute;left:20px;top:16px;font-family:var(--display);font-size:64px;line-height:1;color:var(--gold);z-index:1;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 #v10 .card-cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.7}
 #v10 .card h3{font-size:26px;line-height:1.2;font-weight:400}
 #v10 .card p{font-size:17px;line-height:1.6;text-wrap:pretty}
@@ -1318,17 +1320,17 @@ tesMeet('pageview',location.pathname);
           </div>
           <div data-cols="3" style="width:100%">
             <div class="card" data-tilt>
-              <div class="card-img hatch"><span class="card-num">01</span><span class="card-cap">Foto — tafel, twee koppen koffie, vol vel papier</span></div>
+              <div class="card-img"><img src="img/traject-sessie.jpg" alt="Wekelijkse online sessie" loading="lazy"><span class="card-num">01</span></div>
               <h3>Elke week een uur met mij</h3>
               <p>Één-op-één, online, op een vast moment. We kijken wat er wel en niet gebeurde en bouwen de week erna. Tussendoor zie ik je scores meelopen en bel ik vóór het wegzakt. Vastgelopen? Je bereikt me in de app.</p>
             </div>
             <div class="card" data-tilt>
-              <div class="card-img hatch"><span class="card-num">02</span><span class="card-cap">Screenshot — app, dagweergave met één actie</span></div>
+              <div class="card-img"><img src="img/traject-app.jpg" alt="De app: je dag en je scores" loading="lazy" style="object-position:50% 0%"><span class="card-num">02</span></div>
               <h3>Je eigen app, om je doel gebouwd</h3>
               <p>Je doel, uitgewerkt tot acties met dag en tijd. Elke dag drie minuten afvinken; elke vrijdag dertig minuten je week scoren. Je ziet zwart op wit of je beweegt — in week vier, niet in maand zes.</p>
             </div>
             <div class="card" data-tilt>
-              <div class="card-img hatch"><span class="card-num">03</span><span class="card-cap">Foto — whiteboard, streep door week 12</span></div>
+              <div class="card-img"><img src="img/traject-resultaat.jpg" alt="Je doel, meetbaar, van week 1 tot week 12" loading="lazy" style="object-position:50% 42%"><span class="card-num">03</span></div>
               <h3>Een meetbaar resultaat na twaalf weken</h3>
               <p>In week één maken we je doel meetbaar: niet fitter worden, maar twaalf kilo eraf vóór 1 december. In week twaalf staat er een getal. Staat het er niet, dan krijg je je geld terug.</p>
             </div>
