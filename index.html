@@ -917,7 +917,7 @@ footer p{font-size:.68rem;color:var(--dim)}
 #v10 .v10-hero-copy p{font-size:clamp(18px,1.5vw,22px);line-height:1.55;max-width:560px;text-wrap:pretty}
 #v10 .stage{position:relative;display:flex;justify-content:center;align-items:center;perspective:2000px;width:100%}
 #v10 .stage-glow{position:absolute;width:80%;height:80%;background:radial-gradient(closest-side,rgba(138,110,47,.2),rgba(10,10,10,0) 72%);pointer-events:none}
-#v10 .obj{position:relative;width:100%;max-width:760px;aspect-ratio:16/9;transform-style:preserve-3d;transform:rotateX(4deg);will-change:transform;cursor:pointer}
+#v10 .obj{position:relative;width:100%;max-width:760px;aspect-ratio:16/9;transform-style:preserve-3d;transform:rotateX(4deg);will-change:transform}
 #v10 .obj-b2{position:absolute;inset:0;background:#1E1A16;transform:translateZ(-16px)}
 #v10 .obj-b1{position:absolute;inset:0;background:#2A241E;transform:translateZ(-8px);box-shadow:0 50px 120px rgba(0,0,0,.75)}
 #v10 .obj-face{position:absolute;inset:0;border:1px solid rgba(245,240,232,.12);display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -1265,12 +1265,11 @@ tesMeet('pageview',location.pathname);
 
     <div class="stage" id="stage">
       <div class="stage-glow"></div>
-      <div class="obj" id="obj" role="button" tabindex="0" aria-label="Video afspelen">
+      <div class="obj" id="obj" aria-label="Video">
         <div class="obj-b2"></div>
         <div class="obj-b1"></div>
-        <div class="obj-face hatch">
-          <div class="play"><i></i></div>
-          <div class="obj-cap"><span>Video — Jeray aan tafel: wat het is, hoe een week eruitziet</span><span>01:30</span></div>
+        <div class="obj-face">
+          <iframe id="v10Frame" class="bunny" src="https://iframe.mediadelivery.net/embed/692336/0d86c42a-640a-4bed-b1cd-9558008dbb9c?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
         </div>
       </div>
     </div>
