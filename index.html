@@ -1015,6 +1015,218 @@ footer p{font-size:.68rem;color:var(--dim)}
 #v10 .cta-row.links{align-items:flex-start;text-align:left;margin-top:8px}
 @media(max-width:820px){#v10 .cta-row.links{align-items:center;text-align:center}}
 </style>
+<style id="gm-css">
+/* Zelfde ontwerp als de aanbodpagina, gescoped op #gm */
+#gm{color:#F5F0E8;font-family:'DM Sans',system-ui,sans-serif;font-weight:300;line-height:normal}
+#gm section,#gm div,#gm article{background:none;border:0;border-radius:0;padding:0;margin:0}
+#gm h1,#gm h2,#gm h3,#gm p{margin:0;text-shadow:none;letter-spacing:normal;text-transform:none;color:inherit;font-weight:inherit}
+#gm a:hover{color:#C9A84C}
+#gm{
+  --bg:#0A0A0A; --bg2:#1A1512; --ink:#0E0C0A;
+  --gold:#C9A84C; --gold-l:#E8C97A; --gold-d:#8A6E2F;
+  --white:#F5F0E8; --muted:#A09880; --dim:#6E675A;
+  --line:rgba(245,240,232,.12);
+  --display:'Abolition','Bebas Neue',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --gutter:clamp(20px,4vw,60px);
+}
+#gm *,#gm *::before,#gm *::after{box-sizing:border-box}
+#gm a{color:var(--white);text-decoration:none}
+#gm a:hover{color:var(--gold)}
+#gm ::selection{background:rgba(201,168,76,.28)}
+#gm h1,#gm h2,#gm h3,#gm p{margin:0}
+#gm img{display:block}
+#gm .root{position:relative;isolation:isolate;background:var(--bg);color:var(--white);overflow-x:clip}
+#gm .glow{position:fixed;left:50%;top:40%;width:min(120vw,1400px);aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(201,168,76,.13),rgba(201,168,76,0) 70%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);will-change:transform}
+#gm .mono{font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;font-size:12px}
+#gm .mono.gold{color:var(--gold)}
+#gm .mono.muted{color:var(--muted)}
+#gm .display{font-family:var(--display);font-weight:400;text-transform:uppercase}
+#gm .btn{display:inline-block;position:relative;overflow:hidden;background:linear-gradient(135deg,#E8C97A 0%,#C9A84C 40%,#F0D98A 65%,#C9A84C 100%);color:#000;font-size:14px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:18px 38px;border-radius:4px;box-shadow:0 0 22px rgba(201,168,76,.55),0 4px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.25);transition:all .25s}
+#gm .btn::after{content:'';position:absolute;top:-50%;left:-60%;width:35%;height:200%;background:linear-gradient(to right,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-15deg);animation:shimmer-btn 2.4s infinite;pointer-events:none}
+#gm .btn:hover{color:#000;background:linear-gradient(135deg,#F0D98A 0%,#E8C97A 40%,#FAEAA0 65%,#E8C97A 100%);box-shadow:0 0 36px rgba(201,168,76,.8),0 6px 28px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.3);transform:translateY(-2px) scale(1.015)}
+#gm .btn.big{font-size:19px;padding:22px 52px;box-shadow:0 20px 60px rgba(201,168,76,.22)}
+#gm .btn.big:hover{transform:none;box-shadow:0 28px 80px rgba(201,168,76,.38)}
+#gm .btn.small{font-size:15px;padding:12px 22px}
+#gm .btn.small:hover{transform:none;box-shadow:none}
+#gm [data-cols]{display:grid;gap:48px}
+#gm [data-cols="4"]{grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+#gm [data-cols="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+#gm [data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;max-width:1000px;margin:0 auto}
+@media (max-width:720px){#gm [data-cols="2"]{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:1040px){#gm [data-cols="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+#gm [data-cols="3"]{gap:28px}}
+@media (max-width:640px){#gm [data-cols="4"]{grid-template-columns:minmax(0,1fr)}
+#gm [data-cols="3"]{grid-template-columns:minmax(0,1fr);gap:48px}}
+#gm [data-reveal]{opacity:0;transform:translateY(32px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+#gm [data-reveal="in"]{opacity:1;transform:none}
+#gm [data-tilt]{transform-style:preserve-3d;will-change:transform}
+#gm [data-tilt][data-reveal="in"]{transition:opacity 1s,transform .55s var(--ease),box-shadow .55s var(--ease),background .4s}
+#gm [data-tilt][data-reveal="in"]:hover,#gm [data-tilt].tilt-on:hover{background:#1E1915}
+@keyframes tes-panel{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#gm [data-panel]>*{animation:tes-panel .55s var(--ease) both}
+#gm [data-magnet]{transition:transform .5s var(--ease),background .3s,box-shadow .5s}
+#gm .hatch{background:var(--ink);background-image:repeating-linear-gradient(135deg,rgba(245,240,232,.035) 0 1px,transparent 1px 10px)}
+#gm .nav{position:sticky;top:0;z-index:20;height:76px;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(10,10,10,.92),rgba(10,10,10,.6) 70%,rgba(10,10,10,0));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#gm .brand{display:flex;align-items:center;gap:12px}
+#gm .brand img{width:28px;height:28px;object-fit:contain}
+#gm .brand span{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+#gm .nav-links{display:flex;align-items:center;gap:32px}
+#gm .nav-links a:not(.btn){font-size:15px;color:var(--muted)}
+#gm .nav-links a:not(.btn):hover{color:var(--gold)}
+#gm .btn.small{white-space:nowrap}
+@media (max-width:760px){#gm .nav-links a:not(.btn){display:none}}
+@media (max-width:480px){#gm .nav{height:64px}
+#gm .btn.small{font-size:14px;padding:10px 16px}
+#gm .brand span{font-size:10px;letter-spacing:.18em}}
+#gm .v10-hero{position:relative;z-index:1;padding:48px clamp(20px,6vw,120px) clamp(80px,9vw,140px);display:flex;flex-direction:column;gap:48px;align-items:center;max-width:1440px;margin:0 auto}
+#gm .v10-hero-copy{position:relative;display:flex;flex-direction:column;gap:28px;max-width:900px;align-items:center;text-align:center}
+#gm .v10-hero h1{font-size:clamp(64px,7.4vw,112px);line-height:.88;text-wrap:pretty}
+#gm .v10-hero-copy p{font-size:clamp(18px,1.5vw,22px);line-height:1.55;max-width:560px;text-wrap:pretty}
+#gm .stage{position:relative;display:flex;justify-content:center;align-items:center;perspective:2000px;width:100%}
+#gm .stage-glow{position:absolute;width:80%;height:80%;background:radial-gradient(closest-side,rgba(138,110,47,.2),rgba(10,10,10,0) 72%);pointer-events:none}
+#gm .obj{position:relative;width:100%;max-width:760px;aspect-ratio:16/9;transform-style:preserve-3d;transform:rotateX(4deg);will-change:transform}
+#gm .obj-b2{position:absolute;inset:0;background:#1E1A16;transform:translateZ(-16px)}
+#gm .obj-b1{position:absolute;inset:0;background:#2A241E;transform:translateZ(-8px);box-shadow:0 50px 120px rgba(0,0,0,.75)}
+#gm .obj-face{position:absolute;inset:0;border:1px solid rgba(245,240,232,.12);display:flex;align-items:center;justify-content:center;overflow:hidden}
+#gm .obj-face::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(138,110,47,.18),rgba(10,10,10,0) 60%)}
+#gm .obj-face::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,rgba(245,240,232,.07) 0%,rgba(245,240,232,0) 40%);pointer-events:none}
+#gm .play{position:relative;width:112px;height:112px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;transition:background .3s}
+#gm .obj:hover .play{background:var(--gold)}
+#gm .play i{width:0;height:0;border-left:28px solid var(--white);border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:8px;transition:border-left-color .3s}
+#gm .obj:hover .play i{border-left-color:var(--bg)}
+#gm .obj-cap{position:absolute;left:22px;bottom:18px;right:22px;display:flex;justify-content:space-between;gap:24px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.7}
+@media (max-width:640px){#gm .play{width:80px;height:80px}
+#gm .play i{border-left-width:20px;border-top-width:12px;border-bottom-width:12px}
+#gm .obj-cap{font-size:9px;left:14px;right:14px;bottom:12px}}
+#gm .quotes{max-width:1200px;margin:0 auto;padding:0 var(--gutter) clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:40px}
+#gm .quote{display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--line);padding:24px 20px 20px;margin:0 -20px}
+#gm .quote p{font-size:19px;line-height:1.5;font-style:italic;text-wrap:pretty}
+#gm .who{display:flex;align-items:center;gap:14px}
+#gm .avatar{width:44px;height:44px;border-radius:50%;background:var(--ink);background-image:repeating-linear-gradient(135deg,rgba(245,240,232,.06) 0 1px,transparent 1px 6px);flex:none}
+#gm .who-txt{display:flex;flex-direction:column;gap:3px}
+#gm .who-txt b{font-size:15px;font-weight:400}
+#gm .who-txt span,#gm .note{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+#gm .note{color:var(--dim)}
+#gm .info{position:relative;background:transparent}
+#gm .tabs-wrap{max-width:1200px;margin:0 auto;padding:clamp(28px,3vw,44px) var(--gutter) 0;display:flex;justify-content:center}
+#gm .tabs{display:flex;gap:6px;padding:6px;border:1px solid rgba(245,240,232,.14);border-radius:2px;background:var(--bg)}
+#gm .tab{padding:14px 26px;border-radius:2px;cursor:pointer;font-size:15px;font-weight:500;letter-spacing:.01em;min-height:44px;display:flex;align-items:center;background:transparent;color:var(--muted);border:0;font-family:inherit;transition:background .3s,color .3s}
+#gm .tab:hover{color:var(--white)}
+#gm .tab[aria-selected="true"]{background:var(--gold);color:var(--bg)}
+@media (max-width:480px){#gm .tab{padding:12px 14px;font-size:14px}}
+#gm .panel{position:relative}
+#gm .pane{padding:clamp(44px,5vw,64px) var(--gutter) clamp(48px,6vw,80px)}
+#gm .pane[hidden]{display:none}
+#gm .krijgt-in{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:72px;align-items:center}
+#gm .sec-head{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+#gm .sec-head h2{font-size:clamp(56px,6.4vw,96px);line-height:.9;text-wrap:balance;max-width:900px}
+#gm .card{display:flex;flex-direction:column;gap:22px;padding:20px;margin:-20px}
+#gm .card-img{aspect-ratio:4/3;display:flex;align-items:flex-end;padding:20px;position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink)}
+#gm .card-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+#gm .card-img::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 60px 50px,rgba(10,10,10,.85),rgba(10,10,10,.45) 70px,rgba(10,10,10,0) 150px),linear-gradient(180deg,rgba(10,10,10,.4) 0%,rgba(10,10,10,0) 40%);pointer-events:none}
+#gm .card-num{position:absolute;left:20px;top:16px;font-family:var(--display);font-size:64px;line-height:1;color:var(--gold);z-index:1;text-shadow:0 0 6px rgba(0,0,0,.95),0 2px 18px rgba(0,0,0,.9),0 0 40px rgba(0,0,0,.8)}
+#gm .card-cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);line-height:1.7}
+#gm .card h3{font-size:26px;line-height:1.2;font-weight:400}
+#gm .card p{font-size:17px;line-height:1.6;text-wrap:pretty}
+#gm .gar-in{max-width:640px;margin:0 auto}
+#gm .gar-kaart{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:clamp(40px,5vw,56px) clamp(24px,5vw,56px) clamp(36px,4vw,48px);border:1px solid rgba(201,168,76,.45);border-radius:28px;background:linear-gradient(170deg,rgba(201,168,76,.12) 0%,rgba(26,21,18,.6) 40%,rgba(10,10,10,.9) 100%);box-shadow:0 40px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(245,240,232,.08)}
+#gm .gar-kaart::before{content:'';position:absolute;inset:-1px;border-radius:28px;background:radial-gradient(ellipse at 50% -20%,rgba(201,168,76,.35),transparent 55%);pointer-events:none}
+#gm .gar-zegel{width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.5);box-shadow:0 0 34px rgba(201,168,76,.28);margin-bottom:4px}
+#gm .gar-zegel svg{width:44px;height:44px}
+#gm .gar-kaart h2{font-size:clamp(44px,5.5vw,72px);line-height:.92}
+#gm .gar-kaart .lead{font-size:clamp(17px,1.4vw,20px);line-height:1.55;text-wrap:pretty;max-width:520px}
+#gm .gar-kaart .sub{font-size:16px;line-height:1.6;color:var(--muted);margin-top:-6px}
+#gm .gar-kaart .btn{margin-top:14px}
+#gm .faq-in{max-width:760px;margin:0 auto;display:flex;flex-direction:column;align-items:stretch;gap:36px}
+#gm .faq-l{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+#gm .faq-l h2{font-size:clamp(40px,5vw,68px);line-height:.95;text-wrap:balance}
+#gm .faq-l p{font-size:17px;line-height:1.6;color:var(--muted);max-width:460px;text-wrap:pretty}
+#gm .faq{display:flex;flex-direction:column;gap:12px}
+#gm .q{border:1px solid rgba(201,168,76,.28);border-radius:999px;background:rgba(255,255,255,.02);transition:border-color .2s,background .2s,border-radius .3s var(--ease)}
+#gm .q:hover{border-color:rgba(201,168,76,.55)}
+#gm .q.open{border-radius:26px;border-color:var(--gold);background:rgba(201,168,76,.07)}
+#gm .q-btn{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:18px 26px;cursor:pointer;min-height:44px;width:100%;background:none;border:0;color:inherit;font-family:inherit;text-align:left}
+#gm .q-btn span:first-child{font-size:clamp(18px,1.5vw,22px);line-height:1.35;font-weight:400}
+#gm .q-mark{font-family:var(--mono);font-size:18px;color:var(--gold);flex:none;width:24px;text-align:center}
+#gm .q-a{display:flex;flex-direction:column;gap:14px;padding:0 26px 24px 26px}
+#gm .q-a[hidden]{display:none}
+#gm .q-a p{font-size:17px;line-height:1.65;text-wrap:pretty}
+@media (max-width:640px){#gm .q-a{padding:0 20px 20px}#gm .q-btn{padding:16px 20px}}
+#gm .stap{position:relative;overflow:hidden;background:transparent;padding:clamp(56px,7vw,100px) var(--gutter) clamp(100px,12vw,180px)}
+#gm .para{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
+#gm .para-1{width:1100px;height:1100px;background:radial-gradient(closest-side,rgba(201,168,76,.14),rgba(10,10,10,0) 70%)}
+#gm .para-2{width:min(92vw,900px);aspect-ratio:1;border:1px solid rgba(201,168,76,.18)}
+#gm .para-3{width:min(70vw,620px);aspect-ratio:1;border:1px solid rgba(201,168,76,.12)}
+#gm .stap-in{position:relative;max-width:900px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:32px}
+#gm .stap h2{font-size:clamp(44px,5.5vw,84px);line-height:.92;text-wrap:balance}
+#gm .stap p{font-size:clamp(18px,1.5vw,22px);line-height:1.55;max-width:560px;text-wrap:pretty}
+#gm .stap .fine{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+#gm .foot{max-width:1200px;margin:0 auto;padding:56px var(--gutter) 64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+#gm .foot .brand img{width:26px;height:26px}
+#gm .foot span,#gm .foot a{font-size:14px;color:var(--muted)}
+#gm .foot-links{display:flex;gap:32px}
+@media (prefers-reduced-motion:reduce){#gm [data-reveal]{opacity:1;transform:none;transition:none}
+#gm [data-panel]>*{animation:none}}
+
+#gm .prep{max-width:560px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;padding:28px 24px;border:1px solid rgba(201,168,76,.28);border-radius:2px;background:rgba(10,10,10,.55)}
+#gm .prep h3{font-size:24px;line-height:1.2;font-weight:400}
+#gm .prep p{font-size:16px;line-height:1.6;color:#A09880;max-width:440px}
+#gm .btn.ghost{background:transparent;color:#F5F0E8;border:1px solid rgba(201,168,76,.5);box-shadow:none;font-size:15px;padding:14px 26px}
+#gm .btn.ghost:hover{background:rgba(201,168,76,.1);color:#F5F0E8;transform:none;box-shadow:none}
+#gm .cal{width:100%;max-width:540px;display:flex;flex-direction:column;gap:14px;align-items:center}
+#gm .cal .calendly-inline-widget{width:100%;border:1px solid rgba(245,240,232,.12);border-radius:2px;overflow:hidden;background:#0A0A0A}
+@media(max-width:640px){#gm .cal .calendly-inline-widget{height:640px}}
+
+#gm .cta-row{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative;z-index:3}
+#gm .v10-hero .cta-row{margin-top:8px}
+#gm .cta-row.links{align-items:flex-start;text-align:left;margin-top:8px}
+@media(max-width:820px){#gm .cta-row.links{align-items:center;text-align:center}}
+
+/* ─── extra's die alleen de gesprekpagina heeft ─────────────── */
+#gm .gm-sec{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:clamp(40px,5vw,72px) var(--gutter);display:flex;flex-direction:column;gap:clamp(36px,4vw,56px);align-items:center}
+#gm .gm-sec.smal{max-width:900px}
+#gm .gm-tl{position:relative;width:100%;max-width:760px;display:flex;flex-direction:column}
+#gm .gm-stap{position:relative;display:grid;grid-template-columns:96px 1fr;gap:24px;padding:0 0 40px}
+#gm .gm-stap:last-child{padding-bottom:0}
+#gm .gm-stap::before{content:'';position:absolute;left:107px;top:14px;bottom:-6px;width:1px;background:linear-gradient(180deg,rgba(201,168,76,.45),rgba(201,168,76,.12))}
+#gm .gm-stap:last-child::before{display:none}
+#gm .gm-stap::after{content:'';position:absolute;left:102px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px var(--bg),0 0 18px rgba(201,168,76,.55)}
+#gm .gm-tijd{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-align:right;padding-top:6px;line-height:1.7}
+#gm .gm-stap-in{padding-left:28px;display:flex;flex-direction:column;gap:10px}
+#gm .gm-stap h3{font-size:clamp(22px,2.4vw,30px);line-height:1.15;font-weight:400}
+#gm .gm-stap p{font-size:17px;line-height:1.6;color:#C9C2B4;text-wrap:pretty}
+@media(max-width:560px){#gm .gm-stap{grid-template-columns:1fr;gap:6px;padding-bottom:34px}
+#gm .gm-tijd{text-align:left;padding-top:0;padding-left:28px}
+#gm .gm-stap::before{left:5px;top:8px}
+#gm .gm-stap::after{left:0;top:3px}
+#gm .gm-stap-in{padding-left:28px}}
+#gm .gm-kaart{display:flex;flex-direction:column;gap:14px;padding:30px 26px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(30,25,21,.55),rgba(10,10,10,.5))}
+#gm .gm-kaart .gm-n{font-family:var(--display);font-size:52px;line-height:.9;color:var(--gold)}
+#gm .gm-kaart h3{font-size:24px;line-height:1.2;font-weight:400}
+#gm .gm-kaart p{font-size:16px;line-height:1.6;color:#C9C2B4;text-wrap:pretty}
+#gm .gm-wel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;width:100%;max-width:900px}
+@media(max-width:720px){#gm .gm-wel{grid-template-columns:minmax(0,1fr)}}
+#gm .gm-kol{padding:28px 26px;border:1px solid var(--line)}
+#gm .gm-kol.ja{border-color:rgba(201,168,76,.45);background:rgba(201,168,76,.05)}
+#gm .gm-kol h3{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+#gm .gm-kol.ja h3{color:var(--gold)}
+#gm .gm-kol ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+#gm .gm-kol li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:16px;line-height:1.55;color:#C9C2B4}
+#gm .gm-kol li::before{content:'\2713';color:var(--gold);font-size:14px;line-height:1.7}
+#gm .gm-kol.nee li::before{content:'\2715';color:var(--dim)}
+#gm .gm-eerlijk{width:100%;max-width:720px;padding:28px 30px;border:1px solid var(--line);border-left:3px solid var(--gold);background:rgba(201,168,76,.05)}
+#gm .gm-eerlijk p{font-size:17px;line-height:1.65;color:#C9C2B4;text-wrap:pretty}
+#gm .gm-eerlijk p+p{margin-top:12px}
+#gm .gm-eerlijk b{color:var(--white);font-weight:400}
+#gm .gm-al{width:100%;max-width:540px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:32px 28px;border:1px solid rgba(201,168,76,.45);background:rgba(201,168,76,.06)}
+#gm .gm-al h3{font-family:var(--display);font-size:34px;line-height:1;text-transform:uppercase;font-weight:400}
+#gm .gm-al p{font-size:16px;line-height:1.6;color:#C9C2B4}
+#gm .gm-mini{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#gm .gm-mini u{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+#gm .gm-mini u:hover{color:var(--gold)}
+</style>
 <style id="nav-groups-css">
 .nav-group{position:relative}
 .nav-group:after{content:'';position:absolute;left:-12px;right:-12px;top:100%;height:16px}   /* onzichtbare brug knop → menu */
@@ -1079,6 +1291,7 @@ tesMeet('pageview',location.pathname);
       <div class="nav-group" id="nav-gratis">
         <button class="nav-link nav-group-btn" type="button" onclick="toggleNavGroup(this)" aria-haspopup="true" aria-expanded="false">Gratis waarde <span class="chev">▾</span></button>
         <div class="nav-menu">
+          <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek');closeNavMenu()">Gratis gesprek</button>
           <button class="nav-link" data-page="tool" onclick="showPage('tool');closeNavMenu()">Jaardoel in 5 minuten</button>
           <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Gratis weggevers</button>
           <button class="nav-link" data-page="cursussen" onclick="closeNavMenu();window.location.href='/cursus'">Cursussen</button>
@@ -2196,6 +2409,191 @@ tesMeet('pageview',location.pathname);
   </div>
 </div>
 </div>
+<!-- ═══════════════════════════════════════════
+     PAGE: GESPREK (de gratis planmeeting)
+════════════════════════════════════════════ -->
+<div class="page" id="page-gesprek">
+<div class="root" id="gm">
+  <div class="glow" id="gm-glow"></div>
+
+  <!-- 01 hero -->
+  <section class="v10-hero" aria-label="Het gratis gesprek">
+    <div class="v10-hero-copy" data-reveal>
+      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; online</div>
+      <h1 class="display">E&eacute;n gratis uur.<br>Daarna heb je een plan.</h1>
+      <p>Geen kennismaking waarin we wat praten. We maken jouw doel meetbaar, bouwen je eerste acties en spreken af hoe je jezelf de komende twaalf weken vasthoudt. Dat plan is van jou &mdash; ook als je daarna niets met mij doet.</p>
+    </div>
+    <div class="cta-row" data-reveal>
+      <a href="#gm-cal" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+      <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
+    </div>
+  </section>
+
+  <!-- 02 zo ziet het uur eruit -->
+  <section class="gm-sec" aria-label="Zo ziet het uur eruit">
+    <div class="sec-head" data-reveal>
+      <div class="mono gold">Hoe het gaat</div>
+      <h2 class="display">Zo ziet het uur eruit</h2>
+    </div>
+    <div class="gm-tl">
+      <div class="gm-stap" data-reveal>
+        <div class="gm-tijd">Vooraf<br>5 min</div>
+        <div class="gm-stap-in">
+          <h3>Jij vult je jaardoel in</h3>
+          <p>Vijf minuten in de gratis tool op deze site. Ik lees het door v&oacute;&oacute;r we beginnen, zodat het hele uur opgaat aan jouw plan in plaats van aan vragen stellen.</p>
+        </div>
+      </div>
+      <div class="gm-stap" data-reveal>
+        <div class="gm-tijd">0&ndash;15 min</div>
+        <div class="gm-stap-in">
+          <h3>Waar je nu staat</h3>
+          <p>Wat je al geprobeerd hebt en waar het telkens strandde. Niet om te beoordelen, maar omdat daar meestal ligt wat er echt ontbreekt: richting, een plan, of iemand die kijkt of je het doet.</p>
+        </div>
+      </div>
+      <div class="gm-stap" data-reveal>
+        <div class="gm-tijd">15&ndash;35 min</div>
+        <div class="gm-stap-in">
+          <h3>Je doel wordt meetbaar</h3>
+          <p>Van &ldquo;fitter worden&rdquo; naar &ldquo;twaalf kilo eraf v&oacute;&oacute;r 1 december&rdquo;. Met een getal, een datum en het bewijs waaraan je het straks afmeet.</p>
+        </div>
+      </div>
+      <div class="gm-stap" data-reveal>
+        <div class="gm-tijd">35&ndash;55 min</div>
+        <div class="gm-stap-in">
+          <h3>Je eerste acties en je week</h3>
+          <p>Welke acties dat doel dichterbij brengen, op welke dagen ze staan, en waaraan je elke week ziet of je beweegt. Je loopt weg met week &eacute;&eacute;n op papier.</p>
+        </div>
+      </div>
+      <div class="gm-stap" data-reveal>
+        <div class="gm-tijd">55&ndash;60 min</div>
+        <div class="gm-stap-in">
+          <h3>En dan?</h3>
+          <p>Ik vertel kort hoe ik mensen twaalf weken begeleid. Past het, dan praten we verder. Past het niet, dan houd je je plan en is dit waar het ophoudt.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cta-row" data-reveal>
+      <a href="#gm-cal" onclick="gmNaarAgenda();return false" class="btn">Kies een moment</a>
+      <div class="mono muted" style="font-size:11px">Je ziet direct welke tijden vrij zijn</div>
+    </div>
+  </section>
+
+  <!-- 03 wat je overhoudt -->
+  <section class="gm-sec" aria-label="Wat je overhoudt">
+    <div class="sec-head" data-reveal>
+      <div class="mono gold">Wat je overhoudt</div>
+      <h2 class="display">Je gaat niet<br>met lege handen weg</h2>
+    </div>
+    <div data-cols="3" style="width:100%">
+      <div class="gm-kaart" data-reveal>
+        <div class="gm-n">01</div>
+        <h3>Een meetbaar jaardoel</h3>
+        <p>Zwart op wit, met een getal en een datum. Geen voornemen meer, maar iets waaraan je jezelf kunt afmeten.</p>
+      </div>
+      <div class="gm-kaart" data-reveal>
+        <div class="gm-n">02</div>
+        <h3>Je eerste twaalf weken</h3>
+        <p>De acties die er echt toe doen, verdeeld over je week. Klaar om maandag te beginnen, met of zonder mij.</p>
+      </div>
+      <div class="gm-kaart" data-reveal>
+        <div class="gm-n">03</div>
+        <h3>Het werkboek</h3>
+        <p>Het Execution System Werkboek, gratis, zodat je je week zelf kunt bijhouden en scoren.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 voor wie -->
+  <section class="gm-sec smal" aria-label="Voor wie dit gesprek is">
+    <div class="sec-head" data-reveal>
+      <div class="mono gold">Voor wie</div>
+      <h2 class="display">Is dit gesprek<br>iets voor jou?</h2>
+    </div>
+    <div class="gm-wel">
+      <div class="gm-kol ja" data-reveal>
+        <h3>Ja, als&hellip;</h3>
+        <ul>
+          <li>je een doel hebt dat je al langer voor je ziet</li>
+          <li>je eigenlijk wel weet wat je moet doen, maar het niet volhoudt</li>
+          <li>je bereid bent je doel meetbaar te maken</li>
+          <li>je een uur rustig kunt zitten, zonder afleiding</li>
+        </ul>
+      </div>
+      <div class="gm-kol nee" data-reveal>
+        <h3>Nee, als&hellip;</h3>
+        <ul>
+          <li>je nog niet weet wat je wilt</li>
+          <li>je iemand zoekt die het werk voor je doet</li>
+          <li>je alleen even wilt weten wat het kost</li>
+          <li>je nu geen tijd hebt om ermee aan de slag te gaan</li>
+        </ul>
+      </div>
+    </div>
+    <div class="gm-eerlijk" data-reveal>
+      <p><b>Eerlijk over het einde van het gesprek:</b> ja, ik vertel in de laatste vijf minuten hoe mijn traject werkt. Het uur ervoor is geen verkooppraatje &mdash; we werken aan jouw doel, en dat plan houd je sowieso.</p>
+      <p>Ik begeleid een klein aantal mensen tegelijk, dus ik zeg zelf ook nee als ik denk dat ik je niet verder help.</p>
+    </div>
+  </section>
+
+  <!-- 05 wat mensen zeggen -->
+  <section class="quotes" aria-label="Wat mensen zeggen">
+    <div class="mono muted">Wat mensen zeggen</div>
+    <div data-cols="2">
+      <article class="quote" data-reveal data-tilt>
+        <p>&ldquo;Ik heb twee startende ondernemers geholpen: voor allebei heb ik een marketingstrategie gebouwd, met onderzoek en voorbeelden erbij. Daarvoor had ik vooral dromen, maar geen push. Wat het verschil maakte: het systeem dwingt je om eerlijk te zijn. Ik kan niet drie weken lang hetzelfde zeggen.&rdquo;</p>
+        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Max Groenendijk &middot; Creative Business student</b><span>Twee marketingstrategie&euml;n gebouwd</span></div></div>
+      </article>
+      <article class="quote" data-reveal data-tilt>
+        <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen.&rdquo;</p>
+        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 06 vragen -->
+  <section class="gm-sec smal" aria-label="Veelgestelde vragen over het gesprek">
+    <div class="faq-in">
+      <div class="faq-l" data-reveal>
+        <div class="mono gold">Vragen</div>
+        <h2 class="display">Voordat je boekt.</h2>
+        <p>Kort en eerlijk. Staat je vraag er niet bij, dan is dat waar het gesprek voor is.</p>
+      </div>
+      <div class="faq" id="gm-faq"></div>
+    </div>
+  </section>
+
+  <!-- 07 de agenda -->
+  <section class="stap" id="gm-agenda" aria-label="Plan je gesprek">
+    <div class="para para-1" data-para="0.06"></div>
+    <div class="para para-2" data-para="0.14"></div>
+    <div class="para para-3" data-para="-0.1"></div>
+    <div class="stap-in" data-reveal>
+      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
+      <h2 class="display">Kies een moment<br>dat jou uitkomt.</h2>
+      <p id="gm-intro">Je krijgt direct een bevestiging met de Zoom-link. Vul daarna je jaardoel in, dan beginnen we niet bij nul.</p>
+
+      <div class="gm-al" id="gm-al" style="display:none">
+        <h3>Je staat al ingepland</h3>
+        <p>De bevestiging met de Zoom-link staat in je mail. Vul v&oacute;&oacute;r ons gesprek je jaardoel in, dan halen we het meeste uit het uur.</p>
+        <a href="#tool" onclick="showPage('tool');return false" class="btn">Vul je jaardoel in</a>
+        <div class="gm-mini"><u onclick="gmZetAangemeld(false)">Toch geen gesprek ingepland? Kies hier een moment</u></div>
+      </div>
+
+      <div class="cal" id="gm-cal-wrap" data-reveal>
+        <div class="calendly-inline-widget" id="gm-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:600px"></div>
+        <div class="gm-mini"><u onclick="gmZetAangemeld(true)">Ik heb al een gesprek met Jeray ingepland</u></div>
+      </div>
+
+      <div class="prep" data-reveal id="gm-prep">
+        <h3>Nog niet klaar om te boeken?</h3>
+        <p>Vul eerst je jaardoel in. Vijf minuten, gratis, en je weet daarna zelf al een stuk beter waar je aan toe bent.</p>
+        <a href="#tool" onclick="showPage('tool');return false" class="btn ghost">Vul je jaardoel in</a>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+
 <div class="page" id="page-cursussen">
 <div class="mc-wrap">
 
@@ -7117,7 +7515,7 @@ window.addEventListener('message',function(e){
   if(!e.data||e.data.event!=='calendly.event_scheduled') return;
   if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
   var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
-  var plek=(fr&&fr.closest('#page-tool'))?'stepper':'traject';
+  var plek=(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':'traject');
   var p=(e.data.payload||{});
   var eventUri=String((p.event||{}).uri||''), inviteeUri=String((p.invitee||{}).uri||'');
   if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:eventUri,invitee:inviteeUri});
@@ -7127,7 +7525,8 @@ window.addEventListener('message',function(e){
     var mb=window.tesBron?tesBron():{}; var body=JSON.stringify({invitee:inviteeUri,event:eventUri,plek:plek,naam:g?g.naam:'',email:g?g.email:'',sid:mb.sid||'',vid:mb.vid||''});
     fetch('https://tes-backend-mbyy.onrender.com/api/planmeeting',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});
   }catch(e){}
-  if(plek==='traject') trajectAangemeld();
+  if(plek==='gesprek') gmAangemeld();
+  else if(plek==='traject') trajectAangemeld();
   else { try{ localStorage.setItem('tes_traject_aangemeld','1'); }catch(e){} var al=document.getElementById('gesprek-al'); if(al){ gesprekToonStand(); al.scrollIntoView({behavior:'smooth',block:'center'}); } }
 });
 // chips → stepper (zelfde mechanisme als de homepage)
@@ -7326,6 +7725,121 @@ function wdVerstuur(e){
   if(!checkHash()){ /* niets */ }
   window.addEventListener('hashchange', checkHash);
 })();
+</script>
+
+<script>
+// ─── Gesprekpagina (de gratis planmeeting) ───────────────────
+(function(){
+  var FAQ = [
+    { q: 'Is het echt gratis?', a: [
+      'Ja. Je betaalt niets en zit nergens aan vast. Het plan dat we maken houd je, ook als je daarna niets met mij doet.' ] },
+    { q: 'Moet ik iets voorbereiden?', a: [
+      'Alleen je jaardoel invullen in de gratis tool op deze site; dat kost vijf minuten. Dan weet ik vooraf waar je staat en gaat het hele uur op aan jouw plan.',
+      'Lukt dat niet, dan doen we het samen in het gesprek — er blijft dan alleen minder tijd over voor de rest.' ] },
+    { q: 'Hoe lang duurt het en waar is het?', a: [
+      'Eén uur, online via Zoom. De link staat in je bevestigingsmail. Zorg dat je rustig kunt zitten; dit is geen gesprek om tussendoor te doen.' ] },
+    { q: 'Ga je me iets verkopen?', a: [
+      'In de laatste vijf minuten vertel ik hoe ik mensen twaalf weken begeleid. Dat is het; het uur ervoor werken we aan jouw doel.',
+      'Past het niet, dan zeg ik dat zelf ook. Ik begeleid een klein aantal mensen tegelijk.' ] },
+    { q: 'Wat als ik niet kan of wil verzetten?', a: [
+      'In je bevestigingsmail staat een link om te verzetten of te annuleren. Doe dat gerust, dan komt het moment vrij voor iemand anders.' ] },
+    { q: 'Wat gebeurt er na het gesprek?', a: [
+      'Je gaat met je plan aan de slag. Wil je dat ik je twaalf weken vasthoud, dan bekijken we samen of het traject past.' ] }
+  ];
+  var root = document.getElementById('gm'); if (!root) return;
+  var $ = function(s){ return Array.from(root.querySelectorAll(s)); };
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* vragen */
+  var faqEl = document.getElementById('gm-faq'), openQ = 0;
+  function renderFaq(){
+    faqEl.innerHTML = '';
+    FAQ.forEach(function(f,i){
+      var open = openQ === i;
+      var q = document.createElement('div'); q.className = 'q' + (open ? ' open' : '');
+      var b = document.createElement('button'); b.className = 'q-btn'; b.type = 'button';
+      b.setAttribute('aria-expanded', open);
+      b.innerHTML = '<span>' + f.q + '</span><span class="q-mark">' + (open ? '&ndash;' : '+') + '</span>';
+      b.addEventListener('click', function(){ openQ = (openQ === i) ? -1 : i; renderFaq(); });
+      var a = document.createElement('div'); a.className = 'q-a'; if (!open) a.hidden = true;
+      f.a.forEach(function(t){ var p = document.createElement('p'); p.textContent = t; a.appendChild(p); });
+      q.append(b,a); faqEl.appendChild(q);
+    });
+  }
+  renderFaq();
+
+  /* reveal */
+  var seen = new WeakSet();
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var sibs = Array.from(el.parentElement.children).filter(function(c){ return c.hasAttribute('data-reveal'); });
+      el.style.transitionDelay = (sibs.indexOf(el) % 4) * 110 + 'ms';
+      el.setAttribute('data-reveal','in');
+      io.unobserve(el);
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+  function scan(){
+    if (!document.getElementById('page-gesprek').classList.contains('active')) return;
+    var vh = innerHeight;
+    $('[data-reveal]:not([data-reveal="in"])').forEach(function(el){
+      if (seen.has(el)) return; seen.add(el);
+      if (el.getBoundingClientRect().top < vh * 0.95) el.setAttribute('data-reveal','in');
+      else io.observe(el);
+    });
+  }
+  if (reduce) $('[data-reveal]').forEach(function(el){ el.setAttribute('data-reveal','in'); });
+  window.__gmScan = scan;
+  addEventListener('resize', scan);
+
+  /* glow + parallax, alleen zolang de pagina zichtbaar is */
+  if (!reduce) {
+    var glow = document.getElementById('gm-glow'), paras = $('[data-para]');
+    (function loop(){
+      requestAnimationFrame(loop);
+      if (!document.getElementById('page-gesprek').classList.contains('active')) return;
+      var t = performance.now()/1000, vh = innerHeight;
+      if (glow) glow.style.transform = 'translate(calc(-50% + ' + (Math.sin(t*.25)*140) + 'px), calc(-50% + ' + (Math.cos(t*.19)*90 - scrollY*.08) + 'px))';
+      paras.forEach(function(p){
+        var r = p.parentElement.getBoundingClientRect();
+        var off = (r.top + r.height/2 - vh/2) * parseFloat(p.dataset.para);
+        p.style.transform = 'translate(-50%, calc(-50% + ' + off + 'px))';
+      });
+    })();
+  }
+})();
+// Calendly pas laden als de pagina zichtbaar is
+function gmInitCal(n){ n=n||0; var el=document.getElementById('gm-cal'); if(!el||el.querySelector('iframe')) return;
+  if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:calendlyParams(el.dataset.url),parentElement:el}); }
+  else if(n<20) setTimeout(function(){ gmInitCal(n+1); },500); }
+function gmNaarAgenda(){ gmInitCal(); var el=document.getElementById('gm-agenda'); if(!el) return;
+  var y=el.getBoundingClientRect().top+window.scrollY-60; window.scrollTo({top:y,behavior:'smooth'}); }
+// Al ingepland (op dit apparaat, of zelf aangegeven)? Dan geen agenda, maar een bevestiging
+function gmToonStand(){
+  var al = (typeof trajectIsAangemeld==='function') && trajectIsAangemeld();
+  var a=document.getElementById('gm-al'), c=document.getElementById('gm-cal-wrap'),
+      i=document.getElementById('gm-intro'), p=document.getElementById('gm-prep');
+  if(a) a.style.display = al ? '' : 'none';
+  if(c) c.style.display = al ? 'none' : '';
+  if(i) i.style.display = al ? 'none' : '';
+  if(p) p.style.display = al ? 'none' : '';
+  if(!al) gmInitCal();
+}
+function gmZetAangemeld(ja){
+  try{ if(ja) localStorage.setItem('tes_traject_aangemeld','1'); else localStorage.removeItem('tes_traject_aangemeld'); }catch(e){}
+  if(ja && window.tesMeet) tesMeet('planmeeting_booked','/gesprek',{plek:'gesprek',zelf:'1'});
+  gmToonStand(); if(!ja) calendlyHerlaad('gm-cal');
+}
+// Boeking op deze pagina: bevestiging tonen i.p.v. de agenda
+function gmAangemeld(){
+  try{ localStorage.setItem('tes_traject_aangemeld','1'); }catch(e){}
+  gmToonStand();
+  var a=document.getElementById('gm-al'); if(a) a.scrollIntoView({behavior:'smooth',block:'center'});
+}
+(function(){ var sp=window.showPage; if(typeof sp!=='function') return;
+  window.showPage=function(p){ sp(p); if(p==='gesprek'){ gmToonStand(); if(window.__gmScan) setTimeout(window.__gmScan,60); } }; })();
+(function(){ if(document.getElementById('page-gesprek').classList.contains('active')){ gmToonStand(); if(window.__gmScan) window.__gmScan(); } })();
 </script>
 
 </body>
