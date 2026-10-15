@@ -2469,55 +2469,93 @@ tesMeet('pageview',location.pathname);
 
   </section>
 
-  <!-- 03 wat je overhoudt -->
-  <section class="gm-sec" aria-label="Wat je overhoudt">
-    <div class="sec-head" data-reveal>
-      <div class="mono gold">Wat je overhoudt</div>
-      <h2 class="display">Je gaat niet<br>met lege handen weg</h2>
-    </div>
-    <div data-cols="3" style="width:100%">
-      <div class="gm-kaart" data-reveal>
-        <div class="gm-n">01</div>
-        <h3>Een meetbaar jaardoel</h3>
-        <p>Zwart op wit, met een getal en een datum. Geen voornemen meer, maar iets waaraan je jezelf kunt afmeten.</p>
-      </div>
-      <div class="gm-kaart" data-reveal>
-        <div class="gm-n">02</div>
-        <h3>Je eerste twaalf weken</h3>
-        <p>De acties die er echt toe doen, verdeeld over je week. Klaar om maandag te beginnen, met of zonder mij.</p>
-      </div>
-      <div class="gm-kaart" data-reveal>
-        <div class="gm-n">03</div>
-        <h3>Het werkboek</h3>
-        <p>Het Execution System Werkboek, gratis, zodat je je week zelf kunt bijhouden en scoren.</p>
+  <!-- 03 schakelaar: wat je overhoudt · voor wie · vragen -->
+  <section class="info" aria-label="Meer over het gesprek">
+    <div class="tabs-wrap">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-gmtab="overhoudt" aria-selected="true" aria-controls="gm-pane-overhoudt">Wat je overhoudt</button>
+        <button class="tab" role="tab" data-gmtab="wie" aria-selected="false" aria-controls="gm-pane-wie">Voor wie</button>
+        <button class="tab" role="tab" data-gmtab="vragen" aria-selected="false" aria-controls="gm-pane-vragen">Vragen</button>
       </div>
     </div>
-  </section>
 
-  <!-- 04 voor wie -->
-  <section class="gm-sec smal" aria-label="Voor wie dit gesprek is">
-    <div class="sec-head" data-reveal>
-      <div class="mono gold">Voor wie</div>
-      <h2 class="display">Is dit gesprek<br>iets voor jou?</h2>
-    </div>
-    <div class="gm-wel">
-      <div class="gm-kol ja" data-reveal>
-        <h3>Ja, als&hellip;</h3>
-        <ul>
-          <li>je een doel hebt dat je al langer voor je ziet</li>
-          <li>je eigenlijk wel weet wat je moet doen, maar het niet volhoudt</li>
-          <li>je bereid bent je doel meetbaar te maken</li>
-          <li>je een uur rustig kunt zitten, zonder afleiding</li>
-        </ul>
+    <div class="panel">
+      <div class="pane" id="gm-pane-overhoudt" role="tabpanel">
+        <div class="krijgt-in" data-panel>
+          <div class="sec-head">
+            <div class="mono gold">Wat je overhoudt</div>
+            <h2 class="display">Je gaat niet<br>met lege handen weg</h2>
+          </div>
+          <div data-cols="3" style="width:100%">
+            <div class="gm-kaart">
+              <div class="gm-n">01</div>
+              <h3>Een meetbaar jaardoel</h3>
+              <p>Zwart op wit, met een getal en een datum. Geen voornemen meer, maar iets waaraan je jezelf kunt afmeten.</p>
+            </div>
+            <div class="gm-kaart">
+              <div class="gm-n">02</div>
+              <h3>Je eerste twaalf weken</h3>
+              <p>De acties die er echt toe doen, verdeeld over je week. Klaar om maandag te beginnen, met of zonder mij.</p>
+            </div>
+            <div class="gm-kaart">
+              <div class="gm-n">03</div>
+              <h3>Het werkboek</h3>
+              <p>Het Execution System Werkboek, gratis, zodat je je week zelf kunt bijhouden en scoren.</p>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="#gm-top" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
+          </div>
+        </div>
       </div>
-      <div class="gm-kol nee" data-reveal>
-        <h3>Nee, als&hellip;</h3>
-        <ul>
-          <li>je nog niet weet wat je wilt</li>
-          <li>je iemand zoekt die het werk voor je doet</li>
-          <li>je alleen even wilt weten wat het kost</li>
-          <li>je nu geen tijd hebt om ermee aan de slag te gaan</li>
-        </ul>
+
+      <div class="pane" id="gm-pane-wie" role="tabpanel" hidden>
+        <div class="krijgt-in" data-panel>
+          <div class="sec-head">
+            <div class="mono gold">Voor wie</div>
+            <h2 class="display">Is dit gesprek<br>iets voor jou?</h2>
+          </div>
+          <div class="gm-wel">
+            <div class="gm-kol ja">
+              <h3>Ja, als&hellip;</h3>
+              <ul>
+                <li>je een doel hebt dat je al langer voor je ziet</li>
+                <li>je eigenlijk wel weet wat je moet doen, maar het niet volhoudt</li>
+                <li>je bereid bent je doel meetbaar te maken</li>
+                <li>je een uur rustig kunt zitten, zonder afleiding</li>
+              </ul>
+            </div>
+            <div class="gm-kol nee">
+              <h3>Nee, als&hellip;</h3>
+              <ul>
+                <li>je nog niet weet wat je wilt</li>
+                <li>je iemand zoekt die het werk voor je doet</li>
+                <li>je alleen even wilt weten wat het kost</li>
+                <li>je nu geen tijd hebt om ermee aan de slag te gaan</li>
+              </ul>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="#gm-top" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane" id="gm-pane-vragen" role="tabpanel" hidden>
+        <div class="faq-in" data-panel>
+          <div class="faq-l">
+            <div class="mono gold">Vragen</div>
+            <h2 class="display">Voordat je boekt.</h2>
+            <p>Kort en eerlijk. Staat je vraag er niet bij, dan is dat waar het gesprek voor is.</p>
+          </div>
+          <div class="faq" id="gm-faq"></div>
+          <div class="cta-row">
+            <a href="#gm-top" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2534,18 +2572,6 @@ tesMeet('pageview',location.pathname);
         <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen.&rdquo;</p>
         <div class="who"><div class="avatar"></div><div class="who-txt"><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
       </article>
-    </div>
-  </section>
-
-  <!-- 06 vragen -->
-  <section class="gm-sec smal" aria-label="Veelgestelde vragen over het gesprek">
-    <div class="faq-in">
-      <div class="faq-l" data-reveal>
-        <div class="mono gold">Vragen</div>
-        <h2 class="display">Voordat je boekt.</h2>
-        <p>Kort en eerlijk. Staat je vraag er niet bij, dan is dat waar het gesprek voor is.</p>
-      </div>
-      <div class="faq" id="gm-faq"></div>
     </div>
   </section>
 
@@ -7766,6 +7792,23 @@ function wdVerstuur(e){
       else io.observe(el);
     });
   }
+  /* schakelaar: wat je overhoudt · voor wie · vragen */
+  var tabs = $('.tab[data-gmtab]');
+  var panes = { overhoudt: document.getElementById('gm-pane-overhoudt'), wie: document.getElementById('gm-pane-wie'), vragen: document.getElementById('gm-pane-vragen') };
+  function kies(k){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.gmtab === k)); });
+    Object.keys(panes).forEach(function(key){
+      var p = panes[key]; if(!p) return;
+      p.hidden = key !== k;
+      if (key === k) {                              // paneel-animatie opnieuw afspelen
+        var inner = p.firstElementChild;
+        Array.from(inner.children).forEach(function(c){ c.style.animation = 'none'; void c.offsetWidth; c.style.animation = ''; });
+      }
+    });
+    scan();
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ kies(t.dataset.gmtab); }); });
+
   if (reduce) $('[data-reveal]').forEach(function(el){ el.setAttribute('data-reveal','in'); });
   window.__gmScan = scan;
   addEventListener('resize', scan);
