@@ -1226,19 +1226,13 @@ footer p{font-size:.68rem;color:var(--dim)}
 #gm .gm-mini{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 #gm .gm-mini u{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 #gm .gm-mini u:hover{color:var(--gold)}
-#gm .gm-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:34px;width:100%;max-width:1200px;align-items:start;text-align:left}
-#gm .gm-kol-video{display:flex;flex-direction:column}
-#gm .gm-sub{font-size:17px;line-height:1.6;color:#C9C2B4;margin-top:20px;text-wrap:pretty}
-#gm .gm-punten{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:12px}
-#gm .gm-punten li{display:grid;grid-template-columns:18px 1fr;gap:12px;font-size:16px;line-height:1.5;color:#C9C2B4}
-#gm .gm-punten li::before{content:"";margin-top:11px;height:1px;background:var(--gold)}
-#gm .gm-video{border:1px solid rgba(245,240,232,.12);background:#000;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6)}
+#gm .gm-video{width:100%;max-width:880px;margin:0 auto;border:1px solid rgba(245,240,232,.12);background:#000;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6)}
 #gm .gm-video iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
-#gm .gm-cal-kol{display:flex;flex-direction:column;gap:14px}
-#gm .gm-cal-kol .calendly-inline-widget{width:100%;border:1px solid rgba(245,240,232,.12);background:#0A0A0A;overflow:hidden}
-#gm .gm-top .gm-al{max-width:none}
-@media(max-width:900px){#gm .gm-top{grid-template-columns:minmax(0,1fr);gap:22px}}
-@media(max-width:640px){#gm .gm-cal-kol .calendly-inline-widget{height:640px}}
+#gm .gm-cal-blok{width:100%;max-width:880px;display:flex;flex-direction:column;align-items:stretch;gap:14px}
+#gm .gm-cal-blok .calendly-inline-widget{width:100%;border:1px solid rgba(245,240,232,.12);background:#0A0A0A;overflow:hidden}
+#gm .gm-cal-blok .gm-mini{text-align:center}
+#gm #gm-agenda .gm-al{margin:0 auto}
+@media(max-width:640px){#gm .gm-cal-blok .calendly-inline-widget{height:700px}}
 </style>
 <style id="nav-groups-css">
 .nav-group{position:relative}
@@ -2429,44 +2423,26 @@ tesMeet('pageview',location.pathname);
 <div class="root" id="gm">
   <div class="glow" id="gm-glow"></div>
 
-  <!-- 01 hero: titel, dan links de video en rechts de agenda, daaronder de subtekst -->
+  <!-- 01 hero: titel, video, subtekst en de knop naar de agenda -->
   <section class="v10-hero" id="gm-top" aria-label="Het gratis gesprek">
     <div class="v10-hero-copy" data-reveal>
       <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; online</div>
       <h1 class="display">E&eacute;n gratis uur.<br>Daarna heb je een plan.</h1>
     </div>
 
-    <div class="gm-top" data-reveal>
-      <div class="gm-kol-video">
-        <div class="mono gold" style="margin-bottom:10px">Bekijk dit eerst</div>
-        <div class="gm-video">
-        <!-- tijdelijk de video van de homepage; vervang de guid zodra er een eigen video is -->
-        <iframe id="gm-video" class="bunny" data-src="https://iframe.mediadelivery.net/embed/692336/0d86c42a-640a-4bed-b1cd-9558008dbb9c?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>
-        </div>
-        <p class="gm-sub">Geen kennismaking waarin we wat praten. We maken jouw doel meetbaar, bouwen je eerste acties en spreken af hoe je jezelf de komende twaalf weken vasthoudt. Dat plan is van jou &mdash; ook als je daarna niets met mij doet.</p>
-        <ul class="gm-punten">
-          <li>Je doel wordt meetbaar: een getal en een datum</li>
-          <li>Je eerste twaalf weken staan op papier</li>
-          <li>Je krijgt het Execution System Werkboek, gratis</li>
-        </ul>
-        <div class="mono muted" style="font-size:11px;margin-top:18px">1 uur &middot; online &middot; geen verplichting</div>
-      </div>
-
-      <div class="gm-cal-kol">
-        <div class="gm-al" id="gm-al" style="display:none">
-          <h3>Je staat al ingepland</h3>
-          <p>De bevestiging met de Zoom-link staat in je mail. Vul v&oacute;&oacute;r ons gesprek je jaardoel in, dan halen we het meeste uit het uur.</p>
-          <a href="#tool" onclick="showPage('tool');return false" class="btn">Vul je jaardoel in</a>
-          <div class="gm-mini"><u onclick="gmZetAangemeld(false)">Toch geen gesprek ingepland? Kies hier een moment</u></div>
-        </div>
-        <div id="gm-cal-wrap">
-          <div class="mono gold" style="margin-bottom:10px">Kies een moment dat jou uitkomt</div>
-          <div class="calendly-inline-widget" id="gm-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:560px"></div>
-          <div class="gm-mini" style="margin-top:10px"><u onclick="gmZetAangemeld(true)">Ik heb al een gesprek met Jeray ingepland</u></div>
-        </div>
-      </div>
+    <div class="gm-video" data-reveal>
+      <!-- tijdelijk de video van de homepage; vervang de guid zodra er een eigen video is -->
+      <iframe id="gm-video" class="bunny" data-src="https://iframe.mediadelivery.net/embed/692336/0d86c42a-640a-4bed-b1cd-9558008dbb9c?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>
     </div>
 
+    <div class="v10-hero-copy" data-reveal>
+      <p>Geen kennismaking waarin we wat praten. We maken jouw doel meetbaar, bouwen je eerste acties en spreken af hoe je jezelf de komende twaalf weken vasthoudt. Dat plan is van jou &mdash; ook als je daarna niets met mij doet.</p>
+    </div>
+
+    <div class="cta-row" data-reveal>
+      <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+      <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
+    </div>
   </section>
 
   <!-- 03 schakelaar: wat je overhoudt · voor wie · vragen -->
@@ -2504,7 +2480,7 @@ tesMeet('pageview',location.pathname);
             </div>
           </div>
           <div class="cta-row">
-            <a href="#gm-top" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
             <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
           </div>
         </div>
@@ -2537,7 +2513,7 @@ tesMeet('pageview',location.pathname);
             </div>
           </div>
           <div class="cta-row">
-            <a href="#gm-top" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
             <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
           </div>
         </div>
@@ -2552,7 +2528,7 @@ tesMeet('pageview',location.pathname);
           </div>
           <div class="faq" id="gm-faq"></div>
           <div class="cta-row">
-            <a href="#gm-top" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
+            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan je gratis gesprek</a>
             <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
           </div>
         </div>
@@ -2572,6 +2548,30 @@ tesMeet('pageview',location.pathname);
         <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen.&rdquo;</p>
         <div class="who"><div class="avatar"></div><div class="who-txt"><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
       </article>
+    </div>
+  </section>
+
+  <!-- 06 de agenda -->
+  <section class="stap" id="gm-agenda" aria-label="Plan je gesprek">
+    <div class="para para-1" data-para="0.06"></div>
+    <div class="para para-2" data-para="0.14"></div>
+    <div class="para para-3" data-para="-0.1"></div>
+    <div class="stap-in" data-reveal>
+      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
+      <h2 class="display">Kies een moment<br>dat jou uitkomt.</h2>
+      <p id="gm-intro">Je krijgt direct een bevestiging met de Zoom-link. Vul daarna je jaardoel in, dan beginnen we niet bij nul.</p>
+
+      <div class="gm-al" id="gm-al" style="display:none">
+        <h3>Je staat al ingepland</h3>
+        <p>De bevestiging met de Zoom-link staat in je mail. Vul v&oacute;&oacute;r ons gesprek je jaardoel in, dan halen we het meeste uit het uur.</p>
+        <a href="#tool" onclick="showPage('tool');return false" class="btn">Vul je jaardoel in</a>
+        <div class="gm-mini"><u onclick="gmZetAangemeld(false)">Toch geen gesprek ingepland? Kies hier een moment</u></div>
+      </div>
+
+      <div class="gm-cal-blok" id="gm-cal-wrap">
+        <div class="calendly-inline-widget" id="gm-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:640px"></div>
+        <div class="gm-mini"><u onclick="gmZetAangemeld(true)">Ik heb al een gesprek met Jeray ingepland</u></div>
+      </div>
     </div>
   </section>
 
@@ -7862,7 +7862,7 @@ function gmVideo(){ var f=document.getElementById('gm-video'); if(f&&!f.src&&f.d
 function gmInitCal(n){ n=n||0; var el=document.getElementById('gm-cal'); if(!el||el.querySelector('iframe')) return;
   if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:calendlyParams(el.dataset.url),parentElement:el}); }
   else if(n<20) setTimeout(function(){ gmInitCal(n+1); },500); }
-function gmNaarAgenda(){ gmInitCal(); var el=document.getElementById('gm-top'); if(!el) return;
+function gmNaarAgenda(){ gmInitCal(); var el=document.getElementById('gm-agenda'); if(!el) return;
   var y=el.getBoundingClientRect().top+window.scrollY-60; window.scrollTo({top:y,behavior:'smooth'}); }
 // Al ingepland (op dit apparaat, of zelf aangegeven)? Dan geen agenda, maar een bevestiging
 function gmToonStand(){
