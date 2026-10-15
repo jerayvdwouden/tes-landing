@@ -2575,25 +2575,32 @@ tesMeet('pageview',location.pathname);
     </div>
   </section>
 
-  <!-- 07 afsluiten: terug naar de agenda bovenaan -->
-  <section class="stap" aria-label="Plan je gesprek">
-    <div class="para para-1" data-para="0.06"></div>
-    <div class="para para-2" data-para="0.14"></div>
-    <div class="para para-3" data-para="-0.1"></div>
-    <div class="stap-in" data-reveal>
-      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
-      <h2 class="display">Kies een moment<br>dat jou uitkomt.</h2>
-      <p id="gm-intro">Je krijgt direct een bevestiging met de Zoom-link. Vul daarna je jaardoel in, dan beginnen we niet bij nul.</p>
-      <a href="#gm-top" onclick="gmNaarAgenda();return false" class="btn">Naar de agenda</a>
+</div>
 
-      <div class="prep" data-reveal id="gm-prep">
-        <h3>Nog niet klaar om te boeken?</h3>
-        <p>Vul eerst je jaardoel in. Vijf minuten, gratis, en je weet daarna zelf al een stuk beter waar je aan toe bent.</p>
-        <a href="#tool" onclick="showPage('tool');return false" class="btn ghost">Vul je jaardoel in</a>
+<!-- onderaan: meteen zelf beginnen met de doelentool -->
+<div class="wrap">
+  <div class="div"><span>of begin nu zelf</span></div>
+
+  <section>
+    <div class="hs-wrap">
+      <div class="hs-eyebrow">Gratis &middot; 5 minuten</div>
+      <h2 class="hs-h2">Liever eerst zelf aan de slag?</h2>
+      <p class="hs-sub">Stel hier je jaardoel op. Plan je daarna een gesprek, dan beginnen we niet bij nul.</p>
+      <div class="hs-q">Wat is voor jou nu het meest waardevol?</div>
+      <div class="imp-grid" id="gm-imp-grid">
+        <div class="imp-chip" data-color="#e05252" onclick="gmToggleChip(this,'Gezondheid &amp; Fysiek')"><div class="imp-chip-icon"><svg><use href="#i-heart"/></svg></div><div class="imp-chip-label">Gezondheid &amp; Fysiek</div></div>
+        <div class="imp-chip" data-color="#60A5FA" onclick="gmToggleChip(this,'Carri&egrave;re')"><div class="imp-chip-icon"><svg><use href="#i-trending"/></svg></div><div class="imp-chip-label">Carri&egrave;re</div></div>
+        <div class="imp-chip" data-color="#4ADE80" onclick="gmToggleChip(this,'Financi&euml;n')"><div class="imp-chip-icon"><svg><use href="#i-banknote"/></svg></div><div class="imp-chip-label">Financi&euml;n</div></div>
+        <div class="imp-chip" data-color="#F472B6" onclick="gmToggleChip(this,'Relaties')"><div class="imp-chip-icon"><svg><use href="#i-users"/></svg></div><div class="imp-chip-label">Relaties</div></div>
+        <div class="imp-chip" data-color="#D4E157" onclick="gmToggleChip(this,'Persoonlijke groei &amp; Skills')"><div class="imp-chip-icon"><svg><use href="#i-brain"/></svg></div><div class="imp-chip-label">Persoonlijke groei &amp; Skills</div></div>
+        <div class="imp-chip" data-color="#FFFFFF" onclick="gmToggleChip(this,'Spiritualiteit &amp; Geloof')"><div class="imp-chip-icon"><svg><use href="#i-star"/></svg></div><div class="imp-chip-label">Spiritualiteit &amp; Geloof</div></div>
       </div>
+      <div class="hs-nav">
+        <button class="btn-next locked" id="gm-s1-next" onclick="gmStepNext()">Verder gaan &rarr;</button>
+      </div>
+      <p class="cta-note">Je hebt er vijf minuten voor nodig &nbsp;&middot;&nbsp; geen betaalkaart</p>
     </div>
   </section>
-
 </div>
 </div>
 
@@ -7829,6 +7836,27 @@ function wdVerstuur(e){
     })();
   }
 })();
+// Onderaan de pagina: direct de doelentool in (zelfde mechanisme als op de homepage)
+function gmToggleChip(el, area){
+  if(typeof toggleImpChip==='function') toggleImpChip(el, area);
+  var any=document.querySelectorAll('#gm-imp-grid .imp-chip.selected').length>0;
+  var b=document.getElementById('gm-s1-next'); if(b) b.classList.toggle('locked',!any);
+}
+function gmStepNext(){
+  var chips=[].slice.call(document.querySelectorAll('#gm-imp-grid .imp-chip.selected'));
+  var sel=chips.map(function(c){ return c.querySelector('.imp-chip-label').textContent; });
+  if(!sel.length) return;
+  showPage('tool');
+  document.querySelectorAll('#imp-grid .imp-chip').forEach(function(chip){
+    var lbl=chip.querySelector('.imp-chip-label'); var naam=lbl?lbl.textContent:'';
+    if(sel.indexOf(naam)>-1 && !chip.classList.contains('selected')) toggleImpChip(chip, naam);
+  });
+  chips.forEach(function(c){ c.classList.remove('selected'); c.style.borderColor=''; c.style.background=''; c.style.boxShadow='';
+    var ic=c.querySelector('.imp-chip-icon svg'); if(ic) ic.style.color='';
+    var lb=c.querySelector('.imp-chip-label'); if(lb) lb.style.color=''; });
+  var b=document.getElementById('gm-s1-next'); if(b) b.classList.add('locked');
+  if(typeof goToStep1b==='function') goToStep1b();
+}
 // Calendly pas laden als de pagina zichtbaar is
 function gmVideo(){ var f=document.getElementById('gm-video'); if(f&&!f.src&&f.dataset.src) f.src=f.dataset.src; }
 function gmInitCal(n){ n=n||0; var el=document.getElementById('gm-cal'); if(!el||el.querySelector('iframe')) return;
