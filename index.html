@@ -1226,7 +1226,46 @@ footer p{font-size:.68rem;color:var(--dim)}
 #gm .gm-mini{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 #gm .gm-mini u{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 #gm .gm-mini u:hover{color:var(--gold)}
-#gm .gm-video{width:100%;max-width:880px;margin:0 auto;border:1px solid rgba(245,240,232,.12);background:#000;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6)}
+/* elk blok past op één desktopscherm */
+#gm .v10-hero{padding:clamp(18px,2.2vw,32px) clamp(20px,6vw,120px) clamp(22px,2.6vw,40px);gap:clamp(14px,1.6vw,20px)}
+#gm .v10-hero h1{font-size:clamp(40px,4.9vw,76px)}
+#gm .v10-hero-copy{gap:16px}
+#gm .v10-hero-copy p{font-size:clamp(16px,1.25vw,19px)}
+#gm .info .pane{padding:clamp(28px,3.2vw,44px) var(--gutter) clamp(32px,3.6vw,52px)}
+#gm .krijgt-in{gap:clamp(28px,3.4vw,44px)}
+#gm .sec-head h2{font-size:clamp(38px,4.6vw,66px)}
+#gm .faq-in{gap:24px}
+#gm .faq-l h2{font-size:clamp(34px,4vw,54px)}
+#gm .faq-in{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1fr);gap:clamp(24px,3vw,44px);align-items:start;text-align:left;max-width:1100px}
+#gm .faq-l{grid-column:1;align-items:flex-start;text-align:left}
+#gm .faq{grid-column:2;grid-row:1 / span 2}
+#gm .faq-in .cta-row{grid-column:1;align-items:flex-start;text-align:left}
+#gm .q-btn{padding:14px 22px;gap:16px}
+#gm .q-btn span:first-child{font-size:clamp(16px,1.25vw,19px)}
+#gm .q-a{padding:0 22px 18px}
+#gm .q-a p{font-size:16px;line-height:1.6}
+@media(max-width:900px){#gm .faq-in{grid-template-columns:minmax(0,1fr);text-align:center}
+#gm .faq-l{align-items:center;text-align:center}
+#gm .faq{grid-column:1;grid-row:auto}
+#gm .faq-in .cta-row{grid-column:1;align-items:center;text-align:center}}
+#gm #gm-agenda{padding:clamp(28px,3.4vw,52px) var(--gutter) clamp(36px,4.2vw,64px)}
+#gm #gm-agenda .stap-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(24px,3vw,48px);align-items:center;text-align:left;max-width:1160px}
+#gm .gm-agenda-tekst{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+#gm .gm-agenda-tekst p{max-width:420px}
+#gm #gm-agenda .gm-al{grid-column:1/-1;margin:0 auto}
+@media(max-width:900px){#gm #gm-agenda .stap-in{grid-template-columns:minmax(0,1fr);text-align:center}
+#gm .gm-agenda-tekst{align-items:center}
+#gm .gm-agenda-tekst p{max-width:520px}}
+#gm #gm-agenda h2{font-size:clamp(34px,4vw,58px)}
+#gm #gm-agenda p{font-size:clamp(15px,1.2vw,18px)}
+#gm .gm-cal-blok .calendly-inline-widget{height:clamp(540px,calc(100vh - 230px),660px)}
+#gm .quotes{padding-top:clamp(20px,2.4vw,32px);padding-bottom:clamp(28px,3.2vw,48px)}
+/* het startblok onderaan (buiten #gm) ook binnen één scherm */
+#page-gesprek .hs-eyebrow{margin-bottom:1rem}
+#page-gesprek .hs-sub{margin-bottom:1.5rem}
+#page-gesprek .hs-nav{margin-top:1.2rem}
+
+#gm .gm-video{width:100%;max-width:min(880px,calc((100vh - 545px) * 16 / 9));margin:0 auto;border:1px solid rgba(245,240,232,.12);background:#000;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.6)}
 #gm .gm-video iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
 #gm .gm-cal-blok{width:100%;max-width:680px;display:flex;flex-direction:column;align-items:stretch;gap:14px}
 #gm .gm-cal-blok .calendly-inline-widget{width:100%;overflow:hidden;border-radius:8px}
@@ -2557,20 +2596,22 @@ tesMeet('pageview',location.pathname);
     <div class="para para-2" data-para="0.14"></div>
     <div class="para para-3" data-para="-0.1"></div>
     <div class="stap-in" data-reveal>
-      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
-      <h2 class="display">Kies een moment<br>dat jou uitkomt.</h2>
-      <p id="gm-intro">Je krijgt direct een bevestiging met de Zoom-link. Vul daarna je jaardoel in, dan beginnen we niet bij nul.</p>
+      <div class="gm-agenda-tekst">
+        <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
+        <h2 class="display">Kies een moment<br>dat jou uitkomt.</h2>
+        <p id="gm-intro">Je krijgt direct een bevestiging met de Zoom-link. Vul daarna je jaardoel in, dan beginnen we niet bij nul.</p>
+        <div class="gm-mini" id="gm-al-link"><u onclick="gmZetAangemeld(true)">Ik heb al een gesprek met Jeray ingepland</u></div>
+      </div>
+
+      <div class="gm-cal-blok" id="gm-cal-wrap">
+        <div class="calendly-inline-widget" id="gm-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:620px"></div>
+      </div>
 
       <div class="gm-al" id="gm-al" style="display:none">
         <h3>Je staat al ingepland</h3>
         <p>De bevestiging met de Zoom-link staat in je mail. Vul v&oacute;&oacute;r ons gesprek je jaardoel in, dan halen we het meeste uit het uur.</p>
         <a href="#tool" onclick="showPage('tool');return false" class="btn">Vul je jaardoel in</a>
         <div class="gm-mini"><u onclick="gmZetAangemeld(false)">Toch geen gesprek ingepland? Kies hier een moment</u></div>
-      </div>
-
-      <div class="gm-cal-blok" id="gm-cal-wrap">
-        <div class="calendly-inline-widget" id="gm-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:680px"></div>
-        <div class="gm-mini"><u onclick="gmZetAangemeld(true)">Ik heb al een gesprek met Jeray ingepland</u></div>
       </div>
     </div>
   </section>
@@ -2598,7 +2639,6 @@ tesMeet('pageview',location.pathname);
       <div class="hs-nav">
         <button class="btn-next locked" id="gm-s1-next" onclick="gmStepNext()">Verder gaan &rarr;</button>
       </div>
-      <p class="cta-note">Je hebt er vijf minuten voor nodig &nbsp;&middot;&nbsp; geen betaalkaart</p>
     </div>
   </section>
 </div>
