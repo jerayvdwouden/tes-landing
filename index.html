@@ -2247,6 +2247,8 @@ tesMeet('pageview',location.pathname);
 .wg-modal .jd-input{margin:0}
 .wg-modal select.jd-input option{background:#111}
 .wg-m-fine{font-size:.72rem;color:var(--dim);margin-top:.8rem;text-align:center}
+.wg-mails{display:flex;align-items:flex-start;gap:.6rem;margin:.1rem 0 1rem;font-size:.8rem;color:var(--muted);line-height:1.5;cursor:pointer;text-align:left}
+.wg-mails input{margin-top:.2rem;accent-color:var(--gold);flex-shrink:0;width:1rem;height:1rem}
 .wg-snel-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center;color:var(--muted);font-size:.9rem;line-height:1.5;margin-bottom:1rem}
 .wg-snel-box strong{color:var(--white);font-weight:500;word-break:break-all}
 .wg-link{color:var(--gold);cursor:pointer;text-decoration:underline}
@@ -2326,6 +2328,7 @@ tesMeet('pageview',location.pathname);
       </div>
       <div class="field" id="wg-hoe-anders-wrap" style="display:none"><label>Namelijk</label><input class="jd-input" id="wg-hoe-anders" placeholder="Bijv. een podcast, een vriend&hellip;"/></div>
       <div class="field" id="wg-door-wrap" style="display:none"><label>Door wie ben je doorverwezen?</label><input class="jd-input" id="wg-door" placeholder="Voornaam"/></div>
+      <label class="wg-mails"><input type="checkbox" id="wg-mails" checked> <span>Stuur mij ook nieuwe tips en gratis weggevers per e-mail. Afmelden kan altijd.</span></label>
       <button class="btn-next" id="wg-btn" type="submit" style="width:100%">Stuur mij de pdf &rarr;</button>
       <div class="wg-m-fine">Je krijgt de pdf direct. Geen spam, afmelden kan altijd.</div>
       </div>
@@ -2410,6 +2413,7 @@ tesMeet('pageview',location.pathname);
             </div>
             <div class="field" id="wd-hoe-anders-wrap" style="display:none"><label>Namelijk</label><input class="jd-input" id="wd-hoe-anders" placeholder="Bijv. een podcast, een vriend&hellip;"/></div>
             <div class="field" id="wd-door-wrap" style="display:none"><label>Door wie ben je doorverwezen?</label><input class="jd-input" id="wd-door" placeholder="Voornaam"/></div>
+            <label class="wg-mails"><input type="checkbox" id="wd-mails" checked> <span>Stuur mij ook nieuwe tips en gratis weggevers per e-mail. Afmelden kan altijd.</span></label>
             <button class="btn-next" id="wd-btn" type="submit" style="width:100%">Stuur mij de pdf &rarr;</button>
             <div class="wd-fine">Je krijgt de pdf direct. Geen spam, afmelden kan altijd.</div>
           </div>
@@ -7691,7 +7695,7 @@ function wgVerzend(slug, g, b, klaar){
   b.disabled=true; var orig=b.textContent; b.textContent='Bezig…';
   var m=window.tesBron?tesBron():{sid:'',vid:'',eb:'',lb:''};
   fetch(WG_API+'/api/weggever/'+encodeURIComponent(slug),{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({naam:g.naam,email:g.email,hoe_ken_je_mij:g.hoe_ken_je_mij,doorverwezen_door:g.doorverwezen_door,sid:m.sid,vid:m.vid,eb:m.eb,lb:m.lb})})
+    body:JSON.stringify({naam:g.naam,email:g.email,hoe_ken_je_mij:g.hoe_ken_je_mij,doorverwezen_door:g.doorverwezen_door,email_ok:g.email_ok,sid:m.sid,vid:m.vid,eb:m.eb,lb:m.lb})})
   .then(function(r){ return r.json(); }).then(function(d){
     if(!d.ok){ alert(d.error||'Er ging iets mis.'); b.disabled=false; b.textContent=orig; return; }
     try{ localStorage.setItem('tes_contact',JSON.stringify({naam:String(g.naam||'').trim(),email:String(g.email||'').trim().toLowerCase()})); }catch(e){}
@@ -7703,7 +7707,8 @@ function wgVerstuur(e){
   e.preventDefault(); if(!WG_HUIDIG) return;
   var b=document.getElementById('wg-snel').style.display==='none'?document.getElementById('wg-btn'):document.getElementById('wg-snel-btn');
   var h=document.getElementById('wg-hoe').value; if(h==='Anders'&&document.getElementById('wg-hoe-anders').value.trim()) h='Anders: '+document.getElementById('wg-hoe-anders').value.trim();
-  wgVerzend(WG_HUIDIG.slug,{naam:document.getElementById('wg-naam').value,email:document.getElementById('wg-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wg-door').value},b,function(url){
+  var mails=(document.getElementById('wg-velden').style.display!=='none')?document.getElementById('wg-mails').checked:undefined;
+  wgVerzend(WG_HUIDIG.slug,{naam:document.getElementById('wg-naam').value,email:document.getElementById('wg-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wg-door').value,email_ok:mails},b,function(url){
     document.getElementById('wg-form').style.display='none'; document.getElementById('wg-ok').style.display='block'; document.getElementById('wg-dl').href=url;
     window.location.href=url;
   });
@@ -7764,7 +7769,8 @@ function wdVerstuur(e){
   var snel=document.getElementById('wd-snel').style.display!=='none';
   var b=snel?document.getElementById('wd-snel-btn'):document.getElementById('wd-btn');
   var h=document.getElementById('wd-hoe').value; if(h==='Anders'&&document.getElementById('wd-hoe-anders').value.trim()) h='Anders: '+document.getElementById('wd-hoe-anders').value.trim();
-  wgVerzend(WD.slug,{naam:document.getElementById('wd-naam').value,email:document.getElementById('wd-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wd-door').value},b,function(url){
+  var mails=snel?undefined:document.getElementById('wd-mails').checked;
+  wgVerzend(WD.slug,{naam:document.getElementById('wd-naam').value,email:document.getElementById('wd-email').value,hoe_ken_je_mij:h,doorverwezen_door:document.getElementById('wd-door').value,email_ok:mails},b,function(url){
     document.getElementById('wd-form').style.display='none'; document.getElementById('wd-ok').style.display='block'; document.getElementById('wd-dl').href=url;
     window.location.href=url;
   });
