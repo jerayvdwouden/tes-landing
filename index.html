@@ -2373,14 +2373,24 @@ tesMeet('pageview',location.pathname);
 .wd-punten{list-style:none;padding:0;margin:0 0 1.6rem}
 .wd-punten li{position:relative;padding-left:1.4rem;margin-bottom:.5rem;color:var(--white);font-size:.92rem;line-height:1.5}
 .wd-punten li:before{content:'';position:absolute;left:0;top:.55rem;width:.55rem;height:.55rem;border-radius:50%;background:var(--gold)}
-.wd-pers{border:1px solid rgba(201,168,76,.45);border-radius:16px;background:linear-gradient(170deg,rgba(201,168,76,.12),rgba(13,12,11,.85));padding:1.3rem 1.4rem;margin:0 0 1.6rem}
-.wd-pers-k{font-family:'Abolition',sans-serif;font-size:clamp(1.3rem,4vw,1.7rem);letter-spacing:.03em;text-transform:uppercase;color:var(--white);margin-bottom:.35rem}
-.wd-pers-s{font-size:.86rem;color:var(--muted);line-height:1.6;margin:0 0 1rem;max-width:560px}
-.wd-pers-knoppen{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
-.wd-pers-nee{background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);font-family:inherit;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:.9rem 1.2rem;cursor:pointer}
-.wd-pers-nee:hover{color:var(--white);border-color:var(--border2)}
-.wd-pers-knop{width:100%;margin-top:.7rem;background:transparent;border:1px solid rgba(201,168,76,.45);border-radius:4px;color:var(--white);font-family:inherit;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.8rem 1rem;cursor:pointer}
-.wd-pers-knop:hover{background:rgba(201,168,76,.1)}
+.wp-over{position:fixed;inset:0;z-index:300;background:rgba(5,5,5,.86);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1.5rem;animation:wpIn .25s ease}
+.wp-over.zien{display:flex}
+@keyframes wpIn{from{opacity:0}to{opacity:1}}
+.wp-kaart{position:relative;max-width:560px;width:100%;border:1px solid rgba(201,168,76,.45);border-radius:20px;background:linear-gradient(170deg,rgba(201,168,76,.14),rgba(13,12,11,.96));padding:clamp(1.6rem,5vw,2.4rem);text-align:center;box-shadow:0 40px 90px rgba(0,0,0,.6);animation:wpKaart .3s cubic-bezier(.22,.61,.36,1) both}
+@keyframes wpKaart{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.wp-x{position:absolute;top:.8rem;right:.9rem;background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;padding:.4rem;line-height:1}
+.wp-x:hover{color:var(--white)}
+.wp-eye{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.wp-k{font-family:'Abolition',sans-serif;font-weight:400;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.02;letter-spacing:.02em;text-transform:uppercase;color:var(--white);margin:0 0 .7rem}
+.wp-s{font-size:.9rem;color:var(--muted);line-height:1.65;margin:0 auto 1.4rem;max-width:420px}
+.wp-knoppen{display:flex;flex-direction:column;gap:.6rem;align-items:stretch}
+.wp-nee{background:transparent;border:1px solid var(--border);border-radius:4px;color:var(--muted);font-family:inherit;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 1rem;cursor:pointer}
+.wp-nee:hover{color:var(--white);border-color:var(--border2)}
+.wd-pers-balk{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;border:1px solid rgba(201,168,76,.45);border-radius:12px;background:rgba(201,168,76,.08);padding:.9rem 1.1rem;margin:0 0 1.6rem;cursor:pointer;transition:background .18s}
+.wd-pers-balk:hover{background:rgba(201,168,76,.14)}
+.wd-pers-balk span{font-size:.85rem;color:var(--muted);line-height:1.5}
+.wd-pers-balk b{color:var(--white);font-weight:500}
+.wd-pers-balk-k{color:var(--gold)!important;font-size:.7rem!important;font-weight:700;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
 .wd-form{background:linear-gradient(180deg,#131110,#0d0c0b);border:1px solid var(--border2);border-radius:16px;padding:1.4rem 1.4rem 1.2rem}
 .wd-form-k{font-family:'Abolition',sans-serif;font-size:1.25rem;letter-spacing:.03em;text-transform:uppercase;margin-bottom:.2rem}
 .wd-form-s{color:var(--muted);font-size:.85rem;margin-bottom:1rem}
@@ -2401,13 +2411,9 @@ tesMeet('pageview',location.pathname);
 <div class="page" id="page-weggever">
 <div class="wd-wrap">
   <span class="wd-terug" onclick="showPage('weggevers')">&larr; Alle weggevers</span>
-  <div class="wd-pers" id="wd-pers" style="display:none">
-    <div class="wd-pers-k">Wil je jouw weggever personaliseren?</div>
-    <p class="wd-pers-s">Beantwoord een paar korte vragen over je week. Je krijgt het document ingevuld met jouw eigen planning, plus een lege versie om later nog eens te doen.</p>
-    <div class="wd-pers-knoppen">
-      <button class="btn-next" type="button" onclick="wdPersonaliseer()">Ja, personaliseren &middot; 5 min</button>
-      <button class="wd-pers-nee" type="button" onclick="wdGeenPers()">Nee, ik wil alleen de pdf</button>
-    </div>
+  <div class="wd-pers-balk" id="wd-pers-balk" style="display:none" onclick="wdPersonaliseer()">
+    <span><b>Wil je dit document op jouw week afgestemd hebben?</b> Beantwoord een paar korte vragen en je krijgt het ingevuld.</span>
+    <span class="wd-pers-balk-k">Personaliseer &rarr;</span>
   </div>
   <div class="wd-hero">
     <div class="wd-preview" id="wd-preview"></div>
@@ -2709,6 +2715,12 @@ tesMeet('pageview',location.pathname);
 .pw-vink.aan .pw-hok::after{content:'\2713'}
 .pw-vink span.pw-tekst{font-size:.84rem;color:var(--muted);line-height:1.5}
 .pw-vink.aan span.pw-tekst{color:var(--white)}
+.pw-bekend{border:1px solid rgba(201,168,76,.4);background:rgba(201,168,76,.07);border-radius:10px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.88rem;color:var(--muted);line-height:1.6}
+.pw-bekend b{color:var(--white);font-weight:500}
+.pw-perdag{display:flex;flex-direction:column;gap:.5rem;margin-top:.3rem}
+.pw-perdag-rij{display:flex;align-items:center;gap:.5rem}
+.pw-perdag-dag{width:2.4rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.pw-perdag-rij select{flex:1}
 .pw-eigen{display:flex;gap:.5rem;margin-top:.6rem}
 .pw-eigen input{flex:1}
 .pw-plus{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,.4);border-radius:8px;padding:.5rem .9rem;font-size:1rem;line-height:1;cursor:pointer;font-family:inherit}
@@ -2748,6 +2760,20 @@ tesMeet('pageview',location.pathname);
   .pw-blok{font-size:.48rem;padding:.2rem .22rem}.pw-blok em{font-size:.46rem}.pw-blok.kort{font-size:.44rem}
   .pw-cal{height:700px}}
 </style>
+<!-- schermvullende vraag: wil je de weggever personaliseren? -->
+<div class="wp-over" id="wp-over" onclick="if(event.target===this) wdGeenPers()">
+  <div class="wp-kaart">
+    <button class="wp-x" type="button" onclick="wdGeenPers()" aria-label="Sluiten">&#10005;</button>
+    <div class="wp-eye">Gratis &middot; 5 minuten</div>
+    <h2 class="wp-k">Wil je jouw weggever<br>personaliseren?</h2>
+    <p class="wp-s">Beantwoord een paar korte vragen over je week. Je krijgt het document ingevuld met jouw eigen planning, plus een lege versie om later nog eens te doen.</p>
+    <div class="wp-knoppen">
+      <button class="btn-next" type="button" onclick="wdPersonaliseer()">Ja, personaliseren</button>
+      <button class="wp-nee" type="button" onclick="wdGeenPers()">Nee, ik wil alleen de pdf</button>
+    </div>
+  </div>
+</div>
+
 <div class="page" id="page-plan-je-week">
 <div class="tool-wrap">
 
@@ -2857,6 +2883,8 @@ tesMeet('pageview',location.pathname);
       <div><label class="jd-field-label">Tot</label><select class="jd-input" id="pw-diep-eind" onchange="pwDiepTijd()"></select></div>
     </div>
     <div class="pw-melding" id="pw-diep-melding"></div>
+    <button class="pw-anders" id="pw-diep-perdag-knop" onclick="pwPerDag('diep')">Andere tijden per dag</button>
+    <div class="pw-perdag" id="pw-diep-perdag" style="display:none"></div>
     <div class="pw-mini"><div class="pw-mini-k">Jouw week tot nu toe</div><div class="pw-rooster" id="pw-mini-diep"></div></div>
   </div>
 
@@ -2869,22 +2897,24 @@ tesMeet('pageview',location.pathname);
 
   <!-- taakblok inhoud -->
   <div class="step" id="pw-taakwat">
-    <div class="pw-vraag">Wat gaat er in je taakblok?</div>
-    <p class="pw-hint">Alles wat geen diepwerk is, maar wel moet gebeuren.</p>
+    <div class="pw-vraag">Welke kleine taken moeten er ook gebeuren?</div>
+    <p class="pw-hint">Alles wat moet, maar geen diepwerk is. Die zetten we straks bij elkaar in één blok, zodat ze je dag niet meer onderbreken.</p>
     <div class="jd-chips-row" id="pw-taakwat-chips"></div>
     <div class="pw-eigen"><input class="jd-input" id="pw-taakwat-eigen" placeholder="Zelf toevoegen" onkeydown="if(event.key==='Enter'){event.preventDefault();pwVoegToe('taak')}"><button class="pw-plus" type="button" onclick="pwVoegToe('taak')">+</button></div>
   </div>
 
   <!-- taakblok wanneer -->
   <div class="step" id="pw-taakwanneer">
-    <div class="pw-vraag">Wanneer doe je je taakblok?</div>
-    <p class="pw-hint">Plan meetings en kleine taken vanaf het einde van de dag naar voren.</p>
+    <div class="pw-vraag">Wanneer doe je die kleine taken?</div>
+    <p class="pw-hint">Zet ze aan het einde van je dag. Dan heb je er overdag geen last van.</p>
     <div class="pw-dagen" id="pw-taak-dagen"></div>
     <div class="pw-tijden">
       <div><label class="jd-field-label">Van</label><select class="jd-input" id="pw-taak-start" onchange="pwBewaar()"></select></div>
       <div><label class="jd-field-label">Tot</label><select class="jd-input" id="pw-taak-eind" onchange="pwBewaar()"></select></div>
     </div>
-    <div class="pw-mini"><div class="pw-mini-k">Je diepwerk staat er al in</div><div class="pw-rooster" id="pw-mini-taak"></div></div>
+    <button class="pw-anders" id="pw-taak-perdag-knop" onclick="pwPerDag('taak')">Andere tijden per dag</button>
+    <div class="pw-perdag" id="pw-taak-perdag" style="display:none"></div>
+    <div class="pw-mini"><div class="pw-mini-k">Je diepwerk staat er al in &mdash; plan hier omheen</div><div class="pw-rooster" id="pw-mini-taak"></div></div>
   </div>
 
   <!-- vrije tijd inhoud -->
@@ -2904,6 +2934,8 @@ tesMeet('pageview',location.pathname);
       <div><label class="jd-field-label">Van</label><select class="jd-input" id="pw-vrij-start" onchange="pwBewaar()"></select></div>
       <div><label class="jd-field-label">Tot</label><select class="jd-input" id="pw-vrij-eind" onchange="pwBewaar()"></select></div>
     </div>
+    <button class="pw-anders" id="pw-vrij-perdag-knop" onclick="pwPerDag('vrij')">Andere tijden per dag</button>
+    <div class="pw-perdag" id="pw-vrij-perdag" style="display:none"></div>
     <div class="pw-mini"><div class="pw-mini-k">Jouw week tot nu toe</div><div class="pw-rooster" id="pw-mini-vrij"></div></div>
   </div>
 
@@ -2916,13 +2948,18 @@ tesMeet('pageview',location.pathname);
       <div><label class="jd-field-label">Hoe laat</label><select class="jd-input" id="pw-terug-tijd" onchange="pwBewaar()"></select></div>
       <div><label class="jd-field-label">Hoe lang</label><select class="jd-input" id="pw-terug-duur" onchange="pwBewaar()"><option value="15">15 minuten</option><option value="20" selected>20 minuten</option></select></div>
     </div>
+    <div class="pw-mini"><div class="pw-mini-k">Jouw week &mdash; kijk waar het past</div><div class="pw-rooster" id="pw-mini-terug"></div></div>
   </div>
 
   <!-- gegevens -->
   <div class="step" id="pw-email">
-    <div class="pw-vraag">Waar mag ik je document naartoe sturen?</div>
-    <p class="pw-hint">Je krijgt het ingevulde document en een lege versie, direct op het scherm.</p>
-    <div style="display:flex;flex-direction:column;gap:.7rem">
+    <div class="pw-vraag" id="pw-email-vraag">Waar mag ik je document naartoe sturen?</div>
+    <p class="pw-hint" id="pw-email-hint">Je krijgt het ingevulde document en een lege versie, direct op het scherm.</p>
+    <div class="pw-bekend" id="pw-bekend" style="display:none">
+      <div>Ik ken je al. Zetten we het document klaar voor <b id="pw-bekend-mail"></b>?</div>
+      <button class="pw-overslaan" type="button" onclick="pwAnderAdres()">Ander e-mailadres gebruiken</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.7rem" id="pw-velden">
       <div><label class="jd-field-label">Voornaam</label><input class="jd-input" id="pw-naam" placeholder="Jouw voornaam"></div>
       <div><label class="jd-field-label">Achternaam</label><input class="jd-input" id="pw-achternaam" placeholder="Jouw achternaam"></div>
       <div><label class="jd-field-label">E-mailadres</label><input class="jd-input" id="pw-email-veld" type="email" placeholder="jij@voorbeeld.nl"></div>
@@ -2948,7 +2985,11 @@ tesMeet('pageview',location.pathname);
   <div class="step" id="pw-klaar">
     <div class="step-label">Jouw week</div>
     <div class="pw-vraag" id="pw-klaar-kop">Dit is je week</div>
-    <p class="pw-hint">Zo staat het straks in je document. Je kunt het hier nog aanpassen.</p>
+    <p class="pw-hint">Je document staat klaar, met jouw week erin.</p>
+    <div class="pw-knoppen" style="margin:0 0 1.4rem">
+      <button class="btn-next" onclick="pwPdf()">Download jouw document</button>
+      <div class="cta-note">Je krijgt ook de lege versie, om later nog eens in te vullen</div>
+    </div>
     <div class="pw-schema"><div class="pw-rooster" id="pw-rooster"></div>
       <div class="pw-legenda">
         <span><i style="background:#4B7FD4"></i>Diepwerk</span>
@@ -2961,24 +3002,31 @@ tesMeet('pageview',location.pathname);
       <h3 id="pw-vak-kop">Je diepwerk</h3>
       <ol id="pw-vak-taken"></ol>
     </div>
-    <div class="pw-knoppen">
-      <button class="btn-next" onclick="pwPdf()">Download jouw document</button>
-      <button class="pw-knop2" onclick="pwAgenda()">Zet in mijn agenda</button>
-    </div>
-    <p class="cta-note" style="margin-top:.9rem">Je krijgt ook de lege versie, om later nog eens in te vullen</p>
   </div>
 
-  <!-- na de download: het gratis gesprek -->
+  <!-- na de download: in je agenda zetten? -->
+  <div class="step" id="pw-agenda">
+    <div class="step-label">Je document is gedownload</div>
+    <div class="pw-vraag">Zal ik je blokken ook in je agenda zetten?</div>
+    <p class="pw-hint">Je krijgt een bestandje dat je opent; je agenda vraagt dan of hij de blokken mag toevoegen. Ze komen elke week terug.</p>
+    <div class="pw-knoppen">
+      <button class="btn-next" onclick="pwAgendaJa()">Ja, zet in mijn agenda</button>
+      <button class="pw-knop2" onclick="pwNaarGesprek()">Nee, hoeft niet</button>
+    </div>
+    <p style="text-align:center;margin-top:1rem"><button class="pw-overslaan" onclick="pwNogmaals()">Ik heb mijn document niet ontvangen</button></p>
+  </div>
+
+  <!-- daarna: het gratis gesprek -->
   <div class="step" id="pw-gesprek">
-    <div class="step-label">Je document staat klaar</div>
-    <div class="pw-vraag">Zullen we je week samen doornemen?</div>
-    <p class="pw-hint">E&eacute;n gratis uur, online. We maken je doel meetbaar en bouwen je eerste twaalf weken. Geen verplichting.</p>
+    <div class="step-label">Nog één ding</div>
+    <div class="pw-vraag">Heb je een doel waar je echt aan wilt werken?</div>
+    <p class="pw-hint">Dan maken we er samen een plan voor. In één gratis uur, online, weet je wat je de komende twaalf weken te doen staat om dat doel te halen. Geen verplichting.</p>
     <div id="pw-gesprek-video" style="display:none"></div>
     <div class="calendly-inline-widget pw-cal" id="pw-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c"></div>
     <div class="pw-knoppen">
-      <button class="pw-knop2" onclick="pwLegePdf()">Download ook de lege versie</button>
-      <button class="pw-knop2" onclick="showPage('weggevers')">Liever meer gratis waarde</button>
+      <button class="btn-next" onclick="showPage('weggevers')">Liever meer gratis waarde</button>
     </div>
+    <p style="text-align:center;margin-top:.9rem"><button class="pw-overslaan" onclick="showPage('home')">Terug naar home</button></p>
   </div>
 
   <!-- navigatie -->
@@ -8071,21 +8119,30 @@ var WD_SLUG=null, WD=null;
 var WG_STEPPERS = { 'timemanagement-voor-ondernemers': 'plan-je-week' };
 function wdPersStand(slug){
   var heeft = !!WG_STEPPERS[slug];
-  var p=document.getElementById('wd-pers'), k=document.getElementById('wd-pers-knop'), o=document.getElementById('wd-ok-pers');
-  if(p) p.style.display = heeft ? '' : 'none';          // de vraag staat weer bovenaan bij elk bezoek
-  if(k) k.style.display = heeft ? '' : 'none';          // en blijft als knop onder de download staan
-  if(o) o.style.display = heeft ? '' : 'none';
+  var over=document.getElementById('wp-over'), balk=document.getElementById('wd-pers-balk');
+  var knop=document.getElementById('wd-pers-knop'), ok=document.getElementById('wd-ok-pers');
+  if(balk) balk.style.display = heeft ? 'flex' : 'none';     // blijft staan, ook na "nee"
+  if(knop) knop.style.display = heeft ? '' : 'none';
+  if(ok)   ok.style.display   = heeft ? '' : 'none';
+  if(over) over.classList.toggle('zien', heeft);               // schermvullend, meteen in beeld
+  document.body.style.overflow = heeft ? 'hidden' : '';
+}
+function wdSluitPers(){
+  var over=document.getElementById('wp-over'); if(over) over.classList.remove('zien');
+  document.body.style.overflow='';
 }
 function wdPersonaliseer(){
   var tool = WG_STEPPERS[WD_SLUG]; if(!tool) return;
+  wdSluitPers();
   try{ localStorage.setItem('tes_pers_weggever', WD_SLUG); }catch(e){}
   if(window.tesMeet) tesMeet('pageview','/personaliseren/'+WD_SLUG,{weggever:WD_SLUG});
   showPage(tool);
 }
 function wdGeenPers(){
-  var p=document.getElementById('wd-pers'); if(p) p.style.display='none';
+  wdSluitPers();
   var f=document.getElementById('wd-form'); if(f) f.scrollIntoView({behavior:'smooth',block:'center'});
 }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') wdSluitPers(); });
 function openWeggever(slug){
   WD_SLUG=slug; WD=null;
   showPage('weggever');
@@ -8347,10 +8404,10 @@ var PW = {
   bereikbaar:'', delegeren:'', bereik:{ dagen:['ma','di','wo','do','vr'], van:'12:00', tot:'17:00' },
   rust:'', rustEigen:{ aan:false, van:'08:00', tot:'12:00' },
   energie:'', energieEigen:{ aan:false, van:'08:00', tot:'12:00' },
-  diep:{ dagen:[], start:'08:00', eind:'11:00', aangeraakt:false },
+  diep:{ dagen:[], start:'08:00', eind:'11:00', aangeraakt:false, perDag:false, tijden:{} },
   afleiding:[],
-  taak:{ wat:[], extra:[], dagen:[], start:'16:00', eind:'17:00' },
-  vrij:{ wat:[], extra:[], dagen:[], start:'18:00', eind:'20:00' },
+  taak:{ wat:[], extra:[], dagen:[], start:'16:00', eind:'17:00', perDag:false, tijden:{} },
+  vrij:{ wat:[], extra:[], dagen:[], start:'18:00', eind:'20:00', perDag:false, tijden:{} },
   terug:{ dag:'vr', tijd:'15:30', duur:'20' },
   contact:{}
 };
@@ -8374,6 +8431,7 @@ var PW_SCHERMEN = [
   { id:'pw-terug',         stap:5, klaar:function(){ return !!PW.terug.dag; } },
   { id:'pw-email',         stap:5 },
   { id:'pw-klaar' },
+  { id:'pw-agenda' },
   { id:'pw-gesprek' }
 ];
 var pwNu = 0;
@@ -8465,6 +8523,38 @@ function pwVoegToe(welk){
   veld.value=''; pwTeken(); pwBewaar();
 }
 
+/* ── tijden per dag ─────────────────────────────────────── */
+function pwVak(id){ return id==='diep' ? PW.diep : id==='taak' ? PW.taak : PW.vrij; }
+function pwPerDag(id){
+  var v=pwVak(id); v.perDag=!v.perDag;
+  if(v.perDag) v.dagen.forEach(function(d){ if(!v.tijden[d]) v.tijden[d]={van:v.start, tot:v.eind}; });
+  pwTeken(); pwBewaar();
+}
+function pwPerDagTijd(id, dag, wat, waarde){
+  var v=pwVak(id); v.tijden[dag]=v.tijden[dag]||{van:v.start,tot:v.eind}; v.tijden[dag][wat]=waarde;
+  pwTeken(); pwBewaar();
+}
+function pwTekenPerDag(id){
+  var v=pwVak(id), vak=document.getElementById('pw-'+id+'-perdag'), knop=document.getElementById('pw-'+id+'-perdag-knop');
+  if(!vak||!knop) return;
+  knop.textContent = v.perDag ? 'Overal dezelfde tijd' : 'Andere tijden per dag';
+  knop.style.display = v.dagen.length>1 ? '' : 'none';
+  vak.style.display = (v.perDag && v.dagen.length) ? 'flex' : 'none';
+  if(!v.perDag || !v.dagen.length){ vak.innerHTML=''; return; }
+  var opties=function(gekozen){ var h=''; for(var m=5*60;m<=23*60;m+=30){ var t=pwUur(m); h+='<option'+(t===gekozen?' selected':'')+'>'+t+'</option>'; } return h; };
+  var volgorde=PW_DAGEN.map(function(d){return d.k;});
+  vak.innerHTML = v.dagen.slice().sort(function(a,b){ return volgorde.indexOf(a)-volgorde.indexOf(b); }).map(function(d){
+    var t=v.tijden[d]||{van:v.start,tot:v.eind};
+    var n=PW_DAGEN[volgorde.indexOf(d)].n;
+    return '<div class="pw-perdag-rij"><span class="pw-perdag-dag">'+n+'</span>'+
+      '<select class="jd-input" data-dag="'+d+'" data-wat="van">'+opties(t.van)+'</select>'+
+      '<select class="jd-input" data-dag="'+d+'" data-wat="tot">'+opties(t.tot)+'</select></div>';
+  }).join('');
+  vak.querySelectorAll('select').forEach(function(sel){
+    sel.onchange=function(){ pwPerDagTijd(id, sel.dataset.dag, sel.dataset.wat, sel.value); };
+  });
+}
+
 /* ── alles tekenen ──────────────────────────────────────── */
 function pwTeken(){
   var ond=document.getElementById('pw-onderwerpen');
@@ -8513,6 +8603,7 @@ function pwTeken(){
   };
   chips('pw-taakwat-chips', PW_TAAKWAT, PW.taak);
   chips('pw-vrijwat-chips', PW_VRIJWAT, PW.vrij);
+  ['diep','taak','vrij'].forEach(pwTekenPerDag);
   pwMini();
   pwNav();
 }
@@ -8530,9 +8621,13 @@ function pwDiepTijd(){
 /* ── weekrooster tekenen (groot en klein) ───────────────── */
 function pwBlokken(){
   var uit=[];
-  PW.diep.dagen.forEach(function(d){ uit.push({ dag:d, start:PW.diep.start, eind:PW.diep.eind, soort:'diep', titel:'Diepwerk: '+pwOnderwerpNaam().toLowerCase(), kleur:'#4B7FD4' }); });
-  PW.taak.dagen.forEach(function(d){ uit.push({ dag:d, start:PW.taak.start, eind:PW.taak.eind, soort:'taak', titel:'Taakblok', onder:PW.taak.wat.slice(0,3).join(', '), kleur:'#F1CB51' }); });
-  PW.vrij.dagen.forEach(function(d){ uit.push({ dag:d, start:PW.vrij.start, eind:PW.vrij.eind, soort:'vrij', titel:'Vrije tijd', onder:PW.vrij.wat.slice(0,2).join(', '), kleur:'#b9c7a4' }); });
+  var tijd=function(v,d){ var t=(v.perDag && v.tijden[d]) ? v.tijden[d] : {van:v.start, tot:v.eind}; return t; };
+  PW.diep.dagen.forEach(function(d){ var t=tijd(PW.diep,d);
+    uit.push({ dag:d, start:t.van, eind:t.tot, soort:'diep', titel:'Diepwerk: '+pwOnderwerpNaam().toLowerCase(), kleur:'#4B7FD4' }); });
+  PW.taak.dagen.forEach(function(d){ var t=tijd(PW.taak,d);
+    uit.push({ dag:d, start:t.van, eind:t.tot, soort:'taak', titel:'Taakblok', onder:PW.taak.wat.slice(0,3).join(', '), kleur:'#F1CB51' }); });
+  PW.vrij.dagen.forEach(function(d){ var t=tijd(PW.vrij,d);
+    uit.push({ dag:d, start:t.van, eind:t.tot, soort:'vrij', titel:'Vrije tijd', onder:PW.vrij.wat.slice(0,2).join(', '), kleur:'#b9c7a4' }); });
   if(PW.terug.dag){
     var e=pwMin(PW.terug.tijd)+(+PW.terug.duur||20);
     uit.push({ dag:PW.terug.dag, start:PW.terug.tijd, eind:pwUur(e), soort:'terug', titel:'Terugkijken', kleur:'#8A8A8A' });
@@ -8567,13 +8662,14 @@ function pwMini(){
   pwRooster('pw-mini-diep', b, 22, 'diep');
   pwRooster('pw-mini-taak', b, 22, 'taak');
   pwRooster('pw-mini-vrij', b, 22, 'vrij');
+  pwRooster('pw-mini-terug', b, 22, 'terug');
 }
 
 /* ── navigatie ──────────────────────────────────────────── */
 function pwZichtbaar(i){ var s=PW_SCHERMEN[i]; return !s.toon || s.toon(); }
 function pwNav(){
   var s=PW_SCHERMEN[pwNu], nav=document.getElementById('pw-nav'); if(!s||!nav) return;
-  var eind = (s.id==='pw-klaar' || s.id==='pw-gesprek');
+  var eind = (s.id==='pw-klaar' || s.id==='pw-agenda' || s.id==='pw-gesprek');
   nav.style.display = eind ? 'none' : 'flex';
   nav.querySelector('.btn-back').style.display = (pwNu===0) ? 'none' : '';
   var next=document.getElementById('pw-next'), skip=document.getElementById('pw-skip');
@@ -8586,8 +8682,9 @@ function pwToon(i){
   document.querySelectorAll('#page-plan-je-week .step').forEach(function(el){ el.classList.remove('active'); });
   var el=document.getElementById(s.id); if(el) el.classList.add('active');
   document.getElementById('pw-kop').style.display = (i===0) ? '' : 'none';
-  document.getElementById('pw-prog-wrap').style.display = (s.id==='pw-klaar'||s.id==='pw-gesprek') ? 'none' : '';
+  document.getElementById('pw-prog-wrap').style.display = (s.id==='pw-klaar'||s.id==='pw-agenda'||s.id==='pw-gesprek') ? 'none' : '';
   if(s.id==='pw-diep') pwZetAdvies();
+  if(s.id==='pw-email') pwVulBekend();
   if(s.id==='pw-klaar' || s.id==='pw-gesprek') pwResultaat();
   pwMini(); pwProgressBar(); pwNav();
   window.scrollTo({ top:0, behavior:'smooth' });
@@ -8616,6 +8713,33 @@ function pwProgressBar(){
     }
     return h+'</div>';
   }).join('');
+}
+// Ken ik je al van een eerdere weggever of de doelentool? Dan vul ik je gegevens vast in.
+function pwBekend(){
+  try{
+    var v=JSON.parse(localStorage.getItem('tes_contact')||localStorage.getItem('tes_tool_klaar')||'null');
+    if(v && v.email) return v;
+  }catch(e){}
+  return null;
+}
+function pwVulBekend(){
+  var g=pwBekend(), vak=document.getElementById('pw-bekend'), velden=document.getElementById('pw-velden');
+  if(!vak||!velden) return;
+  if(!g || PW.anderAdres){ vak.style.display='none'; velden.style.display=''; return; }
+  var delen=String(g.naam||'').trim().split(' ');
+  document.getElementById('pw-naam').value = delen[0]||'';
+  document.getElementById('pw-achternaam').value = delen.slice(1).join(' ')||'-';
+  document.getElementById('pw-email-veld').value = g.email;
+  document.getElementById('pw-consent').checked = true;
+  document.getElementById('pw-bekend-mail').textContent = g.email;
+  vak.style.display=''; velden.style.display='none';
+  document.getElementById('pw-email-hint').textContent = 'Je krijgt het ingevulde document en een lege versie, direct op het scherm.';
+}
+function pwAnderAdres(){
+  PW.anderAdres=true;
+  ['pw-naam','pw-achternaam','pw-email-veld'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('pw-consent').checked=false;
+  pwVulBekend(); document.getElementById('pw-naam').focus();
 }
 function pwHoeChange(){
   var v=(document.getElementById('pw-hoe')||{}).value||'';
@@ -8734,6 +8858,7 @@ function pwPdfGegevens(){
     terug: PW.terug.dag ? ('Elke '+dagNaam[PW.terug.dag]+' om '+PW.terug.tijd+', '+PW.terug.duur+' minuten') : ''
   };
 }
+function pwGaNaar(id){ pwToon(PW_SCHERMEN.map(function(x){return x.id;}).indexOf(id)); }
 function pwPdf(){
   var knop=document.querySelector('#pw-klaar .btn-next');
   var tekst=knop?knop.textContent:'';
@@ -8744,23 +8869,26 @@ function pwPdf(){
     .then(function(bytes){
       var voor=(PW.contact.naam||'').trim();
       TESPDF.bewaar(bytes, 'Timemanagement voor ondernemers'+(voor?' - '+voor:'')+'.pdf');
+      setTimeout(pwLegePdf, 1200);          // de lege versie komt er altijd bij
     })
     .catch(function(e){
       console.error(e);
-      // lukt het invullen niet, dan krijg je in elk geval het gewone document
       window.open(PW.download || PW_BRON_PDF, '_blank', 'noopener');
     })
     .then(function(){
       if(knop){ knop.disabled=false; knop.textContent=tekst; }
-      pwNaarGesprek();
+      pwGaNaar('pw-agenda');
     });
 }
+function pwNogmaals(){ pwGaNaar('pw-klaar'); setTimeout(function(){ alert('Kijk ook even in je map Downloads. Lukt het niet, druk dan nog een keer op "Download jouw document".'); }, 200); }
+function pwAgendaJa(){ pwAgenda(); setTimeout(pwNaarGesprek, 900); }
 function pwLegePdf(){
   if(window.tesMeet) tesMeet('download','/plan-je-week',{weggever:PW_SLUG,soort:'leeg'});
-  window.open(PW.download || PW_BRON_PDF, '_blank', 'noopener');
+  var a=document.createElement('a'); a.href = PW.download || PW_BRON_PDF; a.download='Timemanagement voor ondernemers - leeg.pdf';
+  document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); }, 800);
 }
 function pwNaarGesprek(){
-  pwToon(PW_SCHERMEN.map(function(s){return s.id;}).indexOf('pw-gesprek'));
+  pwGaNaar('pw-gesprek');
   var el=document.getElementById('pw-cal');
   if(el && !el.querySelector('iframe') && window.Calendly && Calendly.initInlineWidget){
     Calendly.initInlineWidget({ url: (typeof calendlyParams==='function'? calendlyParams(el.dataset.url) : el.dataset.url), parentElement: el });
@@ -8788,5 +8916,6 @@ function pwNaarGesprek(){
 })();
 </script>
 
+(function(){ var sp=window.showPage; if(typeof sp==='function') window.showPage=function(p){ if(p!=='weggever' && typeof wdSluitPers==='function') wdSluitPers(); sp(p); }; })();
 </body>
 </html>
