@@ -1305,7 +1305,11 @@ footer p{font-size:.68rem;color:var(--dim)}
 </head>
 <body>
 <script>/* meting — zelfde code als src/meting.js in tes-backend */(function(){
-  var API='https://tes-backend-mbyy.onrender.com/api/t';
+  // Op de website praat de site met de echte backend; draait hij op localhost
+  // (testen), dan met de lokale server. Zo komen testbezoeken niet in de cijfers.
+  var LOKAAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  window.TES_BACKEND = LOKAAL ? 'http://localhost:3000' : 'https://tes-backend-mbyy.onrender.com';
+  var API = window.TES_BACKEND + '/api/t';
   function gc(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):'';}
   function sc(n,v,sec){document.cookie=n+'='+encodeURIComponent(v)+'; Max-Age='+sec+'; Path=/; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'');}
   function clean(s){return String(s||'').toLowerCase().replace(/[^a-z0-9:_.-]/g,'').slice(0,60);}
@@ -7918,7 +7922,7 @@ window.addEventListener('message',function(e){
   try{
     var g=(typeof toolKlaarGegevens==='function')?toolKlaarGegevens():null;
     var mb=window.tesBron?tesBron():{}; var body=JSON.stringify({invitee:inviteeUri,event:eventUri,plek:plek,naam:g?g.naam:'',email:g?g.email:'',sid:mb.sid||'',vid:mb.vid||''});
-    fetch('https://tes-backend-mbyy.onrender.com/api/planmeeting',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});
+    fetch((window.TES_BACKEND||'https://tes-backend-mbyy.onrender.com')+'/api/planmeeting',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});
   }catch(e){}
   if(plek==='gesprek') gmAangemeld();
   else if(plek==='traject') trajectAangemeld();
@@ -7972,7 +7976,7 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.nav-group')) docum
 </script>
 <script>
 // ─── Weggevers-pagina ─────────────────────────────────────────
-var WG_API='https://tes-backend-mbyy.onrender.com';
+var WG_API = window.TES_BACKEND || 'https://tes-backend-mbyy.onrender.com';
 var WG_ICONEN=['doel','plan','boek','lijst','vlam','kompas','grafiek','pen'];
 var WG_LIJST=null, WG_CAT='', WG_HUIDIG=null;
 function wgEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
@@ -8303,10 +8307,10 @@ function gmAangemeld(){
 // ═══ Plan je week — personaliseert de weggever "Timemanagement voor ondernemers" ═══
 // Eén vraag per scherm. Ja/nee-vragen springen vanzelf door, bij de rest druk je
 // zelf op Verder. Zelfde opbouw, opmaak, meting en toestemmingsvinkje als de doelentool.
-var PW_API_AAN = false;   // ← op true zodra POST /api/tool/plan-je-week in tes-backend staat
-var PW_API = 'https://tes-backend-mbyy.onrender.com/api/tool/plan-je-week';
+var PW_API_AAN = true;    // de backend bewaart de antwoorden bij de lead
+var PW_API = (window.TES_BACKEND || 'https://tes-backend-mbyy.onrender.com') + '/api/tool/plan-je-week';
 var PW_SLUG = 'timemanagement-voor-ondernemers';
-var PW_MEET_STAPPEN = false;  // ← op true zodra 'stepper_stap' in de backend is toegestaan
+var PW_MEET_STAPPEN = true;   // meet ook waar mensen afhaken
 
 var PW_DAGEN = [
   { k:'ma', n:'Ma', ics:'MO' }, { k:'di', n:'Di', ics:'TU' }, { k:'wo', n:'Wo', ics:'WE' },
@@ -8694,7 +8698,7 @@ function pwAgenda(){
   document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
 }
 // ── het ingevulde document maken ────────────────────────
-var PW_BRON_PDF = '/weggevers/timemanagement-voor-ondernemers.pdf';
+var PW_BRON_PDF = '/weggevers/timemanagement-voor-ondernemers.pdf';   // zelfde map als de site, zodat de browser hem mag openen
 function pwLaadVuller(){
   if(window.TESPDF) return Promise.resolve();
   return new Promise(function(klaar, fout){
