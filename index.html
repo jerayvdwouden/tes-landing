@@ -1252,13 +1252,11 @@ footer p{font-size:.68rem;color:var(--dim)}
 #gm .faq{grid-column:1;grid-row:auto}
 #gm .faq-in .cta-row{grid-column:1;align-items:center;text-align:center}}
 #gm #gm-agenda{padding:clamp(28px,3.4vw,52px) var(--gutter) clamp(36px,4.2vw,64px)}
-#gm #gm-agenda .stap-in{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);gap:clamp(24px,3vw,56px);align-items:start;text-align:left;max-width:1200px}
-#gm .gm-agenda-tekst{display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding-top:4px}
+#gm #gm-agenda .stap-in{display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(20px,2.4vw,32px);max-width:760px}
+#gm .gm-agenda-tekst{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
 #gm .gm-agenda-tekst p{max-width:460px;font-size:clamp(16px,1.3vw,19px)}
 #gm #gm-agenda .gm-al{grid-column:1/-1;margin:0 auto}
-@media(max-width:900px){#gm #gm-agenda .stap-in{grid-template-columns:minmax(0,1fr);text-align:center}
-#gm .gm-agenda-tekst{align-items:center}
-#gm .gm-agenda-tekst p{max-width:520px}}
+
 #gm #gm-agenda h2{font-size:clamp(38px,4.8vw,72px)}
 #gm #gm-agenda p{font-size:clamp(15px,1.2vw,18px)}
 #gm .gm-cal-blok .calendly-inline-widget{height:clamp(540px,calc(100vh - 230px),660px)}
@@ -2618,21 +2616,6 @@ tesMeet('pageview',location.pathname);
     </div>
   </section>
 
-  <!-- 05 wat mensen zeggen -->
-  <section class="quotes" aria-label="Wat mensen zeggen">
-    <div class="mono muted">Wat mensen zeggen</div>
-    <div data-cols="2">
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Ik heb twee startende ondernemers geholpen: voor allebei heb ik een marketingstrategie gebouwd, met onderzoek en voorbeelden erbij. Daarvoor had ik vooral dromen, maar geen push. Wat het verschil maakte: het systeem dwingt je om eerlijk te zijn. Ik kan niet drie weken lang hetzelfde zeggen.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Max Groenendijk &middot; Creative Business student</b><span>Twee marketingstrategie&euml;n gebouwd</span></div></div>
-      </article>
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
-      </article>
-    </div>
-  </section>
-
   <!-- 06 de agenda -->
   <section class="stap" id="gm-agenda" aria-label="Plan je gesprek">
     <div class="para para-1" data-para="0.06"></div>
@@ -2642,7 +2625,6 @@ tesMeet('pageview',location.pathname);
       <div class="gm-agenda-tekst">
         <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
         <h2 class="display">Kies een moment<br>dat jou uitkomt.</h2>
-        <p id="gm-intro">Je krijgt direct een bevestiging met de Zoom-link. Vul daarna je jaardoel in, dan beginnen we niet bij nul.</p>
         <div class="gm-mini" id="gm-al-link"><u onclick="gmZetAangemeld(true)">Ik heb al een gesprek met Jeray ingepland</u></div>
       </div>
 
