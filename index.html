@@ -2204,10 +2204,16 @@ tesMeet('pageview',location.pathname);
 .wg-start-traject .wg-start-t{color:#0A0A0A}
 .wg-start-traject .wg-start-s{color:rgba(0,0,0,.72)}
 .wg-start-traject .wg-start-b{color:#0A0A0A;border-bottom:1.5px solid rgba(0,0,0,.5);padding-bottom:2px}
-.wg-start-tag{position:absolute;top:1rem;right:1rem;font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#0A0A0A;border:1px solid rgba(0,0,0,.45);border-radius:999px;padding:.3rem .6rem}
+.wg-start-tag{position:absolute;z-index:2;top:.8rem;right:.8rem;font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:#0A0A0A;background:rgba(232,201,122,.92);border:1px solid rgba(0,0,0,.25);border-radius:999px;padding:.3rem .6rem}
 .wg-start-card{position:relative;overflow:hidden;background:linear-gradient(160deg,#141210,#0c0b09);border:1px solid var(--border2);border-radius:16px;padding:1.6rem 1.5rem 1.5rem;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s}
 .wg-start-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(201,168,76,.15)}
 .wg-start-card:before{content:'';position:absolute;inset:-40% auto auto -20%;width:60%;aspect-ratio:1;background:radial-gradient(circle,rgba(201,168,76,.16),transparent 65%);pointer-events:none}
+.wg-start-img{position:relative;aspect-ratio:16/10;overflow:hidden;margin:-1.6rem -1.5rem 1.1rem;border-radius:15px 15px 0 0;background:#141210}
+.wg-start-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:transform .4s ease,opacity .2s}
+.wg-start-card:hover .wg-start-img img{transform:scale(1.045);opacity:1}
+.wg-start-img:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.05) 45%,rgba(12,11,9,.95));pointer-events:none}
+.wg-start-traject .wg-start-img:after{background:linear-gradient(180deg,rgba(10,10,10,0) 40%,rgba(201,168,76,.85) 92%,#C9A84C)}
+.wg-verder .wg-start-img{margin:-1.15rem -1.2rem .85rem}
 .wg-start-k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-d);margin-bottom:.6rem}
 .wg-start-t{font-family:'Abolition',sans-serif;font-size:1.7rem;letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin-bottom:.5rem}
 .wg-start-s{color:var(--muted);font-size:.9rem;line-height:1.55;margin-bottom:1.1rem}
@@ -2283,19 +2289,22 @@ tesMeet('pageview',location.pathname);
 
   <div class="wg-verder">
   <div class="wg-start">
-    <div class="wg-start-card" onclick="showPage('tool')">
-      <div class="wg-start-k">Begin hier · 5 minuten</div>
-      <div class="wg-start-t">Jouw jaardoel op papier</div>
-      <div class="wg-start-s">Beantwoord een paar vragen en je hebt jouw doel voor dit jaar, met een eerste plan, in je mail.</div>
-      <span class="wg-start-b">Start de tool &rarr;</span>
+    <div class="wg-start-card" onclick="showPage('gesprek')">
+      <div class="wg-start-img"><img src="img/jeray.jpg" alt="Jeray tijdens een online gesprek" loading="lazy"></div>
+      <div class="wg-start-k">Gratis gesprek &middot; 1 uur</div>
+      <div class="wg-start-t">E&eacute;n uur met mij</div>
+      <div class="wg-start-s">We maken jouw doel meetbaar en bouwen je eerste plan. Online, en je zit nergens aan vast.</div>
+      <span class="wg-start-b">Plan je gesprek &rarr;</span>
     </div>
     <div class="wg-start-card" onclick="window.location.href='/cursus'">
+      <div class="wg-start-img"><img src="img/traject-app.jpg" alt="Het systeem op je telefoon" loading="lazy"></div>
       <div class="wg-start-k">Gratis cursus · 24 lessen</div>
       <div class="wg-start-t">De methode, stap voor stap</div>
       <div class="wg-start-s">De complete methode achter The Execution System in 5 modules, om in je eigen tempo te volgen.</div>
       <span class="wg-start-b">Bekijk de cursus &rarr;</span>
     </div>
     <div class="wg-start-card wg-start-traject" onclick="showPage('traject')">
+      <div class="wg-start-img"><img src="img/traject-resultaat.jpg" alt="Je resultaat na twaalf weken" loading="lazy"></div>
       <div class="wg-start-tag">1-op-1</div>
       <div class="wg-start-k">Het traject &middot; 12 weken</div>
       <div class="wg-start-t">Jouw doel. Gehaald.</div>
@@ -2464,19 +2473,22 @@ tesMeet('pageview',location.pathname);
   <div class="wd-sec">
     <div class="wd-sec-h">Verder kijken</div>
     <div class="wg-start">
-      <div class="wg-start-card" onclick="showPage('tool')">
-        <div class="wg-start-k">Begin hier · 5 minuten</div>
-        <div class="wg-start-t">Jouw jaardoel op papier</div>
-        <div class="wg-start-s">Beantwoord een paar vragen en je hebt jouw doel voor dit jaar, met een eerste plan, in je mail.</div>
-        <span class="wg-start-b">Start de tool &rarr;</span>
+      <div class="wg-start-card" onclick="showPage('gesprek')">
+        <div class="wg-start-img"><img src="img/jeray.jpg" alt="Jeray tijdens een online gesprek" loading="lazy"></div>
+        <div class="wg-start-k">Gratis gesprek &middot; 1 uur</div>
+        <div class="wg-start-t">E&eacute;n uur met mij</div>
+        <div class="wg-start-s">We maken jouw doel meetbaar en bouwen je eerste plan. Online, en je zit nergens aan vast.</div>
+        <span class="wg-start-b">Plan je gesprek &rarr;</span>
       </div>
       <div class="wg-start-card" onclick="window.location.href='/cursus'">
+      <div class="wg-start-img"><img src="img/traject-app.jpg" alt="Het systeem op je telefoon" loading="lazy"></div>
         <div class="wg-start-k">Gratis cursus · 24 lessen</div>
         <div class="wg-start-t">De methode, stap voor stap</div>
         <div class="wg-start-s">De complete methode achter The Execution System in 5 modules, om in je eigen tempo te volgen.</div>
         <span class="wg-start-b">Bekijk de cursus &rarr;</span>
       </div>
       <div class="wg-start-card wg-start-traject" onclick="showPage('traject')">
+      <div class="wg-start-img"><img src="img/traject-resultaat.jpg" alt="Je resultaat na twaalf weken" loading="lazy"></div>
         <div class="wg-start-tag">1-op-1</div>
         <div class="wg-start-k">Het traject &middot; 12 weken</div>
         <div class="wg-start-t">Jouw doel. Gehaald.</div>
