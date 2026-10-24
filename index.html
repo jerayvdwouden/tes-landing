@@ -8423,11 +8423,12 @@ var PW_AFLEIDING = [
   'Ik zet mijn telefoon op niet storen tijdens het blok',
   'Ik sluit mijn mail en berichten-apps',
   'Ik haal social media uit de ruimte',
+  'Ik heb een manier om ideeën en taken die tijdens mijn blok opkomen meteen op te schrijven, bijvoorbeeld pen en papier',
   'Ik geef een klus uit handen die niet door mij hoeft te worden gedaan',
   'Ik plan een vast moment waarop ik mensen terugbel',
   'Ik zet een fles water op mijn bureau',
   'Ik eet voor mijn blok, of maak mijn eten van tevoren klaar',
-  'Ik werk aan de grootste constraint van mijn bedrijf'
+  'Ik werk aan de grootste remmer van mijn bedrijf'
 ];
 var PW_TAAKWAT = ['E-mail','Klantvragen die niet urgent zijn','Facturen','Administratie','Appjes en berichten','Afspraken inplannen','Een kleine operationele klus'];
 var PW_VRIJWAT = ['Wandelen','Sporten','Eten zonder scherm','Tijd met partner, kinderen of vrienden zonder aan werk te denken','Een uur niets met werk'];
@@ -8858,11 +8859,11 @@ function pwAgenda(){
   document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
 }
 // ── het ingevulde document maken ────────────────────────
-var PW_BRON_PDF = '/weggevers/timemanagement-voor-ondernemers.pdf';   // zelfde map als de site, zodat de browser hem mag openen
+var PW_BRON_PDF = '/weggevers/timemanagement-voor-ondernemers.pdf?v=2410';   // zelfde map als de site, zodat de browser hem mag openen
 function pwLaadVuller(){
   if(window.TESPDF) return Promise.resolve();
   return new Promise(function(klaar, fout){
-    var sc=document.createElement('script'); sc.src='/tools/pdfvul.js';
+    var sc=document.createElement('script'); sc.src='/tools/pdfvul.js?v=2410';
     sc.onload=klaar; sc.onerror=function(){ fout(new Error('vuller laadt niet')); };
     document.head.appendChild(sc);
   });
