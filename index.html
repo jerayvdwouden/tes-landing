@@ -2122,7 +2122,7 @@ tesMeet('pageview',location.pathname);
     <div class="calendly-inline-widget" id="gesprek-cal"
          data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c"
          style="min-width:280px;height:620px;border-radius:12px;overflow:hidden"></div>
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 
     <div style="margin-top:.85rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.65rem">
       <button class="btn-back" onclick="backFromGesprek()">← Terug</button>
@@ -7053,13 +7053,31 @@ function toolKlaarGegevens() {
   try { var v = JSON.parse(localStorage.getItem('tes_tool_klaar') || 'null'); if (v && (v.naam || v.email)) return v; } catch (e) {}
   return null;
 }
+// De bron waarmee iemand binnenkwam (?ref=...), uit het meetscript bovenaan de
+// pagina: eb = de eerste bron (die blijft 90 dagen staan), lb = de laatste.
+function tesHerkomst() {
+  var b = (window.tesBron ? tesBron() : null) || {};
+  var eb = b.eb || 'direct';
+  return { eb: eb, lb: b.lb || eb };
+}
+// Zet de herkomst in een Calendly-adres, zodat de bron bij de afspraak staat.
+// Gebeurt een keer: staat utm_source er al in, dan blijft het adres zoals het is.
+function calendlyUtm(url) {
+  if (!url || url.indexOf('utm_source=') >= 0) return url;
+  var h = tesHerkomst();
+  var p = 'utm_source=' + encodeURIComponent(h.eb);
+  if (h.lb && h.lb !== h.eb) p += '&utm_content=' + encodeURIComponent(h.lb);
+  var i = url.indexOf('#'), basis = i >= 0 ? url.slice(0, i) : url, hash = i >= 0 ? url.slice(i) : '';
+  return basis + (basis.indexOf('?') >= 0 ? '&' : '?') + p + hash;
+}
 function calendlyParams(basisUrl) {
+  var url = calendlyUtm(basisUrl);
   var g = toolKlaarGegevens();
-  if (!g) return basisUrl;
+  if (!g) return url;
   var params = ['a1=' + encodeURIComponent('Ja')];
   if (g.naam)  params.push('name='  + encodeURIComponent(g.naam));
   if (g.email) params.push('email=' + encodeURIComponent(g.email));
-  return basisUrl + (basisUrl.indexOf('?') >= 0 ? '&' : '?') + params.join('&');
+  return url + (url.indexOf('?') >= 0 ? '&' : '?') + params.join('&');
 }
 // Laadt een inline widget opnieuw met de ingevulde gegevens (de widget is al
 // bij het laden van de pagina met de kale URL opgebouwd).
@@ -7970,14 +7988,14 @@ window.addEventListener('message',function(e){
   if(!e.data||e.data.event!=='calendly.event_scheduled') return;
   if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
   var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
-  var plek=(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':'traject');
+  var plek=(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
   var p=(e.data.payload||{});
   var eventUri=String((p.event||{}).uri||''), inviteeUri=String((p.invitee||{}).uri||'');
   if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:eventUri,invitee:inviteeUri});
   // Boeking doorgeven aan de backend: die zet (of vult) de lead in het dashboard
   try{
     var g=(typeof toolKlaarGegevens==='function')?toolKlaarGegevens():null;
-    var mb=window.tesBron?tesBron():{}; var body=JSON.stringify({invitee:inviteeUri,event:eventUri,plek:plek,naam:g?g.naam:'',email:g?g.email:'',sid:mb.sid||'',vid:mb.vid||''});
+    var mb=window.tesBron?tesBron():{}; var body=JSON.stringify({invitee:inviteeUri,event:eventUri,plek:plek,naam:g?g.naam:'',email:g?g.email:'',sid:mb.sid||'',vid:mb.vid||'',eb:mb.eb||'',lb:mb.lb||''});
     fetch((window.TES_BACKEND||'https://tes-backend-mbyy.onrender.com')+'/api/planmeeting',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});
   }catch(e){}
   if(plek==='gesprek') gmAangemeld();
@@ -8937,6 +8955,17 @@ function pwNaarGesprek(){
 <script>
 // de schermvullende vraag sluiten zodra je de weggeverpagina verlaat
 (function(){ var sp=window.showPage; if(typeof sp==='function') window.showPage=function(p){ if(p!=='weggever' && typeof wdSluitPers==='function') wdSluitPers(); sp(p); }; })();
+</script>
+
+<script>
+// Elk agenda-blok krijgt de herkomst mee voordat Calendly de widget opbouwt.
+// Dit script loopt tijdens het inlezen van de pagina; widget.js staat op defer
+// en komt daarna, dus de bron zit er altijd in.
+(function(){
+  if (typeof calendlyUtm !== 'function') return;
+  var l = document.querySelectorAll('.calendly-inline-widget[data-url]');
+  for (var i = 0; i < l.length; i++) l[i].dataset.url = calendlyUtm(l[i].dataset.url);
+})();
 </script>
 </body>
 </html>
