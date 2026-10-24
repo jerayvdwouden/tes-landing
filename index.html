@@ -4173,10 +4173,17 @@ function closeNavMenu(){
   var l=document.querySelector('.nav-links'), b=document.querySelector('.nav-burger');
   if(l) l.classList.remove('open'); if(b) b.classList.remove('open');
 }
-function showPage(page) {
+function showPage(page, viaHistorie) {
   if (window.tesMeet) { tesMeet('pageview', '/' + page); if (page === 'tool' && !window.__tesStart) { window.__tesStart = 1; tesMeet('stepper_start', '/tool'); } }
-  // Adresbalk bijhouden, zodat verversen en de terugknop op dezelfde pagina blijven
-  try { if (page !== 'weggever') history.replaceState(null, '', '/' + location.search + (page === 'home' ? '' : '#' + page)); } catch (e) {}
+  // Adresbalk bijhouden. Elke nieuwe pagina is een stap terug waard, dus pushState;
+  // staat het adres al goed (bij laden of na de terugknop), dan doen we niets.
+  try {
+    if (page !== 'weggever') {
+      var nieuw = '/' + location.search + (page === 'home' ? '' : '#' + page);
+      var nu = location.pathname + location.search + location.hash;
+      if (nu !== nieuw) { if (viaHistorie) history.replaceState(null, '', nieuw); else history.pushState({ pagina: page }, '', nieuw); }
+    }
+  } catch (e) {}
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -7711,6 +7718,14 @@ function openHashPage(){
 })();
 openHashPage();
 window.addEventListener('hashchange', openHashPage);
+// Terug- en vooruitknop van de browser: toon de pagina die bij het adres hoort.
+window.addEventListener('popstate', function(){
+  var m = (location.pathname || '').match(/^\/weggever\/([a-z0-9-]+)/i);
+  if (m) { if (typeof openWeggever === 'function') openWeggever(m[1], true); return; }
+  var h = (location.hash || '').replace('#', '');
+  if (h && document.getElementById('page-' + h)) showPage(h, true);
+  else showPage('home', true);
+});
 </script>
 <script>function hfcScroll(d){var r=document.querySelector(".hfc-modules");if(!r)return;r.scrollBy({left:d*r.clientWidth*0.8,behavior:"smooth"});}</script>
 <script>
@@ -8046,13 +8061,20 @@ function wgRender(){
   var lijst=document.getElementById('wg-lijst'), cats=document.getElementById('wg-cats');
   if (!WG_LIJST.length){ lijst.innerHTML='<div class="wg-empty">De eerste weggevers komen eraan. Begin ondertussen met de tool of de cursus hierboven.</div>'; cats.hidden=true; return; }
   var namen=[]; WG_LIJST.forEach(function(w){ var c=(w.categorie||'').trim(); if(c&&namen.indexOf(c)<0) namen.push(c); });
-  if (namen.length>1){
+  // Pas vanaf zes weggevers in kopjes per categorie; daarvoor staan ze gewoon
+  // naast elkaar. De categorie blijft wel bewaard bij de weggever zelf.
+  var inKopjes = WG_LIJST.length >= 6 && namen.length > 1;
+  if (inKopjes){
     cats.hidden=false;
     cats.innerHTML=['<button class="wg-cat'+(WG_CAT?'':' on')+'" onclick="wgFilter(\'\')">Alles</button>'].concat(namen.map(function(c){ return '<button class="wg-cat'+(WG_CAT===c?' on':'')+'" onclick="wgFilter(\''+wgEsc(c)+'\')">'+wgEsc(c)+'</button>'; })).join('');
-  } else cats.hidden=true;
+  } else { cats.hidden=true; WG_CAT=''; }
+  if (!inKopjes){
+    lijst.innerHTML='<div class="wg-sec"><div class="wg-grid">'+WG_LIJST.map(wgKaart).join('')+'</div></div>';
+    return;
+  }
   var groepen={}, volgorde=[];
   WG_LIJST.forEach(function(w){ var c=(w.categorie||'').trim()||'Downloads'; if(WG_CAT&&c!==WG_CAT) return; if(!groepen[c]){ groepen[c]=[]; volgorde.push(c); } groepen[c].push(w); });
-  lijst.innerHTML=volgorde.map(function(c){ return '<div class="wg-sec">'+(namen.length>1||c!=='Downloads'?'<div class="wg-sec-h">'+wgEsc(c)+'</div>':'')+'<div class="wg-grid">'+groepen[c].map(wgKaart).join('')+'</div></div>'; }).join('');
+  lijst.innerHTML=volgorde.map(function(c){ return '<div class="wg-sec"><div class="wg-sec-h">'+wgEsc(c)+'</div><div class="wg-grid">'+groepen[c].map(wgKaart).join('')+'</div></div>'; }).join('');
 }
 function wgFilter(c){ WG_CAT=c; wgRender(); }
 function wgOpen(slug){
@@ -8143,10 +8165,13 @@ function wdGeenPers(){
   var f=document.getElementById('wd-form'); if(f) f.scrollIntoView({behavior:'smooth',block:'center'});
 }
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') wdSluitPers(); });
-function openWeggever(slug){
+function openWeggever(slug, viaHistorie){
   WD_SLUG=slug; WD=null;
-  showPage('weggever');
-  try{ history.replaceState(null,'','/weggever/'+encodeURIComponent(slug)+location.search); }catch(e){}
+  showPage('weggever', viaHistorie);
+  try{
+    var pad='/weggever/'+encodeURIComponent(slug)+location.search;
+    if(location.pathname+location.search !== pad){ if(viaHistorie) history.replaceState(null,'',pad); else history.pushState({ weggever:slug },'',pad); }
+  }catch(e){}
   document.getElementById('wd-titel').innerHTML='&nbsp;'; document.getElementById('wd-sub').textContent=''; document.getElementById('wd-punten').innerHTML=''; document.getElementById('wd-preview').innerHTML='';
   document.getElementById('wd-form').style.display=''; document.getElementById('wd-ok').style.display='none';
   wdPersStand(slug);
@@ -8916,6 +8941,9 @@ function pwNaarGesprek(){
 })();
 </script>
 
+<script>
+// de schermvullende vraag sluiten zodra je de weggeverpagina verlaat
 (function(){ var sp=window.showPage; if(typeof sp==='function') window.showPage=function(p){ if(p!=='weggever' && typeof wdSluitPers==='function') wdSluitPers(); sp(p); }; })();
+</script>
 </body>
 </html>
