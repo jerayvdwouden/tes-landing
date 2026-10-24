@@ -43,10 +43,10 @@ body{background:var(--bg);color:var(--white);font-family:'DM Sans',-apple-system
 
 /* ─── NAV ─────────────────────────────────── */
 nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:900px;margin:0 auto;padding:0 1.5rem;height:56px;display:flex;align-items:center;gap:2rem}
-.logo{font-family:'Abolition',sans-serif;font-size:1rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);cursor:pointer;flex-shrink:0;margin-right:auto}
+.nav-inner{max-width:1180px;margin:0 auto;padding:0 1.5rem;height:56px;display:flex;align-items:center;gap:1.2rem}
+.logo{font-family:'Abolition',sans-serif;font-size:1rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);cursor:pointer;flex-shrink:0;margin-right:auto;white-space:nowrap}
 .nav-links{display:flex;gap:0;align-items:center}
-.nav-link{font-size:.65rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:.5rem .85rem;border-radius:3px;transition:color .15s;white-space:nowrap;border:none;background:none;font-family:inherit}
+.nav-link{font-size:.63rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:.5rem .7rem;border-radius:3px;transition:color .15s;white-space:nowrap;border:none;background:none;font-family:inherit}
 .nav-link:hover{color:var(--white)}
 .nav-link.active{color:var(--gold)}
 .nav-cta{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#000;background:linear-gradient(135deg,#E8C97A 0%,#C9A84C 45%,#F0D98A 70%,#C9A84C 100%);border:none;border-radius:3px;padding:.45rem 1rem;cursor:pointer;font-family:inherit;transition:all .2s;flex-shrink:0;margin-left:.5rem;box-shadow:0 0 10px rgba(201,168,76,0.5),0 2px 8px rgba(0,0,0,0.4);position:relative;overflow:hidden}
@@ -59,17 +59,20 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-fi
 .nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .nav-burger.open span:nth-child(2){opacity:0}
 .nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-@media(max-width:600px){
-  .nav-inner{gap:.6rem;padding:0 .9rem;height:52px}
-  .logo{font-size:.85rem;margin-right:auto}
+/* Smaller dan een desktopscherm: alles in het uitklapmenu achter de hamburger */
+@media(max-width:1023px){
   .nav-burger{display:flex}
-  /* Begin nu blijft zichtbaar op mobiel */
-  .nav-cta{display:inline-flex;align-items:center;font-size:.56rem;padding:.42rem .75rem;margin-left:0}
-  /* nav-links → uitklapmenu (hamburger) onder de balk */
   .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:rgba(12,12,12,0.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.45rem .7rem .8rem;display:none;box-shadow:0 14px 34px rgba(0,0,0,0.45)}
   .nav-links.open{display:flex}
   .nav-link{padding:.9rem .85rem;font-size:.72rem;border-radius:8px;text-align:left}
   .nav-link:hover,.nav-link:active{background:rgba(255,255,255,0.04)}
+  .nav-cta{margin-left:0}
+}
+@media(max-width:600px){
+  .nav-inner{gap:.6rem;padding:0 .9rem;height:52px}
+  .logo{font-size:.85rem;margin-right:auto}
+  /* Begin nu blijft zichtbaar op mobiel */
+  .nav-cta{display:inline-flex;align-items:center;font-size:.56rem;padding:.42rem .75rem}
 }
 
 /* ─── PAGES ───────────────────────────────── */
@@ -1338,17 +1341,13 @@ tesMeet('pageview',location.pathname);
     <div class="logo" onclick="showPage('home')">The Execution System</div>
     <div class="nav-links">
       <button class="nav-link active" data-page="home" onclick="showPage('home');closeNavMenu()">Home</button>
-      <div class="nav-group" id="nav-gratis">
-        <button class="nav-link nav-group-btn" type="button" onclick="toggleNavGroup(this)" aria-haspopup="true" aria-expanded="false">Gratis waarde <span class="chev">▾</span></button>
-        <div class="nav-menu">
-          <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek');closeNavMenu()">Gratis gesprek</button>
-          <button class="nav-link" data-page="tool" onclick="showPage('tool');closeNavMenu()">Jaardoel in 5 minuten</button>
-          <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Gratis weggevers</button>
-          <button class="nav-link" data-page="cursussen" onclick="closeNavMenu();window.location.href='/cursus'">Cursussen</button>
-        </div>
-      </div>
+      <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek');closeNavMenu()">Gratis gesprek</button>
+      <button class="nav-link" data-page="cursussen" onclick="closeNavMenu();window.location.href='/cursus'">Gratis cursus</button>
+      <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Weggevers</button>
+      <button class="nav-link" data-page="tool" onclick="showPage('tool');closeNavMenu()">Jaardoel</button>
+      <button class="nav-link" data-page="traject" onclick="showPage('traject');closeNavMenu()">12 weken traject</button>
     </div>
-    <button class="nav-cta" data-page="traject" onclick="showPage('traject');closeNavMenu()">Begin nu →</button>
+    <button class="nav-cta" onclick="showPage('gesprek');closeNavMenu()">Begin nu →</button>
     <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
