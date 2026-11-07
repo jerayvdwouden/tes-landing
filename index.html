@@ -1776,7 +1776,7 @@ tesMeet('pageview',location.pathname);
 .wg-sub{color:var(--muted);font-size:.95rem;line-height:1.6;max-width:520px;margin:0 auto}
 /* begin hier */
 .wg-start{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:3rem}
-.wg-verder{margin:0 0 1.8rem}
+.wg-verder{margin:0 0 3rem}
 .wg-verder .wg-start{margin-bottom:0}
 .wg-verder .wg-start-card{padding:1.15rem 1.2rem 1.1rem}
 #page-weggevers .wg-verder .wg-start{grid-template-columns:1fr 1fr}
@@ -1831,7 +1831,9 @@ tesMeet('pageview',location.pathname);
 .wg-card{cursor:pointer}
 .wg-card.met-thumb{padding-top:0;overflow:hidden}
 .wg-thumb{aspect-ratio:16/9;background:#0c0c0c;border-bottom:1px solid var(--border);margin:0 -1.25rem 2.6rem}
-.wg-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:saturate(.9);border-radius:14px 14px 0 0}
+.wg-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 32%;filter:saturate(.9);border-radius:14px 14px 0 0}
+/* op deze oudere omslag staat de titel lager dan op de andere */
+.wg-thumb img[src*="/timemanagement-voor-ondernemers/"]{object-position:50% 50%}
 .wg-card.met-thumb{overflow:visible}
 .wg-thumb{position:relative;overflow:visible}
 .wg-card.met-thumb .wg-thumb .wg-ico{top:auto;bottom:-34px}
@@ -1902,13 +1904,10 @@ tesMeet('pageview',location.pathname);
       <div class="wg-start-s">Persoonlijke begeleiding, wekelijkse meetings en een systeem dat je consistent houdt. Met resultaatgarantie.</div>
       <span class="wg-start-b">Bekijk het traject &rarr;</span>
     </div>  </div>
+  </div>
 
   <div class="wg-cats" id="wg-cats" hidden></div>
   <div id="wg-lijst"><div class="wg-empty">Weggevers laden&hellip;</div></div>
-
-
-
-  </div>
 
 </div>
 
