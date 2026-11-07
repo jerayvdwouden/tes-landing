@@ -7287,24 +7287,21 @@ function wgKaart(w){
     +'<div class="wg-s">'+wgEsc(w.beschrijving||'')+'</div>'
     +'<div><button class="wg-btn" type="button">Bekijk &amp; download &rarr;</button></div></div>';
 }
+// Op de pagina sorteren we voorlopig alleen op soort. Alles wat hier niet staat, is een weggever.
+var WG_WERKBOEKEN=['execution-blueprint','timemanagement-voor-ondernemers'];
+function wgIsWerkboek(w){ return WG_WERKBOEKEN.indexOf(w.slug)>=0; }
 function wgRender(){
   var lijst=document.getElementById('wg-lijst'), cats=document.getElementById('wg-cats');
   if (!WG_LIJST.length){ lijst.innerHTML='<div class="wg-empty">De eerste weggevers komen eraan. Plan ondertussen je gratis gesprek hierboven.</div><div class="wg-sec"><div class="wg-grid">'+wgCursusKaart()+'</div></div>'; cats.hidden=true; return; }
-  var namen=[]; WG_LIJST.forEach(function(w){ var c=(w.categorie||'').trim(); if(c&&namen.indexOf(c)<0) namen.push(c); });
-  // Pas vanaf zes weggevers in kopjes per categorie; daarvoor staan ze gewoon
-  // naast elkaar. De categorie blijft wel bewaard bij de weggever zelf.
-  var inKopjes = WG_LIJST.length >= 6 && namen.length > 1;
-  if (inKopjes){
-    cats.hidden=false;
-    cats.innerHTML=['<button class="wg-cat'+(WG_CAT?'':' on')+'" onclick="wgFilter(\'\')">Alles</button>'].concat(namen.map(function(c){ return '<button class="wg-cat'+(WG_CAT===c?' on':'')+'" onclick="wgFilter(\''+wgEsc(c)+'\')">'+wgEsc(c)+'</button>'; })).join('');
-  } else { cats.hidden=true; WG_CAT=''; }
-  if (!inKopjes){
-    lijst.innerHTML='<div class="wg-sec"><div class="wg-grid">'+WG_LIJST.map(wgKaart).join('')+wgCursusKaart()+'</div></div>';
-    return;
-  }
-  var groepen={}, volgorde=[];
-  WG_LIJST.forEach(function(w){ var c=(w.categorie||'').trim()||'Downloads'; if(WG_CAT&&c!==WG_CAT) return; if(!groepen[c]){ groepen[c]=[]; volgorde.push(c); } groepen[c].push(w); });
-  lijst.innerHTML=volgorde.map(function(c,i){ var extra=(i===volgorde.length-1)?wgCursusKaart():''; return '<div class="wg-sec"><div class="wg-sec-h">'+wgEsc(c)+'</div><div class="wg-grid">'+groepen[c].map(wgKaart).join('')+extra+'</div></div>'; }).join('');
+  // De volgorde hier is de volgorde van de knoppen en de kopjes op de pagina.
+  var groepen=[
+    {naam:'Weggevers', html:WG_LIJST.filter(function(w){ return !wgIsWerkboek(w); }).map(wgKaart).join('')},
+    {naam:'Cursussen', html:wgCursusKaart()},
+    {naam:'Werkboeken', html:WG_LIJST.filter(wgIsWerkboek).map(wgKaart).join('')}
+  ].filter(function(g){ return g.html; });
+  cats.hidden=false;
+  cats.innerHTML=['<button class="wg-cat'+(WG_CAT?'':' on')+'" onclick="wgFilter(\'\')">Alles</button>'].concat(groepen.map(function(g){ return '<button class="wg-cat'+(WG_CAT===g.naam?' on':'')+'" onclick="wgFilter(\''+g.naam+'\')">'+g.naam+'</button>'; })).join('');
+  lijst.innerHTML=groepen.filter(function(g){ return !WG_CAT||WG_CAT===g.naam; }).map(function(g){ return '<div class="wg-sec"><div class="wg-sec-h">'+g.naam+'</div><div class="wg-grid">'+g.html+'</div></div>'; }).join('');
 }
 function wgFilter(c){ WG_CAT=c; wgRender(); }
 function wgOpen(slug){
