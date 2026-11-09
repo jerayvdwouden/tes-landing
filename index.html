@@ -8895,18 +8895,22 @@ function dtSchermOverzicht(){
   var m = dtModel(dtVoornaam()), cf = dtCijfers();
   // In de nieuwe route gaat de pdf vanzelf naar de mail: het voorbeeld blijft, met naar welk adres hij gaat.
   var rt = window.rtInDoeltool && rtInDoeltool(), rtMail = rt && window.rtStaat ? (rtStaat() || {}).email : '';
+  if (rt) return '<div class="dt-rt-uit"><button type="button" class="dt-terug dt-rt-terug">&larr; Terug</button>' +
+    '<div class="dt-uit-k">' + esc(m.titel) + '</div>' +
+    (cf.length ? '<div class="ds-cijfers">' + cf.map(function(c){
+      return '<div class="ds-cijfer' + (c.goud?' goud':'') + '"><b>' + esc(c.k) + '</b><span>' + esc(c.v) + '</span></div>';
+    }).join('') + '</div>' : '') +
+    '<div class="dt-rt-pdf"><div class="wd-preview dt-pv" id="dt-pv"></div><div class="dt-rt-pdf-t">' +
+      '<div class="wd-eye">Onderweg naar je mail</div><b>Je uitkomst als pdf</b>' +
+      (rtMail ? '<span class="dt-rt-mail">' + esc(rtMail) + '</span>' : '') + '</div></div>' +
+    '<button type="button" class="btn-next dt-rt-verder" id="dt-uit-verder">Verder &rarr;</button></div>';
   return '<div class="dt-uit-terug"><button type="button" class="btn-back dt-terug">&larr; Terug naar de laatste vraag</button></div>' +
     dtEindBalk(0) +
     '<div class="dt-uit-k">' + esc(m.titel) + '</div><p class="dt-uit-s">Op basis van je eigen antwoorden.</p>' +
     (cf.length ? '<div class="ds-cijfers">' + cf.map(function(c){
       return '<div class="ds-cijfer' + (c.goud?' goud':'') + '"><b>' + esc(c.k) + '</b><span>' + esc(c.v) + '</span></div>';
     }).join('') + '</div>' : '') +
-    (rt ? '<div class="ds-pdf wd-hero"><div class="wd-preview dt-pv" id="dt-pv"></div><div>' +
-      '<div class="wd-eye">Onderweg naar je mail</div><div class="dt-uit-k">Je uitkomst als pdf</div>' +
-      '<p class="wd-sub">We sturen je uitkomst' + (rtMail ? ' naar <b class="dt-rt-mail">' + esc(rtMail) + '</b>' : ' naar je mail') + ', zodat je alles rustig terug kunt lezen.</p>' +
-      '<ul class="wd-punten">' + dtInhoudPunten().map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
-      '<div class="dt-verder-blok"><button type="button" class="btn-next" id="dt-uit-verder">Verder &rarr;</button></div></div></div>' :
-    '<div class="ds-pdf wd-hero"><div class="wd-preview dt-pv" id="dt-pv"></div><div>' +
+    ('<div class="ds-pdf wd-hero"><div class="wd-preview dt-pv" id="dt-pv"></div><div>' +
       '<div class="wd-eye">Je pdf</div><div class="dt-uit-k">Je uitkomst als pdf</div>' +
       '<p class="wd-sub">Dit krijg je straks in je mail, zodat je het kunt bewaren, printen en teruglezen.</p>' +
       '<ul class="wd-punten">' + dtInhoudPunten().map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
@@ -9162,7 +9166,22 @@ html.rt-dt .dt-stappen{display:none!important}
 #rt .rt-chip{background:none;border:1px solid var(--border2);color:var(--white);border-radius:999px;padding:.55rem .95rem;font:inherit;font-size:.82rem;cursor:pointer}
 #rt .rt-chip.aan{background:rgba(201,168,76,.14);border-color:var(--gold);color:var(--gold)}
 #rt .rt-onder{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
-.dt-rt-mail{color:var(--gold);font-weight:500;word-break:break-all}
+/* uitkomst in de route: compact, alles op één scherm */
+.dt-rt-uit{max-width:560px;margin:0 auto}
+.dt-rt-terug{background:none;border:0;color:var(--muted);font:inherit;font-size:.78rem;letter-spacing:.08em;cursor:pointer;padding:0;margin:0 0 1rem}
+.dt-rt-terug:hover{color:var(--gold)}
+.dt-rt-uit .dt-uit-k{margin-bottom:1rem}
+.dt-rt-uit .ds-cijfers{grid-template-columns:1fr 1fr;gap:.5rem;margin:0}
+.dt-rt-uit .ds-cijfer{padding:.7rem .85rem}
+.dt-rt-uit .ds-cijfer b{font-size:1.5rem}
+.dt-rt-uit .ds-cijfer span{font-size:.7rem;margin-top:.15rem}
+.dt-rt-pdf{display:flex;align-items:center;gap:1rem;margin:1rem 0 1.2rem;border:1px solid var(--border);border-radius:12px;padding:.8rem 1rem .8rem .8rem;background:rgba(201,168,76,.04)}
+.dt-rt-pdf .wd-preview{width:84px;flex:none;border-radius:8px}
+.dt-rt-pdf .wd-pages{display:none}
+.dt-rt-pdf .wd-eye{margin-bottom:.25rem}
+.dt-rt-pdf-t b{display:block;font-weight:500;color:var(--white);font-size:.98rem}
+.dt-rt-mail{display:block;color:var(--gold);font-size:.8rem;margin-top:.15rem;word-break:break-all}
+.dt-rt-verder{width:100%}
 #rt .rt-klaar{max-width:520px;margin:0 auto;text-align:left}
 #rt .rt-klaar h2{text-align:left;margin-bottom:1.6rem}
 #rt .rt-lijst{list-style:none;margin:0 0 2rem;padding:0;display:flex;flex-direction:column;gap:.55rem}
