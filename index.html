@@ -8893,16 +8893,19 @@ function dtEindNaar(n){ DT.eind = n; dtRender(); }
 
 function dtSchermOverzicht(){
   var m = dtModel(dtVoornaam()), cf = dtCijfers();
-  // In de nieuwe route gaat de pdf vanzelf naar de mail: dan geen voorbeeld van de pdf, alleen verder.
-  var rt = window.rtInDoeltool && rtInDoeltool();
+  // In de nieuwe route gaat de pdf vanzelf naar de mail: het voorbeeld blijft, met naar welk adres hij gaat.
+  var rt = window.rtInDoeltool && rtInDoeltool(), rtMail = rt && window.rtStaat ? (rtStaat() || {}).email : '';
   return '<div class="dt-uit-terug"><button type="button" class="btn-back dt-terug">&larr; Terug naar de laatste vraag</button></div>' +
     dtEindBalk(0) +
     '<div class="dt-uit-k">' + esc(m.titel) + '</div><p class="dt-uit-s">Op basis van je eigen antwoorden.</p>' +
     (cf.length ? '<div class="ds-cijfers">' + cf.map(function(c){
       return '<div class="ds-cijfer' + (c.goud?' goud':'') + '"><b>' + esc(c.k) + '</b><span>' + esc(c.v) + '</span></div>';
     }).join('') + '</div>' : '') +
-    (rt ? '<div class="dt-verder-blok"><button type="button" class="btn-next" id="dt-uit-verder">Verder &rarr;</button>' +
-      '<p class="dt-cta-note">Je uitkomst komt als pdf in je mail.</p></div>' :
+    (rt ? '<div class="ds-pdf wd-hero"><div class="wd-preview dt-pv" id="dt-pv"></div><div>' +
+      '<div class="wd-eye">Onderweg naar je mail</div><div class="dt-uit-k">Je uitkomst als pdf</div>' +
+      '<p class="wd-sub">We sturen je uitkomst' + (rtMail ? ' naar <b class="dt-rt-mail">' + esc(rtMail) + '</b>' : ' naar je mail') + ', zodat je alles rustig terug kunt lezen.</p>' +
+      '<ul class="wd-punten">' + dtInhoudPunten().map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
+      '<div class="dt-verder-blok"><button type="button" class="btn-next" id="dt-uit-verder">Verder &rarr;</button></div></div></div>' :
     '<div class="ds-pdf wd-hero"><div class="wd-preview dt-pv" id="dt-pv"></div><div>' +
       '<div class="wd-eye">Je pdf</div><div class="dt-uit-k">Je uitkomst als pdf</div>' +
       '<p class="wd-sub">Dit krijg je straks in je mail, zodat je het kunt bewaren, printen en teruglezen.</p>' +
@@ -9159,6 +9162,20 @@ html.rt-dt .dt-stappen{display:none!important}
 #rt .rt-chip{background:none;border:1px solid var(--border2);color:var(--white);border-radius:999px;padding:.55rem .95rem;font:inherit;font-size:.82rem;cursor:pointer}
 #rt .rt-chip.aan{background:rgba(201,168,76,.14);border-color:var(--gold);color:var(--gold)}
 #rt .rt-onder{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+.dt-rt-mail{color:var(--gold);font-weight:500;word-break:break-all}
+#rt .rt-klaar{max-width:520px;margin:0 auto;text-align:left}
+#rt .rt-klaar h2{text-align:left;margin-bottom:1.6rem}
+#rt .rt-lijst{list-style:none;margin:0 0 2rem;padding:0;display:flex;flex-direction:column;gap:.55rem}
+#rt .rt-lijst li{display:flex;align-items:center;gap:.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg2);padding:.85rem 1rem;opacity:0;transform:translateY(10px);animation:rtIn .45s ease forwards}
+#rt .rt-lijst .rt-l{font-size:.78rem;color:var(--muted);min-width:6.5rem}
+#rt .rt-lijst b{font-weight:500;color:var(--white);font-size:.95rem}
+#rt .rt-vink{width:1.4rem;height:1.4rem;border-radius:50%;flex:none;background:rgba(201,168,76,.15);border:1px solid var(--gold);position:relative}
+#rt .rt-vink:after{content:'';position:absolute;left:.42rem;top:.2rem;width:.3rem;height:.6rem;border:solid var(--gold);border-width:0 2px 2px 0;transform:rotate(45deg)}
+#rt .rt-laad{height:3px;background:rgba(201,168,76,.15);border-radius:3px;overflow:hidden}
+#rt .rt-laad i{display:block;height:100%;width:0;background:var(--gold);animation:rtLaad var(--duur,2600ms) linear forwards}
+@keyframes rtIn{to{opacity:1;transform:none}}
+@keyframes rtLaad{to{width:100%}}
+@media (prefers-reduced-motion: reduce){#rt .rt-lijst li{animation:none;opacity:1;transform:none}}
 @media(max-width:640px){#rt .rt-cal{min-height:600px}}
 </style>
 <div id="rt" role="dialog" aria-modal="true"><button type="button" class="rt-x" aria-label="Sluiten">&times;</button><div class="rt-in"></div></div>
@@ -9173,14 +9190,14 @@ html.rt-dt .dt-stappen{display:none!important}
   // weghalen: alleen in deze lijst. Met keuzes worden het knoppen, zonder een tekstveld.
   var RT_ZELFDE = 'Zo zie ik voor wie mijn aanpak het beste werkt.';
   var RT_VRAGEN = [
-    { id: 'bedrijf', vraag: 'Wat voor bedrijf heb je?', waarom: 'Dan kan ik voorbeelden geven die bij jouw werk passen.' },
-    { id: 'bedrijf_sinds', vraag: 'Hoe lang heb je je bedrijf al?', waarom: 'Een starter heeft andere stappen nodig dan iemand die al jaren draait.',
+    { id: 'bedrijf', kort: 'Je bedrijf', vraag: 'Wat voor bedrijf heb je?', waarom: 'Dan kan ik voorbeelden geven die bij jouw werk passen.' },
+    { id: 'bedrijf_sinds', kort: 'Bedrijf sinds', vraag: 'Hoe lang heb je je bedrijf al?', waarom: 'Een starter heeft andere stappen nodig dan iemand die al jaren draait.',
       keuzes: ['Ik ben nog niet gestart', 'Korter dan 1 jaar', '1 tot 5 jaar', 'Langer dan 5 jaar'] },
-    { id: 'leeftijd', vraag: 'Hoe oud ben je?', waarom: RT_ZELFDE, keuzes: ['Jonger dan 25', '25 tot 34', '35 tot 44', '45 tot 54', '55 of ouder'] },
-    { id: 'woonplaats', vraag: 'Waar woon je?', waarom: RT_ZELFDE,
+    { id: 'leeftijd', kort: 'Leeftijd', vraag: 'Hoe oud ben je?', waarom: RT_ZELFDE, keuzes: ['Jonger dan 25', '25 tot 34', '35 tot 44', '45 tot 54', '55 of ouder'] },
+    { id: 'woonplaats', kort: 'Woonplaats', vraag: 'Waar woon je?', waarom: RT_ZELFDE,
       keuzes: ['Drenthe', 'Flevoland', 'Friesland', 'Gelderland', 'Groningen', 'Limburg', 'Noord-Brabant', 'Noord-Holland', 'Overijssel', 'Utrecht', 'Zeeland', 'Zuid-Holland', 'Buitenland'],
       zelf: 'Buitenland' },   // bij Buitenland typt iemand zelf waar
-    { id: 'geslacht', vraag: 'Ben je een man of een vrouw?', waarom: RT_ZELFDE, keuzes: ['Man', 'Vrouw', 'Zeg ik liever niet'] }
+    { id: 'geslacht', kort: 'Geslacht', vraag: 'Ben je een man of een vrouw?', waarom: RT_ZELFDE, keuzes: ['Man', 'Vrouw', 'Zeg ik liever niet'] }
   ];
 
   var API = window.TES_BACKEND || 'https://tes-backend-mbyy.onrender.com';
@@ -9305,10 +9322,20 @@ html.rt-dt .dt-stappen{display:none!important}
     $('rt-sla').onclick = function(){ delete S.antwoorden[v.id]; bewaar(); if (i < RT_VRAGEN.length - 1) toonVragen(i + 1); else klaar(); };
     if ($('rt-terug')) $('rt-terug').onclick = function(){ toonVragen(i - 1); };
   }
+  // Na de laatste vraag: je antwoorden komen één voor één in beeld terwijl de app klaarstaat, daarna opent de app.
   function klaar(){
-    var labels = {}; RT_VRAGEN.forEach(function(v){ labels[v.id] = v.vraag; });
-    scherm('<div class="rt-stap">Even geduld</div>');
-    post('/api/route/stap', { token: S.token, stap: 'vragen', antwoorden: S.antwoorden || {}, labels: labels }).then(naarApp);
+    var labels = {}, a = S.antwoorden || {};
+    RT_VRAGEN.forEach(function(v){ labels[v.id] = v.vraag; });
+    var rijen = RT_VRAGEN.filter(function(v){ return a[v.id]; });
+    var stil = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var duur = stil ? 1200 : Math.max(2600, rijen.length * 550 + 1600);
+    scherm('<div class="rt-klaar" style="--duur:' + duur + 'ms"><div class="rt-stap">Bijna klaar</div><h2>We zetten je app klaar.</h2>' +
+      '<ul class="rt-lijst">' + rijen.map(function(v, i){
+        return '<li style="animation-delay:' + (stil ? 0 : 300 + i * 550) + 'ms"><span class="rt-vink"></span><span class="rt-l">' + e(v.kort) + '</span><b>' + e(a[v.id]) + '</b></li>';
+      }).join('') + '</ul><div class="rt-laad"><i></i></div></div>');
+    var opslaan = post('/api/route/stap', { token: S.token, stap: 'vragen', antwoorden: a, labels: labels });
+    var wachten = new Promise(function(r){ setTimeout(r, duur); });
+    Promise.all([opslaan, wachten]).then(naarApp);
   }
   // 5. de app: een nieuw account komt met het token binnen, een bestaand account logt in met een code
   function naarApp(){
