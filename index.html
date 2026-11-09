@@ -8900,9 +8900,10 @@ function dtSchermOverzicht(){
     (cf.length ? '<div class="ds-cijfers">' + cf.map(function(c){
       return '<div class="ds-cijfer' + (c.goud?' goud':'') + '"><b>' + esc(c.k) + '</b><span>' + esc(c.v) + '</span></div>';
     }).join('') + '</div>' : '') +
-    '<div class="dt-rt-pdf"><div class="wd-preview dt-pv" id="dt-pv"></div><div class="dt-rt-pdf-t">' +
-      '<div class="wd-eye">Onderweg naar je mail</div><b>Je uitkomst als pdf</b>' +
-      (rtMail ? '<span class="dt-rt-mail">' + esc(rtMail) + '</span>' : '') + '</div></div>' +
+    // het document groot en scherp in beeld, zoals een weggever op zijn pagina
+    '<div class="dt-rt-pdf"><div class="wd-preview dt-pv open" id="dt-pv"></div></div>' +
+    '<div class="dt-rt-pdf-t"><b>Je uitkomst als pdf</b><span class="wd-eye">Onderweg naar je mail</span>' +
+      (rtMail ? '<span class="dt-rt-mail">' + esc(rtMail) + '</span>' : '') + '</div>' +
     '<button type="button" class="btn-next dt-rt-verder" id="dt-uit-verder">Verder &rarr;</button></div>';
   return '<div class="dt-uit-terug"><button type="button" class="btn-back dt-terug">&larr; Terug naar de laatste vraag</button></div>' +
     dtEindBalk(0) +
@@ -9175,12 +9176,12 @@ html.rt-dt .dt-stappen{display:none!important}
 .dt-rt-uit .ds-cijfer{padding:.7rem .85rem}
 .dt-rt-uit .ds-cijfer b{font-size:1.5rem}
 .dt-rt-uit .ds-cijfer span{font-size:.7rem;margin-top:.15rem}
-.dt-rt-pdf{display:flex;align-items:center;gap:1rem;margin:1rem 0 1.2rem;border:1px solid var(--border);border-radius:12px;padding:.8rem 1rem .8rem .8rem;background:rgba(201,168,76,.04)}
-.dt-rt-pdf .wd-preview{width:84px;flex:none;border-radius:8px}
-.dt-rt-pdf .wd-pages{display:none}
-.dt-rt-pdf .wd-eye{margin-bottom:.25rem}
-.dt-rt-pdf-t b{display:block;font-weight:500;color:var(--white);font-size:.98rem}
-.dt-rt-mail{display:block;color:var(--gold);font-size:.8rem;margin-top:.15rem;word-break:break-all}
+.dt-rt-pdf{margin:1.4rem 0 .4rem}
+.dt-rt-pdf .wd-preview{width:100%;max-width:440px;margin:0 auto}
+.dt-rt-pdf-t{text-align:center;margin-bottom:1.3rem}
+.dt-rt-pdf-t b{display:block;font-family:'Abolition',sans-serif;font-weight:400;font-size:1.6rem;letter-spacing:.04em;text-transform:uppercase;color:var(--white);margin-bottom:.35rem}
+.dt-rt-pdf-t .wd-eye{display:block;margin:0}
+.dt-rt-mail{display:block;color:var(--muted);font-size:.85rem;margin-top:.2rem;word-break:break-all}
 .dt-rt-verder{width:100%}
 #rt .rt-klaar{max-width:520px;margin:0 auto;text-align:left}
 #rt .rt-klaar h2{text-align:left;margin-bottom:1.6rem}
