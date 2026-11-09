@@ -1332,6 +1332,18 @@ footer p{font-size:.68rem;color:var(--dim)}
   // (testen), dan met de lokale server. Zo komen testbezoeken niet in de cijfers.
   var LOKAAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   window.TES_BACKEND = LOKAAL ? 'http://localhost:3000' : 'https://tes-backend-mbyy.onrender.com';
+  // ── NIEUWE ROUTE (fase 1): weggever → video → gratis app of gesprek ──
+  // LIVE ZETTEN: zet NIEUWE_ROUTE_LIVE hieronder op true. Dat is de enige
+  // plek. Tot dan staat de route alleen aan met ?nieuw=1 in de link; die keuze
+  // blijft de rest van het bezoek staan. Met ?nieuw=0 zet je hem weer uit.
+  var NIEUWE_ROUTE_LIVE = false;
+  (function(){
+    var n = new URLSearchParams(location.search).get('nieuw');
+    try { if (n === '1') sessionStorage.setItem('tes_nieuw', '1'); if (n === '0') sessionStorage.removeItem('tes_nieuw'); } catch(e){}
+    var aan = NIEUWE_ROUTE_LIVE; try { aan = aan || sessionStorage.getItem('tes_nieuw') === '1'; } catch(e){}
+    window.tesNieuweRoute = function(){ return aan; };
+    if (aan) document.documentElement.classList.add('nr');
+  })();
   var API = window.TES_BACKEND + '/api/t';
   function gc(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):'';}
   function sc(n,v,sec){document.cookie=n+'='+encodeURIComponent(v)+'; Max-Age='+sec+'; Path=/; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'');}
@@ -1389,9 +1401,9 @@ tesMeet('pageview',location.pathname);
     <p class="cta-note">Geen betaalkaart &nbsp;·&nbsp; Geen verplichting</p>
   </section>
 
-  <div class="div" id="gratis"><span>start hier</span></div>
+  <div class="div nr-weg" id="gratis"><span>start hier</span></div>
 
-  <section>
+  <section class="nr-weg">
     <div class="section-head">
       <h2 class="free-h2">Ervaar het systeem <span class="u">gratis</span></h2>
     </div>
@@ -1716,9 +1728,9 @@ tesMeet('pageview',location.pathname);
 
 <!-- onderaan de trajectpagina: de doeltool -->
 <div class="wrap">
-  <div class="div"><span>of zoek het zelf uit</span></div>
+  <div class="div nr-weg"><span>of zoek het zelf uit</span></div>
 
-  <section>
+  <section class="nr-weg">
     <div class="hs-wrap">
       <div class="hs-eyebrow">Gratis &middot; 5 minuten</div>
       <h2 class="hs-h2">Weet je nog niet waar je bedrijf op vastloopt?</h2>
@@ -1742,9 +1754,9 @@ tesMeet('pageview',location.pathname);
     <p class="cta-note">De bevestiging met de Zoom-link staat in je mail</p>
   </section>
 
-  <div class="div"><span>of zoek het zelf uit</span></div>
+  <div class="div nr-weg"><span>of zoek het zelf uit</span></div>
 
-  <section>
+  <section class="nr-weg">
     <div class="hs-wrap">
       <div class="hs-eyebrow">Gratis &middot; 5 minuten</div>
       <h2 class="hs-h2">Weet je nog niet waar je bedrijf op vastloopt?</h2>
@@ -2235,8 +2247,8 @@ tesMeet('pageview',location.pathname);
 
       <div class="gm-al" id="gm-al" style="display:none">
         <h3>Je staat al ingepland</h3>
-        <p>Vul v&oacute;&oacute;r ons gesprek de doeltool in. Dan weten we al waar je bedrijf op vastloopt, en gaat het hele uur naar je plan.</p>
-        <a href="#doeltool" onclick="showPage('doeltool');return false" class="btn">Start de doeltool</a>
+        <p class="nr-weg">Vul v&oacute;&oacute;r ons gesprek de doeltool in. Dan weten we al waar je bedrijf op vastloopt, en gaat het hele uur naar je plan.</p>
+        <a href="#doeltool" onclick="showPage('doeltool');return false" class="btn nr-weg">Start de doeltool</a>
         <div class="gm-mini"><u onclick="gmZetAangemeld(false)">Toch geen gesprek ingepland? Kies hier een moment</u></div>
       </div>
     </div>
@@ -2246,9 +2258,9 @@ tesMeet('pageview',location.pathname);
 
 <!-- onderaan de gesprekpagina: de doeltool -->
 <div class="wrap">
-  <div class="div"><span>of zoek het zelf uit</span></div>
+  <div class="div nr-weg"><span>of zoek het zelf uit</span></div>
 
-  <section>
+  <section class="nr-weg">
     <div class="hs-wrap">
       <div class="hs-eyebrow">Gratis &middot; 5 minuten</div>
       <h2 class="hs-h2">Liever eerst zelf zien waar het vastzit?</h2>
@@ -7218,6 +7230,7 @@ window.addEventListener('message',function(e){
   if(!e.data||e.data.event!=='calendly.event_scheduled') return;
   if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
   var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
+  if(fr&&fr.closest('#rt')) return;   // de nieuwe route regelt zijn eigen boeking
   var plek=(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
   var p=(e.data.payload||{});
   var eventUri=String((p.event||{}).uri||''), inviteeUri=String((p.invitee||{}).uri||'');
@@ -7337,11 +7350,13 @@ function wgVerzend(slug, g, b, klaar){
   b.disabled=true; var orig=b.textContent; b.textContent='Bezig…';
   var m=window.tesBron?tesBron():{sid:'',vid:'',eb:'',lb:''};
   fetch(WG_API+'/api/weggever/'+encodeURIComponent(slug),{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({naam:g.naam,email:g.email,hoe_ken_je_mij:g.hoe_ken_je_mij,doorverwezen_door:g.doorverwezen_door,email_ok:g.email_ok,sid:m.sid,vid:m.vid,eb:m.eb,lb:m.lb})})
+    body:JSON.stringify({naam:g.naam,email:g.email,hoe_ken_je_mij:g.hoe_ken_je_mij,doorverwezen_door:g.doorverwezen_door,email_ok:g.email_ok,sid:m.sid,vid:m.vid,eb:m.eb,lb:m.lb,nieuw:window.tesNieuweRoute&&tesNieuweRoute()?true:undefined})})
   .then(function(r){ return r.json(); }).then(function(d){
     if(!d.ok){ alert(d.error||'Er ging iets mis.'); b.disabled=false; b.textContent=orig; return; }
     try{ localStorage.setItem('tes_contact',JSON.stringify({naam:String(g.naam||'').trim(),email:String(g.email||'').trim().toLowerCase()})); }catch(e){}
     b.disabled=false; b.textContent=orig;
+    // nieuwe route: geen download die de pagina overneemt, maar het scherm met de video
+    if(d.route && window.rtStart){ rtStart(d, g, slug, d.download+'&sid='+encodeURIComponent(m.sid)+'&eb='+encodeURIComponent(m.eb)+'&lb='+encodeURIComponent(m.lb)); return; }
     klaar(d.download+'&sid='+encodeURIComponent(m.sid)+'&eb='+encodeURIComponent(m.eb)+'&lb='+encodeURIComponent(m.lb));
   }).catch(function(){ alert('Er ging iets mis. Probeer het opnieuw.'); b.disabled=false; b.textContent=orig; });
 }
@@ -8973,7 +8988,7 @@ function dtBindEind(){
   s.querySelectorAll('.dt-eind-terug').forEach(function(b){
     b.onclick = function(){ dtEindNaar(parseInt(this.getAttribute('data-naar'), 10) || 0); };
   });
-  var verder = document.getElementById('dt-uit-verder'); if (verder) verder.onclick = dtPopupOpen;
+  var verder = document.getElementById('dt-uit-verder'); if (verder) verder.onclick = (window.rtInDoeltool && rtInDoeltool()) ? rtDoeltoolKlaar : dtPopupOpen;
   s.querySelectorAll('.dt-opnieuw').forEach(function(b){ b.onclick = window.dtOpnieuw; });
   var pdf = document.getElementById('dt-pdf'); if (pdf) pdf.onclick = function(){ if (DT.pdf) dtDownload(); else dtPrint(); };
   // het voorbeeld van de pdf; de letters zijn de eerste keer nog niet geladen
@@ -9075,6 +9090,221 @@ window.dtVulStartvragen();
   }
 })();
 if (document.getElementById('page-doeltool') && document.getElementById('page-doeltool').classList.contains('active')) dtRender();
+
+/* ── nieuwe route (fase 1): de doeltool als stap na de knop ──
+   Geen pop-up voor het gesprek en geen formulier: naam en mailadres zijn al
+   bekend. De antwoorden komen bij de lead en de pdf gaat vanzelf naar zijn mail. */
+window.rtStartDoeltool = function(){ dtReset(); if (typeof showPage === 'function') showPage('doeltool'); dtRender(); };
+window.rtDoeltoolKlaar = function(){
+  var r = window.rtStaat ? rtStaat() : null; if (!r) return dtPopupOpen();
+  var knop = this; knop.disabled = true; knop.textContent = 'Bezig…';
+  var mb = window.tesBron ? tesBron() : {};
+  if (window.tesMeet) tesMeet('stepper_complete','/doeltool',{tool:'doeltool'});
+  var bewaren = fetch(DT_API, { method:'POST', headers:{'Content-Type':'text/plain'}, body: JSON.stringify({
+    tool:'doeltool', naam:r.naam, voornaam:r.naam, email:r.email, antwoorden: dtAntwoorden(),
+    sid:mb.sid||'', vid:mb.vid||'', eb:mb.eb||'', lb:mb.lb||''
+  })}).catch(function(){});
+  fetch(DT_PDF_API, { method:'POST', headers:{'Content-Type':'text/plain'}, body: JSON.stringify({
+    naam:r.naam, email:r.email, doc:dtModel(r.naam), sid:mb.sid||'', vid:mb.vid||'', eb:mb.eb||'', lb:mb.lb||''
+  })}).catch(function(){});
+  bewaren.then(function(){ if (window.rtNaDoeltool) rtNaDoeltool(); });
+};
+})();
+</script>
+<!-- ═══════════════════════════════════════════
+     NIEUWE ROUTE (fase 1): na de weggever de video, dan de gratis app of een
+     gesprek. Alleen actief als tesNieuweRoute() aan staat (zie bovenaan).
+════════════════════════════════════════════ -->
+<style id="rt-css">
+html.nr .nr-weg{display:none!important}
+html.rt-dt .dt-cta-note,html.rt-dt .dt-stappen{display:none!important}
+#rt{position:fixed;inset:0;z-index:3000;background:#0A0A0A;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none}
+#rt.open{display:block}
+#rt .rt-in{max-width:760px;margin:0 auto;padding:calc(3.4rem + env(safe-area-inset-top,0px)) 1.25rem 3rem;text-align:center}
+#rt .rt-x{position:fixed;top:calc(.8rem + env(safe-area-inset-top,0px));right:.9rem;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid var(--border2);color:var(--white);font-size:1.4rem;line-height:1;cursor:pointer;z-index:2}
+#rt .rt-eye{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+#rt h2{font-family:'Abolition',sans-serif;font-weight:400;font-size:clamp(2rem,6.5vw,3.2rem);line-height:1.02;letter-spacing:.01em;text-transform:uppercase;color:var(--white);margin:0 0 1.4rem}
+#rt .rt-video{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#111;border:1px solid var(--border);margin:0 0 1.6rem}
+#rt .rt-video iframe,#rt .rt-video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+#rt .rt-leeg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 42%,rgba(201,168,76,.12),transparent 62%),#0f0e0c}
+#rt .rt-leeg span{width:66px;height:66px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center}
+#rt .rt-leeg span:after{content:'';margin-left:6px;border-left:17px solid var(--gold);border-top:11px solid transparent;border-bottom:11px solid transparent}
+#rt .rt-knoppen{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;text-align:left}
+#rt .rt-knop{width:100%;padding-left:1rem;padding-right:1rem}
+#rt .rt-uitleg{font-size:.82rem;color:var(--muted);line-height:1.6;margin:.75rem .1rem 0}
+#rt .rt-klein{font-size:.8rem;color:var(--muted);margin-top:1.8rem}
+#rt .rt-klein a{color:var(--gold)}
+#rt .rt-fout{color:#e07a6a;font-size:.82rem;min-height:1.2em;margin-top:.9rem}
+#rt .rt-cal{height:min(720px,calc(100vh - 12rem));min-height:560px;border-radius:14px;overflow:hidden;background:#0a0a0a;border:1px solid var(--border)}
+#rt .rt-cal iframe{width:100%;height:100%;border:0}
+#rt .rt-vraag{text-align:left;padding:1.15rem 0;border-top:1px solid var(--border)}
+#rt .rt-vraag b{display:block;color:var(--white);font-weight:500;font-size:.98rem;margin-bottom:.25rem}
+#rt .rt-waarom{font-size:.78rem;color:var(--muted);margin-bottom:.8rem;line-height:1.5}
+#rt .rt-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+#rt .rt-chip{background:none;border:1px solid var(--border2);color:var(--white);border-radius:999px;padding:.55rem .95rem;font:inherit;font-size:.82rem;cursor:pointer}
+#rt .rt-chip.aan{background:rgba(201,168,76,.14);border-color:var(--gold);color:var(--gold)}
+#rt .rt-onder{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+@media(max-width:640px){#rt .rt-knoppen{grid-template-columns:1fr;gap:1.3rem}#rt .rt-cal{min-height:600px}}
+</style>
+<div id="rt" role="dialog" aria-modal="true"><button type="button" class="rt-x" aria-label="Sluiten">&times;</button><div class="rt-in"></div></div>
+<script>
+(function(){
+  // ── Instellingen van de route ──
+  // De video: de embedlink van Bunny (of een eigen .mp4). Leeg = een nette lege plek.
+  var RT_VIDEO_URL = '';
+  var RT_CAL = 'https://calendly.com/jryisahia/new-meeting';
+  var RT_GESPREK_UITLEG = 'In één uur laat ik je zien hoe de app voor jou werkt. Samen maken we een gericht doel en een plan voor de komende 12 weken.';
+  // De extra vragen na de doeltool. Niets is verplicht. Vraag toevoegen of
+  // weghalen: alleen in deze lijst. Met keuzes worden het knoppen, zonder een tekstveld.
+  var RT_ZELFDE = 'Zo zie ik voor wie mijn aanpak het beste werkt.';
+  var RT_VRAGEN = [
+    { id: 'bedrijf', vraag: 'Wat voor bedrijf heb je?', waarom: 'Dan kan ik voorbeelden geven die bij jouw werk passen.' },
+    { id: 'bedrijf_sinds', vraag: 'Hoe lang heb je je bedrijf al?', waarom: 'Een starter heeft andere stappen nodig dan iemand die al jaren draait.',
+      keuzes: ['Ik ben nog niet gestart', 'Korter dan 1 jaar', '1 tot 5 jaar', 'Langer dan 5 jaar'] },
+    { id: 'leeftijd', vraag: 'Hoe oud ben je?', waarom: RT_ZELFDE, keuzes: ['Jonger dan 25', '25 tot 34', '35 tot 44', '45 tot 54', '55 of ouder'] },
+    { id: 'woonplaats', vraag: 'Waar woon je?', waarom: RT_ZELFDE },
+    { id: 'geslacht', vraag: 'Ben je een man of een vrouw?', waarom: RT_ZELFDE, keuzes: ['Man', 'Vrouw', 'Zeg ik liever niet'] }
+  ];
+
+  var API = window.TES_BACKEND || 'https://tes-backend-mbyy.onrender.com';
+  var S = null;
+  function $(id){ return document.getElementById(id); }
+  function e(t){ return String(t == null ? '' : t).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+  function laad(){ try { S = JSON.parse(sessionStorage.getItem('tes_route') || 'null'); } catch(x){ S = null; } return S; }
+  function bewaar(){ try { sessionStorage.setItem('tes_route', JSON.stringify(S)); } catch(x){} }
+  function post(pad, body){
+    var mb = window.tesBron ? tesBron() : {};
+    body.sid = mb.sid || ''; body.vid = mb.vid || ''; body.eb = mb.eb || ''; body.lb = mb.lb || '';
+    return fetch(API + pad, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(body) })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return { ok: r.ok, d: d || {} }; }); })
+      .catch(function(){ return { ok: false, d: {} }; });
+  }
+  function meet(stap, extra){ if (S && S.token) post('/api/route/stap', Object.assign({ token: S.token, stap: stap }, extra || {})); }
+  function scherm(html){
+    var o = $('rt'); o.querySelector('.rt-in').innerHTML = html; o.classList.add('open'); o.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+  function sluit(){ $('rt').classList.remove('open'); document.body.style.overflow = ''; }
+  window.rtStaat = function(){ return laad(); };
+  window.rtInDoeltool = function(){ var s = laad(); return !!(s && s.stap === 'doeltool'); };
+
+  // 1. meteen na het formulier
+  window.rtStart = function(d, g, slug, download){
+    if (typeof wgSluit === 'function') wgSluit();
+    S = { token: d.route.token || null, status: d.route.status, naam: String(g.naam || '').trim(), email: String(g.email || '').trim().toLowerCase(),
+          slug: slug, download: download, stap: 'video' };
+    bewaar(); toonVideo(); meet('video');
+  };
+  function videoHtml(){
+    if (!RT_VIDEO_URL) return '<div class="rt-video"><div class="rt-leeg"><span></span></div></div>';
+    if (/\.(mp4|webm|mov)(\?|$)/i.test(RT_VIDEO_URL)) return '<div class="rt-video"><video controls playsinline preload="metadata" src="' + e(RT_VIDEO_URL) + '"></video></div>';
+    return '<div class="rt-video"><iframe src="' + e(RT_VIDEO_URL) + '" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>';
+  }
+  function toonVideo(){
+    S.stap = 'video'; bewaar();
+    var knoppen = S.status !== 'klant';   // een betalende klant krijgt alleen zijn weggever
+    scherm('<div class="rt-eye">Gratis weggever</div><h2>Je gratis weggever is verzonden.</h2>' + videoHtml() +
+      (knoppen ? '<div class="rt-knoppen"><div><button type="button" class="btn-next rt-knop" id="rt-app">Duik gratis in de app</button></div>' +
+        '<div><button type="button" class="btn-back rt-knop" id="rt-gesprek">Plan een gratis gesprek</button><p class="rt-uitleg">' + e(RT_GESPREK_UITLEG) + '</p></div></div>' +
+        '<div class="rt-fout" id="rt-fout"></div>' : '') +
+      '<p class="rt-klein">Liever meteen downloaden? <a href="' + e(S.download) + '" target="_blank" rel="noopener">Klik dan hier.</a></p>');
+    if (knoppen){
+      $('rt-app').onclick = function(){ kies('app', this); };
+      $('rt-gesprek').onclick = function(){ kies('gesprek', this); };
+    }
+  }
+  // 2. een van de twee knoppen: het account
+  function kies(knop, b){
+    var tekst = b.textContent; b.disabled = true; b.textContent = 'Bezig…';
+    post('/api/route/knop', { token: S.token, knop: knop }).then(function(r){
+      b.disabled = false; b.textContent = tekst;
+      if (!r.ok || !r.d.ok){ $('rt-fout').textContent = r.d.error || 'Er ging iets mis. Probeer het opnieuw.'; return; }
+      S.knop = knop; S.account = r.d.account; S.app = r.d.app; bewaar();
+      if (knop === 'gesprek') toonAgenda();
+      else if (S.account === 'bestaand') naarApp();
+      else startDoeltool();
+    });
+  }
+  // 3a. het gesprek plannen
+  function toonAgenda(){
+    S.stap = 'agenda'; bewaar();
+    var p = 'embed_domain=' + encodeURIComponent(location.host) + '&embed_type=Inline&hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1' +
+      '&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c&name=' + encodeURIComponent(S.naam) + '&email=' + encodeURIComponent(S.email);
+    var url = RT_CAL + '?' + p; if (typeof calendlyUtm === 'function') url = calendlyUtm(url);
+    scherm('<h2>Plan een gratis gesprek</h2><div class="rt-cal"><iframe src="' + e(url) + '" title="Plan een gratis gesprek"></iframe></div>' +
+      '<div class="rt-onder"><button type="button" class="btn-back" id="rt-sla-agenda">Sla over</button></div>');
+    $('rt-sla-agenda').onclick = naAgenda;
+  }
+  window.addEventListener('message', function(ev){
+    if (!ev.data || ev.data.event !== 'calendly.event_scheduled') return;
+    if (!/calendly\.com$/.test((ev.origin || '').replace(/^https?:\/\//, ''))) return;
+    if (!laad() || S.stap !== 'agenda') return;
+    var p = ev.data.payload || {};
+    post('/api/planmeeting', { invitee: String((p.invitee || {}).uri || ''), event: String((p.event || {}).uri || ''), naam: S.naam, email: S.email, bron: 'route' });
+    S.gepland = true; bewaar();
+    setTimeout(naAgenda, 2500);
+  });
+  function naAgenda(){ if (S.account === 'bestaand') naarApp(); else startDoeltool(); }
+  // 3b. de doeltool (de bestaande op de site, in routestand)
+  function startDoeltool(){
+    S.stap = 'doeltool'; bewaar(); sluit();
+    document.documentElement.classList.add('rt-dt');
+    if (window.rtStartDoeltool) rtStartDoeltool();
+  }
+  window.rtNaDoeltool = function(){
+    laad(); meet('doeltool');
+    document.documentElement.classList.remove('rt-dt');
+    toonVragen();
+  };
+  // 4. de extra vragen
+  function toonVragen(){
+    S.stap = 'vragen'; bewaar();
+    var gekozen = {};
+    scherm('<h2>Nog een paar vragen</h2>' + RT_VRAGEN.map(function(v){
+      return '<div class="rt-vraag"><b>' + e(v.vraag) + '</b><div class="rt-waarom">' + e(v.waarom) + '</div>' +
+        (v.keuzes ? '<div class="rt-chips" data-id="' + e(v.id) + '">' + v.keuzes.map(function(k){ return '<button type="button" class="rt-chip">' + e(k) + '</button>'; }).join('') + '</div>'
+                  : '<input class="jd-input" data-id="' + e(v.id) + '" maxlength="120">') + '</div>';
+    }).join('') + '<div class="rt-onder"><button type="button" class="btn-next" id="rt-vragen-klaar">Naar de app</button><button type="button" class="btn-back" id="rt-vragen-sla">Sla over</button></div>');
+    [].forEach.call(document.querySelectorAll('#rt .rt-chips'), function(rij){
+      [].forEach.call(rij.querySelectorAll('.rt-chip'), function(c){
+        c.onclick = function(){
+          var aan = !c.classList.contains('aan');
+          [].forEach.call(rij.querySelectorAll('.rt-chip'), function(x){ x.classList.remove('aan'); });
+          if (aan){ c.classList.add('aan'); gekozen[rij.getAttribute('data-id')] = c.textContent; } else delete gekozen[rij.getAttribute('data-id')];
+        };
+      });
+    });
+    $('rt-vragen-klaar').onclick = function(){
+      var antwoorden = Object.assign({}, gekozen), labels = {};
+      [].forEach.call(document.querySelectorAll('#rt input[data-id]'), function(i){ if (i.value.trim()) antwoorden[i.getAttribute('data-id')] = i.value.trim(); });
+      RT_VRAGEN.forEach(function(v){ labels[v.id] = v.vraag; });
+      this.disabled = true; this.textContent = 'Bezig…';
+      post('/api/route/stap', { token: S.token, stap: 'vragen', antwoorden: antwoorden, labels: labels }).then(naarApp);
+    };
+    $('rt-vragen-sla').onclick = function(){
+      this.disabled = true;
+      post('/api/route/stap', { token: S.token, stap: 'vragen', antwoorden: {} }).then(naarApp);
+    };
+  }
+  // 5. de app: een nieuw account komt met het token binnen, een bestaand account logt in met een code
+  function naarApp(){
+    S.stap = 'app'; bewaar();
+    if (!S.app){ sluit(); return; }
+    location.href = S.account === 'nieuw' ? S.app + '#route=' + encodeURIComponent(S.token) : S.app;
+  }
+
+  $('rt').querySelector('.rt-x').onclick = function(){ if (laad()){ S.stap = 'dicht'; bewaar(); } sluit(); document.documentElement.classList.remove('rt-dt'); };
+  // Bij openen: vinkje voor mail uit (de AVG telt een vooraf aangevinkt vakje niet), en
+  // een route die halverwege is (pagina herladen) gaat verder waar hij was.
+  if (window.tesNieuweRoute && tesNieuweRoute()){
+    ['wg-mails', 'wd-mails'].forEach(function(id){ var c = $(id); if (c) c.checked = false; });
+    if (laad() && S.token){
+      if (S.stap === 'video') toonVideo();
+      else if (S.stap === 'agenda') toonAgenda();
+      else if (S.stap === 'doeltool') startDoeltool();
+      else if (S.stap === 'vragen') toonVragen();
+    }
+  }
 })();
 </script>
 </body>
