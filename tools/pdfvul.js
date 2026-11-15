@@ -202,7 +202,7 @@
         pg.drawText((i+1)+". "+t, { x:links, y:onder-64-i*13, size:9, font:tekstFont, color:PDFLib.rgb.apply(null,GRIJS) });
       });
       pg.drawText("TIMEMANAGEMENT VOOR ONDERNEMERS", { x:68, y:49, size:7, font:tekstFont, color:PDFLib.rgb.apply(null,GRIJS), characterSpacing:1.4 });
-      pg.drawText("THE EXECUTION SYSTEM", { x:414, y:49, size:7, font:tekstFont, color:PDFLib.rgb.apply(null,GRIJS), characterSpacing:1.4 });
+      pg.drawText("EXECUTION SYSTEM", { x:414, y:49, size:7, font:tekstFont, color:PDFLib.rgb.apply(null,GRIJS), characterSpacing:1.4 });
     }
 
     // 8. terugkijken
