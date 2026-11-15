@@ -7414,7 +7414,7 @@ function apVerstuur(e){
   .then(function(r){ return r.json().catch(function(){ return {}; }); }).then(function(d){
     if(!d||!d.ok){ terug((d&&d.error)||'Er ging iets mis. Probeer het opnieuw.'); return; }
     try{ localStorage.setItem('tes_contact',JSON.stringify({naam:g.naam,email:g.email})); }catch(x){}
-    if(d.bestaand){ terug(null); document.getElementById('ap-form').style.display='none'; document.getElementById('ap-bestaand').style.display=''; document.getElementById('ap-naar-app').href=API+'/'; return; }
+    if(d.bestaand){ terug(null); document.getElementById('ap-form').style.display='none'; document.getElementById('ap-bestaand').style.display=''; document.getElementById('ap-naar-app').href=API+'/#inlog='+encodeURIComponent(g.email); return; }
     if(!d.route||!window.rtAanmelden){ terug('Er ging iets mis. Probeer het opnieuw.'); return; }
     rtAanmelden(d,g,function(fout){ terug(fout); if(!fout) apSluit(); });
   }).catch(function(){ terug('Geen verbinding. Probeer het opnieuw.'); });
@@ -9452,7 +9452,8 @@ html.rt-dt .dt-stappen{display:none!important}
   function naarApp(){
     S.stap = 'app'; bewaar();
     if (!S.app){ sluit(); return; }
-    location.href = S.account === 'nieuw' ? S.app + '#route=' + encodeURIComponent(S.token) : S.app;
+    // bestaand account: inloggen met een code, met je e-mailadres al ingevuld (#inlog=, gaat niet naar de server)
+    location.href = S.account === 'nieuw' ? S.app + '#route=' + encodeURIComponent(S.token) : S.app + '#inlog=' + encodeURIComponent(S.email || '');
   }
 
   $('rt').querySelector('.rt-x').onclick = function(){ if (laad()){ S.stap = 'dicht'; bewaar(); } sluit(); document.documentElement.classList.remove('rt-dt'); };
