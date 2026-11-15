@@ -1350,7 +1350,7 @@ footer .ft-links a:hover,footer .ft-links button:hover{color:var(--gold)}
   // LIVE ZETTEN: zet NIEUWE_ROUTE_LIVE hieronder op true. Dat is de enige
   // plek. Tot dan staat de route alleen aan met ?nieuw=1 in de link; die keuze
   // blijft de rest van het bezoek staan. Met ?nieuw=0 zet je hem weer uit.
-  var NIEUWE_ROUTE_LIVE = false;
+  var NIEUWE_ROUTE_LIVE = true;   // live sinds 15 nov 2026 (gratis app, bèta)
   (function(){
     var n = new URLSearchParams(location.search).get('nieuw');
     try { if (n === '1') sessionStorage.setItem('tes_nieuw', '1'); if (n === '0') sessionStorage.removeItem('tes_nieuw'); } catch(e){}
@@ -1377,6 +1377,7 @@ tesMeet('pageview',location.pathname);
       <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek');closeNavMenu()">Gratis gesprek</button>
       <button class="nav-link" data-page="traject" onclick="showPage('traject');closeNavMenu()">12 weken traject</button>
       <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Weggevers</button>
+      <button class="nav-link nr-alleen" onclick="apOpen();closeNavMenu()">Gratis app <span class="ap-beta">bèta</span></button>
     </div>
     <button class="nav-cta" onclick="showPage('gesprek');closeNavMenu()">Begin nu →</button>
     <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1400,6 +1401,15 @@ tesMeet('pageview',location.pathname);
     </div>
     <button class="btn-primary" onclick="showPage('gesprek')">Ik wil mijn bedrijf laten groeien →</button>
     <p class="cta-note">Geen betaalkaart &nbsp;·&nbsp; Geen verplichting</p>
+  </section>
+
+  <div class="div nr-alleen" id="gratis-app"><span>gratis app</span></div>
+  <section class="nr-alleen ap-blok">
+    <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
+    <h2 class="ap-h2">Probeer de app <span class="u">gratis</span></h2>
+    <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
+    <button class="btn-primary" type="button" onclick="apOpen()">Maak een gratis account →</button>
+    <p class="cta-note">Gratis &nbsp;·&nbsp; Geen betaalkaart &nbsp;·&nbsp; Bètaversie</p>
   </section>
 
   <div class="div nr-weg" id="gratis"><span>start hier</span></div>
@@ -1859,6 +1869,12 @@ tesMeet('pageview',location.pathname);
 .wg-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,.28)}
 .wg-empty{text-align:center;color:var(--muted);padding:2.5rem 1rem;border:1px dashed var(--border);border-radius:14px;font-size:.9rem}
 /* modal */
+html:not(.nr) .nr-alleen{display:none!important}
+.ap-beta{font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.45);border-radius:999px;padding:.12rem .42rem;margin-left:.3rem;vertical-align:middle}
+.ap-blok{max-width:620px;margin:0 auto;text-align:center}
+.ap-eye{display:inline-block;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);border-radius:999px;padding:.4rem .9rem;margin-bottom:1.3rem}
+.ap-h2{font-family:'Abolition',sans-serif;font-weight:400;font-size:clamp(2rem,6vw,3.2rem);line-height:1.03;letter-spacing:.01em;text-transform:uppercase;margin:0 0 .9rem}
+.ap-sub{font-size:.9rem;color:var(--muted);max-width:480px;margin:0 auto 1.8rem;line-height:1.75}
 .wg-ov{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:16px}
 .wg-ov.show{display:flex}
 .wg-modal{background:#0d0d0d;border:1px solid var(--border2);border-radius:18px;width:100%;max-width:440px;max-height:90vh;overflow:auto;padding:1.6rem 1.5rem 1.5rem;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.7)}
@@ -1924,6 +1940,28 @@ tesMeet('pageview',location.pathname);
 
 </div>
 
+<div class="wg-ov" id="ap-ov" onclick="if(event.target===this)apSluit()">
+  <div class="wg-modal" role="dialog" aria-modal="true" aria-labelledby="ap-t">
+    <button class="wg-x" type="button" onclick="apSluit()" aria-label="Sluiten">&times;</button>
+    <form id="ap-form" onsubmit="apVerstuur(event)">
+      <div class="wg-m-k">Gratis app &nbsp;·&nbsp; bèta</div>
+      <div class="wg-m-t" id="ap-t">Maak je gratis account</div>
+      <div class="wg-m-s">Daarna beantwoord je een paar korte vragen over je bedrijf, en dan opent de app.</div>
+      <div class="field"><label for="ap-naam">Voornaam</label><input class="jd-input" id="ap-naam" autocomplete="given-name" required placeholder="Jouw voornaam"/></div>
+      <div class="field"><label for="ap-email">E-mailadres</label><input class="jd-input" id="ap-email" type="email" required autocomplete="email" placeholder="jij@voorbeeld.nl"/></div>
+      <label class="wg-mails"><input type="checkbox" id="ap-mails"> <span>Stuur mij ook nieuwe tips en gratis weggevers per e-mail. Afmelden kan altijd.</span></label>
+      <button class="btn-next" id="ap-btn" type="submit" style="width:100%">Start gratis &rarr;</button>
+      <div class="rt-fout" id="ap-fout" style="color:#e07a6a;font-size:.82rem;min-height:1.2em;margin-top:.7rem"></div>
+      <div class="tes-pv">Voor mensen van 16 jaar of ouder. <a href="/privacy/" target="_blank" rel="noopener">Lees hoe wij met je gegevens omgaan</a>.</div>
+    </form>
+    <div id="ap-bestaand" style="display:none">
+      <div class="wg-m-k">Je hebt al een account</div>
+      <div class="wg-m-t">Log in met je e-mailadres</div>
+      <p class="wg-m-s">Met dit e-mailadres bestaat al een account. In de app vul je je e-mailadres in en krijg je een code per mail.</p>
+      <a class="btn-next" id="ap-naar-app" href="#" style="width:100%;display:block;text-align:center;text-decoration:none">Naar de app &rarr;</a>
+    </div>
+  </div>
+</div>
 <div class="wg-ov" id="wg-ov" onclick="if(event.target===this)wgSluit()">
   <div class="wg-modal" role="dialog" aria-modal="true">
     <button class="wg-x" onclick="wgSluit()" aria-label="Sluiten">&times;</button>
@@ -7351,7 +7389,37 @@ function wgBekend(){
 }
 function wgAnderAdres(){ document.getElementById('wg-snel').style.display='none'; document.getElementById('wg-velden').style.display=''; document.getElementById('wg-email').value=''; document.getElementById('wg-m-s').textContent='Vul je gegevens in en de pdf komt direct.'; document.getElementById('wg-email').focus(); }
 function wgSluit(){ document.getElementById('wg-ov').classList.remove('show'); }
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') wgSluit(); });
+// ── Gratis app (bèta): direct aanmelden ──
+function apOpen(){
+  var o=document.getElementById('ap-ov'); if(!o) return;
+  if(o.parentElement!==document.body) document.body.appendChild(o);   // staat in de weggeverpagina; moet overal kunnen openen
+  document.getElementById('ap-form').style.display=''; document.getElementById('ap-bestaand').style.display='none'; document.getElementById('ap-fout').textContent='';
+  var g=(typeof wgBekend==='function')?wgBekend():null;
+  if(g){ if(g.naam&&!document.getElementById('ap-naam').value) document.getElementById('ap-naam').value=g.naam; if(g.email&&!document.getElementById('ap-email').value) document.getElementById('ap-email').value=g.email; }
+  o.classList.add('show');
+  if(window.tesMeet) tesMeet('pageview','/gratis-app');
+  setTimeout(function(){ var n=document.getElementById('ap-naam'); (n.value?document.getElementById('ap-email'):n).focus(); },50);
+}
+function apSluit(){ var o=document.getElementById('ap-ov'); if(o) o.classList.remove('show'); }
+function apVerstuur(e){
+  e.preventDefault();
+  var b=document.getElementById('ap-btn'), f=document.getElementById('ap-fout'), orig=b.innerHTML;
+  var g={naam:document.getElementById('ap-naam').value.trim(),email:document.getElementById('ap-email').value.trim().toLowerCase(),email_ok:document.getElementById('ap-mails').checked};
+  if(!g.naam){ f.textContent='Vul je voornaam in.'; return; }
+  b.disabled=true; b.textContent='Bezig…'; f.textContent='';
+  var m=window.tesBron?tesBron():{sid:'',vid:'',eb:'',lb:''};
+  var API=window.TES_BACKEND||'https://tes-backend-mbyy.onrender.com';
+  function terug(fout){ b.disabled=false; b.innerHTML=orig; if(fout) f.textContent=fout; }
+  fetch(API+'/api/app-aanmelden',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({naam:g.naam,email:g.email,email_ok:g.email_ok,sid:m.sid,vid:m.vid,eb:m.eb,lb:m.lb})})
+  .then(function(r){ return r.json().catch(function(){ return {}; }); }).then(function(d){
+    if(!d||!d.ok){ terug((d&&d.error)||'Er ging iets mis. Probeer het opnieuw.'); return; }
+    try{ localStorage.setItem('tes_contact',JSON.stringify({naam:g.naam,email:g.email})); }catch(x){}
+    if(d.bestaand){ terug(null); document.getElementById('ap-form').style.display='none'; document.getElementById('ap-bestaand').style.display=''; document.getElementById('ap-naar-app').href=API+'/'; return; }
+    if(!d.route||!window.rtAanmelden){ terug('Er ging iets mis. Probeer het opnieuw.'); return; }
+    rtAanmelden(d,g,function(fout){ terug(fout); if(!fout) apSluit(); });
+  }).catch(function(){ terug('Geen verbinding. Probeer het opnieuw.'); });
+}
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ wgSluit(); apSluit(); } });
 function wgHoeChange(){ var v=document.getElementById('wg-hoe').value; document.getElementById('wg-hoe-anders-wrap').style.display=v==='Anders'?'':'none'; document.getElementById('wg-door-wrap').style.display=v==='Via iemand anders'?'':'none'; }
 // Gedeeld: e-mail achterlaten → lead in het dashboard → downloadlink terug
 function wgVerzend(slug, g, b, klaar){
@@ -9259,7 +9327,7 @@ html.rt-dt .dt-stappen{display:none!important}
     bewaar(); toonVideo(); meet('video');
   };
   function videoHtml(){
-    if (!RT_VIDEO_URL) return '<div class="rt-video"><div class="rt-leeg"><span></span></div></div>';
+    if (!RT_VIDEO_URL) return '';   // nog geen video: geen lege plek in beeld
     if (/\.(mp4|webm|mov)(\?|$)/i.test(RT_VIDEO_URL)) return '<div class="rt-video"><video controls playsinline preload="metadata" src="' + e(RT_VIDEO_URL) + '"></video></div>';
     return '<div class="rt-video"><iframe src="' + e(RT_VIDEO_URL) + '" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>';
   }
@@ -9269,13 +9337,24 @@ html.rt-dt .dt-stappen{display:none!important}
     // het gesprek is de hoofdknop, de app de tweede keus
     scherm('<div class="rt-eye">Nog meer gratis waarde</div><h2>Je gratis weggever is verzonden.</h2>' + videoHtml() +
       (knoppen ? '<div class="rt-knoppen"><button type="button" class="btn-next rt-knop" id="rt-gesprek">Plan een gratis gesprek</button><p class="rt-uitleg">' + e(RT_GESPREK_UITLEG) + '</p>' +
-        '<button type="button" class="rt-link" id="rt-app">Duik liever zelf gratis in de app</button></div>' +
+        '<button type="button" class="rt-link" id="rt-app">Duik liever zelf gratis in de app (bèta)</button></div>' +
         '<div class="rt-fout" id="rt-fout"></div>' : ''));
     if (knoppen){
       $('rt-app').onclick = function(){ kies('app', this); };
       $('rt-gesprek').onclick = function(){ kies('gesprek', this); };
     }
   }
+  // 1b. direct aanmelden voor de gratis app (zonder weggever): meteen de knop "app"
+  window.rtAanmelden = function(d, g, klaar){
+    S = { token: d.route.token || null, status: d.route.status, naam: String(g.naam || '').trim(), email: String(g.email || '').trim().toLowerCase(), slug: null, download: null, stap: 'video' };
+    bewaar();
+    post('/api/route/knop', { token: S.token, knop: 'app' }).then(function(r){
+      if (!r.ok || !r.d.ok){ klaar(r.d.error || 'Er ging iets mis. Probeer het opnieuw.'); return; }
+      klaar(null);
+      S.knop = 'app'; S.account = r.d.account; S.app = r.d.app; bewaar();
+      if (S.account === 'bestaand') naarApp(); else startDoeltool();
+    });
+  };
   // 2. een van de twee knoppen: het account
   function kies(knop, b){
     var tekst = b.textContent; b.disabled = true; b.textContent = 'Bezig…';
