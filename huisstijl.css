@@ -165,8 +165,3 @@ footer p{color:var(--dim)}
 #hw-vier .wg-card,.wg-grid .wg-card{flex:1;height:100%;box-sizing:border-box}
 #hw-vier .wg-card > div:last-child,.wg-grid .wg-card > div:last-child{margin-top:auto;padding-top:.4rem}
 @media(max-width:600px){.wg-card.met-thumb{padding-left:.7rem !important;padding-right:.7rem !important}.wg-card.met-thumb .wg-papier{margin:0 -.7rem 1rem}}
-/* Zonder kop: het bovenste blok houdt genoeg hoogte, de tekst staat in het midden naast de foto */
-@media(min-width:760px){
-  #page-home .hero{min-height:clamp(360px,42vw,520px);display:flex;flex-direction:column;justify-content:center;align-items:center;padding-top:2.5rem;padding-bottom:2.5rem}
-  #page-home .hero .hero-sub{font-size:1.05rem}
-}
