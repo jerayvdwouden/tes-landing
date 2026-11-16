@@ -7327,9 +7327,9 @@ function wgCursusKaart(){
     +'<div><button class="wg-btn" type="button">Bekijk de cursus &rarr;</button></div></div>';
 }
 function wgKaart(w){
-  var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel', vb=(w.voorbeelden||[])[0];
+  var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel', vb=(w.voorbeelden||[])[0], vb2=(w.voorbeelden||[])[1];
   return '<div class="wg-card'+(vb?' met-thumb':'')+'" onclick="openWeggever(\''+wgEsc(w.slug)+'\')">'
-    +(vb?'<div class="wg-thumb"><img src="'+wgEsc(vb)+'" alt="" loading="lazy"><div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div></div>':'<div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>')
+    +(vb?'<div class="wg-papier'+(vb2?'':' een')+'">'+(vb2?'<img class="wg-p2" src="'+wgEsc(vb2)+'" alt="" loading="lazy">':'')+'<img class="wg-p1" src="'+wgEsc(vb)+'" alt="" loading="lazy"></div>':'<div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>')
     +'<div class="wg-t">'+wgEsc(w.titel)+'</div>'
     +'<div class="wg-s">'+wgEsc(w.beschrijving||'')+'</div>'
     +'<div><button class="wg-btn" type="button">Bekijk &amp; download &rarr;</button></div></div>';

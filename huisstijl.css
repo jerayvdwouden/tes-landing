@@ -126,3 +126,15 @@ footer p{color:var(--dim)}
   #page-home .hero h1 em{font-size:1.45em}
   #page-home .hero-sub{max-width:none}
 }
+
+/* ─── Weggeverkaart: de pagina's van de weggever schuin op elkaar, overlopend in het donker ── */
+.wg-papier{position:relative;aspect-ratio:16/10;margin:0 -1.25rem 1.3rem;overflow:hidden;border-radius:10px 10px 0 0;
+  background:radial-gradient(ellipse 70% 80% at 50% 0%,rgba(201,168,76,.13),transparent 70%),#0d0c0b}
+.wg-papier img{position:absolute;top:13%;width:42%;aspect-ratio:1/1.414;object-fit:cover;object-position:top;border-radius:2px;
+  box-shadow:0 16px 34px rgba(0,0,0,.65);transition:transform .35s ease}
+.wg-papier .wg-p1{left:21%;transform:rotate(-4deg);z-index:2}
+.wg-papier .wg-p2{left:40%;top:9%;transform:rotate(5deg);z-index:1;filter:brightness(.78)}
+.wg-papier.een .wg-p1{left:29%}
+.wg-papier::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to bottom,transparent 42%,#121110 94%)}
+.wg-card:hover .wg-papier .wg-p1{transform:rotate(-5deg) translateY(-6px)}
+.wg-card:hover .wg-papier .wg-p2{transform:rotate(7deg) translate(6px,-3px)}
