@@ -138,3 +138,30 @@ footer p{color:var(--dim)}
 .wg-papier::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to bottom,transparent 42%,#121110 94%)}
 .wg-card:hover .wg-papier .wg-p1{transform:rotate(-5deg) translateY(-6px)}
 .wg-card:hover .wg-papier .wg-p2{transform:rotate(7deg) translate(6px,-3px)}
+
+/* ─── Rasters met weggevers: nooit één kaart los op een rij ──────
+   4 kaarten: 4 naast elkaar, of 2 bij 2. 3 kaarten: 3 naast elkaar, of onder elkaar.
+   2 kaarten: naast elkaar. 1 kaart: in het midden. */
+#hw-vier.hw-n4,.wg-grid.wg-n4,.wg-grid.wg-n8{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+#hw-vier.hw-n3,.wg-grid.wg-n3,.wg-grid.wg-n6{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+#hw-vier.hw-n2,.wg-grid.wg-n2{grid-template-columns:repeat(2,minmax(0,1fr)) !important;max-width:640px;margin-left:auto;margin-right:auto}
+#hw-vier.hw-n1,.wg-grid.wg-n1{grid-template-columns:minmax(0,320px) !important;justify-content:center}
+#hw-vier{max-width:1080px}
+@media(max-width:1099px){
+  #hw-vier.hw-n4,.wg-grid.wg-n4,.wg-grid.wg-n8,.wg-grid.wg-n6{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media(max-width:899px){
+  #hw-vier.hw-n3,.wg-grid.wg-n3{grid-template-columns:minmax(0,420px) !important;justify-content:center}
+}
+@media(max-width:359px){
+  #hw-vier.hw-n4,#hw-vier.hw-n2,.wg-grid.wg-n4,.wg-grid.wg-n8,.wg-grid.wg-n6,.wg-grid.wg-n2{grid-template-columns:1fr !important}
+}
+/* De pagina's vullen de kaart precies tot de rand, ongeacht de schermbreedte */
+.wg-card.met-thumb{padding-left:1rem !important;padding-right:1rem !important}
+.wg-card.met-thumb .wg-papier{margin:0 -1rem 1.3rem;border-radius:9px 9px 0 0}
+/* Kaarten in een rij even hoog, knoppen onderaan op één lijn */
+#hw-vier{align-items:stretch !important}
+#hw-vier > div{display:flex}
+#hw-vier .wg-card,.wg-grid .wg-card{flex:1;height:100%;box-sizing:border-box}
+#hw-vier .wg-card > div:last-child,.wg-grid .wg-card > div:last-child{margin-top:auto;padding-top:.4rem}
+@media(max-width:600px){.wg-card.met-thumb{padding-left:.7rem !important;padding-right:.7rem !important}.wg-card.met-thumb .wg-papier{margin:0 -.7rem 1rem}}

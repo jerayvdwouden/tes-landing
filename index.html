@@ -1450,7 +1450,7 @@ tesMeet('pageview',location.pathname);
 
   <section aria-label="Gratis weggevers">
     <div class="section-head">
-      <h2>Het meest gedownload</h2>
+      <h2>Losse weggevers</h2>
       <p>Werkbladen uit het systeem. Kies er een, vul je e-mail in en je hebt 'm direct.</p>
     </div>
     <div class="hw-vier" id="hw-vier"></div>
@@ -1466,24 +1466,20 @@ tesMeet('pageview',location.pathname);
   }
   /* Zoveel kolommen als er weggevers zijn, met hoogstens twee per groep.
      Zijn het er nog geen vier, dan vullen de kaarten die er zijn de ruimte. */
-  function hwBouw(ondernemers, algemeen){
+  /* Hoogstens vier kaarten, zonder kopjes erboven. Het aantal komt als klasse op
+     het raster, zodat er nooit één kaart los op een rij staat (zie huisstijl.css). */
+  function hwBouw(lijst){
     var el = document.getElementById('hw-vier'); if (!el) return;
-    var o = ondernemers.slice(0,2), a = algemeen.slice(0,2);
-    var kolommen = o.length + a.length;
-    if (!kolommen) { el.innerHTML = ''; return; }
-    el.style.gridTemplateColumns = 'repeat(' + kolommen + ',minmax(0,1fr))';
-    var h = '';
-    if (o.length) h += '<div class="hw-label" style="grid-column:span ' + o.length + '">Voor ondernemers</div>';
-    if (a.length) h += '<div class="hw-label' + (o.length ? ' hw-split' : '') + '" style="grid-column:span ' + a.length + '">Veel gedownload</div>';
-    h += o.map(function(w){ return '<div>' + wgKaart(w) + '</div>'; }).join('');
-    h += a.map(function(w, i){ return '<div' + (i === 0 && o.length ? ' class="hw-split"' : '') + '>' + wgKaart(w) + '</div>'; }).join('');
-    el.innerHTML = h;
+    var k = lijst.slice(0,4);
+    el.className = 'hw-vier hw-n' + k.length;
+    el.style.gridTemplateColumns = '';
+    el.innerHTML = k.map(function(w){ return '<div>' + wgKaart(w) + '</div>'; }).join('');
   }
   function hwLaad(){
     fetch(WG_API + '/api/weggevers').then(function(r){ return r.json(); }).then(function(d){
       var alle = (d && d.weggevers) || [];
       alle.sort(function(a,b){ return (b.downloads||0) - (a.downloads||0); });
-      hwBouw(alle.filter(hwVoorOndernemers), alle.filter(function(w){ return !hwVoorOndernemers(w); }));
+      hwBouw(alle.filter(function(w){ return w.slug !== 'execution-blueprint'; }));
     }).catch(function(){});
   }
   // WG_API en wgKaart staan verderop in de pagina, dus wachten tot alles is ingelezen
@@ -7348,7 +7344,7 @@ function wgRender(){
   ].filter(function(g){ return g.html; });
   cats.hidden=false;
   cats.innerHTML=['<button class="wg-cat'+(WG_CAT?'':' on')+'" onclick="wgFilter(\'\')">Alles</button>'].concat(groepen.map(function(g){ return '<button class="wg-cat'+(WG_CAT===g.naam?' on':'')+'" onclick="wgFilter(\''+g.naam+'\')">'+g.naam+'</button>'; })).join('');
-  lijst.innerHTML=groepen.filter(function(g){ return !WG_CAT||WG_CAT===g.naam; }).map(function(g){ return '<div class="wg-sec"><div class="wg-sec-h">'+g.naam+'</div><div class="wg-grid">'+g.html+'</div></div>'; }).join('');
+  lijst.innerHTML=groepen.filter(function(g){ return !WG_CAT||WG_CAT===g.naam; }).map(function(g){ return '<div class="wg-sec"><div class="wg-sec-h">'+g.naam+'</div><div class="wg-grid wg-n'+(g.html.split('class="wg-card').length-1)+'">'+g.html+'</div></div>'; }).join('');
 }
 function wgFilter(c){ WG_CAT=c; wgRender(); }
 function wgOpen(slug){
