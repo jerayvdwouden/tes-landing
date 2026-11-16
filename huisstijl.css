@@ -111,3 +111,14 @@ footer p{color:var(--dim)}
   .ap-tekst{text-align:center}
   .ap-tekst .cta-note{text-align:center}
 }
+
+/* ─── Homepage: foto van Jeray naast de kop (uit de LinkedIn-banner), alleen op brede schermen ── */
+.hero-foto{display:none}
+@media(min-width:1280px){
+  #page-home .hero{position:relative}
+  #page-home .hero > :not(.hero-foto):not(style){position:relative;z-index:1;transform:translateX(-19vw)}
+  #page-home .hero-foto{display:block;position:absolute;z-index:0;top:-2.4rem;bottom:0;right:calc((100% - 100vw) / 2);width:44vw;
+    background:url('/img/jeray-hero.jpg') 62% 20%/cover no-repeat;
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 22%),linear-gradient(to bottom,#000 72%,transparent 100%);
+    -webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 22%),linear-gradient(to bottom,#000 72%,transparent 100%);mask-composite:intersect}
+}
