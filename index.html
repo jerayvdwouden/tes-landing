@@ -1394,22 +1394,23 @@ tesMeet('pageview',location.pathname);
     <style>#page-home .hero h1{white-space:normal;line-height:1.02}#page-home .hero h1 em{display:block;font-size:1.9em;letter-spacing:.07em;margin-bottom:.04em}#page-home .hero h1 .hero-belofte{display:block;color:var(--white);font-size:.62em;line-height:1.14}#page-home .hero-sub{font-size:.84rem}@media(min-width:1024px){#page-home .hero-sub{font-size:.92rem}}@media(min-width:601px) and (max-width:1023px){#page-home .vsl-wrap{max-width:min(900px,max(640px,calc((100vh - 398px) * 16 / 9)))}}@media(min-width:601px) and (max-width:1023px){#page-home .hero h1{font-size:clamp(2.4rem,6vw,3.4rem)}}</style>
     <h1><em>Ondernemers:</em><span class="hero-belofte">Breng je bedrijf verder, en groei er zelf in mee.</span></h1>
     <p class="hero-sub">We brengen overzicht in je bedrijf en in je week. Vervolgens werk je voor twaalf weken aan het ene ding dat je bedrijf nu tegenhoudt om te groeien. Wat overblijft is een bedrijf dat groeit en een week die je volhoudt.</p>
-    <div class="vsl-wrap">
-      <div class="vsl-inner" id="vslInner">
-        <iframe id="vslFrame" class="bunny vsl-frame" src="https://iframe.mediadelivery.net/embed/692336/0d86c42a-640a-4bed-b1cd-9558008dbb9c?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="eager" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>
-      </div>
-    </div>
     <button class="btn-primary" onclick="showPage('gesprek')">Ik wil mijn bedrijf laten groeien →</button>
     <p class="cta-note">Geen betaalkaart &nbsp;·&nbsp; Geen verplichting</p>
   </section>
 
-  <div class="div nr-alleen" id="gratis-app"><span>gratis app</span></div>
-  <section class="nr-alleen ap-blok">
+  <section class="nr-alleen ap-kaart" id="gratis-app" aria-label="Gratis app">
     <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
-    <h2 class="ap-h2">Probeer de app <span class="u">gratis</span></h2>
-    <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
-    <button class="btn-primary" type="button" onclick="apOpen()">Maak een gratis account →</button>
-    <p class="cta-note">Gratis &nbsp;·&nbsp; Geen betaalkaart &nbsp;·&nbsp; Bètaversie</p>
+    <div class="ap-beeld" aria-hidden="true">
+      <img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy">
+    </div>
+    <div class="ap-tekst">
+      <h2 class="ap-h2">Probeer de app <span class="u">gratis</span></h2>
+      <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
+      <button class="btn-primary" type="button" onclick="apOpen()">Maak een gratis account →</button>
+      <p class="cta-note">Gratis &nbsp;·&nbsp; Geen betaalkaart &nbsp;·&nbsp; Bètaversie</p>
+    </div>
   </section>
 
   <div class="div nr-weg" id="gratis"><span>start hier</span></div>
@@ -1488,20 +1489,6 @@ tesMeet('pageview',location.pathname);
   window.addEventListener('DOMContentLoaded', hwLaad);
   </script>
 
-  <div class="div"><span>wat mensen zeggen</span></div>
-
-  <section class="hq" aria-label="Wat mensen zeggen">
-    <div class="hq-grid">
-      <article class="hq-q">
-        <p>&ldquo;Ik heb twee startende ondernemers geholpen: voor allebei heb ik een marketingstrategie gebouwd, met onderzoek en voorbeelden erbij. Daarmee heb ik praktijkervaring opgedaan en bewijs opgebouwd dat ik kan laten zien aan bedrijven. Daarvoor had ik vooral dromen, maar geen push. Wat het verschil maakte: het systeem dwingt je om eerlijk te zijn. Ik kan niet drie weken lang hetzelfde zeggen.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Max Groenendijk &middot; Creative Business student</b><span>Twee marketingstrategie&euml;n gebouwd</span></div></div>
-      </article>
-      <article class="hq-q">
-        <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen. Dat was nooit in me opgekomen; puur door die gesprekken zijn we daarop uitgekomen.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
-      </article>
-    </div>
-  </section>
 
 
 

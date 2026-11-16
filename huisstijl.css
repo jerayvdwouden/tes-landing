@@ -29,16 +29,16 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
     radial-gradient(470px 330px at 0 0,rgba(176,134,86,.32) 0%,rgba(136,100,66,.20) 45%,transparent 100%),
     radial-gradient(980px 560px at 0 0,rgba(70,96,84,.25) 38%,rgba(40,56,52,.14) 70%,transparent 100%)}
 
-/* ─── Knoppen: dunne gouden rand, geen vulling ───────────────── */
+/* ─── Knoppen: massief goud, afgeronde hoeken, gewone hoofdletters ── */
 .btn-primary,.nav-cta,.btn-next,.wg-btn,.fc-cta,.gp-btn,.cc-btn,.avw-foot button,.pw-knop2,#v10 .btn,#gm .btn{
-  background:transparent;color:var(--gold);border:1.5px solid var(--gold);border-radius:6px;box-shadow:none;
+  background:var(--gold);color:#0A0A0A;border:1.5px solid var(--gold);border-radius:6px;box-shadow:none;
   font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:600;text-transform:none;letter-spacing:.01em;animation:none}
 .btn-primary,#v10 .btn,#gm .btn{font-size:.95rem;padding:.8rem 1.5rem}
 .nav-cta{font-size:.8rem;padding:.42rem .9rem}
 .btn-next,.wg-btn,.fc-cta,.gp-btn,.pw-knop2{font-size:.85rem}
 .btn-primary::after,.btn-primary::before,.nav-cta::after,.btn-next::after,.wg-btn::after,.fc-cta::after,#v10 .btn::after,#gm .btn::after{display:none}
 .btn-primary:hover,.nav-cta:hover,.nav-cta.active,.btn-next:hover,.wg-btn:hover,.fc-cta:hover,.gp-btn:hover,.cc-btn:hover,.avw-foot button:hover,.pw-knop2:hover,#v10 .btn:hover,#gm .btn:hover{
-  background:rgba(201,168,76,.1);color:var(--gold-l);border-color:var(--gold-l);box-shadow:none;transform:none}
+  background:var(--gold-l);color:#0A0A0A;border-color:var(--gold-l);box-shadow:none;transform:none}
 @media(max-width:600px){.nav-cta{font-size:.72rem;padding:.38rem .7rem}}
 
 /* ─── Kleine labels: JetBrains Mono, hoofdletters, ruime letterafstand ── */
@@ -53,15 +53,8 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
 .hq-who span,.hfaq-note{color:var(--dim)}
 
 /* ─── Koppen: Abolition, hoofdletters, gebroken wit ───────────── */
-h1,.section-head h2,.ap-h2,.hs-h2,.founder-h2,.wg-t{color:var(--white);line-height:1}
+.section-head h2,.ap-h2,.hs-h2,.founder-h2,.wg-t{color:var(--white);line-height:1}
 .hfaq-l h2{font-family:'Abolition',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.02em;line-height:1;font-size:clamp(2rem,5vw,2.8rem)}
-
-/* Hero: "Ondernemers:" als handschrift, de belofte als kop (zoals op de banner) */
-#page-home .hero h1{line-height:1;letter-spacing:.01em}
-#page-home .hero h1 em{display:inline-block;font-family:var(--hs-hand);font-size:clamp(1.05rem,2.2vw,1.45rem);letter-spacing:0;text-transform:none;color:var(--gold);
-  transform:rotate(-2deg);margin:0 0 .55em}
-#page-home .hero h1 .hero-belofte{font-size:clamp(2.3rem,5vw,3.6rem);line-height:1;color:var(--white);max-width:14em;margin:0 auto;text-wrap:balance}
-@media(min-width:601px) and (max-width:1023px){#page-home .hero h1 .hero-belofte{font-size:clamp(2.4rem,6vw,3.4rem)}}
 
 /* ─── Iconen: lijn 2, in een cirkel met een gouden rand van 2 px ── */
 .wg-ico{border:2px solid var(--gold);background:#0A0A0A}
@@ -89,10 +82,32 @@ footer p{color:var(--dim)}
 .wg-btn{white-space:nowrap;padding:.7rem 1.1rem;font-size:.82rem}
 
 /* ─── /cursus ─────────────────────────────────────────────────── */
-.sitenav .nav-cta,.btn.gold,.tplband .tplbtn{background:transparent;color:var(--gold);border:1.5px solid var(--gold);border-radius:6px;box-shadow:none;
+.sitenav .nav-cta,.btn.gold,.tplband .tplbtn{background:var(--gold);color:#0A0A0A;border:1.5px solid var(--gold);border-radius:6px;box-shadow:none;
   font-family:'DM Sans',sans-serif;font-weight:600;text-transform:none;letter-spacing:.01em}
 .sitenav .nav-cta{font-size:13px}
-.sitenav .nav-cta:hover,.btn.gold:hover,.tplband .tplbtn:hover{background:rgba(201,168,76,.1);color:var(--gold-l)}
+.sitenav .nav-cta:hover,.btn.gold:hover,.tplband .tplbtn:hover{background:var(--gold-l);color:#0A0A0A}
 .notionband .nbt,.mvhead .mvt{font-family:'Abolition',sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1}
 .pw-vraag{font-size:clamp(1.6rem,4.5vw,2rem)}
 @media(max-width:600px){.wg-btn{white-space:normal;font-size:.8rem;padding:.65rem .75rem;line-height:1.3}}
+
+/* ─── Homepage: de app als kaart (beeld links, tekst rechts), op de plek van de video ── */
+#page-home .hero{padding-bottom:2rem}
+.ap-kaart{position:relative;width:min(1080px,calc(100vw - 32px));margin:1rem 0 1rem 50%;transform:translateX(-50%);
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2.5rem;align-items:center;
+  background:#121110;border:1px solid rgba(245,240,232,.10);border-radius:10px;padding:3rem 3rem 3rem 2rem;overflow:hidden}
+.ap-kaart .ap-eye{position:absolute;top:1.1rem;right:1.1rem;margin:0;background:var(--gold);color:#0A0A0A;border:0;border-radius:4px;padding:.45rem .8rem;font-size:.62rem}
+.ap-beeld{position:relative;height:300px;perspective:1100px}
+.ap-s{position:absolute;display:block;border-radius:6px;border:1px solid rgba(245,240,232,.14);box-shadow:0 18px 40px rgba(0,0,0,.6);background:#0A0A0A}
+.ap-s-m{left:19%;top:10%;width:66%;z-index:3}
+.ap-s-l{left:0;top:17%;width:54%;z-index:1;transform:rotateY(24deg);transform-origin:left center;opacity:.9}
+.ap-s-r{right:2%;top:14%;width:20%;z-index:4;transform:rotateY(-18deg);transform-origin:right center}
+.ap-tekst{text-align:left}
+.ap-tekst .ap-h2{margin:0 0 .8rem}
+.ap-tekst .ap-sub{margin:0 0 1.5rem;max-width:none}
+.ap-tekst .cta-note{text-align:left}
+@media(max-width:860px){
+  .ap-kaart{grid-template-columns:1fr;gap:1.6rem;padding:3.4rem 1.25rem 1.6rem}
+  .ap-beeld{height:clamp(150px,40vw,260px);margin-top:.4rem}
+  .ap-tekst{text-align:center}
+  .ap-tekst .cta-note{text-align:center}
+}
