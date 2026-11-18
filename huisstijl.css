@@ -359,3 +359,43 @@ footer p{color:var(--dim)}
 .wg-start-card:hover .wg-start-appbeeld .ap-s-m{transform:translateY(-3px)}
 .wg-start-card:hover .wg-start-appbeeld .ap-s-l{transform:rotateY(24deg)}
 .wg-start-card:hover .wg-start-appbeeld .ap-s-r{transform:rotateY(-18deg)}
+
+/* ─── Trajectpagina (18 nov 2026) ─────────────────────────────── */
+/* Hero: regel, kop en video hoger op de pagina */
+#v10 .v10-hero{padding-top:20px;gap:32px}
+#v10 .v10-hero-copy{gap:20px}
+/* Grotere knop "Gratis gesprek" in de hero */
+#v10 .btn.v10-hoofdknop{font-size:1.1rem;padding:1.1rem 2.6rem}
+
+/* Garantie: prijs en garantie samen in één kaart */
+#v10 .gar-in.gar-samen{max-width:980px}
+#v10 .gar-kaart.gar-twee{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:0;align-items:stretch;text-align:left;padding:0;overflow:hidden}
+#v10 .gar-twee .gar-links{display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:clamp(32px,4vw,52px)}
+#v10 .gar-twee .gar-links .gar-zegel{margin:0}
+#v10 .gar-twee .gar-rechts{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:clamp(32px,4vw,52px) clamp(24px,3vw,40px);
+  border-left:1px solid rgba(201,168,76,.3);background:linear-gradient(180deg,rgba(201,168,76,.10),rgba(201,168,76,.03))}
+#v10 .gar-bedrag{font-family:var(--display);font-size:clamp(64px,7vw,96px);line-height:.9;color:var(--white)}
+#v10 .gar-per{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+#v10 .gar-rechts p{font-size:15px;line-height:1.55;color:#C9C2B4;max-width:260px;margin:0 0 14px}
+@media(max-width:760px){
+  #v10 .gar-kaart.gar-twee{grid-template-columns:1fr}
+  #v10 .gar-twee .gar-links{align-items:center;text-align:center}
+  #v10 .gar-twee .gar-rechts{border-left:0;border-top:1px solid rgba(201,168,76,.3)}
+}
+
+/* Gespreksblok onderaan: dichter op de vragen, links wat we doen, rechts de agenda */
+#v10 .stap.stap-twee{padding-top:clamp(16px,2.5vw,36px)}
+#v10 .stap-twee .stap-in{max-width:1120px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,4vw,64px);align-items:start;text-align:left}
+#v10 .stap-twee .stap-links{display:flex;flex-direction:column;gap:18px;padding-top:12px}
+#v10 .stap-twee h2{font-size:clamp(40px,4.4vw,64px);line-height:.95}
+#v10 .stap-twee .stap-links > p{margin:0;font-size:17px;color:#C9C2B4}
+#v10 .stap-punten{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+#v10 .stap-punten li{position:relative;padding-left:34px;font-size:16px;line-height:1.55;color:#C9C2B4}
+#v10 .stap-punten li::before{content:'';position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;border:2px solid var(--gold);box-sizing:border-box}
+#v10 .stap-punten li::after{content:'';position:absolute;left:8px;top:7px;width:5px;height:9px;border:solid var(--gold);border-width:0 2px 2px 0;transform:rotate(45deg)}
+#v10 .stap-twee .cal{max-width:none}
+@media(max-width:860px){
+  #v10 .stap-twee .stap-in{grid-template-columns:1fr}
+  #v10 .stap-twee .stap-links{align-items:center;text-align:center}
+  #v10 .stap-punten{text-align:left}
+}

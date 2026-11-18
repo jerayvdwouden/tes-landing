@@ -1620,7 +1620,7 @@ tesMeet('pageview',location.pathname);
     </div>
 
     <div class="cta-row" data-reveal>
-        <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
+        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn v10-hoofdknop">Gratis gesprek</a>
         <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
   </section>
@@ -1629,15 +1629,15 @@ tesMeet('pageview',location.pathname);
   <section class="info" id="info" aria-label="Wat je krijgt, garantie en vragen">
     <div class="tabs-wrap">
       <div class="tabs" role="tablist">
-        <button class="tab" role="tab" data-tab="krijgt" aria-selected="false" aria-controls="pane-krijgt">Wat je krijgt</button>
-        <button class="tab" role="tab" data-tab="garantie" aria-selected="true" aria-controls="pane-garantie">Garantie</button>
+        <button class="tab" role="tab" data-tab="krijgt" aria-selected="true" aria-controls="pane-krijgt">Wat je krijgt</button>
+        <button class="tab" role="tab" data-tab="garantie" aria-selected="false" aria-controls="pane-garantie">Garantie</button>
         <button class="tab" role="tab" data-tab="vragen" aria-selected="false" aria-controls="pane-vragen">Vragen</button>
       </div>
     </div>
 
     <div class="panel" id="panel">
 
-      <div class="pane" id="pane-krijgt" role="tabpanel" hidden>
+      <div class="pane" id="pane-krijgt" role="tabpanel">
         <div class="krijgt-in" data-panel>
           <div class="sec-head">
             <div class="mono gold">Wat je krijgt</div>
@@ -1667,20 +1667,23 @@ tesMeet('pageview',location.pathname);
         </div>
       </div>
 
-      <div class="pane" id="pane-garantie" role="tabpanel">
-        <div class="gar-in" data-panel>
-          <div class="prijs-kaart">
-            <div class="mono gold">De prijs</div>
-            <div class="prijs-bedrag">&euro;799 <span>per maand, exclusief btw</span></div>
-            <p>Het traject duurt drie maanden. Inclusief btw is dat &euro;966,79 per maand.</p>
-          </div>
-          <div class="gar-kaart">
-            <div class="gar-zegel" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4l15 5.5v12c0 10-6.4 18-15 22-8.6-4-15-12-15-22v-12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 24.5l5.5 5.5L32 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="mono gold">De garantie</div>
-            <h2 class="display">Geen resultaat.<br>Geld terug.</h2>
-            <p class="lead">In week &eacute;&eacute;n leggen we vast welk doel je in twaalf weken haalt. Maak je het traject af, kom je opdagen en haal je je doel toch niet, dan krijg je je volledige investering terug.</p>
-            <p class="sub">De enige voorwaarde: maximaal twee gemiste gesprekken.</p>
-            <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
+      <div class="pane" id="pane-garantie" role="tabpanel" hidden>
+        <div class="gar-in gar-samen" data-panel>
+          <div class="gar-kaart gar-twee">
+            <div class="gar-links">
+              <div class="gar-zegel" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4l15 5.5v12c0 10-6.4 18-15 22-8.6-4-15-12-15-22v-12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 24.5l5.5 5.5L32 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="mono gold">De garantie</div>
+              <h2 class="display">Geen resultaat.<br>Geld terug.</h2>
+              <p class="lead">In week &eacute;&eacute;n leggen we vast welk doel je in twaalf weken haalt. Maak je het traject af, kom je opdagen en haal je je doel toch niet, dan krijg je je volledige investering terug.</p>
+              <p class="sub">De enige voorwaarde: maximaal twee gemiste gesprekken.</p>
+            </div>
+            <div class="gar-rechts">
+              <div class="mono gold">De investering</div>
+              <div class="gar-bedrag">&euro;799</div>
+              <div class="gar-per">per maand, exclusief btw</div>
+              <p>Het traject duurt drie maanden. Inclusief btw is dat &euro;966,79 per maand.</p>
+              <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1704,14 +1707,19 @@ tesMeet('pageview',location.pathname);
   </section>
 
   <!-- 04 de stap -->
-  <section class="stap" id="traject-gesprek" aria-label="Plan een gesprek">
+  <section class="stap stap-twee" id="traject-gesprek" aria-label="Plan een gesprek">
     <div class="para para-1" data-para="0.06"></div>
-    <div class="para para-2" data-para="0.14"></div>
-    <div class="para para-3" data-para="-0.1"></div>
     <div class="stap-in" data-reveal>
-      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
-      <h2 class="display">Eén gratis uur.<br>Daarna heb je een plan.</h2>
-      <p>In een uur maken we je doel meetbaar, bouwen we je eerste actieplan en spreken we af hoe je jezelf de komende twaalf weken vasthoudt. Plus het gratis Execution System Werkboek.</p>
+      <div class="stap-links">
+        <h2 class="display">Plan je gratis gesprek</h2>
+        <p>Een uur online, met mij. Dit doen we samen:</p>
+        <ul class="stap-punten">
+          <li>Ik laat je zien hoe de gratis app voor jou werkt.</li>
+          <li>Wil je groeien, dan zoeken we het knelpunt van je bedrijf. Wil je meer rust en overzicht, dan kijken we waar je tijd terugwint.</li>
+          <li>We maken een gericht doel en een plan voor de komende twaalf weken.</li>
+          <li>Het plan staat direct in je app. Het is van jou, ook als je niet aan het traject begint.</li>
+        </ul>
+      </div>
       <div class="cal" data-reveal>
         <div class="mono muted">Kies een moment dat jou uitkomt</div>
         <div class="calendly-inline-widget" id="v10-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:600px"></div>
