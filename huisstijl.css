@@ -171,12 +171,12 @@ footer p{color:var(--dim)}
    Minder dan de oude glanzende knoppen, meer dan massief goud. */
 .btn-primary,.nav-cta,.btn-next,.wg-btn,.fc-cta,.gp-btn,.cc-btn,.avw-foot button,.pw-knop2,#v10 .btn,#gm .btn,.sitenav .nav-cta,.btn.gold,.tplband .tplbtn{
   background-color:var(--gold);
-  background-image:linear-gradient(110deg,rgba(255,236,170,0) 35%,rgba(255,236,170,.55) 50%,rgba(255,236,170,0) 65%),linear-gradient(180deg,#D6B65C,#C2A044);
+  background-image:linear-gradient(110deg,rgba(255,240,190,0) 32%,rgba(255,240,190,.85) 50%,rgba(255,240,190,0) 68%),linear-gradient(160deg,#E6C873 0%,#C9A84C 45%,#E2C46C 70%,#BC9A40 100%);
   background-size:260% 100%,100% 100%;background-repeat:no-repeat;
   background-position:130% 0,0 0;
-  box-shadow:0 0 18px rgba(201,168,76,.22),0 4px 14px rgba(0,0,0,.35);
-  animation:hs-glans 5.5s ease-in-out infinite}
-@keyframes hs-glans{0%,55%{background-position:130% 0,0 0}85%,100%{background-position:-30% 0,0 0}}
+  box-shadow:0 0 22px rgba(201,168,76,.38),0 4px 14px rgba(0,0,0,.35);
+  animation:hs-glans 4s ease-in-out infinite}
+@keyframes hs-glans{0%,45%{background-position:130% 0,0 0}80%,100%{background-position:-30% 0,0 0}}
 .btn-primary:hover,.nav-cta:hover,.btn-next:hover,.wg-btn:hover,.fc-cta:hover,.gp-btn:hover,.cc-btn:hover,.avw-foot button:hover,.pw-knop2:hover,#v10 .btn:hover,#gm .btn:hover,.sitenav .nav-cta:hover,.btn.gold:hover,.tplband .tplbtn:hover{
   background-color:var(--gold-l);background-image:linear-gradient(180deg,#EDD48E,#D9BA62);box-shadow:0 0 26px rgba(201,168,76,.45),0 6px 18px rgba(0,0,0,.4);animation:none}
 .btn-next:disabled,.btn-next[disabled]{animation:none;box-shadow:none}
