@@ -190,3 +190,14 @@ footer p{color:var(--dim)}
     -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
 }
 .nav-cta{white-space:nowrap}
+
+/* ─── App-kaart: kop "Gratis app" bovenin naast het label (18 nov 2026) ── */
+.ap-kaart{grid-template-areas:"kop kop" "beeld tekst";row-gap:1.6rem;padding-top:2rem}
+.ap-kop{grid-area:kop;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.ap-kop .ap-h2{margin:0;font-size:clamp(2rem,4.5vw,3rem)}
+.ap-kaart .ap-kop .ap-eye{position:static;font-size:.52rem;padding:.32rem .6rem;letter-spacing:.18em;white-space:nowrap}
+.ap-beeld{grid-area:beeld}
+.ap-tekst{grid-area:tekst}
+@media(max-width:860px){
+  .ap-kaart{grid-template-areas:"kop" "beeld" "tekst";padding-top:1.4rem}
+}
