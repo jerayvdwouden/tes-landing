@@ -281,3 +281,11 @@ footer p{color:var(--dim)}
     background:linear-gradient(90deg,transparent,rgba(201,168,76,.45) 15%,rgba(201,168,76,.45) 85%,transparent)}
   .es-drie li{background-clip:padding-box}
 }
+
+/* ─── Pagina Gratis app: twee keuzes. Gesprek groot en goud, zelf starten rustig eronder ── */
+.ap-keuze{display:flex;flex-direction:column;align-items:center;gap:.55rem}
+.ap-keuze .ap-hoofdknop{text-transform:none;letter-spacing:.01em;font-size:1.05rem;padding:.95rem 1.9rem}
+.ap-hoofdknop-uitleg{margin:0;font-size:.82rem;color:var(--muted);max-width:420px}
+.ap-zelfknop{opacity:1;margin-top:.9rem;background:none;border:0;padding:.3rem .2rem;color:#A8A39A;font:inherit;font-size:.86rem;cursor:pointer;
+  text-decoration:underline;text-decoration-color:rgba(168,163,154,.45);text-underline-offset:4px;transition:color .2s}
+.ap-zelfknop:hover{color:var(--white);text-decoration-color:var(--gold)}

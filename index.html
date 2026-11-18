@@ -1378,7 +1378,7 @@ tesMeet('pageview',location.pathname);
       <button class="nav-link" data-page="traject" onclick="showPage('traject');closeNavMenu()">12 weken traject</button>
       <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Weggevers</button>
     </div>
-    <button class="nav-cta" onclick="showPage('gesprek');closeNavMenu()">Start gratis →</button>
+    <button class="nav-cta" onclick="showPage('app');closeNavMenu()">Start gratis →</button>
     <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -1394,7 +1394,7 @@ tesMeet('pageview',location.pathname);
     <style>#page-home .hero h1{white-space:normal;line-height:1.02}#page-home .hero h1 em{display:block;font-size:1.9em;letter-spacing:.07em;margin-bottom:.04em}#page-home .hero h1 .hero-belofte{display:block;color:var(--white);font-size:.62em;line-height:1.14}#page-home .hero-sub{font-size:.84rem}@media(min-width:1024px){#page-home .hero-sub{font-size:.92rem}}@media(min-width:601px) and (max-width:1023px){#page-home .vsl-wrap{max-width:min(900px,max(640px,calc((100vh - 398px) * 16 / 9)))}}@media(min-width:601px) and (max-width:1023px){#page-home .hero h1{font-size:clamp(2.4rem,6vw,3.4rem)}}</style>
     <h1><em>Ondernemers:</em><span class="hero-belofte">Win je tijd terug voor het werk dat je bedrijf laat groeien.</span></h1>
     <p class="hero-sub">We brengen overzicht in je bedrijf en in je week. Vervolgens werk je voor twaalf weken consistent aan het ene ding dat je bedrijf nu tegenhoudt om te groeien. Wat overblijft is een bedrijf dat groeit, en tijd die je hebt teruggewonnen.</p>
-    <button class="btn-primary" onclick="showPage('gesprek')">Start gratis →</button>
+    <button class="btn-primary" onclick="showPage('app')">Start gratis →</button>
   </section>
 
   <section class="nr-alleen ap-kaart" id="gratis-app" aria-label="Gratis app">
@@ -1406,7 +1406,7 @@ tesMeet('pageview',location.pathname);
     </div>
     <div class="ap-tekst">
       <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Zo weet je wat nu het belangrijkste is om aan te werken, en krijg je de andere belangrijke taken ook gedaan. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
-      <button class="btn-primary" type="button" onclick="apOpen()">Start gratis →</button>
+      <button class="btn-primary" type="button" onclick="showPage('app')">Start gratis →</button>
       <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
     </div>
   </section>
@@ -1532,7 +1532,7 @@ tesMeet('pageview',location.pathname);
     </div>
     <div class="hfaq-list vq-list" id="hfaq"></div>
     <div class="hfaq-cta">
-      <button class="btn-primary" onclick="showPage('gesprek')">Start gratis &rarr;</button>
+      <button class="btn-primary" onclick="showPage('app')">Start gratis &rarr;</button>
       <div class="hfaq-note">Gratis gesprek &middot; 1 uur &middot; online</div>
     </div>
   </section>
@@ -1580,7 +1580,7 @@ tesMeet('pageview',location.pathname);
         <p>Ik ben zelf ondernemer, dus ik ken de week van een ondernemer. Geen baas die grenzen stelt, een agenda die elke week anders is, werk dat altijd door kan. Daardoor komt het werk dat je bedrijf laat groeien er nooit van. En sporten en op tijd thuis zijn ook niet.</p>
         <p><strong>Businesscoaches houden je niet consistent. Levenscoaches snappen de zakelijke kant niet. Daar zit mijn plek.</strong></p>
         <p>Haal je je doel niet, dan krijg je je geld terug.</p>
-        <button class="btn-primary" onclick="showPage('gesprek')">Start gratis &rarr;</button>
+        <button class="btn-primary" onclick="showPage('app')">Start gratis &rarr;</button>
         <div class="hfaq-note" style="margin-top:.8rem">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
     </div>
@@ -1616,7 +1616,7 @@ tesMeet('pageview',location.pathname);
     </div>
 
     <div class="cta-row" data-reveal>
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Start gratis</a>
+        <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
         <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
   </section>
@@ -1631,7 +1631,7 @@ tesMeet('pageview',location.pathname);
       </article>
     </div>
     <div class="cta-row" data-reveal>
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Start gratis</a>
+        <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
         <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
   </section>
@@ -1672,7 +1672,7 @@ tesMeet('pageview',location.pathname);
             </div>
           </div>
           <div class="cta-row">
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Start gratis</a>
+        <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
         <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
         </div>
@@ -1691,7 +1691,7 @@ tesMeet('pageview',location.pathname);
             <h2 class="display">Geen resultaat.<br>Geld terug.</h2>
             <p class="lead">In week &eacute;&eacute;n leggen we vast welk doel je in twaalf weken haalt. Maak je het traject af, kom je opdagen en haal je je doel toch niet, dan krijg je je volledige investering terug.</p>
             <p class="sub">De enige voorwaarde: maximaal twee gemiste gesprekken.</p>
-            <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Start gratis</a>
+            <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
           </div>
         </div>
       </div>
@@ -1705,7 +1705,7 @@ tesMeet('pageview',location.pathname);
           </div>
           <div class="faq" id="faq"></div>
           <div class="cta-row">
-            <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Start gratis</a>
+            <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
             <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
           </div>
         </div>
@@ -2932,7 +2932,11 @@ html:not(.nr) .nr-alleen{display:none!important}
     </div>
     <div class="ap-tekst">
       <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Zo weet je wat nu het belangrijkste is om aan te werken, en krijg je de andere belangrijke taken ook gedaan. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
-      <button class="btn-primary" type="button" onclick="apOpen()">Start gratis →</button>
+      <div class="ap-keuze">
+        <button class="btn-primary ap-hoofdknop" type="button" onclick="showPage('gesprek')">Plan een gratis gesprek →</button>
+        <p class="ap-hoofdknop-uitleg">Een uur online. We maken samen je doel en je plan, en zetten het direct in je app.</p>
+        <button class="ap-zelfknop" type="button" onclick="apOpen()">Of start zelf gratis in de app</button>
+      </div>
       <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
     </div>
   </section>
@@ -3055,7 +3059,7 @@ html:not(.nr) .nr-alleen{display:none!important}
 
     <div class="mc-bottom">
       <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.1rem">Cursussen worden binnenkort beschikbaar. Zet de eerste stap al vandaag.</p>
-      <button class="btn-primary" onclick="showPage('doeltool')">Start gratis →</button>
+      <button class="btn-primary" onclick="showPage('app')">Start gratis →</button>
     </div>
   </div>
 
