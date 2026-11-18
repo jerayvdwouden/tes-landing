@@ -1374,10 +1374,9 @@ tesMeet('pageview',location.pathname);
     <div class="logo" onclick="showPage('home')">Execution System</div>
     <div class="nav-links">
       <button class="nav-link active" data-page="home" onclick="showPage('home');closeNavMenu()">Home</button>
-      <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek');closeNavMenu()">Gratis gesprek</button>
       <button class="nav-link" data-page="traject" onclick="showPage('traject');closeNavMenu()">12 weken traject</button>
       <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Weggevers</button>
-      <button class="nav-link nr-alleen" onclick="apOpen();closeNavMenu()">Gratis app <span class="ap-beta">bèta</span></button>
+      <button class="nav-link nr-alleen" data-page="app" onclick="showPage('app');closeNavMenu()">Gratis app <span class="ap-beta">bèta</span></button>
     </div>
     <button class="nav-cta" onclick="showPage('gesprek');closeNavMenu()">Start gratis →</button>
     <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1400,19 +1399,12 @@ tesMeet('pageview',location.pathname);
   </section>
 
   <section class="nr-alleen ap-kaart" id="gratis-app" aria-label="Gratis app">
-    <div class="ap-kop">
-      <h2 class="ap-h2">Gratis app</h2>
-      <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
-    </div>
-    <div class="ap-beeld" aria-hidden="true">
-      <img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy">
-      <img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy">
-      <img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy">
-    </div>
+    <div class="ap-kop"><h2 class="ap-h2">Gratis app</h2></div>
+    <div class="ap-beeld" aria-hidden="true"><img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy"></div>
     <div class="ap-tekst">
       <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
       <button class="btn-primary" type="button" onclick="apOpen()">Start gratis →</button>
-      <p class="cta-note">Gratis &nbsp;·&nbsp; Geen betaalkaart &nbsp;·&nbsp; Bètaversie</p>
+      <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
     </div>
   </section>
 
@@ -2907,6 +2899,31 @@ html:not(.nr) .nr-alleen{display:none!important}
     </div>
   </div>
 
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: GRATIS APP (later met een eigen video)
+════════════════════════════════════════════ -->
+<div class="page" id="page-app">
+<div class="wrap ap-pagina">
+  <section class="nr-alleen ap-kaart" aria-label="Gratis app">
+    <div class="ap-kop"><h2 class="ap-h2">Gratis app</h2></div>
+    <div class="ap-beeld" aria-hidden="true"><img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy"></div>
+    <div class="ap-tekst">
+      <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
+      <button class="btn-primary" type="button" onclick="apOpen()">Start gratis →</button>
+      <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
+    </div>
+  </section>
+  <section class="ap-uitleg" aria-label="Zo werkt het">
+    <div class="ap-uitleg-k">Zo werkt het</div>
+    <ol class="ap-stappen">
+      <li><span class="ap-stap-k">Stap 1</span><b>Maak een gratis account</b><span>Met je naam en je e-mailadres. Je hebt geen betaalkaart nodig.</span></li>
+      <li><span class="ap-stap-k">Stap 2</span><b>Vul de doeltool in</b><span>Een paar vragen over je bedrijf en je week. Daarna weet je waar je bedrijf op vastloopt.</span></li>
+      <li><span class="ap-stap-k">Stap 3</span><b>Plan je week</b><span>Je kiest één doel voor twaalf weken en zet in de app elke week op een rij wat je doet.</span></li>
+    </ol>
+  </section>
 </div>
 </div>
 
