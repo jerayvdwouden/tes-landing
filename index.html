@@ -7338,7 +7338,7 @@ window.addEventListener('message',function(e){
 
 
 // Alle CTA's op Traject: naar de agenda scrollen
-function v10NaarAgenda(){ v10InitCal(); var el=document.getElementById('v10-cal'); if(!el) return;
+function v10NaarAgenda(){ v10InitCal(); var el=document.getElementById('traject-gesprek')||document.getElementById('v10-cal'); if(!el) return;
   var y=el.getBoundingClientRect().top+window.scrollY-84; window.scrollTo({top:y,behavior:'smooth'}); }
 // Calendly op de Traject-pagina: pas laden als de pagina zichtbaar is
 function v10InitCal(n){ n=n||0; const el=document.getElementById('v10-cal'); if(!el||el.querySelector('iframe')) return;
