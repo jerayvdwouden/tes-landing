@@ -350,3 +350,12 @@ footer p{color:var(--dim)}
 /* ─── Weggeverspagina's (18 nov 2026): grotere kop, gesprek in goud, de gratis app in plaats van het traject ── */
 #page-weggevers .wg-head h1{font-size:clamp(3rem,7.5vw,5rem);line-height:1}
 .wg-start-app .wg-start-img img{object-position:0 0}
+
+/* App-kaart op de weggeverspagina's: dezelfde drie schermen als op de homepage */
+.wg-start-appbeeld{display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 70% 70% at 50% 40%,rgba(201,168,76,.12),transparent 70%),#100f0d}
+.wg-start-appbeeld .ap-beeld-los{width:92%;height:auto;margin:0 auto}
+.wg-start-appbeeld .ap-s{height:auto;object-fit:initial;opacity:1}
+.wg-start-appbeeld .ap-s-l{opacity:.9}
+.wg-start-card:hover .wg-start-appbeeld .ap-s-m{transform:translateY(-3px)}
+.wg-start-card:hover .wg-start-appbeeld .ap-s-l{transform:rotateY(24deg)}
+.wg-start-card:hover .wg-start-appbeeld .ap-s-r{transform:rotateY(-18deg)}
