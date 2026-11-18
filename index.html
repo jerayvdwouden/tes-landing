@@ -1375,12 +1375,11 @@ tesMeet('pageview',location.pathname);
     <div class="logo" onclick="showPage('home')">Execution System</div>
     <div class="nav-links">
       <button class="nav-link active" data-page="home" onclick="showPage('home');closeNavMenu()">Home</button>
-      <button class="nav-link" data-page="gesprek" onclick="showPage('gesprek');closeNavMenu()">Gratis gesprek</button>
+      <button class="nav-link nr-alleen" data-page="app" onclick="showPage('app');closeNavMenu()">Gratis app <span class="ap-beta">bèta</span></button>
       <button class="nav-link" data-page="traject" onclick="showPage('traject');closeNavMenu()">12 weken traject</button>
       <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Weggevers</button>
-      <button class="nav-link nr-alleen" onclick="apOpen();closeNavMenu()">Gratis app <span class="ap-beta">bèta</span></button>
     </div>
-    <button class="nav-cta" onclick="showPage('gesprek');closeNavMenu()">Begin nu →</button>
+    <button class="nav-cta" onclick="showPage('app');closeNavMenu()">Start gratis →</button>
     <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -1392,25 +1391,25 @@ tesMeet('pageview',location.pathname);
 <div class="wrap">
 
   <section class="hero">
+    <div class="hero-foto" aria-hidden="true"></div>
     <style>#page-home .hero h1{white-space:normal;line-height:1.02}#page-home .hero h1 em{display:block;font-size:1.9em;letter-spacing:.07em;margin-bottom:.04em}#page-home .hero h1 .hero-belofte{display:block;color:var(--white);font-size:.62em;line-height:1.14}#page-home .hero-sub{font-size:.84rem}@media(min-width:1024px){#page-home .hero-sub{font-size:.92rem}}@media(min-width:601px) and (max-width:1023px){#page-home .vsl-wrap{max-width:min(900px,max(640px,calc((100vh - 398px) * 16 / 9)))}}@media(min-width:601px) and (max-width:1023px){#page-home .hero h1{font-size:clamp(2.4rem,6vw,3.4rem)}}</style>
-    <h1><em>Ondernemers:</em><span class="hero-belofte">Breng je bedrijf verder, en groei er zelf in mee.</span></h1>
-    <p class="hero-sub">We brengen overzicht in je bedrijf en in je week. Vervolgens werk je voor twaalf weken consistent aan het ene ding dat je bedrijf nu tegenhoudt om te groeien. Wat overblijft is een bedrijf dat groeit en een week die je volhoudt.</p>
-    <div class="vsl-wrap">
-      <div class="vsl-inner" id="vslInner">
-        <iframe id="vslFrame" class="bunny vsl-frame" src="https://iframe.mediadelivery.net/embed/692336/0d86c42a-640a-4bed-b1cd-9558008dbb9c?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="eager" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe>
-      </div>
-    </div>
-    <button class="btn-primary" onclick="showPage('gesprek')">Ik wil mijn bedrijf laten groeien →</button>
-    <p class="cta-note">Geen betaalkaart &nbsp;·&nbsp; Geen verplichting</p>
+    <h1><em>Ondernemers:</em><span class="hero-belofte">Win je tijd terug voor het werk dat je bedrijf laat groeien.</span></h1>
+    <p class="hero-sub">We brengen overzicht in je bedrijf en in je week. Vervolgens werk je voor twaalf weken consistent aan het ene ding dat je bedrijf nu tegenhoudt om te groeien. Wat overblijft is een bedrijf dat groeit, en tijd die je hebt teruggewonnen.</p>
+    <button class="btn-primary" onclick="showPage('app')">Start gratis →</button>
   </section>
 
-  <div class="div nr-alleen" id="gratis-app"><span>gratis app</span></div>
-  <section class="nr-alleen ap-blok">
-    <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
-    <h2 class="ap-h2">Probeer de app <span class="u">gratis</span></h2>
-    <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
-    <button class="btn-primary" type="button" onclick="apOpen()">Maak een gratis account →</button>
-    <p class="cta-note">Gratis &nbsp;·&nbsp; Geen betaalkaart &nbsp;·&nbsp; Bètaversie</p>
+  <section class="nr-alleen ap-kaart" id="gratis-app" aria-label="Gratis app">
+    <div class="ap-kop"><h2 class="ap-h2">Gratis app</h2></div>
+    <div class="ap-beeld" aria-hidden="true">
+      <img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy">
+    </div>
+    <div class="ap-tekst">
+      <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Zo weet je wat nu het belangrijkste is om aan te werken, en krijg je de andere belangrijke taken ook gedaan. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
+      <button class="btn-primary" type="button" onclick="showPage('app')">Start gratis →</button>
+      <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
+    </div>
   </section>
 
   <div class="div nr-weg" id="gratis"><span>start hier</span></div>
@@ -1449,7 +1448,7 @@ tesMeet('pageview',location.pathname);
 
   <section aria-label="Gratis weggevers">
     <div class="section-head">
-      <h2>Het meest gedownload</h2>
+      <h2>Gratis werkbladen</h2>
       <p>Werkbladen uit het systeem. Kies er een, vul je e-mail in en je hebt 'm direct.</p>
     </div>
     <div class="hw-vier" id="hw-vier"></div>
@@ -1465,47 +1464,42 @@ tesMeet('pageview',location.pathname);
   }
   /* Zoveel kolommen als er weggevers zijn, met hoogstens twee per groep.
      Zijn het er nog geen vier, dan vullen de kaarten die er zijn de ruimte. */
-  function hwBouw(ondernemers, algemeen){
+  /* Hoogstens vier kaarten, zonder kopjes erboven. Het aantal komt als klasse op
+     het raster, zodat er nooit één kaart los op een rij staat (zie huisstijl.css). */
+  function hwBouw(lijst){
     var el = document.getElementById('hw-vier'); if (!el) return;
-    var o = ondernemers.slice(0,2), a = algemeen.slice(0,2);
-    var kolommen = o.length + a.length;
-    if (!kolommen) { el.innerHTML = ''; return; }
-    el.style.gridTemplateColumns = 'repeat(' + kolommen + ',minmax(0,1fr))';
-    var h = '';
-    if (o.length) h += '<div class="hw-label" style="grid-column:span ' + o.length + '">Voor ondernemers</div>';
-    if (a.length) h += '<div class="hw-label' + (o.length ? ' hw-split' : '') + '" style="grid-column:span ' + a.length + '">Veel gedownload</div>';
-    h += o.map(function(w){ return '<div>' + wgKaart(w) + '</div>'; }).join('');
-    h += a.map(function(w, i){ return '<div' + (i === 0 && o.length ? ' class="hw-split"' : '') + '>' + wgKaart(w) + '</div>'; }).join('');
-    el.innerHTML = h;
+    var k = lijst.slice(0,4);
+    el.className = 'hw-vier hw-n' + k.length;
+    el.style.gridTemplateColumns = '';
+    el.innerHTML = k.map(function(w){ return '<div>' + wgKaart(w) + '</div>'; }).join('');
   }
   function hwLaad(){
     fetch(WG_API + '/api/weggevers').then(function(r){ return r.json(); }).then(function(d){
       var alle = (d && d.weggevers) || [];
       alle.sort(function(a,b){ return (b.downloads||0) - (a.downloads||0); });
-      hwBouw(alle.filter(hwVoorOndernemers), alle.filter(function(w){ return !hwVoorOndernemers(w); }));
+      hwBouw(alle.filter(function(w){ return w.slug !== 'execution-blueprint'; }));
     }).catch(function(){});
   }
   // WG_API en wgKaart staan verderop in de pagina, dus wachten tot alles is ingelezen
   window.addEventListener('DOMContentLoaded', hwLaad);
   </script>
 
-  <div class="div"><span>wat mensen zeggen</span></div>
 
-  <section class="hq" aria-label="Wat mensen zeggen">
-    <div class="hq-grid">
-      <article class="hq-q">
-        <p>&ldquo;Ik heb twee startende ondernemers geholpen: voor allebei heb ik een marketingstrategie gebouwd, met onderzoek en voorbeelden erbij. Daarmee heb ik praktijkervaring opgedaan en bewijs opgebouwd dat ik kan laten zien aan bedrijven. Daarvoor had ik vooral dromen, maar geen push. Wat het verschil maakte: het systeem dwingt je om eerlijk te zijn. Ik kan niet drie weken lang hetzelfde zeggen.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Max Groenendijk &middot; Creative Business student</b><span>Twee marketingstrategie&euml;n gebouwd</span></div></div>
-      </article>
-      <article class="hq-q">
-        <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen. Dat was nooit in me opgekomen; puur door die gesprekken zijn we daarop uitgekomen.&rdquo;</p>
-        <div class="hq-who"><div class="hq-avatar"></div><div><b>Lucas Groenendijk &middot; 18</b><span>Van idee naar eigen padel-app</span></div></div>
-      </article>
+
+
+
+  <div class="div" id="systeem"><span>het systeem</span></div>
+
+  <section class="es-blok" aria-label="Wat is het Execution System?">
+    <div class="section-head">
+      <h2>Wat is het Execution System?</h2>
     </div>
+    <ol class="es-drie">
+      <li class="es-hoofd"><span class="es-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4.2-4.2"/></svg></span><span class="es-k">01</span><b>Je knelpunt vinden</b><p>Eerst zoeken we uit wat jouw bedrijf nu het hardste zou laten groeien. Dit kan bijvoorbeeld zitten in je aanbod, in je marketing, in je sales, in het vervullen van je aanbod of in je mankracht. Daar werk je twaalf weken aan, en niet aan vijftig andere dingen. Haal je dat knelpunt weg, dan gaat je bedrijf harder groeien.</p></li>
+      <li><span class="es-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="es-k">02</span><b>Tijd vrijmaken</b><p>We schrappen taken, geven werk weg dat een ander kan doen en maken processen sneller. Door die tijd terug te winnen, creëren we rust, overzicht en de mogelijkheid om extra uren te stoppen in het knelpunt van je onderneming, waardoor je onderneming nog sneller gaat groeien.</p></li>
+      <li><span class="es-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1.2 1.2L7 5M3.5 12l1.2 1.2L7 11"/><circle cx="5" cy="18" r="1.2"/></svg></span><span class="es-k">03</span><b>Overzicht en consistentie</b><p>Je weet elke week wat er moet gebeuren, zodat het belangrijkste af is voordat de rest aan de beurt komt. Elke week spreken we elkaar en zie je in de app wat je gedaan hebt. Zo blijf je consistent, ook in de weken dat het tegenzit.</p></li>
+    </ol>
   </section>
-
-
-
 
   <div class="div" id="vragen"><span>veelgestelde vragen</span></div>
 
@@ -1534,24 +1528,24 @@ tesMeet('pageview',location.pathname);
       @media(max-width:640px){.vq-q{font-size:.97rem}.vq-a-in p{padding-left:1.15rem}}
     </style>
     <div class="hfaq-l">
-      <h2>Hoe het werkt, in het kort.</h2>
+      <h2>Veelgestelde vragen</h2>
       <p>Wat het systeem is, wat het van je vraagt en wat het je oplevert.</p>
     </div>
     <div class="hfaq-list vq-list" id="hfaq"></div>
     <div class="hfaq-cta">
-      <button class="btn-primary" onclick="showPage('gesprek')">Ik wil mijn bedrijf laten groeien &rarr;</button>
+      <button class="btn-primary" onclick="showPage('app')">Start gratis &rarr;</button>
       <div class="hfaq-note">Gratis gesprek &middot; 1 uur &middot; online</div>
     </div>
   </section>
   <script>
   (function(){
     var VRAGEN=[
-      { q:'Wat levert dit mij op?', a:['Eerst zoeken we uit wat je bedrijf nu tegenhoudt: te weinig aanvragen, te weinig mensen die ja zeggen, of een levering die vastloopt. Daar werk je twaalf weken aan, en niet aan vijftig andere dingen. Haal je dat knelpunt weg, dan gaat je bedrijf harder groeien.','Daarnaast cre&euml;ren we meer tijd in je agenda. We schrappen taken, geven werk weg dat een ander kan doen en optimaliseren processen zodat ze sneller lopen. Een taak die nu twee uur kost, kost je straks misschien twintig minuten. Die uren gaan naar je knelpunt, of naar iets anders dat jij belangrijk vindt.','En we cre&euml;ren overzicht in je onderneming doordat je elke week weet wat er moet gebeuren, zodat het belangrijkste af is voordat de rest aan de beurt komt.'] },
-      { q:'Waarom lukt het nu wel, terwijl cursussen en coaches niet hielpen?', a:['Omdat je elke week iemand tegenover je hebt die nakijkt of het ook echt gebeurd is. Een cursus kijkt niet mee. Een businesscoach vertelt je wat je zou moeten doen en is daarna weg. Je weet vaak allang wat je moet doen, het komt er alleen niet van.','Het verschil merk je na twaalf weken: bij een cursus heb je kennis, hier ligt er iets af.'] },
-      { q:'Hoeveel tijd kost het mij?', a:['Het levert je vooral tijd op. We snijden meteen in je agenda: taken die niets opleveren gaan eruit, werk dat een ander kan doen geef je weg, en processen die te lang duren maken we korter.','Het traject zelf kost je anderhalf uur per week. Dat is drie kwartier voor ons gesprek, een half uur om je week te plannen en te scoren, en een paar minuten per dag in de app.','Die anderhalf uur verdien je direct terug. Je weet daarna meteen wat deze week het belangrijkste is, in plaats van uren te stoppen in taken die je bedrijf niet verder brengen.'] },
-      { q:'Moet mijn doel over mijn bedrijf gaan?', a:['Nee, een persoonlijk doel mag ook, en het hoeft niet direct omzet op te leveren. De eis is dat het bijdraagt aan de groei van je bedrijf, of eraan dat je dit jarenlang kunt blijven doen en het leuk blijft vinden.','Je website online zetten helpt direct. Drie keer per week sporten helpt via jou: je slaapt beter, je werkt scherper en je houdt het langer vol. Om zes uur stoppen geeft je rust, waardoor de uren die je w&eacute;l werkt meer opleveren.','Je bedrijf draait voor een groot deel op jou. Word jij sterker, dan merkt je bedrijf dat ook.'] },
-      { q:'Wat als ik mijn doel niet haal?', a:['Voldoe je aan de voorwaarden en haal je je doel niet, dan heb je recht op je hele investering terug.','De voorwaarden zijn simpel: je maakt het traject af en je komt opdagen, met maximaal twee gemiste gesprekken. Een gemist gesprek haal je in de week erna gewoon in.','Daarmee riskeer je je tijd en je inzet, niet je geld.'] },
-      { q:'Hoe begin ik?', a:['Je plant een gratis gesprek van een uur, online. Je betaalt niets en je zit nergens aan vast. Het enige dat ik vraag is dat je komt opdagen.','In dat uur maken we van je belangrijkste doel een plan voor de komende twaalf weken: wat het doel is, waar je nu staat, en wat er elke week moet gebeuren.','Ga je daarna niet verder, dan houd je het plan en voer je het zelf uit. Je weet dan in elk geval waar je moet beginnen.','Ga je wel verder, dan is na twaalf weken het knelpunt weg dat je groei tegenhield en groeit je bedrijf harder. Er staan uren vrij in je agenda. En je hebt overzicht: je weet elke week wat er als eerste moet gebeuren. Haal je je doel niet, dan krijg je je investering terug.'] }
+      { q:'Hoe begin ik?', a:['Er zijn twee manieren, en ze zijn allebei gratis.','Plan een gratis gesprek van een uur, online. Ik laat je zien hoe de app voor jou werkt, en we maken een gericht doel en een plan voor de komende drie maanden. Wil je groeien, dan richten we ons op het knelpunt van je bedrijf. Wil je meer rust en overzicht, dan op tijd terugwinnen. Het plan staat daarna direct in je app. Het plan is van jou, ook als je niet aan het traject begint.','Of begin zelf in de gratis app. Daar maak je je eigen plan en houd je het bij.','Je zit nergens aan vast. Het enige wat ik bij een gesprek vraag, is dat je komt opdagen.'] },
+      { q:'Hoeveel tijd kost het mij?', a:['Het levert je vooral tijd op. We winnen vanaf het begin tijd voor je terug: werk van weinig waarde schrappen we, besteed je uit of maken we korter. De tijd die vrijkomt, steek je in het werk dat je bedrijf vooruit helpt.','Wat je erin stopt, is ongeveer anderhalf uur per week: zo’n drie kwartier voor ons gesprek, een half uur om je week te plannen en te scoren, en een paar minuten per dag in de app. Heb je meer tijd nodig in een gesprek, dan nemen we die. Heb je minder nodig, dan is dat ook goed.'] },
+      { q:'Waarom zou dit werken?', a:['Eerst krijg je inzicht. De meeste mensen weten wel wat ze moeten doen. We maken scherp wat voor jou het belangrijkste is.','Daarna maken we het specifiek. We stellen een plan op dat het je zo makkelijk mogelijk maakt om die acties uit te voeren. Daarvoor maken we ook ruimte in je agenda: wat weinig oplevert gaat eruit, zodat er tijd is voor wat echt belangrijk is.','Dan het lastigste: het volhouden. Daar zit het verschil. Elke week spreken we elkaar en kijken we samen of het gebeurd is. Ook in de weken dat het tegenzit, want juist dan is het makkelijk om af te haken.','Een zzp’er die ik begeleidde, startte in twaalf weken zijn bedrijf en kreeg zijn eerste klanten. En haal je je doel niet, dan krijg je je investering terug.'] },
+      { q:'Wat als ik mijn doel niet haal?', a:['Dan krijg je je hele investering terug.','Het doel leggen we in de eerste week samen vast. Daarop wordt het aan het eind beoordeeld.','Ik vraag daarvoor drie dingen: je maakt het traject af, inclusief het eindgesprek in week 13, je betaalt op tijd, en je komt opdagen. Mis je een gesprek en halen we het de week erna in, dan telt het niet als gemist. Je mag er maximaal twee echt missen.','Daarmee riskeer je je tijd en je inzet, niet je geld.'] },
+      { q:'Wat kost het?', a:['Starten kost niets. De app is gratis, en je kunt er meteen in beginnen.','Het meeste haal je eruit met een gratis gesprek van een uur. Je gaat de deur uit met een helder doel en een concreet plan, gebouwd op het hele systeem en direct klaar in je app. Het plan is van jou, ook als je niet aan het traject begint.','Wil je zeker weten dat het lukt? Dan is er het traject van drie maanden, voor €799 per maand exclusief btw. In die drie maanden los je het knelpunt op dat je bedrijf nu tegenhoudt, en win je je tijd terug. Haal je je doel niet, dan krijg je je geld terug. Je riskeert dus je tijd en je inzet, niet je geld.'] },
+      { q:'Voor wie is het niet?', a:['Het traject is niet voor je als je iemand zoekt die het werk voor je doet. Ik help bouwen, maar het bouwen doe je zelf. Het is ook niet voor je als je op zoek bent naar een snel trucje.','Heb je personeel en wil je leren een team aan te sturen, dan zit je hier niet goed. En zit je in een burn-out of heb je psychische klachten, dan is een therapeut een betere eerste stap.','Wil je bouwen aan je bedrijf terwijl je je tijd terugwint, en ben je klaar om twaalf weken door te zetten? Dan past het wel.'] }
     ];
     var el=document.getElementById('hfaq'); if(!el) return;
     el.innerHTML=VRAGEN.map(function(f,i){
@@ -1587,7 +1581,7 @@ tesMeet('pageview',location.pathname);
         <p>Ik ben zelf ondernemer, dus ik ken de week van een ondernemer. Geen baas die grenzen stelt, een agenda die elke week anders is, werk dat altijd door kan. Daardoor komt het werk dat je bedrijf laat groeien er nooit van. En sporten en op tijd thuis zijn ook niet.</p>
         <p><strong>Businesscoaches houden je niet consistent. Levenscoaches snappen de zakelijke kant niet. Daar zit mijn plek.</strong></p>
         <p>Haal je je doel niet, dan krijg je je geld terug.</p>
-        <button class="btn-primary" onclick="showPage('gesprek')">Ik wil mijn bedrijf laten groeien &rarr;</button>
+        <button class="btn-primary" onclick="showPage('app')">Start gratis &rarr;</button>
         <div class="hfaq-note" style="margin-top:.8rem">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
     </div>
@@ -1626,7 +1620,7 @@ tesMeet('pageview',location.pathname);
     </div>
 
     <div class="cta-row" data-reveal>
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn v10-hoofdknop">Gratis gesprek</a>
         <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
   </section>
@@ -1635,15 +1629,15 @@ tesMeet('pageview',location.pathname);
   <section class="info" id="info" aria-label="Wat je krijgt, garantie en vragen">
     <div class="tabs-wrap">
       <div class="tabs" role="tablist">
-        <button class="tab" role="tab" data-tab="krijgt" aria-selected="false" aria-controls="pane-krijgt">Wat je krijgt</button>
-        <button class="tab" role="tab" data-tab="garantie" aria-selected="true" aria-controls="pane-garantie">Garantie</button>
+        <button class="tab" role="tab" data-tab="krijgt" aria-selected="true" aria-controls="pane-krijgt">Wat je krijgt</button>
+        <button class="tab" role="tab" data-tab="garantie" aria-selected="false" aria-controls="pane-garantie">Garantie</button>
         <button class="tab" role="tab" data-tab="vragen" aria-selected="false" aria-controls="pane-vragen">Vragen</button>
       </div>
     </div>
 
     <div class="panel" id="panel">
 
-      <div class="pane" id="pane-krijgt" role="tabpanel" hidden>
+      <div class="pane" id="pane-krijgt" role="tabpanel">
         <div class="krijgt-in" data-panel>
           <div class="sec-head">
             <div class="mono gold">Wat je krijgt</div>
@@ -1667,26 +1661,29 @@ tesMeet('pageview',location.pathname);
             </div>
           </div>
           <div class="cta-row">
-        <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+        <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
         <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
       </div>
         </div>
       </div>
 
-      <div class="pane" id="pane-garantie" role="tabpanel">
-        <div class="gar-in" data-panel>
-          <div class="prijs-kaart">
-            <div class="mono gold">De prijs</div>
-            <div class="prijs-bedrag">&euro;799 <span>per maand, exclusief btw</span></div>
-            <p>Het traject duurt drie maanden. Inclusief btw is dat &euro;966,79 per maand.</p>
-          </div>
-          <div class="gar-kaart">
-            <div class="gar-zegel" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4l15 5.5v12c0 10-6.4 18-15 22-8.6-4-15-12-15-22v-12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 24.5l5.5 5.5L32 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="mono gold">De garantie</div>
-            <h2 class="display">Geen resultaat.<br>Geld terug.</h2>
-            <p class="lead">In week &eacute;&eacute;n leggen we vast welk doel je in twaalf weken haalt. Maak je het traject af, kom je opdagen en haal je je doel toch niet, dan krijg je je volledige investering terug.</p>
-            <p class="sub">De enige voorwaarde: maximaal twee gemiste gesprekken.</p>
-            <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+      <div class="pane" id="pane-garantie" role="tabpanel" hidden>
+        <div class="gar-in gar-samen" data-panel>
+          <div class="gar-kaart gar-twee">
+            <div class="gar-links">
+              <div class="gar-zegel" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 4l15 5.5v12c0 10-6.4 18-15 22-8.6-4-15-12-15-22v-12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 24.5l5.5 5.5L32 19" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="mono gold">De garantie</div>
+              <h2 class="display">Geen resultaat.<br>Geld terug.</h2>
+              <p class="lead">In week &eacute;&eacute;n leggen we vast welk doel je in twaalf weken haalt. Maak je het traject af, kom je opdagen en haal je je doel toch niet, dan krijg je je volledige investering terug.</p>
+              <p class="sub">De enige voorwaarde: maximaal twee gemiste gesprekken.</p>
+            </div>
+            <div class="gar-rechts">
+              <div class="mono gold">De investering</div>
+              <div class="gar-bedrag">&euro;799</div>
+              <div class="gar-per">per maand, exclusief btw</div>
+              <p>Het traject duurt drie maanden. Inclusief btw is dat &euro;966,79 per maand.</p>
+              <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
+            </div>
           </div>
         </div>
       </div>
@@ -1700,7 +1697,7 @@ tesMeet('pageview',location.pathname);
           </div>
           <div class="faq" id="faq"></div>
           <div class="cta-row">
-            <a href="#v10-cal" onclick="v10NaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+            <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
             <div class="mono muted" style="font-size:11px">1 uur &middot; online &middot; geen verplichting</div>
           </div>
         </div>
@@ -1710,14 +1707,19 @@ tesMeet('pageview',location.pathname);
   </section>
 
   <!-- 04 de stap -->
-  <section class="stap" id="traject-gesprek" aria-label="Plan een gesprek">
+  <section class="stap stap-twee" id="traject-gesprek" aria-label="Plan een gesprek">
     <div class="para para-1" data-para="0.06"></div>
-    <div class="para para-2" data-para="0.14"></div>
-    <div class="para para-3" data-para="-0.1"></div>
     <div class="stap-in" data-reveal>
-      <div class="mono gold">Gratis gesprek &middot; 1 uur &middot; geen verplichting</div>
-      <h2 class="display">Eén gratis uur.<br>Daarna heb je een plan.</h2>
-      <p>In een uur maken we je doel meetbaar, bouwen we je eerste actieplan en spreken we af hoe je jezelf de komende twaalf weken vasthoudt. Plus het gratis Execution System Werkboek.</p>
+      <div class="stap-links">
+        <h2 class="display">Plan je gratis gesprek</h2>
+        <p>Een uur online, met mij. Dit doen we samen:</p>
+        <ul class="stap-punten">
+          <li>Ik laat je zien hoe de gratis app voor jou werkt.</li>
+          <li>Wil je groeien, dan zoeken we het knelpunt van je bedrijf. Wil je meer rust en overzicht, dan kijken we waar je tijd terugwint.</li>
+          <li>We maken een gericht doel en een plan voor de komende twaalf weken.</li>
+          <li>Het plan staat direct in je app. Het is van jou, ook als je niet aan het traject begint.</li>
+        </ul>
+      </div>
       <div class="cal" data-reveal>
         <div class="mono muted">Kies een moment dat jou uitkomt</div>
         <div class="calendly-inline-widget" id="v10-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c" style="min-width:280px;height:600px"></div>
@@ -1900,27 +1902,25 @@ html:not(.nr) .nr-alleen{display:none!important}
 <div class="page" id="page-weggevers">
 <div class="wg-wrap">
   <div class="wg-head">
-    <div class="wg-eye">Gratis waarde</div>
     <h1>Gratis <em>weggevers</em></h1>
     <p class="wg-sub">Werkbladen, templates en checklists voor ondernemers die alleen werken. Kies wat je nodig hebt, vul je e-mail in en je hebt 'm direct.</p>
   </div>
 
   <div class="wg-verder">
   <div class="wg-start">
-    <div class="wg-start-card" onclick="showPage('gesprek')">
+    <div class="wg-start-card wg-start-traject" onclick="showPage('gesprek')">
       <div class="wg-start-img"><img src="img/jeray.jpg" alt="Jeray tijdens een online gesprek" loading="lazy"></div>
-      <div class="wg-start-k">E&eacute;n uur &middot; met Jeray</div>
+      <div class="wg-start-k">E&eacute;n uur &middot; met demo van de app</div>
       <div class="wg-start-t">Gratis online gesprek</div>
-      <div class="wg-start-s">We maken jouw doel meetbaar en bouwen je eerste plan. Online, en je zit nergens aan vast.</div>
+      <div class="wg-start-s">Ik laat je de gratis app zien en we maken samen je doel en je plan. Dat plan staat daarna direct in je app, zodat je meteen kunt starten, ook zonder begeleiding.</div>
       <span class="wg-start-b">Plan je gesprek &rarr;</span>
     </div>
-    <div class="wg-start-card wg-start-traject" onclick="showPage('traject')">
-      <div class="wg-start-img"><img src="img/traject-kaart.jpg" alt="Jeray met een klant" loading="lazy"></div>
-      <div class="wg-start-tag">1-op-1</div>
-      <div class="wg-start-k">1-op-1 &middot; met resultaatgarantie</div>
-      <div class="wg-start-t">12 weken traject</div>
-      <div class="wg-start-s">Persoonlijke begeleiding, wekelijkse meetings en een systeem dat je consistent houdt. Met resultaatgarantie.</div>
-      <span class="wg-start-b">Bekijk het traject &rarr;</span>
+    <div class="wg-start-card wg-start-app" onclick="showPage('app')">
+      <div class="wg-start-img wg-start-appbeeld" role="img" aria-label="De gratis app op laptop en telefoon"><div class="ap-beeld ap-beeld-los"><img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy"><img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy"><img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy"></div></div>
+      <div class="wg-start-k">Gratis &middot; b&egrave;ta</div>
+      <div class="wg-start-t">De gratis app</div>
+      <div class="wg-start-s">Je ziet waar je bedrijf nu op vastloopt, kiest &eacute;&eacute;n doel voor twaalf weken en plant je week.</div>
+      <span class="wg-start-b">Bekijk de app &rarr;</span>
     </div>  </div>
   </div>
 
@@ -2105,11 +2105,11 @@ html:not(.nr) .nr-alleen{display:none!important}
   <div class="wd-sec">
     <div class="wd-sec-h">Verder kijken</div>
     <div class="wg-start">
-      <div class="wg-start-card" onclick="showPage('gesprek')">
+      <div class="wg-start-card wg-start-traject" onclick="showPage('gesprek')">
         <div class="wg-start-img"><img src="img/jeray.jpg" alt="Jeray tijdens een online gesprek" loading="lazy"></div>
-        <div class="wg-start-k">E&eacute;n uur &middot; met Jeray</div>
+        <div class="wg-start-k">E&eacute;n uur &middot; met demo van de app</div>
         <div class="wg-start-t">Gratis online gesprek</div>
-        <div class="wg-start-s">We maken jouw doel meetbaar en bouwen je eerste plan. Online, en je zit nergens aan vast.</div>
+        <div class="wg-start-s">Ik laat je de gratis app zien en we maken samen je doel en je plan. Dat plan staat daarna direct in je app, zodat je meteen kunt starten, ook zonder begeleiding.</div>
         <span class="wg-start-b">Plan je gesprek &rarr;</span>
       </div>
       <div class="wg-start-card" onclick="window.location.href='/cursus'">
@@ -2119,13 +2119,12 @@ html:not(.nr) .nr-alleen{display:none!important}
         <div class="wg-start-s">De complete methode achter Execution System in 5 modules, om in je eigen tempo te volgen.</div>
         <span class="wg-start-b">Bekijk de cursus &rarr;</span>
       </div>
-      <div class="wg-start-card wg-start-traject" onclick="showPage('traject')">
-      <div class="wg-start-img"><img src="img/traject-kaart.jpg" alt="Jeray met een klant" loading="lazy"></div>
-        <div class="wg-start-tag">1-op-1</div>
-        <div class="wg-start-k">1-op-1 &middot; met resultaatgarantie</div>
-        <div class="wg-start-t">12 weken traject</div>
-        <div class="wg-start-s">Persoonlijke begeleiding, wekelijkse meetings en een systeem dat je consistent houdt. Met resultaatgarantie.</div>
-        <span class="wg-start-b">Bekijk het traject &rarr;</span>
+      <div class="wg-start-card wg-start-app" onclick="showPage('app')">
+        <div class="wg-start-img wg-start-appbeeld" role="img" aria-label="De gratis app op laptop en telefoon"><div class="ap-beeld ap-beeld-los"><img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy"><img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy"><img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy"></div></div>
+        <div class="wg-start-k">Gratis &middot; b&egrave;ta</div>
+        <div class="wg-start-t">De gratis app</div>
+        <div class="wg-start-s">Je ziet waar je bedrijf nu op vastloopt, kiest &eacute;&eacute;n doel voor twaalf weken en plant je week.</div>
+        <span class="wg-start-b">Bekijk de app &rarr;</span>
       </div>
     </div>
   </div>
@@ -2155,7 +2154,7 @@ html:not(.nr) .nr-alleen{display:none!important}
     </div>
 
     <div class="cta-row" data-reveal>
-      <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+      <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Start gratis</a>
       <div class="mono muted" style="font-size:11px">E&eacute;n uur, online.</div>
     </div>
   </section>
@@ -2204,7 +2203,7 @@ html:not(.nr) .nr-alleen{display:none!important}
             </ol>
           </div>
           <div class="cta-row">
-            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Start gratis</a>
             <div class="mono muted" style="font-size:11px">E&eacute;n uur, online.</div>
           </div>
         </div>
@@ -2236,7 +2235,7 @@ html:not(.nr) .nr-alleen{display:none!important}
             </div>
           </div>
           <div class="cta-row">
-            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Start gratis</a>
             <div class="mono muted" style="font-size:11px">E&eacute;n uur, online.</div>
           </div>
         </div>
@@ -2251,7 +2250,7 @@ html:not(.nr) .nr-alleen{display:none!important}
           </div>
           <div class="faq" id="gm-faq"></div>
           <div class="cta-row">
-            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Plan het gratis gesprek</a>
+            <a href="#gm-agenda" onclick="gmNaarAgenda();return false" class="btn">Start gratis</a>
             <div class="mono muted" style="font-size:11px">E&eacute;n uur, online.</div>
           </div>
         </div>
@@ -2278,7 +2277,7 @@ html:not(.nr) .nr-alleen{display:none!important}
       <div class="gm-al" id="gm-al" style="display:none">
         <h3>Je staat al ingepland</h3>
         <p class="nr-weg">Vul v&oacute;&oacute;r ons gesprek de doeltool in. Dan weten we al waar je bedrijf op vastloopt, en gaat het hele uur naar je plan.</p>
-        <a href="#doeltool" onclick="showPage('doeltool');return false" class="btn nr-weg">Start de doeltool</a>
+        <a href="#doeltool" onclick="showPage('doeltool');return false" class="btn nr-weg">Start gratis</a>
         <div class="gm-mini"><u onclick="gmZetAangemeld(false)">Toch geen gesprek ingepland? Kies hier een moment</u></div>
       </div>
     </div>
@@ -2913,6 +2912,59 @@ html:not(.nr) .nr-alleen{display:none!important}
 </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     PAGE: GRATIS APP (later met een eigen video)
+════════════════════════════════════════════ -->
+<div class="page" id="page-app">
+<div class="wrap ap-pagina">
+  <section class="nr-alleen ap-kaart ap-video-kaart" aria-label="Gratis app">
+    <div class="ap-video" role="img" aria-label="Video over de gratis app, volgt binnenkort"><span class="ap-video-play" aria-hidden="true"></span><span class="ap-video-lbl">Video volgt</span></div>
+    <div class="ap-rechts">
+    <div class="ap-kop"><h2 class="ap-h2">Gratis app</h2></div>
+    <div class="ap-tekst">
+      <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Zo weet je wat nu het belangrijkste is om aan te werken, en krijg je de andere belangrijke taken ook gedaan. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
+      <div class="ap-keuze">
+        <div class="ap-knoppen">
+          <button class="btn-primary ap-hoofdknop" type="button" onclick="apNaarAgenda()">Plan een gratis gesprek →</button>
+          <button class="ap-zelfknop" type="button" onclick="apOpen()">Of start gratis in de app</button>
+        </div>
+      </div>
+      <div class="ap-eye">Nieuw &nbsp;·&nbsp; Bèta</div>
+    </div>
+    </div>
+  </section>
+
+  <section class="ap-functies" aria-label="Wat je met de app doet">
+    <div class="ap-functies-k">De app</div>
+    <div class="ap-functies-in">
+      <div class="ap-beeld ap-beeld-los" aria-hidden="true">
+        <img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy">
+        <img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy">
+        <img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy">
+      </div>
+        <div class="ap-functies-tekst">
+        <h2>Wat je met de app doet</h2>
+        <ul class="ap-punten">
+          <li>Je kiest één doel voor twaalf weken en ziet per week hoe ver je bent.</li>
+          <li>Je plant je acties per dag en vinkt ze af.</li>
+          <li>Je actiescore laat zien hoeveel van wat je plande je ook echt deed.</li>
+          <li>Grote klussen zet je op als project, verdeeld in acties.</li>
+          <li>Een gemiste actie haal je later in de week in.</li>
+          <li>Taken, ideeën en losse gedachten bewaar je in je kladblok.</li>
+          <li>Na twaalf weken kijk je terug en plan je de volgende periode.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ap-agenda" id="ap-agenda" aria-label="Plan je gratis gesprek">
+    <div class="ap-functies-k">Gratis gesprek &middot; 1 uur &middot; online</div>
+    <h2 class="ap-agenda-h">Kies een moment dat jou uitkomt</h2>
+    <div class="calendly-inline-widget ap-cal" id="ap-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c"></div>
+  </section>
+</div>
+</div>
+
 <div class="page" id="page-cursussen">
 <div class="mc-wrap">
 
@@ -3021,7 +3073,7 @@ html:not(.nr) .nr-alleen{display:none!important}
 
     <div class="mc-bottom">
       <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.1rem">Cursussen worden binnenkort beschikbaar. Zet de eerste stap al vandaag.</p>
-      <button class="btn-primary" onclick="showPage('doeltool')">Ik wil mijn doelen halen →</button>
+      <button class="btn-primary" onclick="showPage('app')">Start gratis →</button>
     </div>
   </div>
 
@@ -7266,7 +7318,7 @@ window.addEventListener('message',function(e){
   if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
   var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
   if(fr&&fr.closest('#rt')) return;   // de nieuwe route regelt zijn eigen boeking
-  var plek=(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
+  var plek=(fr&&fr.closest('#page-app'))?'app':(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
   var p=(e.data.payload||{});
   var eventUri=String((p.event||{}).uri||''), inviteeUri=String((p.invitee||{}).uri||'');
   if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:eventUri,invitee:inviteeUri});
@@ -7286,7 +7338,7 @@ window.addEventListener('message',function(e){
 
 
 // Alle CTA's op Traject: naar de agenda scrollen
-function v10NaarAgenda(){ v10InitCal(); var el=document.getElementById('v10-cal'); if(!el) return;
+function v10NaarAgenda(){ v10InitCal(); var el=document.getElementById('traject-gesprek')||document.getElementById('v10-cal'); if(!el) return;
   var y=el.getBoundingClientRect().top+window.scrollY-84; window.scrollTo({top:y,behavior:'smooth'}); }
 // Calendly op de Traject-pagina: pas laden als de pagina zichtbaar is
 function v10InitCal(n){ n=n||0; const el=document.getElementById('v10-cal'); if(!el||el.querySelector('iframe')) return;
@@ -7312,7 +7364,7 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.nav-group')) docum
 // ─── Weggevers-pagina ─────────────────────────────────────────
 var WG_API = window.TES_BACKEND || 'https://tes-backend-mbyy.onrender.com';
 var WG_ICONEN=['doel','plan','boek','lijst','vlam','kompas','grafiek','pen'];
-var WG_LIJST=null, WG_CAT='', WG_HUIDIG=null;
+var WG_LIJST=null, WG_CAT='Weggevers', WG_HUIDIG=null;   // de pagina opent op het filter Weggevers
 function wgEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function wgLaad(){
   if (WG_LIJST) { wgRender(); return; }
@@ -7328,9 +7380,9 @@ function wgCursusKaart(){
     +'<div><button class="wg-btn" type="button">Bekijk de cursus &rarr;</button></div></div>';
 }
 function wgKaart(w){
-  var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel', vb=(w.voorbeelden||[])[0];
+  var ico=WG_ICONEN.indexOf(w.icoon)>=0?w.icoon:'doel', vb=(w.voorbeelden||[])[0], vb2=(w.voorbeelden||[])[1];
   return '<div class="wg-card'+(vb?' met-thumb':'')+'" onclick="openWeggever(\''+wgEsc(w.slug)+'\')">'
-    +(vb?'<div class="wg-thumb"><img src="'+wgEsc(vb)+'" alt="" loading="lazy"><div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div></div>':'<div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>')
+    +(vb?'<div class="wg-papier'+(vb2?'':' een')+'">'+(vb2?'<img class="wg-p2" src="'+wgEsc(vb2)+'" alt="" loading="lazy">':'')+'<img class="wg-p1" src="'+wgEsc(vb)+'" alt="" loading="lazy"></div>':'<div class="wg-ico"><svg><use href="#wg-i-'+ico+'"/></svg></div>')
     +'<div class="wg-t">'+wgEsc(w.titel)+'</div>'
     +'<div class="wg-s">'+wgEsc(w.beschrijving||'')+'</div>'
     +'<div><button class="wg-btn" type="button">Bekijk &amp; download &rarr;</button></div></div>';
@@ -7349,7 +7401,7 @@ function wgRender(){
   ].filter(function(g){ return g.html; });
   cats.hidden=false;
   cats.innerHTML=['<button class="wg-cat'+(WG_CAT?'':' on')+'" onclick="wgFilter(\'\')">Alles</button>'].concat(groepen.map(function(g){ return '<button class="wg-cat'+(WG_CAT===g.naam?' on':'')+'" onclick="wgFilter(\''+g.naam+'\')">'+g.naam+'</button>'; })).join('');
-  lijst.innerHTML=groepen.filter(function(g){ return !WG_CAT||WG_CAT===g.naam; }).map(function(g){ return '<div class="wg-sec"><div class="wg-sec-h">'+g.naam+'</div><div class="wg-grid">'+g.html+'</div></div>'; }).join('');
+  lijst.innerHTML=groepen.filter(function(g){ return !WG_CAT||WG_CAT===g.naam; }).map(function(g){ return '<div class="wg-sec"><div class="wg-sec-h">'+g.naam+'</div><div class="wg-grid wg-n'+(g.html.split('class="wg-card').length-1)+'">'+g.html+'</div></div>'; }).join('');
 }
 function wgFilter(c){ WG_CAT=c; wgRender(); }
 function wgOpen(slug){
@@ -7643,6 +7695,11 @@ function gmVideo(){ var f=document.getElementById('gm-video'); if(f&&!f.src&&f.d
 function gmInitCal(n){ n=n||0; var el=document.getElementById('gm-cal'); if(!el||el.querySelector('iframe')) return;
   if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:calendlyParams(el.dataset.url),parentElement:el}); }
   else if(n<20) setTimeout(function(){ gmInitCal(n+1); },500); }
+function apInitCal(n){ n=n||0; var el=document.getElementById('ap-cal'); if(!el||el.querySelector('iframe')) return;
+  if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:calendlyParams(el.dataset.url),parentElement:el}); }
+  else if(n<20) setTimeout(function(){ apInitCal(n+1); },500); }
+function apNaarAgenda(){ apInitCal(); var el=document.getElementById('ap-agenda'); if(!el) return;
+  var y=el.getBoundingClientRect().top+window.scrollY-60; window.scrollTo({top:y,behavior:'smooth'}); }
 function gmNaarAgenda(){ gmInitCal(); var el=document.getElementById('gm-agenda'); if(!el) return;
   var y=el.getBoundingClientRect().top+window.scrollY-60; window.scrollTo({top:y,behavior:'smooth'}); }
 // Al ingepland (op dit apparaat, of zelf aangegeven)? Dan geen agenda, maar een bevestiging
@@ -9459,5 +9516,6 @@ html.rt-dt .dt-stappen{display:none!important}
   }
 })();
 </script>
+<link rel="stylesheet" href="/huisstijl.css">
 </body>
 </html>
