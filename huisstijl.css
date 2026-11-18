@@ -262,3 +262,22 @@ footer p{color:var(--dim)}
   .ap-kaart .ap-tekst .ap-sub{margin-bottom:1.2rem}
   .ap-kaart .ap-tekst .ap-eye{margin-top:.8rem}
 }
+
+/* ─── Blok "Wat is het Execution System?": beeldender (18 nov 2026) ──
+   Iconen in een gouden cirkel (huisstijl), groot nummer op de achtergrond,
+   het eerste onderdeel uitgelicht met een gouden rand, en een lijn die de drie verbindt. */
+.es-drie{position:relative;gap:1.2rem}
+.es-drie li{position:relative;overflow:hidden;padding:1.6rem 1.4rem 1.5rem;
+  background:linear-gradient(180deg,rgba(201,168,76,.06),rgba(201,168,76,0) 45%),#121110;transition:border-color .25s,transform .25s}
+.es-drie li:hover{border-color:rgba(201,168,76,.55);transform:translateY(-3px)}
+.es-drie li.es-hoofd{border-color:var(--gold);box-shadow:0 0 30px rgba(201,168,76,.12)}
+.es-ico{display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;border:2px solid var(--gold);background:#0A0A0A;margin-bottom:1rem;position:relative;z-index:1}
+.es-ico svg{width:24px;height:24px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.es-k{position:absolute;top:.9rem;right:1.1rem;margin:0;font-family:'Abolition',sans-serif;font-size:4.2rem;line-height:1;letter-spacing:0;color:rgba(201,168,76,.13)}
+.es-drie b{font-size:1.65rem}
+/* verbindingslijn achter de cirkels, alleen als ze naast elkaar staan */
+@media(min-width:861px){
+  .es-drie::before{content:'';position:absolute;left:12%;right:12%;top:calc(1.6rem + 27px);height:1px;z-index:0;
+    background:linear-gradient(90deg,transparent,rgba(201,168,76,.45) 15%,rgba(201,168,76,.45) 85%,transparent)}
+  .es-drie li{background-clip:padding-box}
+}
