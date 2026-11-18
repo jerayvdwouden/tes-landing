@@ -139,7 +139,7 @@ footer p{color:var(--dim)}
 .wg-card:hover .wg-papier .wg-p1{transform:rotate(-5deg) translateY(-6px)}
 .wg-card:hover .wg-papier .wg-p2{transform:rotate(7deg) translate(6px,-3px)}
 
-/* ─── Rasters met weggevers: nooit één kaart los op een rij ──────
+/* ─── Rasters met werkbladen: nooit één kaart los op een rij ──────
    4 kaarten: 4 naast elkaar, of 2 bij 2. 3 kaarten: 3 naast elkaar, of onder elkaar.
    2 kaarten: naast elkaar. 1 kaart: in het midden. */
 #hw-vier.hw-n4,.wg-grid.wg-n4,.wg-grid.wg-n8{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
@@ -234,3 +234,12 @@ footer p{color:var(--dim)}
 .ap-kaart .ap-beeld .ap-s-r{right:1%;top:12%;width:19%;transform:rotateY(-18deg);transform-origin:right center;z-index:4}
 .ap-kaart .ap-beeld::after{position:absolute;left:14%;right:14%;bottom:-1.6rem;width:auto;margin:0}
 @media(max-width:600px){.ap-kaart .ap-beeld{margin-bottom:2.6rem}.ap-kaart .ap-beeld::after{bottom:-1.2rem}}
+
+/* ─── Homepage: blok "Wat is het Execution System?" (18 nov 2026) ── */
+.es-blok{max-width:1080px;margin:0 auto}
+.es-drie{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;text-align:left}
+.es-drie li{background:#121110;border:1px solid rgba(245,240,232,.10);border-radius:10px;padding:1.4rem 1.3rem}
+.es-k{display:block;font-family:var(--hs-mono);font-size:.62rem;letter-spacing:.2em;color:var(--gold);margin-bottom:.7rem}
+.es-drie b{display:block;font-family:'Abolition',sans-serif;font-weight:400;text-transform:uppercase;font-size:1.5rem;line-height:1;letter-spacing:.02em;color:var(--white);margin-bottom:.6rem}
+.es-drie p{margin:0;font-size:.9rem;line-height:1.6;color:var(--muted)}
+@media(max-width:860px){.es-drie{grid-template-columns:1fr}}
