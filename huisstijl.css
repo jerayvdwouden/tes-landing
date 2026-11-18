@@ -399,3 +399,16 @@ footer p{color:var(--dim)}
   #v10 .stap-twee .stap-links{align-items:center;text-align:center}
   #v10 .stap-punten{text-align:left}
 }
+
+/* ─── Trajectpagina op de telefoon: "Wat je krijgt" compact (18 nov 2026) ── */
+@media(max-width:640px){
+  #v10 .krijgt-in{gap:26px}
+  #v10 .krijgt-in .sec-head h2{font-size:40px;line-height:.95}
+  #v10 .krijgt-in [data-cols="3"]{gap:12px}
+  #v10 .krijgt-in .card{display:grid;grid-template-columns:76px minmax(0,1fr);grid-template-areas:"img titel" "tekst tekst";column-gap:14px;row-gap:10px;align-items:center;
+    padding:14px;margin:0;border:1px solid rgba(245,240,232,.10);border-radius:10px;background:#121110;transform:none}
+  #v10 .krijgt-in .card-img{grid-area:img;aspect-ratio:1;padding:0;border-radius:8px}
+  #v10 .krijgt-in .card-num{font-size:26px;left:7px;top:5px}
+  #v10 .krijgt-in .card h3{grid-area:titel;font-size:21px;line-height:1.05;margin:0}
+  #v10 .krijgt-in .card p{grid-area:tekst;font-size:14.5px;line-height:1.55;margin:0;color:#C9C2B4}
+}
