@@ -181,3 +181,12 @@ footer p{color:var(--dim)}
   background-color:var(--gold-l);background-image:linear-gradient(180deg,#EDD48E,#D9BA62);box-shadow:0 0 26px rgba(201,168,76,.45),0 6px 18px rgba(0,0,0,.4);animation:none}
 .btn-next:disabled,.btn-next[disabled]{animation:none;box-shadow:none}
 @media(prefers-reduced-motion:reduce){.btn-primary,.nav-cta,.btn-next,.wg-btn,.fc-cta,.gp-btn,.cc-btn,.avw-foot button,.pw-knop2,#v10 .btn,#gm .btn,.sitenav .nav-cta,.btn.gold,.tplband .tplbtn{animation:none}}
+
+/* ─── Homepage op de telefoon: foto als strook boven de kop (keuze A, 18 nov 2026) ── */
+@media(max-width:759px){
+  #page-home .hero{padding-top:0}
+  #page-home .hero-foto{display:block;width:100vw;margin-left:calc(50% - 50vw);height:min(70vw,420px);margin-bottom:min(-14vw,-50px);
+    background:url('/img/jeray-hero.jpg') 58% 22%/cover no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);mask-image:linear-gradient(to bottom,#000 55%,transparent 100%)}
+}
+.nav-cta{white-space:nowrap}
