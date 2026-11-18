@@ -908,6 +908,7 @@ footer .ft-links a:hover,footer .ft-links button:hover{color:var(--gold)}
 #v10 [data-cols="3"]{gap:28px}}
 @media (max-width:640px){#v10 [data-cols="4"]{grid-template-columns:minmax(0,1fr)}
 #v10 [data-cols="3"]{grid-template-columns:minmax(0,1fr);gap:48px}}
+@media(max-width:640px){#v10 .v10-br{display:none}}
 #v10 [data-reveal]{opacity:0;transform:translateY(32px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 #v10 [data-reveal="in"]{opacity:1;transform:none}
 #v10 [data-tilt]{transform-style:preserve-3d;will-change:transform}
@@ -1599,9 +1600,9 @@ tesMeet('pageview',location.pathname);
   <!-- 01 hero -->
   <section class="v10-hero" id="top" aria-label="Introductie">
     <div class="v10-hero-copy" data-reveal>
-      <div class="mono gold">Jouw doel · gegarandeerd resultaat</div>
-      <h1 class="display">Twaalf weken aan het ene ding<br>dat je bedrijf tegenhoudt.</h1>
-      <p>Elke week een &eacute;&eacute;n-op-&eacute;&eacute;n met mij, een app die bijhoudt wat je werkelijk doet, en je geld terug als je je doel niet haalt.</p>
+      <div class="mono gold">12-wekentraject · één-op-één · online</div>
+      <h1 class="display" style="text-wrap:balance">Laat je bedrijf groeien<br class="v10-br"> en win je tijd terug.</h1>
+      <p>Twaalf weken lang werk je consistent aan het ene ding dat je bedrijf tegenhoudt. Werk dat weinig oplevert gaat eruit, en die uren steek je in je groei. Elke week krijg je persoonlijke één-op-één begeleiding, online. Haal je je doel niet, dan krijg je je geld terug.</p>
     </div>
 
     <div class="stage" id="stage">
@@ -1615,21 +1616,6 @@ tesMeet('pageview',location.pathname);
       </div>
     </div>
 
-    <div class="cta-row" data-reveal>
-        <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
-        <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
-      </div>
-  </section>
-
-  <!-- 02 wat mensen zeggen -->
-  <section class="quotes" aria-label="Wat mensen zeggen">
-    <div class="mono muted">Wat mensen zeggen</div>
-    <div data-cols="1" style="max-width:620px;margin:0 auto">
-      <article class="quote" data-reveal data-tilt>
-        <p>&ldquo;Mijn grote droom is een eigen padelbaan. Maar het was een idee zonder dat ik er echt iets mee deed: geen druk erachter, geen consistentie. Nu heb ik mijn doel en zijn de stappen daarnaartoe een stuk duidelijker. Ik ben zelfs een padel-app aan het bouwen. Dat was nooit in me opgekomen; puur door die gesprekken zijn we daarop uitgekomen.&rdquo;</p>
-        <div class="who"><div class="avatar"></div><div class="who-txt"><b>Lucas Groenendijk &middot; startend ondernemer</b><span>Van idee naar eigen padel-app</span></div></div>
-      </article>
-    </div>
     <div class="cta-row" data-reveal>
         <a href="#app" onclick="showPage('app');return false" class="btn">Start gratis</a>
         <div class="mono muted" style="font-size:11px">Gratis gesprek &middot; 1 uur &middot; online</div>
