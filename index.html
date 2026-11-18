@@ -7364,7 +7364,7 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.nav-group')) docum
 // ─── Weggevers-pagina ─────────────────────────────────────────
 var WG_API = window.TES_BACKEND || 'https://tes-backend-mbyy.onrender.com';
 var WG_ICONEN=['doel','plan','boek','lijst','vlam','kompas','grafiek','pen'];
-var WG_LIJST=null, WG_CAT='', WG_HUIDIG=null;
+var WG_LIJST=null, WG_CAT='Weggevers', WG_HUIDIG=null;   // de pagina opent op het filter Weggevers
 function wgEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function wgLaad(){
   if (WG_LIJST) { wgRender(); return; }

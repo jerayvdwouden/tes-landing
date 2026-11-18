@@ -427,3 +427,22 @@ footer p{color:var(--dim)}
 #page-home .ap-kaart .ap-kop .ap-h2{font-size:clamp(2.6rem,5vw,3.6rem)}
 #page-home .ap-kaart .ap-kop::after{content:'';display:block;width:96px;height:2px;border-radius:2px;
   background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold-l) 50%,var(--gold) 80%,transparent);box-shadow:0 0 12px rgba(201,168,76,.5)}
+
+/* ─── Weggeverspagina (18 nov 2026): gesprek en app als compacte kaarten naast elkaar ── */
+@media(min-width:700px){
+  #page-weggevers .wg-start{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:2rem}
+  #page-weggevers .wg-start-card{display:grid;grid-template-columns:40% minmax(0,1fr);grid-template-rows:auto auto auto auto;column-gap:1.2rem;row-gap:0;align-content:center;padding:1rem 1.2rem 1rem 1rem}
+  #page-weggevers .wg-start-img{grid-column:1;grid-row:1 / span 4;margin:0;aspect-ratio:4/3;border-radius:10px;align-self:center}
+  #page-weggevers .wg-start-card > :not(.wg-start-img){grid-column:2}
+  #page-weggevers .wg-start-k{margin-bottom:.4rem}
+  #page-weggevers .wg-start-t{font-size:1.45rem;margin-bottom:.35rem}
+  #page-weggevers .wg-start-s{font-size:.84rem;line-height:1.5;margin-bottom:.6rem}
+  #page-weggevers .wg-start-traject .wg-start-img:after{background:none}
+  #page-weggevers .wg-start-img:after{background:linear-gradient(180deg,rgba(10,10,10,0) 60%,rgba(12,11,9,.35))}
+  #page-weggevers .wg-start-appbeeld .ap-beeld-los{width:100%}
+  #page-weggevers .wg-head{margin-bottom:1.6rem}
+}
+
+/* ─── Trajectpagina: kop en video iets kleiner ── */
+#v10 .v10-hero h1{font-size:clamp(48px,5.6vw,86px)}
+#v10 .obj{max-width:640px}
