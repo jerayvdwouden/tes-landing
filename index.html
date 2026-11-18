@@ -2931,7 +2931,7 @@ html:not(.nr) .nr-alleen{display:none!important}
       <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Zo weet je wat nu het belangrijkste is om aan te werken, en krijg je de andere belangrijke taken ook gedaan. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
       <div class="ap-keuze">
         <div class="ap-knoppen">
-          <button class="btn-primary ap-hoofdknop" type="button" onclick="showPage('gesprek')">Plan een gratis gesprek →</button>
+          <button class="btn-primary ap-hoofdknop" type="button" onclick="apNaarAgenda()">Plan een gratis gesprek →</button>
           <button class="ap-zelfknop" type="button" onclick="apOpen()">Of start gratis in de app</button>
         </div>
       </div>
@@ -2963,13 +2963,10 @@ html:not(.nr) .nr-alleen{display:none!important}
     </div>
   </section>
 
-  <section class="ap-uitleg" aria-label="Zo werkt het">
-    <div class="ap-uitleg-k">Zo werkt het</div>
-    <ol class="ap-stappen">
-      <li><span class="ap-stap-k">Stap 1</span><b>Plan een gratis gesprek</b><span>Een uur online, op een moment dat jou uitkomt. Je betaalt niets en je zit nergens aan vast.</span></li>
-      <li><span class="ap-stap-k">Stap 2</span><b>We maken je plan</b><span>Samen kiezen we één doel voor twaalf weken en zetten we op een rij wat er elke week moet gebeuren.</span></li>
-      <li><span class="ap-stap-k">Stap 3</span><b>Je start in de app</b><span>Je plan staat direct in je gratis app. Je weet meteen wat je deze week doet.</span></li>
-    </ol>
+  <section class="ap-agenda" id="ap-agenda" aria-label="Plan je gratis gesprek">
+    <div class="ap-functies-k">Gratis gesprek &middot; 1 uur &middot; online</div>
+    <h2 class="ap-agenda-h">Kies een moment dat jou uitkomt</h2>
+    <div class="calendly-inline-widget ap-cal" id="ap-cal" data-url="https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c"></div>
   </section>
 </div>
 </div>
@@ -7327,7 +7324,7 @@ window.addEventListener('message',function(e){
   if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
   var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
   if(fr&&fr.closest('#rt')) return;   // de nieuwe route regelt zijn eigen boeking
-  var plek=(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
+  var plek=(fr&&fr.closest('#page-app'))?'app':(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
   var p=(e.data.payload||{});
   var eventUri=String((p.event||{}).uri||''), inviteeUri=String((p.invitee||{}).uri||'');
   if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:eventUri,invitee:inviteeUri});
@@ -7704,6 +7701,11 @@ function gmVideo(){ var f=document.getElementById('gm-video'); if(f&&!f.src&&f.d
 function gmInitCal(n){ n=n||0; var el=document.getElementById('gm-cal'); if(!el||el.querySelector('iframe')) return;
   if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:calendlyParams(el.dataset.url),parentElement:el}); }
   else if(n<20) setTimeout(function(){ gmInitCal(n+1); },500); }
+function apInitCal(n){ n=n||0; var el=document.getElementById('ap-cal'); if(!el||el.querySelector('iframe')) return;
+  if(window.Calendly&&Calendly.initInlineWidget){ Calendly.initInlineWidget({url:calendlyParams(el.dataset.url),parentElement:el}); }
+  else if(n<20) setTimeout(function(){ apInitCal(n+1); },500); }
+function apNaarAgenda(){ apInitCal(); var el=document.getElementById('ap-agenda'); if(!el) return;
+  var y=el.getBoundingClientRect().top+window.scrollY-60; window.scrollTo({top:y,behavior:'smooth'}); }
 function gmNaarAgenda(){ gmInitCal(); var el=document.getElementById('gm-agenda'); if(!el) return;
   var y=el.getBoundingClientRect().top+window.scrollY-60; window.scrollTo({top:y,behavior:'smooth'}); }
 // Al ingepland (op dit apparaat, of zelf aangegeven)? Dan geen agenda, maar een bevestiging
