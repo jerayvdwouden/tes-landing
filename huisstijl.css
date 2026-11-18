@@ -225,3 +225,12 @@ footer p{color:var(--dim)}
 .ap-stappen b{display:block;font-family:'Abolition',sans-serif;font-weight:400;text-transform:uppercase;font-size:1.35rem;line-height:1;letter-spacing:.02em;color:var(--white);margin-bottom:.45rem}
 .ap-stappen li > span:last-child{font-size:.88rem;line-height:1.55;color:var(--muted)}
 @media(max-width:700px){.ap-stappen{grid-template-columns:1fr}}
+
+/* ─── App-kaart: de drie schermen weer terug, kleiner, met de gouden streep eronder ── */
+.ap-kaart .ap-beeld{position:relative;max-width:600px;aspect-ratio:2/1;height:auto;perspective:1100px;margin:0 auto 3.2rem}
+.ap-kaart .ap-beeld .ap-s{position:absolute;border-radius:6px}
+.ap-kaart .ap-beeld .ap-s-m{left:19%;top:8%;width:64%;transform:none;z-index:3}
+.ap-kaart .ap-beeld .ap-s-l{left:0;top:16%;width:52%;transform:rotateY(24deg);transform-origin:left center;opacity:.9;z-index:1}
+.ap-kaart .ap-beeld .ap-s-r{right:1%;top:12%;width:19%;transform:rotateY(-18deg);transform-origin:right center;z-index:4}
+.ap-kaart .ap-beeld::after{position:absolute;left:14%;right:14%;bottom:-1.6rem;width:auto;margin:0}
+@media(max-width:600px){.ap-kaart .ap-beeld{margin-bottom:2.6rem}.ap-kaart .ap-beeld::after{bottom:-1.2rem}}

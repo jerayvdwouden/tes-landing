@@ -1374,9 +1374,9 @@ tesMeet('pageview',location.pathname);
     <div class="logo" onclick="showPage('home')">Execution System</div>
     <div class="nav-links">
       <button class="nav-link active" data-page="home" onclick="showPage('home');closeNavMenu()">Home</button>
+      <button class="nav-link nr-alleen" data-page="app" onclick="showPage('app');closeNavMenu()">Gratis app <span class="ap-beta">bèta</span></button>
       <button class="nav-link" data-page="traject" onclick="showPage('traject');closeNavMenu()">12 weken traject</button>
       <button class="nav-link" data-page="weggevers" onclick="showPage('weggevers');closeNavMenu()">Weggevers</button>
-      <button class="nav-link nr-alleen" data-page="app" onclick="showPage('app');closeNavMenu()">Gratis app <span class="ap-beta">bèta</span></button>
     </div>
     <button class="nav-cta" onclick="showPage('gesprek');closeNavMenu()">Start gratis →</button>
     <button class="nav-burger" onclick="toggleNavMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -1400,7 +1400,11 @@ tesMeet('pageview',location.pathname);
 
   <section class="nr-alleen ap-kaart" id="gratis-app" aria-label="Gratis app">
     <div class="ap-kop"><h2 class="ap-h2">Gratis app</h2></div>
-    <div class="ap-beeld" aria-hidden="true"><img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy"></div>
+    <div class="ap-beeld" aria-hidden="true">
+      <img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy">
+    </div>
     <div class="ap-tekst">
       <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
       <button class="btn-primary" type="button" onclick="apOpen()">Start gratis →</button>
@@ -2909,7 +2913,11 @@ html:not(.nr) .nr-alleen{display:none!important}
 <div class="wrap ap-pagina">
   <section class="nr-alleen ap-kaart" aria-label="Gratis app">
     <div class="ap-kop"><h2 class="ap-h2">Gratis app</h2></div>
-    <div class="ap-beeld" aria-hidden="true"><img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy"></div>
+    <div class="ap-beeld" aria-hidden="true">
+      <img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy">
+      <img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy">
+    </div>
     <div class="ap-tekst">
       <p class="ap-sub">De app van Execution System, gratis voor ondernemers. Je ziet waar je bedrijf nu op vastloopt, kiest één doel voor twaalf weken en plant je week. Het is een bètaversie: nog niet alles is af, en wat jij tegenkomt maakt hem beter.</p>
       <button class="btn-primary" type="button" onclick="apOpen()">Start gratis →</button>
