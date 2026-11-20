@@ -1250,6 +1250,8 @@ footer .ft-links a:hover,footer .ft-links button:hover{color:var(--gold)}
 #gm .gm-eerlijk b{color:var(--white);font-weight:400}
 #gm .gm-al{width:100%;max-width:540px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:32px 28px;border:1px solid rgba(201,168,76,.45);background:rgba(201,168,76,.06)}
 #gm .gm-al h3{font-family:var(--display);font-size:34px;line-height:1;text-transform:uppercase;font-weight:400}
+#gm .gm-al-video{width:100%;aspect-ratio:16/9;border:1px solid rgba(245,240,232,.12);background:#000;overflow:hidden}
+#gm .gm-al-video iframe{width:100%;height:100%;border:0;display:block}
 #gm .gm-al p{font-size:16px;line-height:1.6;color:#C9C2B4}
 #gm .gm-mini{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 #gm .gm-mini u{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
@@ -1610,7 +1612,7 @@ tesMeet('pageview',location.pathname);
         <div class="obj-b2"></div>
         <div class="obj-b1"></div>
         <div class="obj-face">
-          <iframe id="v10Frame" class="bunny" src="https://iframe.mediadelivery.net/embed/692336/0d86c42a-640a-4bed-b1cd-9558008dbb9c?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+          <iframe id="v10Frame" class="bunny" src="https://iframe.mediadelivery.net/embed/692336/52e554b6-6942-4201-b562-bcd8287c5538?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
         </div>
       </div>
     </div>
@@ -2276,6 +2278,7 @@ html:not(.nr) .nr-alleen{display:none!important}
 
       <div class="gm-al" id="gm-al" style="display:none">
         <h3>Je staat al ingepland</h3>
+        <div class="gm-al-video"><iframe id="gm-al-video" class="bunny" data-src="https://iframe.mediadelivery.net/embed/692336/6e1dfe5e-a4c6-40bf-9c54-c7fde9c27869?autoplay=false&loop=false&muted=false&preload=true&responsive=true" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>
         <p class="nr-weg">Vul v&oacute;&oacute;r ons gesprek de doeltool in. Dan weten we al waar je bedrijf op vastloopt, en gaat het hele uur naar je plan.</p>
         <a href="#doeltool" onclick="showPage('doeltool');return false" class="btn nr-weg">Start gratis</a>
         <div class="gm-mini"><u onclick="gmZetAangemeld(false)">Toch geen gesprek ingepland? Kies hier een moment</u></div>
@@ -7290,7 +7293,7 @@ document.addEventListener('click', function(e){
 
 
 // ── Traject: scherm na het boeken ────────────────────────────
-var TA_VIDEO_GUID = '0d86c42a-640a-4bed-b1cd-9558008dbb9c';   // ← vervang door de guid van de nieuwe "je staat ingepland"-video
+var TA_VIDEO_GUID = '6e1dfe5e-a4c6-40bf-9c54-c7fde9c27869';   // VSL 4, bevestigingsvideo
 function trajectAangemeld(){
   try{ localStorage.setItem('tes_traject_aangemeld','1'); }catch(e){}
   if(!document.getElementById('page-traject').classList.contains('active')) showPage('traject');
@@ -7712,6 +7715,7 @@ function gmToonStand(){
   if(i) i.style.display = al ? 'none' : '';
   if(p) p.style.display = al ? 'none' : '';
   gmVideo(); if(!al) gmInitCal();
+  var av=document.getElementById('gm-al-video'); if(al&&av&&!av.src) av.src=av.dataset.src;
 }
 function gmZetAangemeld(ja){
   try{ if(ja) localStorage.setItem('tes_traject_aangemeld','1'); else localStorage.removeItem('tes_traject_aangemeld'); }catch(e){}
@@ -9328,7 +9332,8 @@ html.rt-dt .dt-stappen{display:none!important}
 (function(){
   // ── Instellingen van de route ──
   // De video: de embedlink van Bunny (of een eigen .mp4). Leeg = een nette lege plek.
-  var RT_VIDEO_URL = '';
+  var RT_VIDEO_URL = 'https://iframe.mediadelivery.net/embed/692336/7c0f7251-7fd9-4a68-b048-c26a9650ae89?autoplay=false&loop=false&muted=false&preload=true&responsive=true';   // VSL 5, na een weggever
+  var RT_BEVESTIG_URL = 'https://iframe.mediadelivery.net/embed/692336/6e1dfe5e-a4c6-40bf-9c54-c7fde9c27869?autoplay=false&loop=false&muted=false&preload=true&responsive=true';   // VSL 4, na het boeken van het gesprek
   var RT_CAL = 'https://calendly.com/jryisahia/new-meeting';
   var RT_GESPREK_UITLEG = 'In één uur laat ik je zien hoe de app voor jou werkt. Samen maken we een gericht doel en een plan voor de komende 12 weken.';
   // De extra vragen na de doeltool. Niets is verplicht. Vraag toevoegen of
@@ -9374,10 +9379,11 @@ html.rt-dt .dt-stappen{display:none!important}
           slug: slug, download: download, stap: 'video' };
     bewaar(); toonVideo(); meet('video');
   };
-  function videoHtml(){
-    if (!RT_VIDEO_URL) return '';   // nog geen video: geen lege plek in beeld
-    if (/\.(mp4|webm|mov)(\?|$)/i.test(RT_VIDEO_URL)) return '<div class="rt-video"><video controls playsinline preload="metadata" src="' + e(RT_VIDEO_URL) + '"></video></div>';
-    return '<div class="rt-video"><iframe src="' + e(RT_VIDEO_URL) + '" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>';
+  function videoHtml(url){
+    url = url || RT_VIDEO_URL;
+    if (!url) return '';   // nog geen video: geen lege plek in beeld
+    if (/\.(mp4|webm|mov)(\?|$)/i.test(url)) return '<div class="rt-video"><video controls playsinline preload="metadata" src="' + e(url) + '"></video></div>';
+    return '<div class="rt-video"><iframe src="' + e(url) + '" loading="lazy" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen></iframe></div>';
   }
   function toonVideo(){
     S.stap = 'video'; bewaar();
@@ -9432,8 +9438,17 @@ html.rt-dt .dt-stappen{display:none!important}
     var p = ev.data.payload || {};
     post('/api/planmeeting', { invitee: String((p.invitee || {}).uri || ''), event: String((p.event || {}).uri || ''), naam: S.naam, email: S.email, bron: 'route' });
     S.gepland = true; bewaar();
-    setTimeout(naAgenda, 2500);
+    setTimeout(toonBevestiging, 1200);
   });
+  // 3a2. bevestiging met video 4, daarna verder naar de doeltool (of de app)
+  function toonBevestiging(){
+    if (!RT_BEVESTIG_URL) return naAgenda();
+    S.stap = 'bevestiging'; bewaar();
+    scherm('<div class="rt-eye">Je staat ingepland</div><h2>Je gesprek staat erin.</h2>' + videoHtml(RT_BEVESTIG_URL) +
+      '<div class="rt-knoppen"><button type="button" class="btn-next rt-knop" id="rt-door">' + (S.account === 'bestaand' ? 'Naar je app' : 'Vul de gratis tool in') + '</button>' +
+      '<p class="rt-uitleg">De Zoom-link staat in je bevestigingsmail.</p></div>');
+    $('rt-door').onclick = naAgenda;
+  }
   function naAgenda(){ if (S.account === 'bestaand') naarApp(); else startDoeltool(); }
   // 3b. de doeltool (de bestaande op de site, in routestand)
   function startDoeltool(){
@@ -9510,6 +9525,7 @@ html.rt-dt .dt-stappen{display:none!important}
     if (laad() && S.token){
       if (S.stap === 'video') toonVideo();
       else if (S.stap === 'agenda') toonAgenda();
+      else if (S.stap === 'bevestiging') toonBevestiging();
       else if (S.stap === 'doeltool') startDoeltool();
       else if (S.stap === 'vragen') toonVragen(S.vraag || 0);
     }
