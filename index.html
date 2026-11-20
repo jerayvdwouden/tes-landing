@@ -1910,7 +1910,7 @@ html:not(.nr) .nr-alleen{display:none!important}
 
   <div class="wg-verder">
   <div class="wg-start">
-    <div class="wg-start-card wg-start-traject" onclick="showPage('gesprek')">
+    <div class="wg-start-card wg-start-traject" onclick="gesprekPop()">
       <div class="wg-start-img"><img src="img/jeray.jpg" alt="Jeray tijdens een online gesprek" loading="lazy"></div>
       <div class="wg-start-k">E&eacute;n uur &middot; met demo van de app</div>
       <div class="wg-start-t">Gratis online gesprek</div>
@@ -2106,20 +2106,13 @@ html:not(.nr) .nr-alleen{display:none!important}
 
   <div class="wd-sec">
     <div class="wd-sec-h">Verder kijken</div>
-    <div class="wg-start">
-      <div class="wg-start-card wg-start-traject" onclick="showPage('gesprek')">
+    <div class="wg-start wg-start-twee">
+      <div class="wg-start-card wg-start-traject" onclick="gesprekPop()">
         <div class="wg-start-img"><img src="img/jeray.jpg" alt="Jeray tijdens een online gesprek" loading="lazy"></div>
         <div class="wg-start-k">E&eacute;n uur &middot; met demo van de app</div>
         <div class="wg-start-t">Gratis online gesprek</div>
         <div class="wg-start-s">Ik laat je de gratis app zien en we maken samen je doel en je plan. Dat plan staat daarna direct in je app, zodat je meteen kunt starten, ook zonder begeleiding.</div>
         <span class="wg-start-b">Plan je gesprek &rarr;</span>
-      </div>
-      <div class="wg-start-card" onclick="window.location.href='/cursus'">
-      <div class="wg-start-img"><img src="img/cursus-kaart.jpg" alt="Jeray legt de methode uit" loading="lazy"></div>
-        <div class="wg-start-k">5 modules · 24 lessen</div>
-        <div class="wg-start-t">Gratis online cursus</div>
-        <div class="wg-start-s">De complete methode achter Execution System in 5 modules, om in je eigen tempo te volgen.</div>
-        <span class="wg-start-b">Bekijk de cursus &rarr;</span>
       </div>
       <div class="wg-start-card wg-start-app" onclick="showPage('app')">
         <div class="wg-start-img wg-start-appbeeld" role="img" aria-label="De gratis app op laptop en telefoon"><div class="ap-beeld ap-beeld-los"><img class="ap-s ap-s-l" src="img/app-plan.jpg" alt="" loading="lazy"><img class="ap-s ap-s-m" src="img/app-dashboard.jpg" alt="" loading="lazy"><img class="ap-s ap-s-r" src="img/app-telefoon.jpg" alt="" loading="lazy"></div></div>
@@ -6451,6 +6444,35 @@ function calendlyHerlaad(id) {
   el.innerHTML = ''; el.dataset.geladen = url;
   Calendly.initInlineWidget({ url: url, parentElement: el });
 }
+// De agenda in een venster (gouden kaart "Gratis online gesprek"). Na het boeken
+// sluit het venster en volgt het scherm "Je staat ingepland" met de bevestigingsvideo.
+function gesprekPop(){
+  if (document.getElementById('gs-pop')) return;
+  var ov = document.createElement('div');
+  ov.id = 'gs-pop'; ov.className = 'dt-pop';
+  ov.innerHTML = '<div class="dt-pop-doos gs-pop-doos" role="dialog" aria-modal="true" aria-label="Plan een gratis gesprek">' +
+    '<button type="button" class="dt-pop-x" aria-label="Sluiten">&times;</button>' +
+    '<div class="dt-pop-kop"><div class="dt-uit-k">Plan een gratis gesprek</div>' +
+    '<p class="dt-uit-s">E&eacute;n uur, online. Ik laat je de gratis app zien en we maken samen je doel en je plan.</p></div>' +
+    '<div class="dt-cal" id="gs-cal"></div></div>';
+  document.body.appendChild(ov);
+  document.body.style.overflow = 'hidden';
+  function toets(e){ if (e.key === 'Escape') gesprekPopDicht(); }
+  ov._toets = toets; document.addEventListener('keydown', toets);
+  ov.querySelector('.dt-pop-x').onclick = gesprekPopDicht;
+  ov.addEventListener('click', function(e){ if (e.target === ov) gesprekPopDicht(); });
+  if (window.tesMeet) tesMeet('gesprek_pop_open', location.pathname || '/', {});
+  var url = calendlyParams('https://calendly.com/jryisahia/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1&background_color=0a0a0a&text_color=f0f0f0&primary_color=c9a84c');
+  (function laad(n){
+    if (window.Calendly && Calendly.initInlineWidget) Calendly.initInlineWidget({ url: url, parentElement: document.getElementById('gs-cal') });
+    else if (n < 20) setTimeout(function(){ laad(n + 1); }, 300);
+  })(0);
+}
+function gesprekPopDicht(){
+  var ov = document.getElementById('gs-pop'); if (!ov) return;
+  document.removeEventListener('keydown', ov._toets);
+  ov.remove(); document.body.style.overflow = '';
+}
 function openCalendly() {
   window.open(calendlyParams('https://calendly.com/jryisahia/new-meeting'), '_blank', 'noopener,noreferrer');
 }
@@ -7321,7 +7343,7 @@ window.addEventListener('message',function(e){
   if(!/calendly\.com$/.test((e.origin||'').replace(/^https?:\/\//,''))) return;
   var fr=[].slice.call(document.querySelectorAll('iframe')).filter(function(f){return f.contentWindow===e.source;})[0];
   if(fr&&fr.closest('#rt')) return;   // de nieuwe route regelt zijn eigen boeking
-  var plek=(fr&&fr.closest('#page-app'))?'app':(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
+  var plek=(fr&&fr.closest('#gs-pop'))?'pop':(fr&&fr.closest('#page-app'))?'app':(fr&&fr.closest('#page-tool'))?'stepper':((fr&&fr.closest('#page-gesprek'))?'gesprek':((fr&&fr.closest('#page-plan-je-week'))?'weekplan':'traject'));
   var p=(e.data.payload||{});
   var eventUri=String((p.event||{}).uri||''), inviteeUri=String((p.invitee||{}).uri||'');
   if(window.tesMeet) tesMeet('planmeeting_booked','/'+plek,{plek:plek,event:eventUri,invitee:inviteeUri});
@@ -7332,6 +7354,7 @@ window.addEventListener('message',function(e){
     fetch((window.TES_BACKEND||'https://tes-backend-mbyy.onrender.com')+'/api/planmeeting',{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true}).catch(function(){});
   }catch(e){}
   if(plek==='gesprek') gmAangemeld();
+  else if(plek==='pop'){ setTimeout(function(){ gesprekPopDicht(); trajectAangemeld(); },1500); }
   else if(plek==='traject') trajectAangemeld();
   else { try{ localStorage.setItem('tes_traject_aangemeld','1'); }catch(e){} var al=document.getElementById('gesprek-al'); if(al){ gesprekToonStand(); al.scrollIntoView({behavior:'smooth',block:'center'}); } }
 });
@@ -7367,7 +7390,7 @@ document.addEventListener('click',e=>{ if(!e.target.closest('.nav-group')) docum
 // ─── Weggevers-pagina ─────────────────────────────────────────
 var WG_API = window.TES_BACKEND || 'https://tes-backend-mbyy.onrender.com';
 var WG_ICONEN=['doel','plan','boek','lijst','vlam','kompas','grafiek','pen'];
-var WG_LIJST=null, WG_CAT='Weggevers', WG_HUIDIG=null;   // de pagina opent op het filter Weggevers
+var WG_LIJST=null, WG_CAT='', WG_HUIDIG=null;
 function wgEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 function wgLaad(){
   if (WG_LIJST) { wgRender(); return; }
@@ -7390,21 +7413,31 @@ function wgKaart(w){
     +'<div class="wg-s">'+wgEsc(w.beschrijving||'')+'</div>'
     +'<div><button class="wg-btn" type="button">Bekijk &amp; download &rarr;</button></div></div>';
 }
-// Op de pagina sorteren we voorlopig alleen op soort. Alles wat hier niet staat, is een weggever.
-var WG_WERKBOEKEN=['execution-blueprint','timemanagement-voor-ondernemers'];
-function wgIsWerkboek(w){ return WG_WERKBOEKEN.indexOf(w.slug)>=0; }
+// Weggevers voor persoonlijke doelen (niet voor je bedrijf). Die staan niet tussen de weggevers voor ondernemers,
+// maar apart onderaan de pagina, samen met de cursus.
+var WG_PRIVE=['execution-blueprint'];
+function wgIsPrive(w){ return WG_PRIVE.indexOf(w.slug)>=0; }
+function wgPrive(){
+  var bp=(WG_LIJST||[]).filter(function(w){ return w.slug==='execution-blueprint'; })[0], bpBeeld=bp&&(bp.voorbeelden||[])[0];
+  return '<div class="wg-prive">'
+    +'<div class="wg-prive-k">Niet voor je bedrijf</div>'
+    +'<div class="wg-prive-h">Voor je persoonlijke doelen</div>'
+    +'<p class="wg-prive-s">Wil je een doel buiten je bedrijf halen? Daarvoor zijn er een aparte cursus en een werkblad, met dezelfde methode.</p>'
+    +'<div class="wg-prive-rij">'
+    +'<a class="wg-prive-item" href="/cursus"><span class="wg-prive-img"><img src="img/cursus-kaart.jpg" alt="" loading="lazy"></span><span class="wg-prive-tekst"><b>Gratis online cursus</b><span>5 modules &middot; 24 lessen</span></span><span class="wg-prive-pijl">&rarr;</span></a>'
+    +(bp?'<a class="wg-prive-item" href="/weggever/execution-blueprint" onclick="openWeggever(\'execution-blueprint\');return false"><span class="wg-prive-img wg-prive-papier">'+(bpBeeld?'<img src="'+wgEsc(bpBeeld)+'" alt="" loading="lazy">':'')+'</span><span class="wg-prive-tekst"><b>'+wgEsc(bp.titel)+'</b><span>Werkblad &middot; van je doel naar de acties van deze week</span></span><span class="wg-prive-pijl">&rarr;</span></a>':'')
+    +'</div></div>';
+}
 function wgRender(){
   var lijst=document.getElementById('wg-lijst'), cats=document.getElementById('wg-cats');
-  if (!WG_LIJST.length){ lijst.innerHTML='<div class="wg-empty">De eerste weggevers komen eraan. Plan ondertussen je gratis gesprek hierboven.</div><div class="wg-sec"><div class="wg-grid">'+wgCursusKaart()+'</div></div>'; cats.hidden=true; return; }
+  if (!WG_LIJST.length){ lijst.innerHTML='<div class="wg-empty">De eerste weggevers komen eraan. Plan ondertussen je gratis gesprek hierboven.</div>'+wgPrive(); cats.hidden=true; return; }
   // De volgorde hier is de volgorde van de knoppen en de kopjes op de pagina.
   var groepen=[
-    {naam:'Weggevers', html:WG_LIJST.filter(function(w){ return !wgIsWerkboek(w); }).map(wgKaart).join('')},
-    {naam:'Cursussen', html:wgCursusKaart()},
-    {naam:'Werkboeken', html:WG_LIJST.filter(wgIsWerkboek).map(wgKaart).join('')}
+    {naam:'Voor ondernemers', html:WG_LIJST.filter(function(w){ return !wgIsPrive(w); }).map(wgKaart).join('')}
   ].filter(function(g){ return g.html; });
-  cats.hidden=false;
+  cats.hidden=groepen.length<2;
   cats.innerHTML=['<button class="wg-cat'+(WG_CAT?'':' on')+'" onclick="wgFilter(\'\')">Alles</button>'].concat(groepen.map(function(g){ return '<button class="wg-cat'+(WG_CAT===g.naam?' on':'')+'" onclick="wgFilter(\''+g.naam+'\')">'+g.naam+'</button>'; })).join('');
-  lijst.innerHTML=groepen.filter(function(g){ return !WG_CAT||WG_CAT===g.naam; }).map(function(g){ return '<div class="wg-sec"><div class="wg-sec-h">'+g.naam+'</div><div class="wg-grid wg-n'+(g.html.split('class="wg-card').length-1)+'">'+g.html+'</div></div>'; }).join('');
+  lijst.innerHTML=groepen.filter(function(g){ return !WG_CAT||WG_CAT===g.naam; }).map(function(g){ return '<div class="wg-sec"><div class="wg-sec-h">'+g.naam+'</div><div class="wg-grid wg-n'+(g.html.split('class="wg-card').length-1)+'">'+g.html+'</div></div>'; }).join('')+wgPrive();
 }
 function wgFilter(c){ WG_CAT=c; wgRender(); }
 function wgOpen(slug){
@@ -7543,7 +7576,7 @@ function openWeggever(slug, viaHistorie){
     if(window.tesMeet) tesMeet('pageview','/weggevers/'+slug,{weggever:slug});
   }).catch(function(){ document.getElementById('wd-titel').textContent='Kon de weggever niet laden'; });
   // andere weggevers
-  var toon=function(){ var rest=(WG_LIJST||[]).filter(function(x){ return x.slug!==slug; }); var sec=document.getElementById('wd-andere-sec'); sec.hidden=!rest.length; document.getElementById('wd-andere').innerHTML=rest.slice(0,4).map(wgKaart).join(''); };
+  var toon=function(){ var rest=(WG_LIJST||[]).filter(function(x){ return x.slug!==slug && !wgIsPrive(x); }); if(WG_PRIVE.indexOf(slug)>=0) rest=[]; var sec=document.getElementById('wd-andere-sec'); sec.hidden=!rest.length; document.getElementById('wd-andere').innerHTML=rest.slice(0,4).map(wgKaart).join(''); };
   if(WG_LIJST) toon(); else fetch(WG_API+'/api/weggevers').then(function(r){return r.json();}).then(function(d){ WG_LIJST=(d&&d.weggevers)||[]; toon(); }).catch(function(){});
 }
 function wdRender(w){

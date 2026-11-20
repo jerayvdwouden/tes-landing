@@ -446,3 +446,41 @@ footer p{color:var(--dim)}
 /* ─── Trajectpagina: kop en video iets kleiner ── */
 #v10 .v10-hero h1{font-size:clamp(48px,5.6vw,86px)}
 #v10 .obj{max-width:640px}
+
+/* ─── Weggevers: persoonlijke doelen apart van de weggevers voor ondernemers ───
+   Onderaan de pagina, rustiger dan de rest: geen goud, zodat het niet concurreert met de weggevers voor ondernemers. */
+.wg-grid.wg-n5{grid-template-columns:repeat(6,minmax(0,1fr)) !important}
+.wg-grid.wg-n5 > *{grid-column:span 2}
+.wg-grid.wg-n5 > :nth-child(4){grid-column:2/4}
+.wg-grid.wg-n5 > :nth-child(5){grid-column:4/6}
+@media(max-width:899px){
+  .wg-grid.wg-n5{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  .wg-grid.wg-n5 > *,.wg-grid.wg-n5 > :nth-child(4){grid-column:auto}
+  .wg-grid.wg-n5 > :nth-child(5){grid-column:1/-1;width:calc(50% - .4rem);justify-self:center}
+}
+.wd-sec .wg-start.wg-start-twee{grid-template-columns:1fr 1fr}
+@media(max-width:640px){.wd-sec .wg-start.wg-start-twee{grid-template-columns:1fr}}
+.wd-sec .wg-start.wg-start-twee .wg-start-traject{grid-column:auto}
+
+.wg-prive{margin:5rem auto 1rem;max-width:860px;padding-top:3rem;border-top:1px solid var(--border);text-align:center}
+.wg-prive-k{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem}
+.wg-prive-h{font-family:'Abolition',sans-serif;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:.05em;text-transform:uppercase;color:#D5CCB8;margin-bottom:.6rem}
+.wg-prive-s{font-size:.9rem;line-height:1.6;color:var(--muted);max-width:520px;margin:0 auto 1.8rem}
+.wg-prive-rij{display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left}
+.wg-prive-item{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem .8rem .8rem;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.015);color:inherit;text-decoration:none;transition:border-color .2s,background .2s}
+.wg-prive-item:hover{border-color:var(--border2);background:rgba(255,255,255,.035)}
+.wg-prive-img{flex:0 0 84px;height:64px;border-radius:8px;overflow:hidden;background:#1a1816}
+.wg-prive-img img{width:100%;height:100%;object-fit:cover;display:block}
+.wg-prive-papier{background:#ece6da}
+.wg-prive-papier img{object-fit:cover;object-position:top}
+.wg-prive-tekst{flex:1;min-width:0;display:flex;flex-direction:column;gap:.25rem}
+.wg-prive-tekst b{font-weight:600;font-size:.98rem;color:var(--white)}
+.wg-prive-tekst span{font-size:.78rem;color:var(--muted);line-height:1.45}
+.wg-prive-pijl{color:var(--muted);font-size:1.1rem}
+.wg-prive-item:hover .wg-prive-pijl{color:#D5CCB8}
+@media(max-width:640px){.wg-prive{margin-top:3.5rem;padding-top:2.4rem}.wg-prive-rij{grid-template-columns:1fr}}
+.wg-cats[hidden]{display:none !important}
+
+/* agenda in een venster (gouden kaart Gratis online gesprek) */
+.gs-pop-doos{max-width:760px}
+.gs-pop-doos .dt-cal{min-height:680px}
